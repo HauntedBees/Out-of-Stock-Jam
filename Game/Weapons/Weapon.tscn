@@ -151,22 +151,26 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1627.0
-margin_top = 1042.0
-margin_right = 1744.0
-margin_bottom = 1140.0
+margin_left = -293.0
+margin_top = -38.0
+margin_right = -176.0
+margin_bottom = 60.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Pistol" type="TextureRect" parent="Weapon"]
-margin_left = -179.0
-margin_top = -318.0
-margin_right = 374.0
-margin_bottom = -42.0
-rect_rotation = 18.4423
+margin_left = -291.0
+margin_top = -22.0
+margin_right = 16.0
+margin_bottom = 136.0
+rect_rotation = -69.7
+rect_scale = Vector2( 1, 3.32 )
 texture = ExtResource( 2 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Hammer" type="TextureRect" parent="Weapon"]
 margin_left = -194.0

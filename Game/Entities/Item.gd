@@ -7,12 +7,12 @@ var texture:String
 var size:Vector2
 var amount:int
 var position:Vector2
-var rotate:bool
 var stackable:bool
 var equippable:bool
+var uses_ammo:bool
 
 func _init(type:String, texture:String, size:Vector2, position := Vector2.ZERO, amount := 1, 
-			rotate := false, stackable := true, equippable := false):
+			stackable := true, equippable := false, uses_ammo := true):
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
 	id = rng.randi_range(1, 10000)
@@ -21,9 +21,9 @@ func _init(type:String, texture:String, size:Vector2, position := Vector2.ZERO, 
 	self.size = size
 	self.amount = amount
 	self.position = position
-	self.rotate = rotate
 	self.stackable = stackable
 	self.equippable = equippable
+	self.uses_ammo = uses_ammo
 
 func equip_index() -> int:
 	var item_positions := []
@@ -39,8 +39,9 @@ func _pos_sort(a:Vector2, b:Vector2) -> bool:
 	if a.x == b.x: return a.y < b.y
 	else: return a.x < b.x
 
-func overlaps_item(i:Item, new_position:Vector2 = Vector2(-1, -1)) -> bool:
+func overlaps_item(i:Item, new_position:Vector2 = Vector2(-1, -1), alert_on_overlap := false) -> bool:
 	if i.id == id: return false
+	if i.type == type && stackable && !alert_on_overlap: return false
 	var p := i.position if new_position.x < 0 else new_position
 	for dx in size.x:
 		for dy in size.y:

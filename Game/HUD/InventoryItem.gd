@@ -2,6 +2,7 @@ class_name InventoryItem
 extends Control
 
 signal equip_position_changed()
+signal remove_item()
 
 const CAN_MOVE := Color(0, 1, 0, 0.5)
 const CANT_MOVE := Color(1, 0, 0, 0.5)
@@ -21,9 +22,6 @@ var drag_start_pos := Vector2.ZERO
 func set_item(i:Item): info = i
 func _ready():
 	rect_size = 96 * info.size
-	if info.rotate:
-		rect_size = Vector2(rect_size.y, rect_size.x)
-		for f in [item, movehighlight, highlight, shadow]: f.rect_rotation = 90
 	item.rect_size = rect_size
 	shadow.rect_size = rect_size
 	item.texture = load("res://Textures/%s" % info.texture)
@@ -61,6 +59,11 @@ func _end_item_movement():
 	shadow.visible = false
 	movehighlight.visible = false
 	if _is_valid_move_location():
+		if info.stackable:
+			var potential_merge := _get_potential_stack()
+			if potential_merge != null:
+				_merge_items(potential_merge)
+				return
 		info.position = _get_shifted_location()
 		rect_position = PlayerInfo.INV_OFFSET + PlayerInfo.INV_DELTA * info.position
 	shadow.rect_position = Vector2.ZERO
@@ -85,6 +88,16 @@ func _is_valid_move_location() -> bool:
 	for i in PlayerInfo.inventory:
 		if i.overlaps_item(info, current_position): return false
 	return true
+
+func _get_potential_stack() -> Item:
+	var current_position := _get_shifted_location()
+	for i in PlayerInfo.inventory:
+		if i.overlaps_item(info, current_position, true): return i
+	return null
+
+func _merge_items(target:Item):
+	target.amount += info.amount
+	emit_signal("remove_item")
 
 func _get_shifted_location() -> Vector2:
 	return ((rect_position + shadow.rect_position - PlayerInfo.INV_OFFSET) / PlayerInfo.INV_DELTA).round()

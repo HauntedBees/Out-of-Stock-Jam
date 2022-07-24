@@ -1,9 +1,18 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://Weapons/Weapon.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Textures/Weapons/Hammer.png" type="Texture" id=2]
 [ext_resource path="res://Textures/HUD/crosshair.png" type="Texture" id=3]
+[ext_resource path="res://Textures/HUD/Inventory.jpg" type="Texture" id=4]
 [ext_resource path="res://HUD/Inventory.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Textures/HUD/Chaos.png" type="Texture" id=6]
+[ext_resource path="res://Textures/HUD/Rings.png" type="Texture" id=7]
+[ext_resource path="res://HUD/BWTheme.tres" type="Theme" id=8]
+[ext_resource path="res://Textures/HUD/Progress.png" type="Texture" id=9]
+[ext_resource path="res://Textures/HUD/InventorySlot.png" type="Texture" id=10]
+[ext_resource path="res://Textures/HUD/EmeraldShard.png" type="Texture" id=11]
+[ext_resource path="res://PlayerStatsHUD.gd" type="Script" id=12]
+[ext_resource path="res://Weapons/Weapon.tscn" type="PackedScene" id=13]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.560811
@@ -38,7 +47,7 @@ __meta__ = {
 }
 
 [node name="Crosshair" type="TextureRect" parent="HUD"]
-modulate = Color( 1, 1, 1, 0.45098 )
+modulate = Color( 1, 1, 1, 0.501961 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -54,10 +63,213 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Weapon" parent="HUD" instance=ExtResource( 2 )]
+[node name="Weapon" parent="HUD" groups=["equip_monitor"] instance=ExtResource( 13 )]
 
 [node name="Inventory" parent="HUD" instance=ExtResource( 5 )]
 visible = false
+
+[node name="LeftHUD" type="TextureRect" parent="HUD" groups=["equip_monitor"]]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -176.0
+margin_right = 1036.0
+margin_bottom = 12.0
+rect_scale = Vector2( 0.75, 0.75 )
+rect_pivot_offset = Vector2( 0, 141 )
+texture = ExtResource( 4 )
+expand = true
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthChaos" type="TextureRect" parent="HUD/LeftHUD"]
+margin_left = 13.3333
+margin_top = 75.6666
+margin_right = 689.333
+margin_bottom = 175.667
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChaosLabel" type="Label" parent="HUD/LeftHUD/HealthChaos"]
+margin_left = 572.0
+margin_top = 14.0
+margin_right = 676.0
+margin_bottom = 89.0
+theme = ExtResource( 8 )
+text = "CHAOS"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChaosBar" type="TextureProgress" parent="HUD/LeftHUD/HealthChaos"]
+modulate = Color( 0.992157, 0, 1, 1 )
+margin_left = 275.0
+margin_top = 30.0
+margin_right = 454.0
+margin_bottom = 70.0
+value = 100.0
+texture_progress = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChaosAmount" type="Label" parent="HUD/LeftHUD/HealthChaos"]
+margin_left = 354.667
+margin_top = 16.6667
+margin_right = 458.667
+margin_bottom = 91.6667
+rect_scale = Vector2( 0.9, 0.9 )
+theme = ExtResource( 8 )
+text = "5"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rings" type="TextureRect" parent="HUD/LeftHUD"]
+margin_left = 268.0
+margin_top = 14.0
+margin_right = 685.0
+margin_bottom = 54.0
+texture = ExtResource( 9 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthAmount" type="Label" parent="HUD/LeftHUD/Rings"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -104.0
+margin_top = -37.5
+margin_bottom = 37.5
+theme = ExtResource( 8 )
+text = "100"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RingsLabel" type="Label" parent="HUD/LeftHUD/Rings"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 69.3333
+margin_top = -37.6667
+margin_right = 152.333
+margin_bottom = 37.3333
+theme = ExtResource( 8 )
+text = "RINGS"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RingsIcon" type="TextureRect" parent="HUD/LeftHUD/Rings"]
+margin_right = 64.0
+margin_bottom = 40.0
+texture = ExtResource( 7 )
+expand = true
+
+[node name="Shards" type="Control" parent="HUD/LeftHUD"]
+margin_left = 705.333
+margin_top = 86.3334
+margin_right = 801.333
+margin_bottom = 182.333
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="TextureRect" parent="HUD/LeftHUD/Shards"]
+modulate = Color( 0.196078, 0.27451, 0.243137, 1 )
+margin_right = 96.0
+margin_bottom = 96.0
+texture = ExtResource( 10 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShardImg" type="TextureRect" parent="HUD/LeftHUD/Shards"]
+margin_right = 96.0
+margin_bottom = 96.0
+texture = ExtResource( 11 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShardAmount" type="Label" parent="HUD/LeftHUD/Shards"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -51.0
+theme = ExtResource( 8 )
+text = "5"
+align = 2
+valign = 2
+
+[node name="Weapon" type="Control" parent="HUD/LeftHUD"]
+margin_left = 822.667
+margin_top = 5.0
+margin_right = 918.667
+margin_bottom = 101.0
+
+[node name="BG" type="TextureRect" parent="HUD/LeftHUD/Weapon"]
+modulate = Color( 0.196078, 0.27451, 0.243137, 1 )
+margin_right = 96.0
+margin_bottom = 96.0
+texture = ExtResource( 10 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Texture" type="TextureRect" parent="HUD/LeftHUD/Weapon"]
+margin_right = 96.0
+margin_bottom = 96.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="Ammo" type="Label" parent="HUD/LeftHUD/Weapon"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -80.0
+margin_top = -51.0
+theme = ExtResource( 8 )
+text = "42000"
+align = 2
+valign = 2
+
+[node name="Power" type="Control" parent="HUD/LeftHUD"]
+margin_left = 929.333
+margin_top = 78.3334
+margin_right = 1025.33
+margin_bottom = 174.333
+
+[node name="BG" type="TextureRect" parent="HUD/LeftHUD/Power"]
+modulate = Color( 0.196078, 0.27451, 0.243137, 1 )
+margin_right = 96.0
+margin_bottom = 96.0
+texture = ExtResource( 10 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="DebugModel" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.968006, 0 )

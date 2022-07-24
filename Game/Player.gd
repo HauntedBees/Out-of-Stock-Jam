@@ -9,10 +9,12 @@ const DECELERATION := 16.0
 var velocity := Vector3()
 var direction := Vector3()
 
+onready var player_stats := $HUD/LeftHUD
 onready var inventory := $HUD/Inventory
 onready var weapon:Weapon = $HUD/Weapon
 onready var vision:Spatial = $Vision
 onready var camera:Camera = $Vision/Camera
+onready var crosshair:TextureRect = $HUD/Crosshair
 var MOUSE_SENSITIVITY := -0.15
 
 var in_inventory := false
@@ -32,10 +34,15 @@ func _handle_cursor():
 	var from := camera.project_ray_origin(center)
 	var to := from + camera.project_ray_normal(center) * 100.0
 	var res := get_viewport().world.direct_space_state.intersect_ray(from, to)
-	if !res.has("collider"): return
-	var body: PhysicsBody = res["collider"]
-	if !(body is Entity):  return
-	(body as Entity).show_highlight()
+	if res.has("collider"):
+		var body:PhysicsBody = res["collider"]
+		if body is Entity:
+			(body as Entity).show_highlight()
+			var dist := (body.transform.origin - transform.origin).length()
+			if dist <= weapon.attack_range:
+				crosshair.modulate.a = 1
+				return
+	else: crosshair.modulate.a = 0.25
 
 func _handle_input():
 	var movement := Vector2()
@@ -73,6 +80,7 @@ func _input(event:InputEvent):
 		pass
 	if event.is_action_pressed("toggle_inventory"):
 		in_inventory = !in_inventory
+		if in_inventory: inventory.refresh_items()
 		inventory.visible = in_inventory
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE if in_inventory else Input.MOUSE_MODE_CAPTURED)
 	_handle_equip_switch(event)
@@ -87,6 +95,7 @@ func _handle_camera_movement(event:InputEventMouseMotion):
 func _handle_equip_switch(event:InputEvent):
 	for i in range(0, 10):
 		if !event.is_action_pressed("equip%s" % i): continue
-		var item:String = inventory.get_equipment(i)
-		if item == "": return
-		weapon.set_weapon(item)
+		var item:Item = inventory.get_equipment(i)
+		if item == null: return
+		PlayerInfo.current_weapon = item
+		get_tree().call_group("equip_monitor", "update_weapon")
