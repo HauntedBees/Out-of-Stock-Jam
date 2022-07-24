@@ -1,0 +1,32 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=6]
+code = "shader_type spatial;
+render_mode unshaded, cull_disabled, depth_draw_opaque;
+
+uniform float size;
+uniform float width;
+uniform vec4 inner_color: hint_color;
+uniform vec4 outer_color: hint_color;
+
+void fragment() {
+	ALPHA = 0.0;
+	vec2 uv = vec2(
+		abs(UV.x - 0.5) * 2.0, 
+		abs(UV.y - 0.5) * 2.0
+	);
+	float min_size = size - width;
+	if ((uv.x > min_size || uv.y > min_size) && (uv.x < size && uv.y < size)) {
+		vec4 color = mix(inner_color, outer_color, max(uv.x - min_size, uv.y - min_size) / width);
+		ALPHA = color.a;
+		ALBEDO = color.rgb;
+	}
+}"
+
+[resource]
+render_priority = 1
+shader = SubResource( 6 )
+shader_param/size = 1.0
+shader_param/width = 0.1
+shader_param/inner_color = Color( 1, 1, 1, 0 )
+shader_param/outer_color = Color( 0.0784314, 1, 0, 1 )
