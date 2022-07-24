@@ -21,6 +21,10 @@ var drag_start_pos := Vector2.ZERO
 
 func set_item(i:Item): info = i
 func _ready():
+	if info.stackable:
+		hint_tooltip = "%s (%s)" % [info.type, info.amount]
+	else:
+		hint_tooltip = info.type
 	rect_size = 96 * info.size
 	item.rect_size = rect_size
 	shadow.rect_size = rect_size
@@ -84,7 +88,7 @@ func _is_valid_move_location() -> bool:
 	var current_position := _get_shifted_location()
 	if current_position.x < 0 || current_position.y < 0: return false
 	var potential_end := current_position + info.size - Vector2(1, 1)
-	if potential_end.x >= PlayerInfo.INV_WIDTH || potential_end.y >= PlayerInfo.INV_HEIGHT: return false
+	if potential_end.x >= PlayerInfo.inventory_columns || potential_end.y >= PlayerInfo.INV_HEIGHT: return false
 	for i in PlayerInfo.inventory:
 		if i.overlaps_item(info, current_position): return false
 	return true

@@ -51,13 +51,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
+[node name="InvLabel" type="Label" parent="."]
 margin_left = 19.0
 margin_top = 10.0
 margin_right = 181.0
 margin_bottom = 68.0
 theme = ExtResource( 3 )
 text = "Inventory"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PowerArea" type="ColorRect" parent="."]
+visible = false
+margin_left = 1098.0
+margin_top = 10.0
+margin_right = 1458.0
+margin_bottom = 368.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChaosLabel" type="Label" parent="."]
+margin_left = 1107.0
+margin_top = 10.0
+margin_right = 1269.0
+margin_bottom = 68.0
+theme = ExtResource( 3 )
+text = "POWERS"
 __meta__ = {
 "_edit_use_anchors_": false
 }

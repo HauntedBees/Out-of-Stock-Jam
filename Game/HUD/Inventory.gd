@@ -1,5 +1,6 @@
 extends Control
 
+onready var tooltip_theme:Theme = preload("res://HUD/Tooltip.tres")
 onready var item:PackedScene = preload("res://HUD/InventoryItem.tscn")
 onready var tile:TextureRect = $TileRect
 onready var lock:TextureRect = $LockedRect
@@ -7,11 +8,14 @@ onready var lock:TextureRect = $LockedRect
 var items := []
 
 func _ready():
-	var available_rows = PlayerInfo.inventory_rows
 	for x in PlayerInfo.INV_WIDTH:
-		var ref_tile := tile if x < available_rows else lock
+		var is_locked:bool = x >= PlayerInfo.inventory_columns
+		var ref_tile := lock if is_locked else tile
 		for y in PlayerInfo.INV_HEIGHT:
 			var xy:TextureRect = ref_tile.duplicate()
+			if is_locked:
+				xy.theme = tooltip_theme
+				xy.hint_tooltip = "Locked"
 			xy.rect_position = PlayerInfo.INV_OFFSET + PlayerInfo.INV_DELTA * Vector2(x, y)
 			add_child(xy)
 	_draw_items()
