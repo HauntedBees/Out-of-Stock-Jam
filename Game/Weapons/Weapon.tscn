@@ -1,0 +1,188 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Textures/Weapons/Blast.png" type="Texture" id=1]
+[ext_resource path="res://Textures/Weapons/Pistol.png" type="Texture" id=2]
+[ext_resource path="res://Textures/Weapons/Hammer.png" type="Texture" id=3]
+[ext_resource path="res://Weapons/Weapon.gd" type="Script" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Melee"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Weapon:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.15, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 30.0, -46.6, 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "MoveDown"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Weapon:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1627, 1042 ), Vector2( 1627, 1698 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "MoveUp"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Weapon:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1627, 1698 ), Vector2( 1627, 1042 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Weapon:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Blast:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Weapon:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1627, 1042 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Shoot"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Weapon:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 30.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Blast:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="Weapon" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -1047, -306 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Blast" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -652.0
+margin_top = -426.0
+rect_rotation = 32.7459
+rect_scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapon" type="Control" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1627.0
+margin_top = 1042.0
+margin_right = 1744.0
+margin_bottom = 1140.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pistol" type="TextureRect" parent="Weapon"]
+margin_left = -179.0
+margin_top = -318.0
+margin_right = 374.0
+margin_bottom = -42.0
+rect_rotation = 18.4423
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Hammer" type="TextureRect" parent="Weapon"]
+margin_left = -194.0
+margin_top = -546.0
+margin_right = 181.0
+margin_bottom = 72.0001
+rect_rotation = 12.4311
+rect_pivot_offset = Vector2( 187, 550 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Melee = SubResource( 1 )
+anims/MoveDown = SubResource( 4 )
+anims/MoveUp = SubResource( 5 )
+anims/RESET = SubResource( 2 )
+anims/Shoot = SubResource( 3 )

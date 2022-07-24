@@ -32,7 +32,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 18.3 ]
+"values": [ 6.6 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Blast:modulate")
@@ -109,7 +109,7 @@ margin_left = -533.0
 margin_top = -542.0
 margin_right = 467.0
 margin_bottom = -199.0
-rect_rotation = 18.3
+rect_rotation = 6.6
 rect_scale = Vector2( 0.4, 0.5 )
 rect_pivot_offset = Vector2( 187, 618 )
 texture = ExtResource( 1 )

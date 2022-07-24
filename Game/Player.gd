@@ -10,7 +10,7 @@ var velocity := Vector3()
 var direction := Vector3()
 
 onready var inventory := $HUD/Inventory
-onready var weapon:Weapon = $HUD/Pistol
+onready var weapon:Weapon = $HUD/Weapon
 onready var vision:Spatial = $Vision
 onready var camera:Camera = $Vision/Camera
 var MOUSE_SENSITIVITY := -0.15
@@ -19,6 +19,7 @@ var in_inventory := false
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	weapon.set_weapon("Pistol")
 
 func _physics_process(delta:float):
 	if weapon != null: weapon.try_attack(delta)
@@ -74,6 +75,7 @@ func _input(event:InputEvent):
 		in_inventory = !in_inventory
 		inventory.visible = in_inventory
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE if in_inventory else Input.MOUSE_MODE_CAPTURED)
+	_handle_equip_switch(event)
 
 func _handle_camera_movement(event:InputEventMouseMotion):
 	vision.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
@@ -81,3 +83,10 @@ func _handle_camera_movement(event:InputEventMouseMotion):
 	var camera_rotation := vision.rotation_degrees
 	camera_rotation.x = clamp(camera_rotation.x, -50, 50)
 	vision.rotation_degrees = camera_rotation
+
+func _handle_equip_switch(event:InputEvent):
+	for i in range(0, 10):
+		if !event.is_action_pressed("equip%s" % i): continue
+		var item:String = inventory.get_equipment(i)
+		if item == "": return
+		weapon.set_weapon(item)

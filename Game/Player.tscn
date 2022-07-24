@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://Weapons/Hammer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Weapons/Weapon.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Textures/HUD/crosshair.png" type="Texture" id=3]
-[ext_resource path="res://Weapons/Pistol.tscn" type="PackedScene" id=4]
 [ext_resource path="res://HUD/Inventory.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape" id=1]
@@ -55,10 +54,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hammer" parent="HUD" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Pistol" parent="HUD" instance=ExtResource( 4 )]
+[node name="Weapon" parent="HUD" instance=ExtResource( 2 )]
 
 [node name="Inventory" parent="HUD" instance=ExtResource( 5 )]
 visible = false
