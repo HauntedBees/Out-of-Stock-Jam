@@ -38,9 +38,10 @@ func _draw_items():
 		var ii:InventoryItem = item.instance()
 		ii.search_drag = is_search
 		ii.parent_container = PlayerInfo.inventory
+		ii.other_container = search_contents if is_search else []
 		ii.rect_position = PlayerInfo.INV_OFFSET + PlayerInfo.INV_DELTA * i["position"]
 		ii.connect("equip_position_changed", self, "_refresh_equip_positions")
-		ii.connect("remove_item", self, "_remove_item", [i])
+		ii.connect("remove_item", self, "_item_moved")
 		ii.set_item(i)
 		items.append(ii)
 		add_child(ii)
@@ -50,16 +51,12 @@ func _draw_items():
 			ii.is_search = true
 			ii.search_drag = true
 			ii.parent_container = search_contents
+			ii.other_container = PlayerInfo.inventory
 			ii.rect_position = PlayerInfo.SEARCH_OFFSET + PlayerInfo.INV_DELTA * i["position"]
-			#ii.connect("equip_position_changed", self, "_refresh_equip_positions")
-			#ii.connect("remove_item", self, "_remove_item", [i])
+			ii.connect("remove_item", self, "_item_moved")
 			ii.set_item(i)
 			search_items.append(ii)
 			add_child(ii)
-
-func _remove_item(i:Item):
-	PlayerInfo.inventory.erase(i)
-	refresh_items()
 
 func refresh_items():
 	search.visible = is_search
@@ -69,6 +66,14 @@ func refresh_items():
 	items = []
 	search_items = []
 	_draw_items()
+
+func _item_moved():
+	if is_search:
+		get_tree().call_group("equip_monitor", "update_ammo")
+		if !PlayerInfo.inventory.has(PlayerInfo.current_weapon) && PlayerInfo.current_weapon != PlayerInfo.UNARMED:
+			PlayerInfo.current_weapon = PlayerInfo.UNARMED
+			get_tree().call_group("equip_monitor", "update_weapon")
+	refresh_items()
 
 func _refresh_equip_positions():
 	for i in items:

@@ -37,6 +37,10 @@ var cooldown_remaining := 0.0
 func update_weapon(): set_weapon(PlayerInfo.current_weapon.type)
 func set_weapon(weapon:String):
 	if current_weapon == weapon: return
+	if weapon == "Unarmed":
+		for wt in weapon_textures:
+			wt.visible = false
+		return
 	var prev_weapon := current_weapon
 	current_weapon = weapon
 	var w:Dictionary = weapon_info[weapon]
@@ -64,6 +68,7 @@ func _switch_weapon():
 	cooldown_remaining = 0
 
 func try_attack(delta:float):
+	if current_weapon == "Unarmed": return
 	cooldown_remaining -= delta
 	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED || !Input.is_action_just_pressed("action"): return
 	if cooldown_remaining > 0.0: return

@@ -6,6 +6,8 @@ const INV_DELTA := 96
 const INV_WIDTH := 11
 const INV_HEIGHT := 3
 
+var UNARMED := Item.new("Unarmed", "", Vector2(0, 0), Vector2(0, 0), 1, false, true, false)
+
 var rings := 0
 var chaos_energy := 10
 var max_chaos_energy := 10
@@ -22,7 +24,7 @@ var inventory := [
 	Item.new("Hammer", "Weapons/Hammer.png", Vector2(1, 3), Vector2(5, 0), 1, false, true, false),
 	Item.new("Pistol", "Weapons/Pistol.png", Vector2(1, 3), Vector2(0, 0), 1, false, true)
 ]
-var current_weapon:Item = inventory[2]
+var current_weapon:Item = UNARMED
 
 func get_ammo(type := "") -> int:
 	if type == "": type = current_weapon.type

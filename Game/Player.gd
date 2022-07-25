@@ -21,10 +21,10 @@ var in_inventory := false
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	weapon.set_weapon("Pistol")
+	weapon.set_weapon(PlayerInfo.current_weapon.type)
 
 func _physics_process(delta:float):
-	if weapon != null: weapon.try_attack(delta)
+	if weapon != null && PlayerInfo.current_weapon != PlayerInfo.UNARMED: weapon.try_attack(delta)
 	_handle_input()
 	_handle_movement(delta)
 	_handle_cursor()
