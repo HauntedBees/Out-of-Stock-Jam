@@ -6,7 +6,7 @@ const INV_DELTA := 96
 const INV_WIDTH := 11
 const INV_HEIGHT := 3
 
-var UNARMED := Item.new("Unarmed", "", Vector2(0, 0), Vector2(0, 0), 1, false, true, false)
+var UNARMED := Item.new("Unarmed", "", Vector2(0, 0), Vector2(0, 0), {"uses_ammo": false})
 
 var rings := 0
 var chaos_energy := 10
@@ -19,30 +19,43 @@ var inventory_columns := 8
 var inv_is_dragging := false
 
 var inventory := [
-	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(1, 1), 3),
-	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(1, 2), 3),
-	Item.new("Hammer", "Weapons/Hammer.png", Vector2(1, 3), Vector2(5, 0), 1, false, true, false),
-	Item.new("Pistol", "Weapons/Pistol.png", Vector2(1, 3), Vector2(0, 0), 1, false, true)
+	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(1, 1), {"amount": 3}),
+	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(1, 2), {"amount": 8}),
+	Item.new("Hammer", "Weapons/Hammer.png", Vector2(1, 3), Vector2(5, 0), { "equippable": true, "uses_ammo": false }),
+	Item.new("Pistol", "Weapons/Pistol.png", Vector2(1, 3), Vector2(0, 0), { "equippable": true, "reload_amount": 6, "current_ammo": 4, "reload_speed_mult": 0.2 })
 ]
 var current_weapon:Item = UNARMED
 
-func get_ammo(type := "") -> int:
-	if type == "": type = current_weapon.type
+func get_loaded_ammo() -> int: return current_weapon.current_ammo
+func get_ammo() -> int:
+	var type := current_weapon.type
 	var amount := 0
 	for i in inventory:
 		if i.type == ("%s Ammo" % type): amount += i.amount
 	return amount
 
-func reduce_ammo(type := ""):
-	if type == "": type = current_weapon.type
+func reduce_ammo():
+	current_weapon.current_ammo -= 1
+	get_tree().call_group("equip_monitor", "update_ammo")
+
+func reload_weapon():
+	var type := current_weapon.type
+	var remaining := current_weapon.reload_amount - current_weapon.current_ammo
+	var indexes_to_remove := []
 	for i in inventory.size():
 		var item:Item = inventory[i]
 		if item.type != ("%s Ammo" % type): continue
-		item.amount -= 1
-		if item.amount <= 0:
-			inventory.remove(i)
-		get_tree().call_group("equip_monitor", "update_ammo")
-		return
+		if item.amount >= remaining:
+			item.amount -= remaining
+			remaining = 0
+		else:
+			remaining -= item.amount
+			item.amount = 0
+		if item.amount <= 0: indexes_to_remove.append(i)
+		if remaining == 0: break
+	for i in indexes_to_remove: inventory.remove(i)
+	current_weapon.current_ammo = current_weapon.reload_amount - remaining
+	get_tree().call_group("equip_monitor", "update_ammo")
 
 func get_collision(distance:float) -> Entity:
 	var camera := get_viewport().get_camera()

@@ -21,5 +21,5 @@ func update_weapon():
 func update_ammo():
 	if PlayerInfo.current_weapon.uses_ammo:
 		weapon_ammo.visible = true
-		weapon_ammo.text = String(PlayerInfo.get_ammo())
+		weapon_ammo.text = "%s/%s" % [PlayerInfo.get_loaded_ammo(), PlayerInfo.get_ammo()]
 	else: weapon_ammo.visible = false

@@ -39,6 +39,9 @@ func _ready():
 	if info.stackable:
 		amount_label.visible = true
 		amount_label.text = "x%s" % info.amount
+	elif info.uses_ammo:
+		amount_label.visible = true
+		amount_label.text = String(info.current_ammo)
 	set_equip_order()
 
 func set_equip_order():

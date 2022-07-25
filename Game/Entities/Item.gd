@@ -10,20 +10,28 @@ var position:Vector2
 var stackable:bool
 var equippable:bool
 var uses_ammo:bool
+var reload_amount:int
+var reload_speed_mult:float
+var current_ammo:int
 
-func _init(type:String, texture:String, size:Vector2, position := Vector2.ZERO, amount := 1, 
-			stackable := true, equippable := false, uses_ammo := true):
+func _init(item_type:String, texture_path:String, inv_size:Vector2, inv_pos := Vector2.ZERO, other := {}):
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
 	id = rng.randi_range(1, 10000)
-	self.type = type
-	self.texture = texture
-	self.size = size
-	self.amount = amount
-	self.position = position
-	self.stackable = stackable
-	self.equippable = equippable
-	self.uses_ammo = uses_ammo
+	type = item_type
+	texture = texture_path
+	size = inv_size
+	position = inv_pos
+	amount = other["amount"] if other.has("amount") else 1
+	equippable = other["equippable"] if other.has("equippable") else false
+	if equippable:
+		stackable = false
+	else:
+		stackable = other["stackable"] if other.has("stackable") else true
+	uses_ammo = other["uses_ammo"] if other.has("uses_ammo") else true
+	reload_amount = other["reload_amount"] if other.has("reload_amount") else 0
+	current_ammo = other["current_ammo"] if other.has("current_ammo") else reload_amount
+	reload_speed_mult = other["reload_speed_mult"] if other.has("reload_speed_mult") else 1.0
 
 func equip_index() -> int:
 	var item_positions := []

@@ -4,7 +4,7 @@ extends Control
 onready var weapon_textures := [$Weapon/Pistol, $Weapon/Hammer]
 onready var blast := $Blast
 
-var weapon_info := {
+const weapon_info := {
 	"Hammer": {
 		"animation": "Melee",
 		"cooldown": 0.3,
@@ -57,6 +57,13 @@ func set_weapon(weapon:String):
 			wt.visible = wt.name == weapon
 	else: _switch_weapon()
 
+func reload():
+	cooldown_remaining = 99
+	anim.play("Reload", -1, PlayerInfo.current_weapon.reload_speed_mult)
+	yield(anim, "animation_finished")
+	PlayerInfo.reload_weapon()
+	cooldown_remaining = 0
+
 func _switch_weapon():
 	cooldown_remaining = 99
 	anim.play("MoveDown")
@@ -73,8 +80,12 @@ func try_attack(delta:float):
 	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED || !Input.is_action_just_pressed("action"): return
 	if cooldown_remaining > 0.0: return
 	if uses_ammo:
-		var ammo := PlayerInfo.get_ammo()
-		if ammo <= 0: return
+		var ammo := PlayerInfo.get_loaded_ammo()
+		if ammo <= 0:
+			var total_ammo := PlayerInfo.get_ammo()
+			if total_ammo <= 0: return
+			#PlayerInfo.reload_weapon()
+			return
 		PlayerInfo.reduce_ammo()
 	cooldown_remaining = cooldown
 	anim.play(attack_animation)

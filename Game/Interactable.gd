@@ -2,7 +2,7 @@ class_name Interactable
 extends Entity
 
 var contents := [
-	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(0, 0), 95)
+	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(0, 0), {"amount": 95})
 ]
 
 func _ready():

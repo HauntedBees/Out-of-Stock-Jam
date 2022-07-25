@@ -49,6 +49,8 @@ func _handle_input():
 		movement.x -= 1
 	elif Input.is_action_pressed("strafe_right"):
 		movement.x += 1
+	if Input.is_action_just_pressed("reload"):
+		weapon.reload()
 	movement = movement.normalized()
 	
 	var camera_basis := camera.get_global_transform().basis
@@ -66,7 +68,6 @@ func _handle_movement(delta:float):
 	var acceleration := ACCELERATION if direction.dot(vel_xz) > 0 else DECELERATION
 	vel_xz = vel_xz.linear_interpolate(direction * MAX_SPEED, acceleration * delta)
 	velocity = move_and_slide(Vector3(vel_xz.x, velocity.y, vel_xz.z), Vector3.UP)
-
 
 func _input(event:InputEvent):
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED: # aiming
