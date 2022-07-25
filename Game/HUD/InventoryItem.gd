@@ -115,7 +115,7 @@ func _is_valid_move_location(offset:Vector2, container:Array) -> bool:
 	if current_position.x < 0 || current_position.y < 0: return false
 	var potential_end := current_position + info.size - Vector2(1, 1)
 	if potential_end.x >= num_columns || potential_end.y >= PlayerInfo.INV_HEIGHT: return false
-	for i in parent_container:
+	for i in container:
 		if i.overlaps_item(info, current_position): return false
 	return true
 
