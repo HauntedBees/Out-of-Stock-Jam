@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Entities/Entity.gd"
 }, {
+"base": "Entity",
+"class": "Interactable",
+"language": "GDScript",
+"path": "res://Interactable.gd"
+}, {
 "base": "Control",
 "class": "InventoryItem",
 "language": "GDScript",
@@ -37,6 +42,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Enemy": "",
 "Entity": "",
+"Interactable": "",
 "InventoryItem": "",
 "Item": "",
 "Weapon": ""
@@ -154,6 +160,11 @@ equip9={
 equip0={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":48,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+use={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

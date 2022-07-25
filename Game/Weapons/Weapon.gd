@@ -73,11 +73,5 @@ func try_attack(delta:float):
 		PlayerInfo.reduce_ammo()
 	cooldown_remaining = cooldown
 	anim.play(attack_animation)
-	var center := get_viewport().size / 2
-	var from := camera.project_ray_origin(center)
-	var to := from + camera.project_ray_normal(center) * attack_range
-	var res := get_viewport().world.direct_space_state.intersect_ray(from, to)
-	if !res.has("collider"): return
-	var body: PhysicsBody = res["collider"]
-	if body is Enemy:
-		(body as Enemy).take_hit(camera.project_ray_normal(center), pushback, 69.0)
+	var body := PlayerInfo.get_collision(attack_range)
+	if body != null: body.take_hit(camera.project_ray_normal(get_viewport().size / 2), pushback, 69.0)

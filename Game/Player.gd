@@ -30,18 +30,13 @@ func _physics_process(delta:float):
 	_handle_cursor()
 
 func _handle_cursor():
-	var center := get_viewport().size / 2
-	var from := camera.project_ray_origin(center)
-	var to := from + camera.project_ray_normal(center) * 100.0
-	var res := get_viewport().world.direct_space_state.intersect_ray(from, to)
-	if res.has("collider"):
-		var body:PhysicsBody = res["collider"]
-		if body is Entity:
-			(body as Entity).show_highlight()
-			var dist := (body.transform.origin - transform.origin).length()
-			if dist <= weapon.attack_range:
-				crosshair.modulate.a = 1
-				return
+	var body := PlayerInfo.get_collision(100.0)
+	if body != null:
+		body.show_highlight()
+		var dist := (body.transform.origin - transform.origin).length()
+		if dist <= weapon.attack_range:
+			crosshair.modulate.a = 1
+			return
 	else: crosshair.modulate.a = 0.25
 
 func _handle_input():

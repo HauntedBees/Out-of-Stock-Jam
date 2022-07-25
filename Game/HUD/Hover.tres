@@ -9,6 +9,10 @@ uniform float width;
 uniform vec4 inner_color: hint_color;
 uniform vec4 outer_color: hint_color;
 
+void vertex() {
+	MODELVIEW_MATRIX = INV_CAMERA_MATRIX * mat4(CAMERA_MATRIX[0], CAMERA_MATRIX[1], CAMERA_MATRIX[2], WORLD_MATRIX[3]);
+}
+
 void fragment() {
 	ALPHA = 0.0;
 	vec2 uv = vec2(

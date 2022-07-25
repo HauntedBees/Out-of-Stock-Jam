@@ -40,3 +40,12 @@ func reduce_ammo(type := ""):
 			inventory.remove(i)
 		get_tree().call_group("equip_monitor", "update_ammo")
 		return
+
+func get_collision(distance:float) -> Entity:
+	var camera := get_viewport().get_camera()
+	var center := get_viewport().size / 2
+	var from := camera.project_ray_origin(center)
+	var to := from + camera.project_ray_normal(center) * distance
+	var res := get_viewport().world.direct_space_state.intersect_ray(from, to)
+	if !res.has("collider"): return null
+	return res["collider"] if res["collider"] is Entity else null

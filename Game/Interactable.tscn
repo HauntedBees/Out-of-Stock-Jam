@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Textures/Entities/crate.png" type="Texture" id=1]
+[ext_resource path="res://Interactable.gd" type="Script" id=2]
+[ext_resource path="res://HUD/Theme.tres" type="Theme" id=3]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.504577, 0.474442, 0.513129 )
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=13]
+flags_transparent = true
+albedo_color = Color( 0.235294, 0.329412, 0.972549, 0.341176 )
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_transparent = true
+params_billboard_mode = 2
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="QuadMesh" id=4]
+material = SubResource( 3 )
+size = Vector2( 1.5, 1 )
+
+[sub_resource type="QuadMesh" id=11]
+
+[sub_resource type="ViewportTexture" id=12]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="SpatialMaterial" id=9]
+resource_local_to_scene = true
+render_priority = 1
+flags_transparent = true
+flags_unshaded = true
+flags_no_depth_test = true
+flags_do_not_receive_shadows = true
+params_billboard_mode = 2
+albedo_texture = SubResource( 12 )
+uv1_scale = Vector3( 0.731, 2.883, 1 )
+uv1_offset = Vector3( 0.034, -1.106, 0 )
+
+[node name="Interactable" type="KinematicBody"]
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="DebugModel" type="MeshInstance" parent="."]
+layers = 2
+mesh = SubResource( 2 )
+material/0 = SubResource( 13 )
+
+[node name="InteractModel" type="MeshInstance" parent="."]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="Name" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.1, 0, -0.5738, 0 )
+visible = false
+mesh = SubResource( 11 )
+material/0 = SubResource( 9 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 250, 50 )
+transparent_bg = true
+render_target_v_flip = true
+
+[node name="Label" type="Label" parent="Viewport"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 200.0
+margin_bottom = 60.0
+theme = ExtResource( 3 )
+text = "Crate"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
