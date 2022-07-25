@@ -12,6 +12,7 @@ https://pixabay.com/vectors/abstract-background-triangle-1673772/
 https://www.pexels.com/photo/a-white-blue-digital-thermometer-7722669/
 https://pixabay.com/photos/wedding-rings-engagement-rings-3611277/
 https://pixabay.com/photos/obsidian-stone-volcanic-rock-glass-505332/
+https://pixabay.com/illustrations/technology-network-connection-3357605/
 
 Weapons
 https://pixabay.com/photos/wooden-hammer-hammer-1922384/
@@ -22,10 +23,13 @@ https://pixabay.com/photos/blasting-caps-danger-beware-tin-1267476/
 Environment
 https://pixabay.com/photos/sheet-metal-bottom-stole-metal-338882/
 
-Entities
+Items
+https://www.freeimages.com/photo/crate-1542214
+
+Characters
 https://pixabay.com/photos/construction-worker-building-949768/
 
 use planemesh for stuff?
-
+reloading?
 
 https://fontlibrary.org/en/font/computer-speak

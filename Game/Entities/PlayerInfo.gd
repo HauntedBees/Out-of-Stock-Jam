@@ -1,5 +1,6 @@
 extends Node
 
+const SEARCH_OFFSET := Vector2(-172, 630)
 const INV_OFFSET := Vector2(16, 64)
 const INV_DELTA := 96
 const INV_WIDTH := 11
@@ -16,8 +17,8 @@ var inventory_columns := 8
 var inv_is_dragging := false
 
 var inventory := [
-	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(2, 1), Vector2(1, 1), 3),
-	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(2, 1), Vector2(1, 2), 3),
+	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(1, 1), 3),
+	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(1, 2), 3),
 	Item.new("Hammer", "Weapons/Hammer.png", Vector2(1, 3), Vector2(5, 0), 1, false, true, false),
 	Item.new("Pistol", "Weapons/Pistol.png", Vector2(1, 3), Vector2(0, 0), 1, false, true)
 ]

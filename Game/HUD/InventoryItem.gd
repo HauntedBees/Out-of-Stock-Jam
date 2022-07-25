@@ -14,13 +14,20 @@ onready var movehighlight:ColorRect = $MoveHover
 onready var highlight:ColorRect = $Hover
 onready var shadow:TextureRect = $Shadow
 
+var search_drag := false
+var is_search := false
+var parent_container := []
+var num_columns := 0
 var equip_order := -1
 var info:Item
 var dragging := false
 var drag_start_pos := Vector2.ZERO
+var offset := Vector2.ZERO
 
 func set_item(i:Item): info = i
 func _ready():
+	offset = PlayerInfo.SEARCH_OFFSET if is_search else PlayerInfo.INV_OFFSET
+	num_columns = 4 if is_search else PlayerInfo.inventory_columns
 	if info.stackable:
 		hint_tooltip = "%s (%s)" % [info.type, info.amount]
 	else:
@@ -69,7 +76,7 @@ func _end_item_movement():
 				_merge_items(potential_merge)
 				return
 		info.position = _get_shifted_location()
-		rect_position = PlayerInfo.INV_OFFSET + PlayerInfo.INV_DELTA * info.position
+		rect_position = offset + PlayerInfo.INV_DELTA * info.position
 	shadow.rect_position = Vector2.ZERO
 	movehighlight.rect_position = Vector2.ZERO
 	PlayerInfo.inv_is_dragging = false
@@ -88,14 +95,14 @@ func _is_valid_move_location() -> bool:
 	var current_position := _get_shifted_location()
 	if current_position.x < 0 || current_position.y < 0: return false
 	var potential_end := current_position + info.size - Vector2(1, 1)
-	if potential_end.x >= PlayerInfo.inventory_columns || potential_end.y >= PlayerInfo.INV_HEIGHT: return false
-	for i in PlayerInfo.inventory:
+	if potential_end.x >= num_columns || potential_end.y >= PlayerInfo.INV_HEIGHT: return false
+	for i in parent_container:
 		if i.overlaps_item(info, current_position): return false
 	return true
 
 func _get_potential_stack() -> Item:
 	var current_position := _get_shifted_location()
-	for i in PlayerInfo.inventory:
+	for i in parent_container:
 		if i.overlaps_item(info, current_position, true): return i
 	return null
 
@@ -104,7 +111,7 @@ func _merge_items(target:Item):
 	emit_signal("remove_item")
 
 func _get_shifted_location() -> Vector2:
-	return ((rect_position + shadow.rect_position - PlayerInfo.INV_OFFSET) / PlayerInfo.INV_DELTA).round()
+	return ((rect_position + shadow.rect_position - offset) / PlayerInfo.INV_DELTA).round()
 
 func _on_mouse_entered():
 	if PlayerInfo.inv_is_dragging: return

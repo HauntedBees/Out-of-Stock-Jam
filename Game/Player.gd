@@ -71,14 +71,10 @@ func _handle_movement(delta:float):
 func _input(event:InputEvent):
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED: # aiming
 		if event is InputEventMouseMotion: return _handle_camera_movement(event)
-	else:
-		pass
 	if event.is_action_pressed("toggle_inventory"):
-		in_inventory = !in_inventory
-		if in_inventory: inventory.refresh_items()
-		inventory.visible = in_inventory
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE if in_inventory else Input.MOUSE_MODE_CAPTURED)
+		_toggle_inventory(!in_inventory)
 	_handle_equip_switch(event)
+	_handle_use_item(event)
 
 func _handle_camera_movement(event:InputEventMouseMotion):
 	vision.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
@@ -87,6 +83,20 @@ func _handle_camera_movement(event:InputEventMouseMotion):
 	camera_rotation.x = clamp(camera_rotation.x, -50, 50)
 	vision.rotation_degrees = camera_rotation
 
+func _handle_use_item(event:InputEvent):
+	if !event.is_action_pressed("use"): return
+	var body := PlayerInfo.get_collision(2.5)
+	if body == null || body is Enemy: return
+	inventory.search_contents = body.contents
+	_toggle_inventory(true, true)
+
+func _toggle_inventory(new_position:bool, search := false):
+	in_inventory = new_position
+	inventory.is_search = search
+	if in_inventory: inventory.refresh_items()
+	inventory.visible = in_inventory
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE if in_inventory else Input.MOUSE_MODE_CAPTURED)
+
 func _handle_equip_switch(event:InputEvent):
 	for i in range(0, 10):
 		if !event.is_action_pressed("equip%s" % i): continue
@@ -94,3 +104,5 @@ func _handle_equip_switch(event:InputEvent):
 		if item == null: return
 		PlayerInfo.current_weapon = item
 		get_tree().call_group("equip_monitor", "update_weapon")
+
+func _on_close_item_search(): _toggle_inventory(false)
