@@ -1,0 +1,510 @@
+[gd_scene load_steps=37 format=2]
+
+[ext_resource path="res://Textures/Special Stage/test_walls.png" type="Texture" id=1]
+[ext_resource path="res://Textures/Special Stage/Player.png" type="Texture" id=2]
+[ext_resource path="res://Special/SpecialStage.gd" type="Script" id=3]
+[ext_resource path="res://Special/ShadowMaterial.tres" type="Material" id=4]
+[ext_resource path="res://HUD/Theme.tres" type="Theme" id=5]
+[ext_resource path="res://Textures/HUD/Rings.png" type="Texture" id=6]
+[ext_resource path="res://HUD/BWTheme.tres" type="Theme" id=7]
+[ext_resource path="res://Textures/HUD/OrbBG.jpg" type="Texture" id=8]
+[ext_resource path="res://Assets/Computer Speak v0.3.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Textures/Special Stage/Skybox.png" type="Texture" id=10]
+[ext_resource path="res://Special/Skybox.gd" type="Script" id=11]
+[ext_resource path="res://Textures/Special Stage/PlayerHurt.png" type="Texture" id=12]
+[ext_resource path="res://Special/SpecialStages.gd" type="Script" id=13]
+[ext_resource path="res://Textures/Special Stage/Popup.png" type="Texture" id=14]
+[ext_resource path="res://Textures/Special Stage/ThumbsUp.png" type="Texture" id=15]
+[ext_resource path="res://Textures/Special Stage/ThumbsDown.png" type="Texture" id=16]
+[ext_resource path="res://Special/Emerald.tscn" type="PackedScene" id=17]
+
+[sub_resource type="QuadMesh" id=14]
+size = Vector2( 230, 130 )
+
+[sub_resource type="SpatialMaterial" id=15]
+flags_unshaded = true
+params_billboard_mode = 1
+albedo_texture = ExtResource( 10 )
+
+[sub_resource type="Animation" id=10]
+resource_name = "MoveStage"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("ConeZone:mesh:material:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("ConeZone:mesh:material:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="SpatialMaterial" id=1]
+params_cull_mode = 1
+albedo_texture = ExtResource( 1 )
+metallic_specular = 0.0
+
+[sub_resource type="CylinderMesh" id=2]
+material = SubResource( 1 )
+radial_segments = 6
+
+[sub_resource type="PlaneMesh" id=9]
+size = Vector2( 1, 1 )
+
+[sub_resource type="Animation" id=21]
+resource_name = "Fall"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../HurtAnim:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../HurtAnim:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -2.477, 34.1495 ), Vector3( 0, -4.84462, 34.1495 ) ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "Hurt"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.95 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../HurtAnim:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.95 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../HurtAnim:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -2.477, 34.25 ), Vector3( 0, -2.477, 34.088 ), Vector3( 0, -2.477, 34.412 ), Vector3( 0, -2.477, 33.922 ), Vector3( 0, -2.477, 34.377 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../HurtAnim:material/0:albedo_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material/0:uv1_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../HurtAnim:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../HurtAnim:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, -2.477, 34.25 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../HurtAnim:material/0:albedo_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Run"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material/0:uv1_scale")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 1, 1, 1 ), Vector3( -1, 1, 1 ) ]
+}
+
+[sub_resource type="CylinderShape" id=13]
+radius = 0.415168
+
+[sub_resource type="QuadMesh" id=3]
+size = Vector2( 1, 2 )
+
+[sub_resource type="SpatialMaterial" id=4]
+flags_transparent = true
+params_billboard_mode = 1
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="QuadMesh" id=18]
+size = Vector2( 1.5, 2.5 )
+
+[sub_resource type="SpatialMaterial" id=16]
+flags_transparent = true
+params_billboard_mode = 1
+albedo_texture = ExtResource( 12 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 58
+font_data = ExtResource( 9 )
+
+[sub_resource type="Animation" id=19]
+resource_name = "Bob"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 640, 300 ), Vector2( 640, 290 ), Vector2( 640, 310 ), Vector2( 640, 300 ) ]
+}
+
+[sub_resource type="Animation" id=20]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 640, 355 ) ]
+}
+
+[node name="SpecialStage" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="Skybox" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -26, -28 )
+mesh = SubResource( 14 )
+material/0 = SubResource( 15 )
+script = ExtResource( 11 )
+
+[node name="Timer" type="Timer" parent="Skybox"]
+wait_time = 0.1
+autostart = true
+
+[node name="ConeAnimation" type="AnimationPlayer" parent="."]
+autoplay = "MoveStage"
+playback_speed = 0.1
+anims/MoveStage = SubResource( 10 )
+anims/RESET = SubResource( 11 )
+
+[node name="ConeZone" type="MeshInstance" parent="."]
+transform = Transform( 7.64274e-15, -1.74846e-06, -4, -4, -1.74846e-06, 0, -1.74846e-07, 40, -1.74846e-07, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="ConeContainer" type="Spatial" parent="."]
+transform = Transform( 1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0, 0 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2.6, 45 )
+
+[node name="Player" type="Spatial" parent="."]
+
+[node name="PlayerShadow" type="MeshInstance" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.45349, 34.25 )
+mesh = SubResource( 9 )
+skeleton = NodePath("../RunAnim")
+material/0 = ExtResource( 4 )
+
+[node name="PlayerAnimation" type="AnimationPlayer" parent="Player"]
+root_node = NodePath("../RunAnim")
+autoplay = "Run"
+anims/Fall = SubResource( 21 )
+anims/Hurt = SubResource( 17 )
+anims/RESET = SubResource( 5 )
+anims/Run = SubResource( 6 )
+
+[node name="PlayerCollider" type="RigidBody" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.47731, 34.25 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Player/PlayerCollider"]
+shape = SubResource( 13 )
+
+[node name="RunAnim" type="MeshInstance" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.47731, 34.25 )
+mesh = SubResource( 3 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 4 )
+
+[node name="HurtAnim" type="MeshInstance" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.477, 34.25 )
+visible = false
+mesh = SubResource( 18 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 16 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0, 38.0158 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="HUD" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scoreboard" type="TextureRect" parent="HUD"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -120.5
+margin_right = 120.5
+margin_bottom = 222.0
+rect_pivot_offset = Vector2( 120, 0 )
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Scoreboard"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Scoreboard/HBoxContainer"]
+margin_left = 59.0
+margin_right = 181.0
+margin_bottom = 227.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HUD/Scoreboard/HBoxContainer/VBoxContainer"]
+margin_right = 122.0
+margin_bottom = 51.0
+theme = ExtResource( 7 )
+text = "Rings"
+align = 1
+
+[node name="RingIcon" type="TextureRect" parent="HUD/Scoreboard/HBoxContainer/VBoxContainer"]
+margin_top = 55.0
+margin_right = 122.0
+margin_bottom = 119.0
+texture = ExtResource( 6 )
+
+[node name="RingCount" type="Label" parent="HUD/Scoreboard/HBoxContainer/VBoxContainer"]
+margin_top = 123.0
+margin_right = 122.0
+margin_bottom = 227.0
+rect_min_size = Vector2( 120, 58 )
+rect_pivot_offset = Vector2( 61, 29 )
+theme = ExtResource( 5 )
+custom_fonts/font = SubResource( 12 )
+text = "0"
+align = 1
+
+[node name="Popup" type="TextureRect" parent="HUD"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -185.0
+margin_right = 320.0
+margin_bottom = -53.0
+texture = ExtResource( 14 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HUD/Popup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -148.0
+margin_top = -25.5
+margin_right = 148.0
+margin_bottom = 25.5
+theme = ExtResource( 7 )
+text = "Collect 6900 Coins"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Good" type="TextureRect" parent="HUD/Popup"]
+visible = false
+margin_left = -294.0
+margin_top = -113.0
+margin_right = 89.0
+margin_bottom = 367.0
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bad" type="TextureRect" parent="HUD/Popup"]
+visible = false
+margin_left = 494.0
+margin_top = -113.0
+margin_right = 971.0
+margin_bottom = 367.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PopupAnim" type="AnimationPlayer" parent="HUD/Popup"]
+autoplay = "Bob"
+anims/Bob = SubResource( 19 )
+anims/RESET = SubResource( 20 )
+
+[node name="SpecialStages" type="Spatial" parent="."]
+script = ExtResource( 13 )
+
+[node name="MiscTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Emerald" parent="." instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.913391, -42 )
+
+[connection signal="timeout" from="Skybox/Timer" to="Skybox" method="_on_timeout"]

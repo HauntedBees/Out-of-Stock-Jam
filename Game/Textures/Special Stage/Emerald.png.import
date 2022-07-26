@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Inventory.jpg-8781e81988dffc84ebf9092e700de287.s3tc.stex"
-path.etc="res://.import/Inventory.jpg-8781e81988dffc84ebf9092e700de287.etc.stex"
+path.s3tc="res://.import/Emerald.png-2477a25bc724f4570d00ed3fbe4cbe0c.s3tc.stex"
+path.etc="res://.import/Emerald.png-2477a25bc724f4570d00ed3fbe4cbe0c.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/HUD/Inventory.jpg"
-dest_files=[ "res://.import/Inventory.jpg-8781e81988dffc84ebf9092e700de287.s3tc.stex", "res://.import/Inventory.jpg-8781e81988dffc84ebf9092e700de287.etc.stex" ]
+source_file="res://Textures/Special Stage/Emerald.png"
+dest_files=[ "res://.import/Emerald.png-2477a25bc724f4570d00ed3fbe4cbe0c.s3tc.stex", "res://.import/Emerald.png-2477a25bc724f4570d00ed3fbe4cbe0c.etc.stex" ]
 
 [params]
 

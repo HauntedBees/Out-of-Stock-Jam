@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Textures/Weapons/Blast.png" type="Texture" id=1]
 [ext_resource path="res://Textures/Weapons/Pistol.png" type="Texture" id=2]
 [ext_resource path="res://Textures/Weapons/Hammer.png" type="Texture" id=3]
 [ext_resource path="res://Weapons/Weapon.gd" type="Script" id=4]
+[ext_resource path="res://Textures/Weapons/Hand.png" type="Texture" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Melee"
@@ -219,3 +220,22 @@ anims/MoveUp = SubResource( 5 )
 anims/RESET = SubResource( 2 )
 anims/Reload = SubResource( 6 )
 anims/Shoot = SubResource( 3 )
+
+[node name="Chaos" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Hand" type="TextureRect" parent="Chaos"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = -212.0
+margin_right = 532.0
+margin_bottom = -1.0
+rect_rotation = -14.0648
+rect_pivot_offset = Vector2( 0, 234 )
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

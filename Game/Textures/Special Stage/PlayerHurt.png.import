@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Inventory.jpg-8781e81988dffc84ebf9092e700de287.s3tc.stex"
-path.etc="res://.import/Inventory.jpg-8781e81988dffc84ebf9092e700de287.etc.stex"
+path.s3tc="res://.import/PlayerHurt.png-0d43b4ebd56ba321d172dab6b93a5d43.s3tc.stex"
+path.etc="res://.import/PlayerHurt.png-0d43b4ebd56ba321d172dab6b93a5d43.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/HUD/Inventory.jpg"
-dest_files=[ "res://.import/Inventory.jpg-8781e81988dffc84ebf9092e700de287.s3tc.stex", "res://.import/Inventory.jpg-8781e81988dffc84ebf9092e700de287.etc.stex" ]
+source_file="res://Textures/Special Stage/PlayerHurt.png"
+dest_files=[ "res://.import/PlayerHurt.png-0d43b4ebd56ba321d172dab6b93a5d43.s3tc.stex", "res://.import/PlayerHurt.png-0d43b4ebd56ba321d172dab6b93a5d43.etc.stex" ]
 
 [params]
 

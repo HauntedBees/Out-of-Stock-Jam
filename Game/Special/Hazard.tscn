@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Special/Hazard.gd" type="Script" id=1]
+[ext_resource path="res://Textures/Special Stage/Skybox.png" type="Texture" id=2]
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 1.24107, 0.123443, 1 )
+
+[sub_resource type="PlaneMesh" id=2]
+size = Vector2( 3, 3.75 )
+
+[sub_resource type="Shader" id=3]
+code = "shader_type spatial;
+render_mode unshaded;
+// Renders a tileable 2D texture to screen, using spatial polygons as a mask.
+// Remove blur from textures by unchecking \"Detect 3D\" and \"Filter\" in Import.
+// Demo: https://github.com/DeerTears/Polygon-Mask-for-2D-Textures/
+
+uniform sampler2D tiling_texture;
+
+uniform float tiling_scale = 1.0;
+uniform vec2 delta = vec2(0.0, 0.0);
+uniform vec2 mult = vec2(1.0, 1.0);
+
+const float DEFAULT_SCALE = 8.0;
+
+void fragment() {
+	vec2 uv = mult * vec2(FRAGCOORD.x, -FRAGCOORD.y) + delta;
+	vec2 tiling_uv = uv / (DEFAULT_SCALE * tiling_scale);
+	vec4 texture_result = texture(tiling_texture, tiling_uv);
+	ALBEDO = texture_result.rgb;
+	ALPHA = texture_result.a;
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/tiling_scale = 200.0
+shader_param/delta = Vector2( 0, 0 )
+shader_param/mult = Vector2( 1, 1 )
+shader_param/tiling_texture = ExtResource( 2 )
+
+[node name="Hazard" type="Area"]
+script = ExtResource( 1 )
+item_type = "hazard"
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.127109, 0 )
+shape = SubResource( 5 )
+
+[node name="CompleteMesh" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0 )
+mesh = SubResource( 2 )
+skeleton = NodePath("")
+material/0 = SubResource( 4 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timeout"]
