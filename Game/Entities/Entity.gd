@@ -1,12 +1,15 @@
 class_name Entity
 extends KinematicBody
 
+export(String) var type := "Roboticizer"
+export(float) var health := 100.0
+export(String) var content_name := ""
+
 onready var highlight:ShaderMaterial = preload("res://HUD/Hover.tres")
 var main_mesh:MeshInstance
 var name_mesh:MeshInstance
-export(String) var type := "Roboticizer"
+var material:SpatialMaterial
 
-var health := 100.0
 var is_dead := false
 
 var forced_velocity := Vector3.ZERO
@@ -17,6 +20,10 @@ var highlight_timer := 0.0
 var contents := [
 	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(0, 0), {"amount": 95})
 ]
+
+func _ready():
+	if content_name != "":
+		contents = ContentIndex.items[content_name]
 
 func show_highlight():
 	highlight_timer = 0.1

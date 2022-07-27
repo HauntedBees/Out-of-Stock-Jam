@@ -11,6 +11,7 @@ var velocity := Vector3()
 var direction := Vector3()
 
 onready var player_stats := $HUD/LeftHUD
+onready var ring_label := $HUD/LeftHUD/Rings/HealthAmount
 onready var inventory := $HUD/Inventory
 onready var weapon:Weapon = $HUD/Weapon
 onready var vision:Spatial = $Vision
@@ -127,3 +128,7 @@ func _on_close_item_search():
 	if search_target != null: search_target.refresh_label()
 	search_target = null
 	_toggle_inventory(false)
+
+func add_rings(amount:int):
+	PlayerInfo.rings += amount
+	ring_label.text = String(PlayerInfo.rings)

@@ -14,7 +14,6 @@ onready var dead:Texture = load("res://Textures/Entities/corpse.png")
 onready var timer:Timer = $Timer
 onready var label:Label = $Viewport/Label
 
-var material:SpatialMaterial
 var last_h_angle := 0.0
 var hit_anim := false
 
@@ -22,6 +21,7 @@ func _ready():
 	main_mesh = $EnemyModel
 	name_mesh = $Name
 	material = main_mesh.get_active_material(0)
+	main_mesh.material_override = material
 	material.albedo_texture = front
 	label.text = type
 

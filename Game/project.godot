@@ -93,6 +93,7 @@ config/icon="res://icon.png"
 [autoload]
 
 PlayerInfo="*res://Entities/PlayerInfo.gd"
+ContentIndex="*res://Entities/ContentIndex.gd"
 
 [debug]
 
