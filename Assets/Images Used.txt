@@ -29,8 +29,14 @@ https://pixabay.com/photos/sheet-metal-bottom-stole-metal-338882/
 Items
 https://www.freeimages.com/photo/crate-1542214
 
-Characters
+Enemies
+https://pixabay.com/photos/halloween-tombstone-gray-2540017/
+
+Roboticizer
 https://pixabay.com/photos/construction-worker-building-949768/
+https://pixabay.com/photos/workers-construction-worker-handyman-2036185/
+https://pixabay.com/photos/construction-worker-workers-appraise-1618343/
+https://www.pexels.com/photo/a-person-walking-while-carrying-a-pylon-9322227/
 
 Special Stage
 https://pixabay.com/vectors/marathon-runner-sport-silhouette-3635758/
@@ -45,11 +51,6 @@ https://www.pexels.com/photo/a-man-flashing-the-thumbs-down-sign-5511613/
 https://www.freeimages.com/photo/diamond-green-i-1181034
 
 https://godotshaders.com/shader/screenspace-tiled-texturing/
-
-
-CLOSE SORT
-F TO CLOSE TOO
-
 https://fontlibrary.org/en/font/computer-speak
 
 GONNA USE:

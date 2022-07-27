@@ -42,3 +42,4 @@ cull_mask = 1048574
 
 [node name="Interactable" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6825, 0.497803, -4.29834 )
+type = "Crate"

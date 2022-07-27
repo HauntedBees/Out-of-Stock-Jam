@@ -1,5 +1,7 @@
 extends Control
 
+signal close_search()
+
 onready var tooltip_theme:Theme = preload("res://HUD/Tooltip.tres")
 onready var item:PackedScene = preload("res://HUD/InventoryItem.tscn")
 onready var tile:TextureRect = $TileRect
@@ -83,3 +85,5 @@ func get_equipment(idx:int) -> Item:
 	for i in items:
 		if i.equip_order == idx: return i.info
 	return null
+
+func _on_CloseButton_pressed(): emit_signal("close_search")

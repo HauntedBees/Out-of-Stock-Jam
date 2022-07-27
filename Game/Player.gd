@@ -16,6 +16,7 @@ onready var vision:Spatial = $Vision
 onready var camera:Camera = $Vision/Camera
 onready var crosshair:TextureRect = $HUD/Crosshair
 var MOUSE_SENSITIVITY := -0.15
+var search_target:Entity
 
 var in_inventory := false
 
@@ -28,6 +29,12 @@ func _physics_process(delta:float):
 	_handle_input()
 	_handle_movement(delta)
 	_handle_cursor()
+	_handle_move_too_far_from_target()
+
+func _handle_move_too_far_from_target():
+	if search_target == null: return
+	if search_target.global_transform.origin.distance_to(global_transform.origin) > 5.0:
+		_on_close_item_search()
 
 func _handle_cursor():
 	var body := PlayerInfo.get_collision(100.0)
@@ -86,13 +93,20 @@ func _handle_camera_movement(event:InputEventMouseMotion):
 
 func _handle_use_item(event:InputEvent):
 	if !event.is_action_pressed("use"): return
+	if in_inventory && search_target != null:
+		_on_close_item_search()
+		return
 	var body := PlayerInfo.get_collision(2.5)
-	if body == null || body is Enemy: return
+	if body == null || (body is Enemy && !body.is_dead): return
+	search_target = body
 	inventory.search_contents = body.contents
 	_toggle_inventory(true, true)
 
 func _toggle_inventory(new_position:bool, search := false):
 	in_inventory = new_position
+	if !in_inventory && search_target != null:
+		_on_close_item_search()
+		return
 	inventory.is_search = search
 	if in_inventory: inventory.refresh_items()
 	inventory.visible = in_inventory
@@ -106,4 +120,7 @@ func _handle_equip_switch(event:InputEvent):
 		PlayerInfo.current_weapon = item
 		get_tree().call_group("equip_monitor", "update_weapon")
 
-func _on_close_item_search(): _toggle_inventory(false)
+func _on_close_item_search():
+	if search_target != null: search_target.refresh_label()
+	search_target = null
+	_toggle_inventory(false)

@@ -1,10 +1,10 @@
 class_name Interactable
 extends Entity
 
-var contents := [
-	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(0, 0), {"amount": 95})
-]
-
+onready var label:Label = $Viewport/Label
 func _ready():
 	main_mesh = $InteractModel
 	name_mesh = $Name
+	refresh_label()
+
+func refresh_label(): label.text = "%s (%s)" % [type, contents.size()]

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/constructionworker.png-579ee8da4257eba7646111fc3371d85c.s3tc.stex"
-path.etc="res://.import/constructionworker.png-579ee8da4257eba7646111fc3371d85c.etc.stex"
+path.s3tc="res://.import/Roboticizer_Back.png-809f644aabad1d08417db21edf6f0224.s3tc.stex"
+path.etc="res://.import/Roboticizer_Back.png-809f644aabad1d08417db21edf6f0224.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/Entities/constructionworker.png"
-dest_files=[ "res://.import/constructionworker.png-579ee8da4257eba7646111fc3371d85c.s3tc.stex", "res://.import/constructionworker.png-579ee8da4257eba7646111fc3371d85c.etc.stex" ]
+source_file="res://Textures/Entities/Roboticizer_Back.png"
+dest_files=[ "res://.import/Roboticizer_Back.png-809f644aabad1d08417db21edf6f0224.s3tc.stex", "res://.import/Roboticizer_Back.png-809f644aabad1d08417db21edf6f0224.etc.stex" ]
 
 [params]
 

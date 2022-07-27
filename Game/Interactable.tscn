@@ -62,7 +62,7 @@ mesh = SubResource( 11 )
 material/0 = SubResource( 9 )
 
 [node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 250, 50 )
+size = Vector2( 250, 55 )
 transparent_bg = true
 render_target_v_flip = true
 

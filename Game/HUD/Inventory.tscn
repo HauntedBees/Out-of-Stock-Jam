@@ -157,3 +157,5 @@ text = "X"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="pressed" from="Search/CloseButton" to="." method="_on_CloseButton_pressed"]
