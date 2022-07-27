@@ -16,7 +16,7 @@ albedo_color = Color( 0.235294, 0.329412, 0.972549, 0.341176 )
 
 [sub_resource type="SpatialMaterial" id=3]
 flags_transparent = true
-params_billboard_mode = 2
+params_billboard_mode = 1
 albedo_texture = ExtResource( 1 )
 
 [sub_resource type="QuadMesh" id=4]

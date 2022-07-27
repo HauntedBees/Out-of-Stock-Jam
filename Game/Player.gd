@@ -1,3 +1,4 @@
+class_name Player
 extends KinematicBody
 
 const GRAVITY = -9.8
