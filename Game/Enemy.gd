@@ -68,4 +68,8 @@ func _die():
 	collision_layer = 2
 	collision_mask = 2
 
-func refresh_label(): label.text = "%s (%s)" % ["Corpse" if is_human else "Scrap", contents.size()]
+func refresh_label():
+	var amount := contents.size()
+	var title := "Corpse" if is_human else "Scrap"
+	if amount == 0: label.text = title
+	else: label.text = "%s (%s)" % [title, amount]

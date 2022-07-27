@@ -1,8 +1,8 @@
 extends KinematicBody
 
-const GRAVITY = -4.8
+const GRAVITY = -9.8
 const MAX_SPEED := 20.0
-const JUMP_SPEED := 18.0
+const JUMP_SPEED := 12.0
 const ACCELERATION := 4.5
 const DECELERATION := 16.0
 
@@ -79,7 +79,9 @@ func _handle_movement(delta:float):
 func _input(event:InputEvent):
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED: # aiming
 		if event is InputEventMouseMotion: return _handle_camera_movement(event)
-	if event.is_action_pressed("toggle_inventory"):
+	if event.is_action_pressed("jump") && is_on_floor():
+		velocity.y = JUMP_SPEED
+	elif event.is_action_pressed("toggle_inventory"):
 		_toggle_inventory(!in_inventory)
 	_handle_equip_switch(event)
 	_handle_use_item(event)
@@ -88,7 +90,7 @@ func _handle_camera_movement(event:InputEventMouseMotion):
 	vision.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
 	rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY))
 	var camera_rotation := vision.rotation_degrees
-	camera_rotation.x = clamp(camera_rotation.x, -50, 50)
+	camera_rotation.x = clamp(camera_rotation.x, -75, 75)
 	vision.rotation_degrees = camera_rotation
 
 func _handle_use_item(event:InputEvent):
