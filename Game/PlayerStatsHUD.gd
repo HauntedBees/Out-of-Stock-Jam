@@ -1,11 +1,12 @@
+class_name PlayerStatsHUD
 extends TextureRect
 
-onready var ring_count := $Rings/HealthAmount
-onready var chaos_count := $HealthChaos/ChaosAmount
-onready var chaos_bar := $HealthChaos/ChaosBar
-onready var shard_amount := $Shards/ShardAmount
-onready var weapon_texture := $Weapon/Texture
-onready var weapon_ammo := $Weapon/Ammo
+onready var ring_count:Label = $Rings/HealthAmount
+onready var chaos_count:Label = $HealthChaos/ChaosAmount
+onready var chaos_bar:TextureProgress = $HealthChaos/ChaosBar
+onready var shard_amount:Label = $Shards/ShardAmount
+onready var weapon_texture:TextureRect = $Weapon/Texture
+onready var weapon_ammo:Label = $Weapon/Ammo
 
 func _ready():
 	ring_count.text = String(PlayerInfo.rings)
@@ -14,7 +15,10 @@ func _ready():
 	shard_amount.text = String(PlayerInfo.emerald_shards)
 	update_weapon()
 
+func update_rings(): ring_count.text = String(PlayerInfo.rings)
+
 func update_weapon():
+	if PlayerInfo.current_weapon == PlayerInfo.UNARMED: return
 	weapon_texture.texture = load("res://Textures/%s" % PlayerInfo.current_weapon.texture)
 	update_ammo()
 

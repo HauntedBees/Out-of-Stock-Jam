@@ -1,7 +1,16 @@
+KNOWN BUGS:
+moving platform going down is jittery
+
+TODOS:
+put something in at least one desk in Doctors' Office
+
 Cover Art
 https://www.gettyimages.com/detail/photo/electro-therapy-man-royalty-free-image/1270832624
 https://pixabay.com/photos/mustache-indian-man-portrait-pirate-2431996/
 
+Title Screen:
+https://pixabay.com/illustrations/security-internet-crime-cyber-4700815/
+https://pixabay.com/vectors/button-icon-www-pages-theme-859343/
 
 HUD
 https://pixabay.com/vectors/crosshair-cross-wires-146621/
@@ -14,6 +23,14 @@ https://pixabay.com/photos/wedding-rings-engagement-rings-3611277/
 https://pixabay.com/photos/obsidian-stone-volcanic-rock-glass-505332/
 https://pixabay.com/illustrations/technology-network-connection-3357605/
 
+
+Opening Cutscene
+https://pixabay.com/photos/christmas-man-decorated-reindeer-1717771/
+https://pixabay.com/photos/white-background-hand-white-men-5244175/
+https://www.pexels.com/photo/anonymous-woman-hands-in-protective-gloves-in-blue-studio-5938655/
+https://pixabay.com/photos/connection-hand-human-robot-touch-3308188/
+https://pixabay.com/photos/man-male-adult-watching-movie-5545037/
+
 Weapons
 https://pixabay.com/photos/wooden-hammer-hammer-1922384/
 https://pixabay.com/photos/pistol-muzzleloader-weapon-old-2490781/
@@ -25,6 +42,9 @@ https://pixabay.com/illustrations/hand-robot-ai-hold-future-space-7014643/
 
 Environment
 https://pixabay.com/photos/sheet-metal-bottom-stole-metal-338882/
+https://pixabay.com/photos/white-painted-concrete-wall-concrete-888895/
+https://pixabay.com/vectors/lamp-ceiling-interior-blue-metal-576012/
+https://pixabay.com/photos/ladder-clouds-heart-valentine-s-day-6955391/
 
 Gimmicks
 https://pixabay.com/photos/macarons-desserts-food-pastry-6483919/
@@ -34,6 +54,12 @@ https://pixabay.com/photos/swimming-pool-pool-tiles-blue-4638912/
 
 Items
 https://www.freeimages.com/photo/crate-1542214
+https://www.pexels.com/photo/empty-workspace-8453810/
+https://pixabay.com/illustrations/rubble-rocks-pile-stones-junk-4283456/
+https://pixabay.com/photos/coffee-waitress-operation-3100343/
+https://pixabay.com/photos/operation-theatre-hospital-555088/
+https://pixabay.com/illustrations/sci-fi-interface-design-technology-4803373/
+https://pixabay.com/photos/bonsai-tree-green-plant-small-316573/
 
 Enemies
 https://pixabay.com/photos/halloween-tombstone-gray-2540017/
@@ -43,6 +69,13 @@ https://pixabay.com/photos/construction-worker-building-949768/
 https://pixabay.com/photos/workers-construction-worker-handyman-2036185/
 https://pixabay.com/photos/construction-worker-workers-appraise-1618343/
 https://www.pexels.com/photo/a-person-walking-while-carrying-a-pylon-9322227/
+
+Medical Robot
+https://pixabay.com/vectors/health-medicine-serpent-wings-304919/
+https://pixabay.com/illustrations/man-front-robot-cyborg-android-320270/
+https://pixabay.com/illustrations/man-side-robot-cyborg-android-320268/
+https://pixabay.com/illustrations/man-back-robot-cyborg-android-320271/
+https://pixabay.com/illustrations/man-face-back-posing-robot-cyborg-320272/
 
 Special Stage
 https://pixabay.com/vectors/marathon-runner-sport-silhouette-3635758/
@@ -61,7 +94,9 @@ https://fontlibrary.org/en/font/computer-speak
 
 GONNA USE:
 
-https://www.pexels.com/photo/anonymous-woman-hands-in-protective-gloves-in-blue-studio-5938655/ <-- gloves
+https://pixabay.com/photos/perforated-sheet-sheet-holes-1359412/
+https://pixabay.com/vectors/comic-fear-flee-fright-1296117/
+
 
 https://www.pexels.com/photo/photo-of-woman-using-fishing-rod-2898225/
 https://pixabay.com/vectors/fishing-rod-fishing-drawing-sketch-6856757/
@@ -76,6 +111,9 @@ https://pixabay.com/photos/accuracy-international-as50-872190/ <- sniper rifle
 https://pixabay.com/illustrations/arco-de-garra-talon-bow-arco-6039059/ <- shitty bow and arrow
 
 https://pixabay.com/photos/lacasadicarta-robbery-gun-gangster-5337100/ <- weird mask guy
+
+> https://www.freeimages.com/photo/computer-1242700
+> https://www.freeimages.com/photo/desk-top-computer-1242409
 
 our guy:
 https://www.shutterstock.com/search/models/2610

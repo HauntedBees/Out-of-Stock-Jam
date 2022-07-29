@@ -1,3 +1,4 @@
+class_name Inventory
 extends Control
 
 signal close_search()

@@ -3,6 +3,7 @@ extends KinematicBody
 
 export(String) var type := "Roboticizer"
 export(float) var health := 100.0
+export(float) var force_multiplier := 1.0
 export(String) var content_name := ""
 
 onready var highlight:ShaderMaterial = preload("res://HUD/Hover.tres")
@@ -17,9 +18,8 @@ var forced_velocity_timer := 0.0
 
 var highlight_timer := 0.0
 
-var contents := [
-	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(0, 0), {"amount": 95})
-]
+var contents := []
+	#Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(0, 0), {"amount": 95})
 
 func _ready():
 	if content_name != "":
@@ -42,7 +42,7 @@ func hide_highlight():
 func take_hit(direction:Vector3, force:float, damage:float):
 	if is_dead: return
 	if abs(force) > 0.05:
-		forced_velocity = direction * force
+		forced_velocity = direction * force * force_multiplier
 		forced_velocity.y = 0.0
 		forced_velocity_timer = 0.2
 	health -= damage

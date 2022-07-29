@@ -83,3 +83,15 @@ path_follow_path = NodePath("..")
 
 [node name="Ring" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.47184, 0.459625, 7.44977 )
+
+[node name="Ring2" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.38956, 0.459625, 7.44977 )
+
+[node name="Ring3" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.28791, 0.459625, 7.44977 )
+
+[node name="Ring4" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.20175, 0.459625, 7.44977 )
+
+[node name="Ring5" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.05138, 0.459625, 7.44977 )

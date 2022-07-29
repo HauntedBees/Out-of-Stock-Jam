@@ -57,11 +57,11 @@ func reload_weapon():
 	current_weapon.current_ammo = current_weapon.reload_amount - remaining
 	get_tree().call_group("equip_monitor", "update_ammo")
 
-func get_collision(distance:float) -> Entity:
+func get_collision(distance:float, no_lamps := false) -> Entity:
 	var camera := get_viewport().get_camera()
 	var center := get_viewport().size / 2
 	var from := camera.project_ray_origin(center)
 	var to := from + camera.project_ray_normal(center) * distance
 	var res := get_viewport().world.direct_space_state.intersect_ray(from, to)
 	if !res.has("collider"): return null
-	return res["collider"] if res["collider"] is Entity else null
+	return res["collider"] if res["collider"] is Entity || (!no_lamps && res["collider"] is Lamp) else null

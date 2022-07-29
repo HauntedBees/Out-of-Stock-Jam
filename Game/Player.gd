@@ -10,9 +10,9 @@ const DECELERATION := 16.0
 var velocity := Vector3()
 var direction := Vector3()
 
-onready var player_stats := $HUD/LeftHUD
-onready var ring_label := $HUD/LeftHUD/Rings/HealthAmount
-onready var inventory := $HUD/Inventory
+onready var head:CollisionShape = $Head
+onready var player_stats:PlayerStatsHUD = $HUD/LeftHUD
+onready var inventory:Inventory = $HUD/Inventory
 onready var weapon:Weapon = $HUD/Weapon
 onready var vision:Spatial = $Vision
 onready var camera:Camera = $Vision/Camera
@@ -21,6 +21,7 @@ var MOUSE_SENSITIVITY := -0.15
 var search_target:Entity
 
 var in_inventory := false
+var is_crouched := false
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -39,7 +40,7 @@ func _handle_move_too_far_from_target():
 		_on_close_item_search()
 
 func _handle_cursor():
-	var body := PlayerInfo.get_collision(100.0)
+	var body:Spatial = PlayerInfo.get_collision(100.0)
 	if body != null:
 		body.show_highlight()
 		var dist := (body.transform.origin - transform.origin).length()
@@ -48,7 +49,26 @@ func _handle_cursor():
 			return
 	else: crosshair.modulate.a = 0.25
 
+var crouch_toggle := false # TODO: move to settings. also, create settings.
 func _handle_input():
+	if Input.is_action_just_pressed("reload"):
+		weapon.reload()
+	_handle_movement_input()
+	
+	if Input.is_action_just_pressed("crouch"):
+		_handle_crouch(!is_crouched if crouch_toggle else true)
+	elif !crouch_toggle && Input.is_action_just_released("crouch"):
+		_handle_crouch(false)
+		
+	# TODO: jumping
+	# TODO: free cursor
+
+func _handle_crouch(is_crouch:bool):
+	is_crouched = is_crouch
+	head.disabled = is_crouched
+	camera.transform.origin.y = -0.35 if is_crouch else 0.55
+
+func _handle_movement_input():
 	var movement := Vector2()
 	if Input.is_action_pressed("move_forward"):
 		movement.y += 1
@@ -58,16 +78,12 @@ func _handle_input():
 		movement.x -= 1
 	elif Input.is_action_pressed("strafe_right"):
 		movement.x += 1
-	if Input.is_action_just_pressed("reload"):
-		weapon.reload()
 	movement = movement.normalized()
 	
 	var camera_basis := camera.get_global_transform().basis
 	direction = Vector3()
 	direction += -camera_basis.z * movement.y
 	direction += camera_basis.x * movement.x
-	# TODO: jumping
-	# TODO: free cursor
 
 func _handle_movement(delta:float):
 	direction.y = 0
@@ -92,7 +108,7 @@ func _handle_camera_movement(event:InputEventMouseMotion):
 	vision.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
 	rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY))
 	var camera_rotation := vision.rotation_degrees
-	camera_rotation.x = clamp(camera_rotation.x, -75, 75)
+	camera_rotation.x = clamp(camera_rotation.x, -85, 85)
 	vision.rotation_degrees = camera_rotation
 
 func _handle_use_item(event:InputEvent):
@@ -100,7 +116,7 @@ func _handle_use_item(event:InputEvent):
 	if in_inventory && search_target != null:
 		_on_close_item_search()
 		return
-	var body := PlayerInfo.get_collision(2.5)
+	var body:Entity = PlayerInfo.get_collision(2.5, true)
 	if body == null || (body is Enemy && !body.is_dead): return
 	search_target = body
 	inventory.search_contents = body.contents
@@ -131,4 +147,4 @@ func _on_close_item_search():
 
 func add_rings(amount:int):
 	PlayerInfo.rings += amount
-	ring_label.text = String(PlayerInfo.rings)
+	player_stats.update_rings()

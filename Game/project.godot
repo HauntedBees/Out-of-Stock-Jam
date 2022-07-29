@@ -35,6 +35,11 @@ _global_script_classes=[ {
 "path": "res://Interactable.gd"
 }, {
 "base": "Control",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://HUD/Inventory.gd"
+}, {
+"base": "Control",
 "class": "InventoryItem",
 "language": "GDScript",
 "path": "res://HUD/InventoryItem.gd"
@@ -44,10 +49,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Entities/Item.gd"
 }, {
+"base": "StaticBody",
+"class": "Lamp",
+"language": "GDScript",
+"path": "res://Entities/Lamp.gd"
+}, {
 "base": "KinematicBody",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Player.gd"
+}, {
+"base": "TextureRect",
+"class": "PlayerStatsHUD",
+"language": "GDScript",
+"path": "res://PlayerStatsHUD.gd"
 }, {
 "base": "Area",
 "class": "SpecialStageItem",
@@ -75,9 +90,12 @@ _global_script_class_icons={
 "Entity": "",
 "Gimmick": "",
 "Interactable": "",
+"Inventory": "",
 "InventoryItem": "",
 "Item": "",
+"Lamp": "",
 "Player": "",
+"PlayerStatsHUD": "",
 "SpecialStageItem": "",
 "SpecialStageLevelInfo": "",
 "SpecialStages": "",
@@ -87,7 +105,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Sonic Shock"
-run/main_scene="res://Testbench.tscn"
+run/main_scene="res://Maps/Medical Bay.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -220,6 +238,11 @@ reload={
 jump={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+crouch={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777238,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

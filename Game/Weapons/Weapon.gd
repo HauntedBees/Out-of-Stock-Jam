@@ -2,7 +2,7 @@ class_name Weapon
 extends Control
 
 onready var weapon_textures := [$Weapon/Pistol, $Weapon/Hammer]
-onready var blast := $Blast
+onready var blast:TextureRect = $Blast
 
 const weapon_info := {
 	"Hammer": {
