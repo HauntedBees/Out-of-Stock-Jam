@@ -28,6 +28,7 @@ func _ready():
 	weapon.set_weapon(PlayerInfo.current_weapon.type)
 
 func _physics_process(delta:float):
+	if PlayerInfo.in_cutscene: return
 	if weapon != null && PlayerInfo.current_weapon != PlayerInfo.UNARMED: weapon.try_attack(delta)
 	_handle_input()
 	_handle_movement(delta)

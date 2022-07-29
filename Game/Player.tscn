@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Textures/Weapons/Hammer.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Textures/HUD/EmeraldShard.png" type="Texture" id=11]
 [ext_resource path="res://PlayerStatsHUD.gd" type="Script" id=12]
 [ext_resource path="res://Weapons/Weapon.tscn" type="PackedScene" id=13]
+[ext_resource path="res://HUD/DialogHUD.gd" type="Script" id=14]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.560811
@@ -26,6 +27,18 @@ radius = 0.5
 
 [sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://Assets/Computer Speak v0.3.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 42
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 5 )
+
+[sub_resource type="Theme" id=7]
+Label/fonts/font = SubResource( 6 )
 
 [node name="Player" type="KinematicBody" groups=["player"]]
 script = ExtResource( 1 )
@@ -283,5 +296,38 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.96
 layers = 2
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
+
+[node name="DialogHUD" type="Control" parent="." groups=["Dialog"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Textbox" type="TextureRect" parent="DialogHUD"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -377.0
+margin_top = -444.0
+margin_right = 408.0
+margin_bottom = -153.0
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogText" type="Label" parent="DialogHUD/Textbox"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 7 )
+text = "Gunk: you are a fool"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="close_search" from="HUD/Inventory" to="." method="_on_close_item_search"]

@@ -17,6 +17,7 @@ var drag_to_move := true
 var inventory_columns := 8
 
 var inv_is_dragging := false
+var in_cutscene := false
 
 var inventory := [
 	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(1, 1), {"amount": 3}),
