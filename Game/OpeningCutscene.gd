@@ -21,14 +21,17 @@ var messages := [
 	"Oaknut: But now you're the only one who can stop Roboton, he's not stopping with just this station.",
 	"Oaknut: Once he's finished taking control of the captain's chamber... our species is doomed.",
 	"Oaknut: Please, stop him. I'm glad I was able to catch you before it was too late for you.",
-	"Oaknut: But now, it's too late for me..."
+	"Oaknut: But now, it's too late for me...",
+	"Oaknut: There's a weapon... in that desk. Good luck..."
 ]
 var message_idx := 0
 
-var already_cutscened := false
+var already_cutscened := true
 
 func _ready():
-	if already_cutscened: return
+	if already_cutscened:
+		queue_free()
+		return
 	PlayerInfo.in_cutscene = true
 	start()
 
