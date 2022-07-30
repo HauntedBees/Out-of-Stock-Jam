@@ -8,7 +8,7 @@ const weapon_info := {
 		"cooldown": 0.3,
 		"pushback": 300.0,
 		"range": 4.0,
-		"melee": true,
+		"is_melee": true,
 		"uses_ammo": false
 	},
 	"Pistol": {
@@ -18,7 +18,7 @@ const weapon_info := {
 		"cooldown": 0.5,
 		"pushback": 100.0,
 		"range": 30.0,
-		"melee": true,
+		"is_melee": true,
 		"uses_ammo": true
 	}
 }
@@ -155,12 +155,16 @@ func _try_weapon_attack():
 	var body := PlayerInfo.get_collision(attack_range)
 	var damage_power := power
 	var modifier := rng.randf()
-	if modifier <= 0.05:
+	var damage_ranges := [0.2, 0.4, 0.95]
+	match PlayerInfo.get_mayhem_level("Vision"):
+		1, 2: damage_ranges = [0.05, 0.3, 0.96]
+		3: damage_ranges = [0.01, 0.2, 0.92]
+	if modifier <= damage_ranges[0]:
 		damage_power = 0.0
-	elif modifier >= 0.95:
+	elif modifier >= damage_ranges[2]:
 		damage_power *= 3.0
-	elif modifier < 0.4:
-		damage_power *= 0.9
+	elif modifier < damage_ranges[1]:
+		damage_power *= 0.7
 	if is_melee:
 		match PlayerInfo.get_mayhem_level("Strength"):
 			1: damage_power *= 1.08

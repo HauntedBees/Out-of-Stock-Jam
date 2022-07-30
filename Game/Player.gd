@@ -33,6 +33,7 @@ var mayhem_targets := []
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	weapon.set_weapon(PlayerInfo.current_weapon.type)
+	update_environment()
 
 func _physics_process(delta:float):
 	if PlayerInfo.in_cutscene: return
@@ -76,12 +77,10 @@ func _handle_input():
 	if Input.is_action_just_pressed("reload"):
 		weapon.reload()
 	_handle_movement_input()
-	
 	if Input.is_action_just_pressed("crouch"):
 		_handle_crouch(!is_crouched if crouch_toggle else true)
 	elif !crouch_toggle && Input.is_action_just_released("crouch"):
 		_handle_crouch(false)
-		
 	# TODO: jumping
 	# TODO: free cursor
 
@@ -231,3 +230,11 @@ func _on_Spindash_exited(body:Spatial):
 	if body == self: return
 	if !(body is Entity): return
 	mayhem_targets.erase(body)
+
+func update_environment():
+	var vision := PlayerInfo.get_mayhem_level("Vision")
+	if vision < 2: return
+	camera.environment.fog_enabled = false
+	camera.environment.ambient_light_energy = 0.2
+	if vision < 3: return
+	camera.environment.ambient_light_energy = 0.5

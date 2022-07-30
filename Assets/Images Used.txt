@@ -10,6 +10,8 @@ should probably actually show how much damage is dealt
 add heavy weapons
 add hacking
 
+REMAINING POWERS?: hi-jump? repair? accuracy?
+
 Cover Art
 https://www.gettyimages.com/detail/photo/electro-therapy-man-royalty-free-image/1270832624
 https://pixabay.com/photos/mustache-indian-man-portrait-pirate-2431996/
@@ -68,6 +70,8 @@ https://pixabay.com/vectors/sniper-aim-crosshair-cross-hairs-297661/
 https://pixabay.com/photos/suit-business-man-business-man-673697/
 https://pixabay.com/vectors/hacking-data-theft-online-fraud-6694207/
 https://pixabay.com/illustrations/hacker-cybercrime-security-network-2077138/
+https://pixabay.com/photos/archery-archer-3d-archery-3d-2756048/
+https://pixabay.com/photos/target-goal-aiming-dartboard-aim-1551484/
 
 Energy
 https://pixabay.com/illustrations/hand-robot-ai-hold-future-space-7014643/

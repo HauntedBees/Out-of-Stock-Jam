@@ -28,7 +28,8 @@ var mayhem_levels := {
 	"Swim": 1,
 	"Strength": 1,
 	"Weaponry": 1,
-	"Hacking": 1
+	"Hacking": 1,
+	"Vision": 1
 }
 var time_frozen := false
 var invisible := false

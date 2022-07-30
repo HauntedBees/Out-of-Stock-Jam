@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Textures/Weapons/Hammer.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Weapons/Weapon.tscn" type="PackedScene" id=13]
 [ext_resource path="res://HUD/DialogHUD.gd" type="Script" id=14]
 [ext_resource path="res://HUD/Minimap.tscn" type="PackedScene" id=15]
+[ext_resource path="res://default_env.tres" type="Environment" id=16]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.560811
@@ -65,6 +66,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.708863, 0 )
 [node name="Camera" type="Camera" parent="Vision"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0 )
 cull_mask = 1048573
+environment = ExtResource( 16 )
 current = true
 
 [node name="HUD" type="Control" parent="."]
