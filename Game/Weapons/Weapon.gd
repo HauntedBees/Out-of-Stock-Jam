@@ -32,6 +32,10 @@ const mayhem_info := {
 	"Mayhem-Modulate": {
 		"cost": [8, 8, 8],
 		"cooldown": [3.0, 6.0, 10.0]
+	},
+	"Cloak": {
+		"cost": [8, 8, 5],
+		"cooldown": [5.0, 8.0, 15.0]
 	}
 }
 
@@ -43,7 +47,12 @@ var pushback := 2.0
 var uses_ammo := false
 
 onready var weapon_textures := [$Weapon/Pistol, $Weapon/Hammer]
-onready var mayhem_textures := [$Mayhem/Powers/Spindash, $Mayhem/Powers/Magnet, $"Mayhem/Powers/Mayhem-Modulate"]
+onready var mayhem_textures := [
+	$Mayhem/Powers/Spindash, 
+	$Mayhem/Powers/Magnet, 
+	$"Mayhem/Powers/Mayhem-Modulate",
+	$Mayhem/Powers/Cloak
+]
 onready var mayhem_hand:TextureRect = $Mayhem/Hand
 onready var blast:TextureRect = $Blast
 onready var camera:Camera = get_viewport().get_camera()

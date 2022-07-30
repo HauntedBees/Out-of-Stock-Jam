@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Textures/Entities/Mayhem/MayhemScreen.png" type="Texture" id=1]
 [ext_resource path="res://HUD/ThemeBig.tres" type="Theme" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://HUD/Theme.tres" type="Theme" id=13]
 [ext_resource path="res://HUD/MayhemScreen.gd" type="Script" id=14]
 [ext_resource path="res://Textures/Entities/Mayhem/Mayhem-Modulate.png" type="Texture" id=15]
+[ext_resource path="res://Textures/Entities/Mayhem/Cloak.png" type="Texture" id=16]
 
 [node name="MayhemScreen" type="Control"]
 anchor_right = 1.0
@@ -121,6 +122,36 @@ anchor_bottom = 1.0
 rect_scale = Vector2( 0.75, 0.75 )
 rect_pivot_offset = Vector2( 64, 64 )
 texture = ExtResource( 10 )
+
+[node name="Cloak" type="TextureButton" parent="."]
+margin_left = 1100.0
+margin_top = 810.0
+margin_right = 1228.0
+margin_bottom = 938.0
+rect_pivot_offset = Vector2( 64, 64 )
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 6 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+mayhem_name = "Cloak"
+main_text = "The Cloak Ability will make you invisible for a short period of time. Enemies and cameras won't detect you."
+level_one_cost = 5
+level_one = "Level 1 unlocks the Cloak Ability."
+level_two_cost = 5
+level_two = "Level 2 increases the duration of the Ability."
+level_three_cost = 8
+level_three = "Level 3 reduces the Chaos Cost of using the Ability and greatly increases its duration."
+
+[node name="TextureRect" type="TextureRect" parent="Cloak"]
+modulate = Color( 1, 1, 1, 0.603922 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 0.75, 0.75 )
+rect_pivot_offset = Vector2( 64, 64 )
+texture = ExtResource( 16 )
 
 [node name="Modulate" type="TextureButton" parent="."]
 margin_left = 769.0
@@ -295,6 +326,10 @@ text = "Close Window"
 [connection signal="mouse_exited" from="MayhemKioskButton" to="MayhemKioskButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="MayhemKioskButton" to="MayhemKioskButton" method="_on_pressed"]
 [connection signal="select_mayhem" from="MayhemKioskButton" to="." method="_on_select_mayhem"]
+[connection signal="mouse_entered" from="Cloak" to="Cloak" method="_onmouse_entered"]
+[connection signal="mouse_exited" from="Cloak" to="Cloak" method="_on_mouse_exited"]
+[connection signal="pressed" from="Cloak" to="Cloak" method="_on_pressed"]
+[connection signal="select_mayhem" from="Cloak" to="." method="_on_select_mayhem"]
 [connection signal="mouse_entered" from="Modulate" to="Modulate" method="_onmouse_entered"]
 [connection signal="mouse_exited" from="Modulate" to="Modulate" method="_on_mouse_exited"]
 [connection signal="pressed" from="Modulate" to="Modulate" method="_on_pressed"]

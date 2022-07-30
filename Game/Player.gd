@@ -44,6 +44,7 @@ func _physics_process(delta:float):
 				"Magnet": magnet_area_shape.disabled = true
 				"Spindash": spindash_area_shape.disabled = true
 				"Mayhem-Modulate": PlayerInfo.time_frozen = false
+				"Cloak": PlayerInfo.invisible = false
 		else:
 			match PlayerInfo.current_mayhem:
 				"Magnet": _mayhem_magnet()
@@ -167,6 +168,7 @@ func _handle_equip_switch():
 				1: mayhem = "Spindash"
 				2: mayhem = "Magnet"
 				3: mayhem = "Mayhem-Modulate"
+				4: mayhem = "Cloak"
 			if mayhem == "": return
 			if PlayerInfo.get_mayhem_level(mayhem) == 0: return
 			if PlayerInfo.current_mayhem == mayhem:
@@ -206,6 +208,8 @@ func cause_mayhem(time:float):
 			spindash_area_shape.disabled = false
 		"Mayhem-Modulate":
 			PlayerInfo.time_frozen = true
+		"Cloak":
+			PlayerInfo.invisible = true
 
 func _mayhem_magnet():
 	var areas := magnet_area.get_overlapping_areas()

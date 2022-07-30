@@ -14,7 +14,8 @@ const MAYHEMS := ["Spindash", "Magnet", "Mayhem-Modulate"]
 onready var mayhem_textures := {
 	"Spindash": preload("res://Textures/Entities/Mayhem/Spindash.png"),
 	"Magnet": preload("res://Textures/Entities/Mayhem/Magnet.png"),
-	"Mayhem-Modulate": preload("res://Textures/Entities/Mayhem/Mayhem-Modulate.png")
+	"Mayhem-Modulate": preload("res://Textures/Entities/Mayhem/Mayhem-Modulate.png"),
+	"Cloak": preload("res://Textures/Entities/Mayhem/Cloak.png")
 }
 
 onready var search:Control = $Search

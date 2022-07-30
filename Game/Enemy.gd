@@ -114,6 +114,7 @@ func refresh_label():
 func _on_mind_timeout():
 	if PlayerInfo.time_frozen: return
 	if hit_anim || is_dead: return
+	if PlayerInfo.invisible: return
 	_set_target(player.global_transform.origin, true)
 
 func _get_light_level() -> int:
@@ -129,6 +130,7 @@ func _get_light_level() -> int:
 	return light_amount
 
 func _get_player_light_level() -> int:
+	if PlayerInfo.invisible: return 0
 	var lights := get_tree().get_nodes_in_group("light")
 	var light_amount := 0
 	var state := get_viewport().world.direct_space_state
