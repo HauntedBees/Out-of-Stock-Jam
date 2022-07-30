@@ -4,6 +4,7 @@ extends Control
 const weapon_info := {
 	"Hammer": {
 		"animation": "Melee",
+		"power": 7.0,
 		"cooldown": 0.3,
 		"pushback": 300.0,
 		"range": 4.0,
@@ -12,6 +13,7 @@ const weapon_info := {
 	"Pistol": {
 		"blast_position": Vector2(-652, -426),
 		"animation": "Shoot",
+		"power": 5.0,
 		"cooldown": 0.5,
 		"pushback": 100.0,
 		"range": 30.0,
@@ -31,6 +33,7 @@ const mayhem_info := {
 
 var attack_animation := "Shoot"
 var cooldown := 0.5
+var power := 10.0
 var attack_range := 50.0
 var pushback := 2.0
 var uses_ammo := false
@@ -65,6 +68,7 @@ func set_weapon(weapon:String):
 	pushback = w["pushback"]
 	attack_range = w["range"]
 	uses_ammo = w["uses_ammo"]
+	power = w["power"] * 10.0
 	if w.has("blast_position"):
 		blast.margin_left = w["blast_position"].x
 		blast.margin_bottom = w["blast_position"].y
@@ -129,14 +133,14 @@ func _try_weapon_attack():
 	cooldown_remaining = cooldown
 	weapon_anim.play(attack_animation)
 	var body := PlayerInfo.get_collision(attack_range)
-	if body != null: body.take_hit(camera.project_ray_normal(get_viewport().size / 2), pushback, 69.0)
+	if body != null: body.take_hit(camera.project_ray_normal(get_viewport().size / 2), pushback, power)
 
 func _try_mayhem():
 	if mayhem_cooldown_remaining > 0.0 || current_mayhem == "": return
 	if !Input.is_action_just_pressed("mayhem"): return
 	var current_info:Dictionary = mayhem_info[current_mayhem]
 	var current_level := PlayerInfo.get_mayhem_level(current_mayhem)
-	var chaos_cost:int = current_info["cost"][current_level]
+	var chaos_cost:int = current_info["cost"][current_level - 1]
 	if chaos_cost > PlayerInfo.chaos_energy: return
 	PlayerInfo.chaos_energy -= chaos_cost
 	get_tree().call_group("equip_monitor", "update_chaos")

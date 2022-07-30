@@ -11,6 +11,8 @@ var velocity := Vector3()
 var direction := Vector3()
 
 onready var magnet_area:Area = $Magnet
+onready var magnet_area_shape:CollisionShape = $Magnet/CollisionShape
+onready var spindash_area_shape:CollisionShape = $Spindash/CollisionShape
 
 onready var head:CollisionShape = $Head
 onready var player_stats:PlayerStatsHUD = $HUD/LeftHUD
@@ -24,7 +26,9 @@ var search_target:Entity
 
 var in_inventory := false
 var is_crouched := false
+
 var active_mayhem := 0.0
+var mayhem_targets := []
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -35,8 +39,16 @@ func _physics_process(delta:float):
 	if weapon != null: weapon.try_attack(delta)
 	if active_mayhem > 0:
 		active_mayhem -= delta
-		match PlayerInfo.current_mayhem:
-			"Magnet": _mayhem_magnet()
+		if active_mayhem <= 0:
+			match PlayerInfo.current_mayhem:
+				"Magnet": magnet_area_shape.disabled = true
+				"Spindash": spindash_area_shape.disabled = true
+		else:
+			match PlayerInfo.current_mayhem:
+				"Magnet": _mayhem_magnet()
+				"Spindash":
+					for m in mayhem_targets:
+						(m as Entity).take_hit(Vector3.ZERO, 0.0, 3.0 * PlayerInfo.get_mayhem_level("Spindash"))
 	_handle_input()
 	_handle_movement(delta)
 	_handle_cursor()
@@ -78,7 +90,7 @@ func _handle_crouch(is_crouch:bool):
 
 func _handle_movement_input():
 	var movement := Vector2()
-	if Input.is_action_pressed("move_forward"):
+	if Input.is_action_pressed("move_forward") || active_mayhem > 0 && PlayerInfo.current_mayhem == "Spindash":
 		movement.y += 1
 	elif Input.is_action_pressed("move_backward"):
 		movement.y -= 1
@@ -96,10 +108,15 @@ func _handle_movement_input():
 func _handle_movement(delta:float):
 	direction.y = 0
 	direction = direction.normalized()
-	velocity.y += delta * GRAVITY
+	var speed_mult := 1.0
+	if active_mayhem > 0 && PlayerInfo.current_mayhem == "Spindash":
+		velocity.y = 0.0
+		speed_mult = 1.6 + 0.6 * (PlayerInfo.get_mayhem_level("Spindash") - 1)
+	else:
+		velocity.y += delta * GRAVITY
 	var vel_xz := Vector3(velocity.x, 0, velocity.z)
-	var acceleration := ACCELERATION if direction.dot(vel_xz) > 0 else DECELERATION
-	vel_xz = vel_xz.linear_interpolate(direction * MAX_SPEED, acceleration * delta)
+	var acceleration := speed_mult * (ACCELERATION if direction.dot(vel_xz) > 0 else DECELERATION)
+	vel_xz = vel_xz.linear_interpolate(direction * speed_mult * MAX_SPEED, acceleration * delta)
 	velocity = move_and_slide(Vector3(vel_xz.x, velocity.y, vel_xz.z), Vector3.UP)
 
 func _input(event:InputEvent):
@@ -175,11 +192,34 @@ func add_rings(amount:int):
 
 func cause_mayhem():
 	active_mayhem = 1.0
+	mayhem_targets = []
+	match PlayerInfo.current_mayhem:
+		"Magnet":
+			magnet_area_shape.disabled = false
+			var magnet_size := 0.5 + PlayerInfo.get_mayhem_level("Magnet") / 2.0
+			var s:CylinderShape = magnet_area_shape.shape
+			s.radius = 6.0 * magnet_size
+			s.height = 5.0 * magnet_size
+		"Spindash":
+			spindash_area_shape.disabled = false
 
 func _mayhem_magnet():
 	var areas := magnet_area.get_overlapping_areas()
+	var super_charged := PlayerInfo.get_mayhem_level("Magnet") == 3
 	for a in areas:
 		var ring:Spatial = a
 		if !a.is_in_group("Ring"): continue
-		var direction := (global_transform.origin - ring.global_transform.origin).normalized()
-		ring.global_transform.origin += direction * 0.25
+		var ring_direction := (global_transform.origin - ring.global_transform.origin).normalized()
+		ring.global_transform.origin += ring_direction * (0.6 if super_charged else 0.25)
+
+func _on_Spindash_entered(body:Spatial):
+	if body == self: return
+	if !(body is Entity): return
+	(body as Entity).take_hit(camera.project_ray_normal(get_viewport().size / 2), 2500.0, 15.0 * PlayerInfo.get_mayhem_level("Spindash"))
+	if mayhem_targets.find(body) < 0:
+		mayhem_targets.append(body)
+
+func _on_Spindash_exited(body:Spatial):
+	if body == self: return
+	if !(body is Entity): return
+	mayhem_targets.erase(body)

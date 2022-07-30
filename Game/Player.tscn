@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Textures/Weapons/Hammer.png" type="Texture" id=2]
@@ -45,6 +45,9 @@ Label/fonts/font = SubResource( 6 )
 radius = 6.0
 height = 5.0
 
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 0.478443, 1, 0.221113 )
+
 [node name="Player" type="KinematicBody" groups=["player"]]
 script = ExtResource( 1 )
 
@@ -61,6 +64,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.708863, 0 )
 
 [node name="Camera" type="Camera" parent="Vision"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0 )
+cull_mask = 1048573
 current = true
 
 [node name="HUD" type="Control" parent="."]
@@ -360,5 +364,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.39368, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Magnet"]
 shape = SubResource( 8 )
+disabled = true
+
+[node name="Spindash" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.784994 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Spindash"]
+shape = SubResource( 9 )
+disabled = true
 
 [connection signal="close_search" from="HUD/Inventory" to="." method="_on_close_item_search"]
+[connection signal="body_entered" from="Spindash" to="." method="_on_Spindash_entered"]
+[connection signal="body_exited" from="Spindash" to="." method="_on_Spindash_exited"]

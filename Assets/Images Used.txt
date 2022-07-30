@@ -3,7 +3,8 @@ moving platform going down is jittery
 
 TODOS:
 put something in at least one desk in Doctors' Office
-make magnet radius actually increase on upgrade (AND SAVE THAT TOO)
+zoom out minimap a bit
+allow viewing full map
 
 Cover Art
 https://www.gettyimages.com/detail/photo/electro-therapy-man-royalty-free-image/1270832624
