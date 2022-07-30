@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Textures/Weapons/Hammer.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://HUD/DialogHUD.gd" type="Script" id=14]
 [ext_resource path="res://HUD/Minimap.tscn" type="PackedScene" id=15]
 [ext_resource path="res://default_env.tres" type="Environment" id=16]
+[ext_resource path="res://Hacking/HackingTerminal.tscn" type="PackedScene" id=17]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.560811
@@ -375,6 +376,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.784994 )
 shape = SubResource( 9 )
 disabled = true
 
+[node name="HackingTerminal" parent="." instance=ExtResource( 17 )]
+visible = false
+
 [connection signal="close_search" from="HUD/Inventory" to="." method="_on_close_item_search"]
 [connection signal="body_entered" from="Spindash" to="." method="_on_Spindash_entered"]
 [connection signal="body_exited" from="Spindash" to="." method="_on_Spindash_exited"]
+[connection signal="button_pressed" from="HackingTerminal" to="." method="_on_HackingTerminal_button_pressed"]
+[connection signal="exit" from="HackingTerminal" to="." method="_close_terminal"]
+[connection signal="hacked" from="HackingTerminal" to="." method="_on_HackingTerminal_hacked"]

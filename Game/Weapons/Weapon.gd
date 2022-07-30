@@ -152,7 +152,8 @@ func _try_weapon_attack():
 		PlayerInfo.reduce_ammo()
 	cooldown_remaining = cooldown
 	weapon_anim.play(attack_animation)
-	var body := PlayerInfo.get_collision(attack_range)
+	var body = PlayerInfo.get_collision(attack_range)
+	if body is SecurityControl: return
 	var damage_power := power
 	var modifier := rng.randf()
 	var damage_ranges := [0.2, 0.4, 0.95]
@@ -186,11 +187,11 @@ func _try_mayhem():
 	if chaos_cost > PlayerInfo.chaos_energy: return
 	PlayerInfo.chaos_energy -= chaos_cost
 	get_tree().call_group("equip_monitor", "update_chaos")
-	var cooldown:float = current_info["cooldown"][current_level - 1]
-	mayhem_cooldown_remaining = cooldown
-	get_tree().call_group("player", "cause_mayhem", cooldown)
+	var new_cooldown:float = current_info["cooldown"][current_level - 1]
+	mayhem_cooldown_remaining = new_cooldown
+	get_tree().call_group("player", "cause_mayhem", new_cooldown)
 	var passive_pos := mayhem_anim.current_animation_position
-	mayhem_anim.play(current_mayhem, -1, 1.0 / cooldown)
+	mayhem_anim.play(current_mayhem, -1, 1.0 / new_cooldown)
 	yield(mayhem_anim, "animation_finished")
 	mayhem_anim.play("RESET")
 	yield(mayhem_anim, "animation_finished")

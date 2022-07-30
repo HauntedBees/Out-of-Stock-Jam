@@ -21,9 +21,12 @@ onready var weapon:Weapon = $HUD/Weapon
 onready var vision:Spatial = $Vision
 onready var camera:Camera = $Vision/Camera
 onready var crosshair:TextureRect = $HUD/Crosshair
+onready var hacking_terminal:HackingTerminal = $HackingTerminal
 var MOUSE_SENSITIVITY := -0.15
 var search_target:Entity
+var hack_target:SecurityControl
 
+var in_terminal := false
 var in_inventory := false
 var is_crouched := false
 
@@ -36,7 +39,7 @@ func _ready():
 	update_environment()
 
 func _physics_process(delta:float):
-	if PlayerInfo.in_cutscene: return
+	if in_terminal || PlayerInfo.in_cutscene: return
 	if weapon != null: weapon.try_attack(delta)
 	if active_mayhem > 0:
 		active_mayhem -= delta
@@ -51,7 +54,8 @@ func _physics_process(delta:float):
 				"Magnet": _mayhem_magnet()
 				"Spindash":
 					for m in mayhem_targets:
-						(m as Entity).take_hit(Vector3.ZERO, 0.0, 3.0 * PlayerInfo.get_mayhem_level("Spindash"))
+						var me:Entity = m
+						me.take_hit(Vector3.ZERO, 0.0, 3.0 * PlayerInfo.get_mayhem_level("Spindash"))
 	_handle_input()
 	_handle_movement(delta)
 	_handle_cursor()
@@ -63,10 +67,10 @@ func _handle_move_too_far_from_target():
 		_on_close_item_search()
 
 func _handle_cursor():
-	var body:Spatial = PlayerInfo.get_collision(100.0)
+	var body = PlayerInfo.get_collision(100.0)
 	if body != null:
 		body.show_highlight()
-		var dist := (body.transform.origin - transform.origin).length()
+		var dist:float = (body.transform.origin - transform.origin).length()
 		if dist <= weapon.attack_range:
 			crosshair.modulate.a = 1
 			return
@@ -81,8 +85,6 @@ func _handle_input():
 		_handle_crouch(!is_crouched if crouch_toggle else true)
 	elif !crouch_toggle && Input.is_action_just_released("crouch"):
 		_handle_crouch(false)
-	# TODO: jumping
-	# TODO: free cursor
 
 func _handle_crouch(is_crouch:bool):
 	is_crouched = is_crouch
@@ -121,11 +123,15 @@ func _handle_movement(delta:float):
 	velocity = move_and_slide(Vector3(vel_xz.x, velocity.y, vel_xz.z), Vector3.UP)
 
 func _input(event:InputEvent):
+	if in_terminal:
+		if (event.is_action("toggle_inventory") && Input.is_action_just_pressed("toggle_inventory")) || (event.is_action("use") && Input.is_action_just_pressed("use")):
+			_close_terminal()
+		return
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED: # aiming
 		if event is InputEventMouseMotion: return _handle_camera_movement(event)
 	if event.is_action_pressed("jump") && is_on_floor():
 		velocity.y = JUMP_SPEED
-	elif Input.is_action_just_pressed("toggle_inventory"):
+	elif event.is_action("toggle_inventory") && Input.is_action_just_pressed("toggle_inventory"):
 		_toggle_inventory(!in_inventory)
 	_handle_equip_switch()
 	_handle_use_item(event)
@@ -138,15 +144,44 @@ func _handle_camera_movement(event:InputEventMouseMotion):
 	vision.rotation_degrees = camera_rotation
 
 func _handle_use_item(event:InputEvent):
-	if !event.is_action_pressed("use"): return
+	if !(event.is_action("use") && Input.is_action_just_pressed("use")): return
 	if in_inventory && search_target != null:
 		_on_close_item_search()
 		return
-	var body:Entity = PlayerInfo.get_collision(2.5, true)
-	if body == null || (body is Enemy && !body.is_dead): return
-	search_target = body
-	inventory.search_contents = body.contents
-	_toggle_inventory(true, true)
+	var body:Spatial = PlayerInfo.get_collision(2.8, true)
+	if body == null: return
+	if body is Entity:
+		var body_as_entity:Entity = body
+		var body_as_enemy:Enemy = body
+		if !body_as_enemy.is_dead: return
+		search_target = body_as_entity
+		inventory.search_contents = body_as_entity.contents
+		_toggle_inventory(true, true)
+	elif body is SecurityControl:
+		var bs:SecurityControl = body
+		hack_target = bs
+		hacking_terminal.configure(bs.cleared, bs.first_button_text, bs.second_button_text, bs.third_button_text, bs.level_requirement)
+		_open_terminal(hacking_terminal)
+
+func _on_HackingTerminal_hacked():
+	if hack_target == null: return
+	hack_target.cleared = true
+
+func _on_HackingTerminal_button_pressed(idx:int):
+	if hack_target == null: return
+	hack_target.button_press(idx)
+
+func _open_terminal(terminal:Control):
+	in_terminal = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	terminal.visible = true
+
+func _close_terminal():
+	in_terminal = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	hacking_terminal.visible = false
+	hack_target = null
+	# TODO: the other one too
 
 func _toggle_inventory(new_position:bool, search := false):
 	in_inventory = new_position
@@ -232,9 +267,9 @@ func _on_Spindash_exited(body:Spatial):
 	mayhem_targets.erase(body)
 
 func update_environment():
-	var vision := PlayerInfo.get_mayhem_level("Vision")
-	if vision < 2: return
+	var vision_level := PlayerInfo.get_mayhem_level("Vision")
+	if vision_level < 2: return
 	camera.environment.fog_enabled = false
 	camera.environment.ambient_light_energy = 0.2
-	if vision < 3: return
+	if vision_level < 3: return
 	camera.environment.ambient_light_energy = 0.5

@@ -9,8 +9,9 @@ actually implement swimming
 should probably actually show how much damage is dealt
 add heavy weapons
 add hacking
+difficulty options
 
-REMAINING POWERS?: hi-jump? repair? accuracy?
+REMAINING POWERS?: hi-jump? repair?
 
 Cover Art
 https://www.gettyimages.com/detail/photo/electro-therapy-man-royalty-free-image/1270832624
@@ -19,6 +20,16 @@ https://pixabay.com/photos/mustache-indian-man-portrait-pirate-2431996/
 Title Screen:
 https://pixabay.com/illustrations/security-internet-crime-cyber-4700815/
 https://pixabay.com/vectors/button-icon-www-pages-theme-859343/
+
+Hacking
+https://pixabay.com/illustrations/square-background-color-mosaic-2724370/
+https://pixabay.com/photos/marble-game-blue-alone-toy-4293695/
+https://pixabay.com/illustrations/ball-sphere-globe-black-red-round-2004399/
+https://pixabay.com/illustrations/hacker-hacking-theft-cyber-malware-5151533/
+https://pixabay.com/vectors/road-sign-roadsign-no-prohibited-147409/
+https://pixabay.com/illustrations/approved-stamp-approval-agreement-6044530/
+https://pixabay.com/illustrations/ipad-tablet-apple-computer-1999649/
+https://pixabay.com/vectors/security-systems-code-alarm-control-156149/
 
 HUD
 https://pixabay.com/vectors/crosshair-cross-wires-146621/
@@ -87,6 +98,7 @@ https://pixabay.com/photos/macarons-desserts-food-pastry-6483919/
 https://pixabay.com/photos/springs-spring-coils-spiral-coils-5972655/
 https://www.flickr.com/photos/videocrab/116136642/
 https://pixabay.com/photos/swimming-pool-pool-tiles-blue-4638912/
+https://pixabay.com/illustrations/metal-wall-ufo-pipes-machinery-4484579/
 
 Items
 https://www.freeimages.com/photo/crate-1542214

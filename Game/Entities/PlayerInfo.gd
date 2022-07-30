@@ -85,4 +85,10 @@ func get_collision(distance:float, no_lamps := false) -> Entity:
 	var to := from + camera.project_ray_normal(center) * distance
 	var res := get_viewport().world.direct_space_state.intersect_ray(from, to)
 	if !res.has("collider"): return null
-	return res["collider"] if res["collider"] is Entity || (!no_lamps && res["collider"] is Lamp) else null
+	if res["collider"] is Entity:
+		return res["collider"]
+	elif res["collider"] is SecurityControl:
+		return res["collider"]
+	elif !no_lamps && res["collider"] is Lamp:
+		return res["collider"]
+	return null

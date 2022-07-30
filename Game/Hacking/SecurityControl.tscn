@@ -1,34 +1,25 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Textures/Entities/Crate.png" type="Texture" id=1]
-[ext_resource path="res://Interactable.gd" type="Script" id=2]
+[ext_resource path="res://Textures/Hacking/Terminal.png" type="Texture" id=1]
+[ext_resource path="res://Hacking/SecurityControl.gd" type="Script" id=2]
 [ext_resource path="res://HUD/Theme.tres" type="Theme" id=3]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.504577, 0.506043, 0.513129 )
+extents = Vector3( 0.504577, 0.500301, 0.0555888 )
 
 [sub_resource type="CubeMesh" id=2]
-size = Vector3( 1, 1, 1 )
-
-[sub_resource type="SpatialMaterial" id=13]
-flags_transparent = true
-albedo_color = Color( 0.235294, 0.329412, 0.972549, 0.341176 )
+size = Vector3( 1, 1, 0.1 )
 
 [sub_resource type="SpatialMaterial" id=3]
-flags_transparent = true
-params_billboard_mode = 1
+flags_unshaded = true
 albedo_texture = ExtResource( 1 )
 
-[sub_resource type="QuadMesh" id=4]
-material = SubResource( 3 )
-size = Vector2( 1.5, 1 )
+[sub_resource type="QuadMesh" id=13]
 
-[sub_resource type="QuadMesh" id=11]
-
-[sub_resource type="ViewportTexture" id=14]
+[sub_resource type="ViewportTexture" id=15]
 viewport_path = NodePath("Viewport")
 
-[sub_resource type="SpatialMaterial" id=9]
+[sub_resource type="SpatialMaterial" id=14]
 resource_local_to_scene = true
 render_priority = 1
 flags_transparent = true
@@ -36,24 +27,20 @@ flags_unshaded = true
 flags_no_depth_test = true
 flags_do_not_receive_shadows = true
 params_billboard_mode = 2
-albedo_texture = SubResource( 14 )
+albedo_texture = SubResource( 15 )
 uv1_scale = Vector3( 0.731, 2.883, 1 )
 uv1_offset = Vector3( 0.034, -1.106, 0 )
 
-[node name="Interactable" type="KinematicBody"]
+[node name="SecurityControl" type="StaticBody"]
 script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
 
-[node name="DebugModel" type="MeshInstance" parent="."]
-layers = 2
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 4.37114e-08, 1, -8.74228e-08, 1, -4.37114e-08, 0, -3.82137e-15, -8.74228e-08, -1, 0, 0, 0 )
 mesh = SubResource( 2 )
-material/0 = SubResource( 13 )
-
-[node name="InteractModel" type="MeshInstance" parent="."]
-mesh = SubResource( 4 )
-material/0 = null
+material/0 = SubResource( 3 )
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 300, 55 )
@@ -66,7 +53,7 @@ margin_top = 2.0
 margin_right = 216.0
 margin_bottom = 60.0
 theme = ExtResource( 3 )
-text = "Cryochamber"
+text = "Terminal"
 align = 1
 valign = 2
 __meta__ = {
@@ -76,5 +63,5 @@ __meta__ = {
 [node name="Name" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.1, 0, -0.5738, 0 )
 visible = false
-mesh = SubResource( 11 )
-material/0 = SubResource( 9 )
+mesh = SubResource( 13 )
+material/0 = SubResource( 14 )
