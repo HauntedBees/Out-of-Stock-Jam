@@ -10,7 +10,7 @@ onready var tile:TextureRect = $TileRect
 onready var lock:TextureRect = $LockedRect
 
 const MAYHEM_OFFSET := PlayerInfo.INV_OFFSET + Vector2(12.0 * PlayerInfo.INV_DELTA, 0.0)
-const MAYHEMS := ["Spindash", "Magnet", "Mayhem-Modulate"]
+const MAYHEMS := ["Spindash", "Magnet", "Mayhem-Modulate", "Cloak"]
 onready var mayhem_textures := {
 	"Spindash": preload("res://Textures/Entities/Mayhem/Spindash.png"),
 	"Magnet": preload("res://Textures/Entities/Mayhem/Magnet.png"),
@@ -29,7 +29,7 @@ var is_search := false
 
 func _ready():
 	for x in PlayerInfo.INV_WIDTH:
-		var is_locked:bool = x >= PlayerInfo.inventory_columns
+		var is_locked:bool = x >= PlayerInfo.get_inventory_columns()
 		var ref_tile := lock if is_locked else tile
 		for y in PlayerInfo.INV_HEIGHT:
 			var xy:TextureRect = ref_tile.duplicate()
@@ -76,7 +76,7 @@ func _draw_items():
 		var mayhem_name:String = MAYHEMS[idx]
 		if PlayerInfo.get_mayhem_level(mayhem_name) > 0:
 			var ii:InventoryMayhem = mayhem.instance()
-			ii.set_info(mayhem_name, 1, mayhem_textures[mayhem_name])
+			ii.set_info(mayhem_name, idx + 1, mayhem_textures[mayhem_name])
 			ii.rect_position = MAYHEM_OFFSET + PlayerInfo.INV_DELTA * mayhem_pos
 			if mayhem_pos.x == 1:
 				mayhem_pos = Vector2(0, mayhem_pos.y + 1)

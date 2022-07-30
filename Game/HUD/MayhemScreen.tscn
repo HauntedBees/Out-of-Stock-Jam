@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Textures/Entities/Mayhem/MayhemScreen.png" type="Texture" id=1]
 [ext_resource path="res://HUD/ThemeBig.tres" type="Theme" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://HUD/MayhemScreen.gd" type="Script" id=14]
 [ext_resource path="res://Textures/Entities/Mayhem/Mayhem-Modulate.png" type="Texture" id=15]
 [ext_resource path="res://Textures/Entities/Mayhem/Cloak.png" type="Texture" id=16]
+[ext_resource path="res://Textures/Entities/Mayhem/Swim.png" type="Texture" id=17]
+[ext_resource path="res://Textures/Entities/Mayhem/Strength.png" type="Texture" id=18]
 
 [node name="MayhemScreen" type="Control"]
 anchor_right = 1.0
@@ -123,6 +125,72 @@ rect_scale = Vector2( 0.75, 0.75 )
 rect_pivot_offset = Vector2( 64, 64 )
 texture = ExtResource( 10 )
 
+[node name="Swim" type="TextureButton" parent="."]
+margin_left = 502.0
+margin_top = 775.0
+margin_right = 630.0
+margin_bottom = 903.0
+rect_pivot_offset = Vector2( 64, 64 )
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 6 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+mayhem_name = "Swim"
+main_text = "The Swim Ability will allow you to breathe longer underwater and swim freely in all directions."
+level_one_cost = 3
+level_one = "Level 1 unlocks the ability to swim freely underwater."
+level_two_cost = 3
+level_two = "Level 2 increases the amount of time you can breathe underwater."
+level_three_cost = 3
+level_three = "Level 3 increases your swimming speed."
+
+[node name="TextureRect" type="TextureRect" parent="Swim"]
+modulate = Color( 1, 1, 1, 0.756863 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 0.75, 0.75 )
+rect_pivot_offset = Vector2( 64, 64 )
+texture = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Strength" type="TextureButton" parent="."]
+margin_left = 1298.0
+margin_top = 537.0
+margin_right = 1426.0
+margin_bottom = 665.0
+rect_pivot_offset = Vector2( 64, 64 )
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 6 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+mayhem_name = "Strength"
+main_text = "The Strength Ability will increase your Melee Attack damage and your available Inventory space."
+level_one_cost = 4
+level_one = "Level 1 unlocks one additional Inventory column and slightly increases your Melee Attack damage."
+level_two_cost = 5
+level_two = "Level 2 unlocks one additional Inventory column and increases your Melee Attack damage."
+level_three_cost = 6
+level_three = "Level 3 unlocks one additional Inventory column and greatly increases your Melee Attack damage."
+
+[node name="TextureRect" type="TextureRect" parent="Strength"]
+modulate = Color( 1, 1, 1, 0.756863 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 0.75, 0.75 )
+rect_pivot_offset = Vector2( 64, 64 )
+texture = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Cloak" type="TextureButton" parent="."]
 margin_left = 1100.0
 margin_top = 810.0
@@ -152,6 +220,9 @@ anchor_bottom = 1.0
 rect_scale = Vector2( 0.75, 0.75 )
 rect_pivot_offset = Vector2( 64, 64 )
 texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Modulate" type="TextureButton" parent="."]
 margin_left = 769.0
@@ -326,6 +397,14 @@ text = "Close Window"
 [connection signal="mouse_exited" from="MayhemKioskButton" to="MayhemKioskButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="MayhemKioskButton" to="MayhemKioskButton" method="_on_pressed"]
 [connection signal="select_mayhem" from="MayhemKioskButton" to="." method="_on_select_mayhem"]
+[connection signal="mouse_entered" from="Swim" to="Swim" method="_onmouse_entered"]
+[connection signal="mouse_exited" from="Swim" to="Swim" method="_on_mouse_exited"]
+[connection signal="pressed" from="Swim" to="Swim" method="_on_pressed"]
+[connection signal="select_mayhem" from="Swim" to="." method="_on_select_mayhem"]
+[connection signal="mouse_entered" from="Strength" to="Strength" method="_onmouse_entered"]
+[connection signal="mouse_exited" from="Strength" to="Strength" method="_on_mouse_exited"]
+[connection signal="pressed" from="Strength" to="Strength" method="_on_pressed"]
+[connection signal="select_mayhem" from="Strength" to="." method="_on_select_mayhem"]
 [connection signal="mouse_entered" from="Cloak" to="Cloak" method="_onmouse_entered"]
 [connection signal="mouse_exited" from="Cloak" to="Cloak" method="_on_mouse_exited"]
 [connection signal="pressed" from="Cloak" to="Cloak" method="_on_pressed"]

@@ -8,6 +8,7 @@ const weapon_info := {
 		"cooldown": 0.3,
 		"pushback": 300.0,
 		"range": 4.0,
+		"melee": true,
 		"uses_ammo": false
 	},
 	"Pistol": {
@@ -17,6 +18,7 @@ const weapon_info := {
 		"cooldown": 0.5,
 		"pushback": 100.0,
 		"range": 30.0,
+		"melee": true,
 		"uses_ammo": true
 	}
 }
@@ -45,6 +47,7 @@ var power := 10.0
 var attack_range := 50.0
 var pushback := 2.0
 var uses_ammo := false
+var is_melee := false
 
 onready var weapon_textures := [$Weapon/Pistol, $Weapon/Hammer]
 onready var mayhem_textures := [
@@ -58,12 +61,15 @@ onready var blast:TextureRect = $Blast
 onready var camera:Camera = get_viewport().get_camera()
 onready var weapon_anim:AnimationPlayer = $WeaponAnim
 onready var mayhem_anim:AnimationPlayer = $MayhemAnim
+onready var rng := RandomNumberGenerator.new()
 
 var current_weapon := ""
 var cooldown_remaining := 0.0
 
 var current_mayhem := ""
 var mayhem_cooldown_remaining := 0.0
+
+func _ready(): rng.randomize()
 
 func update_weapon(): set_weapon(PlayerInfo.current_weapon.type)
 func set_weapon(weapon:String):
@@ -81,6 +87,7 @@ func set_weapon(weapon:String):
 	pushback = w["pushback"]
 	attack_range = w["range"]
 	uses_ammo = w["uses_ammo"]
+	is_melee = w["is_melee"]
 	power = w["power"] * 10.0
 	if w.has("blast_position"):
 		blast.margin_left = w["blast_position"].x
@@ -146,7 +153,19 @@ func _try_weapon_attack():
 	cooldown_remaining = cooldown
 	weapon_anim.play(attack_animation)
 	var body := PlayerInfo.get_collision(attack_range)
-	if body != null: body.take_hit(camera.project_ray_normal(get_viewport().size / 2), pushback, power)
+	var damage_power := power
+	var modifier := rng.randf()
+	if modifier <= 0.05:
+		damage_power = 0.0
+	elif modifier >= 0.95:
+		damage_power *= 3.0
+	elif modifier < 0.4:
+		damage_power *= 0.9
+	match PlayerInfo.get_mayhem_level("Strength"):
+		1: damage_power *= 1.1
+		2: damage_power *= 1.5
+		3: damage_power *= 2.5
+	if body != null: body.take_hit(camera.project_ray_normal(get_viewport().size / 2), pushback, damage_power)
 
 func _try_mayhem():
 	if mayhem_cooldown_remaining > 0.0 || current_mayhem == "": return

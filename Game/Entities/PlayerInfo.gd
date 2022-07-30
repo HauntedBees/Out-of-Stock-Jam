@@ -14,7 +14,6 @@ var max_chaos_energy := 10
 var emerald_shards := 6
 
 var drag_to_move := true
-var inventory_columns := 8
 
 var inv_is_dragging := false
 var in_cutscene := false
@@ -25,13 +24,16 @@ var mayhem_levels := {
 	"Spindash": 1,
 	"Magnet": 1,
 	"Mayhem-Modulate": 1,
-	"Cloak": 1
+	"Cloak": 1,
+	"Swim": 1,
+	"Strength": 1
 }
 var time_frozen := false
 var invisible := false
 
 func get_mayhem_level(mayhem_name:String) -> int: return mayhem_levels[mayhem_name]
 func increase_mayhem_level(mayhem_name:String): mayhem_levels[mayhem_name] += 1
+func get_inventory_columns() -> int: return 8 + get_mayhem_level("Strength") 
 
 var inventory := [
 	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(1, 1), {"amount": 3}),

@@ -26,7 +26,7 @@ var drag_start_pos := Vector2.ZERO
 
 func set_item(i:Item): info = i
 func _ready():
-	num_columns = 4 if is_search else PlayerInfo.inventory_columns
+	num_columns = 4 if is_search else PlayerInfo.get_inventory_columns()
 	if info.stackable:
 		hint_tooltip = "%s (%s)" % [info.type, info.amount]
 	else:

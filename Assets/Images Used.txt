@@ -5,6 +5,8 @@ TODOS:
 put something in at least one desk in Doctors' Office
 zoom out minimap a bit
 allow viewing full map
+actually implement swimming
+should probably actually show how much damage is dealt
 
 Cover Art
 https://www.gettyimages.com/detail/photo/electro-therapy-man-royalty-free-image/1270832624
@@ -56,6 +58,10 @@ https://pixabay.com/photos/fidget-spinner-spin-play-stress-2373975/
 https://pixabay.com/photos/fidget-spinner-fidget-spinner-2748234/
 https://pixabay.com/illustrations/hourglass-sand-castle-sand-time-1412440/
 https://pixabay.com/photos/fantasy-portrait-clock-time-2790666/
+https://pixabay.com/vectors/swimming-swimmer-water-sport-pool-303771/
+https://pixabay.com/photos/head-swimming-man-swimmer-2823697/
+https://pixabay.com/vectors/silhouette-body-building-3276824/
+https://pixabay.com/photos/man-muscle-fitness-workout-641691/
 
 Energy
 https://pixabay.com/illustrations/hand-robot-ai-hold-future-space-7014643/
