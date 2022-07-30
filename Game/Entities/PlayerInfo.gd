@@ -26,7 +26,8 @@ var mayhem_levels := {
 	"Mayhem-Modulate": 1,
 	"Cloak": 1,
 	"Swim": 1,
-	"Strength": 1
+	"Strength": 1,
+	"Weaponry": 1
 }
 var time_frozen := false
 var invisible := false

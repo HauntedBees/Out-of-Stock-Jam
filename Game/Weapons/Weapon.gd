@@ -161,10 +161,16 @@ func _try_weapon_attack():
 		damage_power *= 3.0
 	elif modifier < 0.4:
 		damage_power *= 0.9
-	match PlayerInfo.get_mayhem_level("Strength"):
-		1: damage_power *= 1.1
-		2: damage_power *= 1.5
-		3: damage_power *= 2.5
+	if is_melee:
+		match PlayerInfo.get_mayhem_level("Strength"):
+			1: damage_power *= 1.08
+			2: damage_power *= 1.25
+			3: damage_power *= 2.25
+	else:
+		match PlayerInfo.get_mayhem_level("Weaponry"):
+			1: damage_power *= 1.08
+			2: damage_power *= 1.25
+			3: damage_power *= 2.25
 	if body != null: body.take_hit(camera.project_ray_normal(get_viewport().size / 2), pushback, damage_power)
 
 func _try_mayhem():
