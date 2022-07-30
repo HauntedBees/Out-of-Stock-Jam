@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://HUD/MapOrigin.gd" type="Script" id=1]
+
+[node name="MapOrigin" type="Spatial" groups=["MapOrigin"]]
+script = ExtResource( 1 )
