@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Textures/Weapons/Hammer.png" type="Texture" id=2]
@@ -40,6 +40,10 @@ font_data = SubResource( 5 )
 
 [sub_resource type="Theme" id=7]
 Label/fonts/font = SubResource( 6 )
+
+[sub_resource type="CylinderShape" id=8]
+radius = 6.0
+height = 5.0
 
 [node name="Player" type="KinematicBody" groups=["player"]]
 script = ExtResource( 1 )
@@ -278,6 +282,9 @@ margin_left = 929.333
 margin_top = 78.3334
 margin_right = 1025.33
 margin_bottom = 174.333
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BG" type="TextureRect" parent="HUD/LeftHUD/Power"]
 modulate = Color( 0.196078, 0.27451, 0.243137, 1 )
@@ -347,5 +354,11 @@ autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Magnet" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.39368, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Magnet"]
+shape = SubResource( 8 )
 
 [connection signal="close_search" from="HUD/Inventory" to="." method="_on_close_item_search"]

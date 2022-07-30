@@ -10,6 +10,8 @@ const DECELERATION := 16.0
 var velocity := Vector3()
 var direction := Vector3()
 
+onready var magnet_area:Area = $Magnet
+
 onready var head:CollisionShape = $Head
 onready var player_stats:PlayerStatsHUD = $HUD/LeftHUD
 onready var inventory:Inventory = $HUD/Inventory
@@ -22,6 +24,7 @@ var search_target:Entity
 
 var in_inventory := false
 var is_crouched := false
+var active_mayhem := 0.0
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -29,7 +32,11 @@ func _ready():
 
 func _physics_process(delta:float):
 	if PlayerInfo.in_cutscene: return
-	if weapon != null && PlayerInfo.current_weapon != PlayerInfo.UNARMED: weapon.try_attack(delta)
+	if weapon != null: weapon.try_attack(delta)
+	if active_mayhem > 0:
+		active_mayhem -= delta
+		match PlayerInfo.current_mayhem:
+			"Magnet": _mayhem_magnet()
 	_handle_input()
 	_handle_movement(delta)
 	_handle_cursor()
@@ -165,3 +172,14 @@ func _on_close_item_search():
 func add_rings(amount:int):
 	PlayerInfo.rings += amount
 	player_stats.update_rings()
+
+func cause_mayhem():
+	active_mayhem = 1.0
+
+func _mayhem_magnet():
+	var areas := magnet_area.get_overlapping_areas()
+	for a in areas:
+		var ring:Spatial = a
+		if !a.is_in_group("Ring"): continue
+		var direction := (global_transform.origin - ring.global_transform.origin).normalized()
+		ring.global_transform.origin += direction * 0.25

@@ -112,8 +112,8 @@ func try_attack(delta:float):
 	cooldown_remaining -= delta
 	mayhem_cooldown_remaining -= delta
 	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED: return
-	_try_weapon_attack()
-	_try_mayhem()
+	if PlayerInfo.current_weapon != PlayerInfo.UNARMED: _try_weapon_attack()
+	if PlayerInfo.current_mayhem != "": _try_mayhem()
 
 func _try_weapon_attack():
 	if cooldown_remaining > 0.0 || current_weapon == "Unarmed": return
@@ -141,10 +141,7 @@ func _try_mayhem():
 	PlayerInfo.chaos_energy -= chaos_cost
 	get_tree().call_group("equip_monitor", "update_chaos")
 	mayhem_cooldown_remaining = 1.0
-	
-	print("ZAPPY ZOO!")
-	# TODO: unleash mayhem
-	
+	get_tree().call_group("player", "cause_mayhem")
 	var passive_pos := mayhem_anim.current_animation_position
 	mayhem_anim.play(current_mayhem)
 	yield(mayhem_anim, "animation_finished")
