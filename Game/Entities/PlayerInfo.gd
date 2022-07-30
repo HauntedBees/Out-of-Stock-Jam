@@ -21,6 +21,14 @@ var in_cutscene := false
 
 var map_to_load := "Medical Bay"
 
+var mayhem_levels := {
+	"Spindash": 1,
+	"Magnet": 1
+}
+
+func get_mayhem_level(mayhem_name:String) -> int: return mayhem_levels[mayhem_name]
+func increase_mayhem_level(mayhem_name:String): mayhem_levels[mayhem_name] += 1
+
 var inventory := [
 	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(1, 1), {"amount": 3}),
 	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(1, 2), {"amount": 8}),
@@ -28,6 +36,7 @@ var inventory := [
 	Item.new("Pistol", "Weapons/Pistol.png", Vector2(1, 3), Vector2(0, 0), { "equippable": true, "reload_amount": 6, "current_ammo": 4, "reload_speed_mult": 0.2 })
 ]
 var current_weapon:Item = UNARMED
+var current_mayhem := ""
 
 func get_loaded_ammo() -> int: return current_weapon.current_ammo
 func get_ammo() -> int:

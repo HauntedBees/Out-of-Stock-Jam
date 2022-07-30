@@ -100,9 +100,9 @@ func _input(event:InputEvent):
 		if event is InputEventMouseMotion: return _handle_camera_movement(event)
 	if event.is_action_pressed("jump") && is_on_floor():
 		velocity.y = JUMP_SPEED
-	elif event.is_action_pressed("toggle_inventory"):
+	elif Input.is_action_just_pressed("toggle_inventory"):
 		_toggle_inventory(!in_inventory)
-	_handle_equip_switch(event)
+	_handle_equip_switch()
 	_handle_use_item(event)
 
 func _handle_camera_movement(event:InputEventMouseMotion):
@@ -133,13 +133,29 @@ func _toggle_inventory(new_position:bool, search := false):
 	inventory.visible = in_inventory
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE if in_inventory else Input.MOUSE_MODE_CAPTURED)
 
-func _handle_equip_switch(event:InputEvent):
+func _handle_equip_switch():
 	for i in range(0, 10):
-		if !event.is_action_pressed("equip%s" % i): continue
-		var item:Item = inventory.get_equipment(i)
-		if item == null: return
-		PlayerInfo.current_weapon = item
-		get_tree().call_group("equip_monitor", "update_weapon")
+		if !Input.is_action_just_pressed("equip%s" % i): continue
+		if Input.is_action_pressed("equip_modifier"):
+			var mayhem := ""
+			match i:
+				1: mayhem = "Spindash"
+				2: mayhem = "Magnet"
+			if mayhem == "": return
+			if PlayerInfo.get_mayhem_level(mayhem) == 0: return
+			if PlayerInfo.current_mayhem == mayhem:
+				PlayerInfo.current_mayhem = ""
+			else:
+				PlayerInfo.current_mayhem = mayhem
+			get_tree().call_group("equip_monitor", "update_mayhem")
+		else:
+			var item:Item = inventory.get_equipment(i)
+			if item == null: return
+			if PlayerInfo.current_weapon == item:
+				PlayerInfo.current_weapon = PlayerInfo.UNARMED
+			else:
+				PlayerInfo.current_weapon = item
+			get_tree().call_group("equip_monitor", "update_weapon")
 
 func _on_close_item_search():
 	if search_target != null: search_target.refresh_label()

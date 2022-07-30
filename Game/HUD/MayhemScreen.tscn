@@ -1,0 +1,273 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Textures/Entities/Mayhem/MayhemScreen.png" type="Texture" id=1]
+[ext_resource path="res://HUD/ThemeBig.tres" type="Theme" id=2]
+[ext_resource path="res://Textures/HUD/EmeraldShard.png" type="Texture" id=3]
+[ext_resource path="res://HUD/BWTheme.tres" type="Theme" id=4]
+[ext_resource path="res://HUD/Button.tres" type="Theme" id=5]
+[ext_resource path="res://Textures/Entities/Mayhem/ButtonHover.png" type="Texture" id=6]
+[ext_resource path="res://Textures/Entities/Mayhem/Button.png" type="Texture" id=7]
+[ext_resource path="res://Textures/Entities/Mayhem/ButtonClick.png" type="Texture" id=8]
+[ext_resource path="res://HUD/MayhemKioskButton.gd" type="Script" id=9]
+[ext_resource path="res://Textures/Entities/Mayhem/Spindash.png" type="Texture" id=10]
+[ext_resource path="res://Textures/HUD/Inventory.jpg" type="Texture" id=11]
+[ext_resource path="res://Textures/Entities/Mayhem/Magnet.png" type="Texture" id=12]
+[ext_resource path="res://HUD/Theme.tres" type="Theme" id=13]
+[ext_resource path="res://HUD/MayhemScreen.gd" type="Script" id=14]
+
+[node name="MayhemScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -362, -327 )
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 261.0
+margin_top = 16.0
+margin_right = 621.0
+margin_bottom = 102.0
+theme = ExtResource( 2 )
+text = "Mayhem Kiosk"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InfoLabel" type="Label" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 229.0
+margin_top = -86.0
+margin_right = -214.0
+theme = ExtResource( 2 )
+text = "Choose a mayhem power to upgrade"
+align = 2
+
+[node name="Shards" type="Control" parent="."]
+margin_left = 63.0
+margin_top = 926.0
+margin_right = 159.0
+margin_bottom = 1022.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShardImg" type="TextureRect" parent="Shards"]
+margin_right = 96.0
+margin_bottom = 96.0
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShardAmount" type="Label" parent="Shards"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -51.0
+theme = ExtResource( 4 )
+text = "5"
+align = 2
+valign = 2
+
+[node name="CloseButton" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -174.0
+margin_top = 922.0
+margin_right = -52.0
+margin_bottom = 1033.0
+theme = ExtResource( 5 )
+text = "X"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MayhemKioskButton" type="TextureButton" parent="."]
+margin_left = -291.0
+margin_top = 372.0
+margin_right = -163.0
+margin_bottom = 500.0
+rect_pivot_offset = Vector2( 64, 64 )
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 6 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+mayhem_name = "Spindash"
+
+[node name="TextureRect" type="TextureRect" parent="MayhemKioskButton"]
+modulate = Color( 1, 1, 1, 0.603922 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 0.75, 0.75 )
+rect_pivot_offset = Vector2( 64, 64 )
+texture = ExtResource( 10 )
+
+[node name="Magnet" type="TextureButton" parent="."]
+margin_left = 1105.0
+margin_top = 303.0
+margin_right = 1233.0
+margin_bottom = 431.0
+rect_pivot_offset = Vector2( 64, 64 )
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 6 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+mayhem_name = "Magnet"
+main_text = "The Magnet Ability will pull all nearby rings into you, allowing you to quickly gain and recover health."
+level_one_cost = 2
+level_one = "Level 1 unlocks the Magnet Ability."
+level_two_cost = 2
+level_two = "Level 2 increases the magnet's radius."
+level_three_cost = 4
+level_three = "Level 3 greatly reduces the Chaos Cost of using the Ability and greatly increases the magnet's radius."
+
+[node name="TextureRect" type="TextureRect" parent="Magnet"]
+modulate = Color( 1, 1, 1, 0.603922 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 0.75, 0.75 )
+rect_pivot_offset = Vector2( 64, 64 )
+texture = ExtResource( 12 )
+
+[node name="Spindash" type="TextureButton" parent="."]
+margin_left = 566.0
+margin_top = 425.0
+margin_right = 694.0
+margin_bottom = 553.0
+rect_pivot_offset = Vector2( 64, 64 )
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 6 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+mayhem_name = "Spindash"
+main_text = "The Spindash Ability lets you quickly dash forward over pits and dangerous areas, damaging any enemies foolish enough to cross your path."
+level_one_cost = 2
+level_one = "Level 1 unlocks the Spindash Ability."
+level_two_cost = 2
+level_two = "Level 2 reduces the Chaos Cost of using the Ability."
+level_three_cost = 4
+level_three = "Level 3 greatly reduces the Chaos Cost of using the Ability and increases the damage dealt on collision."
+
+[node name="TextureRect" type="TextureRect" parent="Spindash"]
+modulate = Color( 1, 1, 1, 0.603922 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 0.75, 0.75 )
+rect_pivot_offset = Vector2( 64, 64 )
+texture = ExtResource( 10 )
+
+[node name="InfoPanel" type="TextureRect" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -629.0
+margin_top = -492.0
+margin_right = 630.0
+margin_bottom = 493.0
+texture = ExtResource( 11 )
+expand = true
+
+[node name="MayhemImage" type="TextureRect" parent="InfoPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -383.5
+margin_top = 105.0
+margin_right = 384.5
+margin_bottom = 489.0
+rect_min_size = Vector2( 512, 256 )
+expand = true
+
+[node name="MayhemLabel" type="Label" parent="InfoPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -250.0
+margin_right = 250.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 500, 0 )
+theme = ExtResource( 2 )
+text = "Spindash Lv.1"
+align = 1
+
+[node name="MayhemText" type="Label" parent="InfoPanel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+margin_top = -473.0
+margin_right = -25.0
+margin_bottom = -142.0
+theme = ExtResource( 13 )
+text = "Hey guys"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InfoPanel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -80.0
+theme = ExtResource( 5 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuyButton" type="Button" parent="InfoPanel/HBoxContainer"]
+margin_left = 104.0
+margin_right = 604.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 500, 80 )
+theme = ExtResource( 5 )
+text = "Buy (3 shards)"
+
+[node name="CancelButton" type="Button" parent="InfoPanel/HBoxContainer"]
+margin_left = 654.0
+margin_right = 1154.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 500, 80 )
+theme = ExtResource( 5 )
+text = "Close Window"
+
+[connection signal="mouse_entered" from="MayhemKioskButton" to="MayhemKioskButton" method="_onmouse_entered"]
+[connection signal="mouse_exited" from="MayhemKioskButton" to="MayhemKioskButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="MayhemKioskButton" to="MayhemKioskButton" method="_on_pressed"]
+[connection signal="select_mayhem" from="MayhemKioskButton" to="." method="_on_select_mayhem"]
+[connection signal="mouse_entered" from="Magnet" to="Magnet" method="_onmouse_entered"]
+[connection signal="mouse_exited" from="Magnet" to="Magnet" method="_on_mouse_exited"]
+[connection signal="pressed" from="Magnet" to="Magnet" method="_on_pressed"]
+[connection signal="select_mayhem" from="Magnet" to="." method="_on_select_mayhem"]
+[connection signal="mouse_entered" from="Spindash" to="Spindash" method="_onmouse_entered"]
+[connection signal="mouse_exited" from="Spindash" to="Spindash" method="_on_mouse_exited"]
+[connection signal="pressed" from="Spindash" to="Spindash" method="_on_pressed"]
+[connection signal="select_mayhem" from="Spindash" to="." method="_on_select_mayhem"]
+[connection signal="pressed" from="InfoPanel/HBoxContainer/BuyButton" to="." method="_on_BuyButton_pressed"]
+[connection signal="pressed" from="InfoPanel/HBoxContainer/CancelButton" to="." method="_on_CancelButton_pressed"]

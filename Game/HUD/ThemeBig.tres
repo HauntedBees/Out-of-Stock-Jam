@@ -1,0 +1,14 @@
+[gd_resource type="Theme" load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Computer Speak v0.3.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+outline_size = 1
+outline_color = Color( 0.0784314, 0.462745, 0.32549, 1 )
+font_data = ExtResource( 1 )
+
+[resource]
+Label/colors/font_color = Color( 0.384314, 1, 0, 1 )
+Label/fonts/font = SubResource( 1 )
+VBoxContainer/constants/separation = 32

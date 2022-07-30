@@ -4,9 +4,17 @@ extends Control
 signal close_search()
 
 onready var tooltip_theme:Theme = preload("res://HUD/Tooltip.tres")
+onready var mayhem:PackedScene = preload("res://HUD/InventoryMayhem.tscn")
 onready var item:PackedScene = preload("res://HUD/InventoryItem.tscn")
 onready var tile:TextureRect = $TileRect
 onready var lock:TextureRect = $LockedRect
+
+const MAYHEM_OFFSET := PlayerInfo.INV_OFFSET + Vector2(12.0 * PlayerInfo.INV_DELTA, 0.0)
+const MAYHEMS := ["Spindash", "Magnet"]
+onready var mayhem_textures := {
+	"Spindash": preload("res://Textures/Entities/Mayhem/Spindash.png"),
+	"Magnet": preload("res://Textures/Entities/Mayhem/Magnet.png")
+}
 
 onready var search:Control = $Search
 
@@ -59,6 +67,19 @@ func _draw_items():
 			ii.connect("remove_item", self, "_item_moved")
 			ii.set_item(i)
 			search_items.append(ii)
+			add_child(ii)
+			
+	var mayhem_pos := Vector2(0, 0)
+	for idx in MAYHEMS.size():
+		var mayhem_name:String = MAYHEMS[idx]
+		if PlayerInfo.get_mayhem_level(mayhem_name) > 0:
+			var ii:InventoryMayhem = mayhem.instance()
+			ii.set_info(mayhem_name, 1, mayhem_textures[mayhem_name])
+			ii.rect_position = MAYHEM_OFFSET + PlayerInfo.INV_DELTA * mayhem_pos
+			if mayhem_pos.x == 1:
+				mayhem_pos = Vector2(0, mayhem_pos.y + 1)
+			else:
+				mayhem_pos.x += 1
 			add_child(ii)
 
 func refresh_items():

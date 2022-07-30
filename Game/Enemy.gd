@@ -37,7 +37,7 @@ func _process(_delta:float):
 	_set_animation()
 
 func _physics_process(delta:float):
-	if hit_anim || is_dead: return
+	return #if hit_anim || is_dead: return
 	if path_node < path.size():
 		var dir:Vector3 = (path[path_node] - global_transform.origin)
 		dir.y = -0.2
