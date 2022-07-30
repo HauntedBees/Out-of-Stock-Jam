@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Textures/Entities/Mayhem/MayhemScreen.png" type="Texture" id=1]
 [ext_resource path="res://HUD/ThemeBig.tres" type="Theme" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://Textures/Entities/Mayhem/Swim.png" type="Texture" id=17]
 [ext_resource path="res://Textures/Entities/Mayhem/Strength.png" type="Texture" id=18]
 [ext_resource path="res://Textures/Entities/Mayhem/Weaponry.png" type="Texture" id=19]
+[ext_resource path="res://Textures/Entities/Mayhem/Hacking.png" type="Texture" id=20]
 
 [node name="MayhemScreen" type="Control"]
 anchor_right = 1.0
@@ -125,6 +126,39 @@ anchor_bottom = 1.0
 rect_scale = Vector2( 0.75, 0.75 )
 rect_pivot_offset = Vector2( 64, 64 )
 texture = ExtResource( 10 )
+
+[node name="Hacking" type="TextureButton" parent="."]
+margin_left = 518.0
+margin_top = 214.0
+margin_right = 646.0
+margin_bottom = 342.0
+rect_pivot_offset = Vector2( 64, 64 )
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 6 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+mayhem_name = "Hacking"
+main_text = "The Hacking Ability will allow you to hack computer terminals, security panels, and other technology based on your level."
+level_one_cost = 3
+level_one = "Level 1 unlocks the ability to hack Level 1 technology."
+level_two_cost = 5
+level_two = "Level 2 unlocks the ability to hack Level 2 technology."
+level_three_cost = 7
+level_three = "Level 3 unlocks the ability to hack Level 3 technology."
+
+[node name="TextureRect" type="TextureRect" parent="Hacking"]
+modulate = Color( 1, 1, 1, 0.603922 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 0.75, 0.75 )
+rect_pivot_offset = Vector2( 64, 64 )
+texture = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Weaponry" type="TextureButton" parent="."]
 margin_left = 1140.0
@@ -428,6 +462,10 @@ text = "Close Window"
 [connection signal="mouse_exited" from="MayhemKioskButton" to="MayhemKioskButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="MayhemKioskButton" to="MayhemKioskButton" method="_on_pressed"]
 [connection signal="select_mayhem" from="MayhemKioskButton" to="." method="_on_select_mayhem"]
+[connection signal="mouse_entered" from="Hacking" to="Hacking" method="_onmouse_entered"]
+[connection signal="mouse_exited" from="Hacking" to="Hacking" method="_on_mouse_exited"]
+[connection signal="pressed" from="Hacking" to="Hacking" method="_on_pressed"]
+[connection signal="select_mayhem" from="Hacking" to="." method="_on_select_mayhem"]
 [connection signal="mouse_entered" from="Weaponry" to="Weaponry" method="_onmouse_entered"]
 [connection signal="mouse_exited" from="Weaponry" to="Weaponry" method="_on_mouse_exited"]
 [connection signal="pressed" from="Weaponry" to="Weaponry" method="_on_pressed"]
