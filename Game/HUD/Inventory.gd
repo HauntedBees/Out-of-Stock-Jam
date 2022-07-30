@@ -10,10 +10,11 @@ onready var tile:TextureRect = $TileRect
 onready var lock:TextureRect = $LockedRect
 
 const MAYHEM_OFFSET := PlayerInfo.INV_OFFSET + Vector2(12.0 * PlayerInfo.INV_DELTA, 0.0)
-const MAYHEMS := ["Spindash", "Magnet"]
+const MAYHEMS := ["Spindash", "Magnet", "Mayhem-Modulate"]
 onready var mayhem_textures := {
 	"Spindash": preload("res://Textures/Entities/Mayhem/Spindash.png"),
-	"Magnet": preload("res://Textures/Entities/Mayhem/Magnet.png")
+	"Magnet": preload("res://Textures/Entities/Mayhem/Magnet.png"),
+	"Mayhem-Modulate": preload("res://Textures/Entities/Mayhem/Mayhem-Modulate.png")
 }
 
 onready var search:Control = $Search

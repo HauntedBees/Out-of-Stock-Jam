@@ -37,7 +37,8 @@ func _process(_delta:float):
 	_set_animation()
 
 func _physics_process(delta:float):
-	return #if hit_anim || is_dead: return
+	if PlayerInfo.time_frozen: return
+	if hit_anim || is_dead: return
 	if path_node < path.size():
 		var dir:Vector3 = (path[path_node] - global_transform.origin)
 		dir.y = -0.2
@@ -111,6 +112,7 @@ func refresh_label():
 	else: label.text = "%s (%s)" % [title, amount]
 
 func _on_mind_timeout():
+	if PlayerInfo.time_frozen: return
 	if hit_anim || is_dead: return
 	_set_target(player.global_transform.origin, true)
 

@@ -23,8 +23,10 @@ var map_to_load := "Medical Bay"
 
 var mayhem_levels := {
 	"Spindash": 1,
-	"Magnet": 1
+	"Magnet": 1,
+	"Mayhem-Modulate": 1
 }
+var time_frozen := false
 
 func get_mayhem_level(mayhem_name:String) -> int: return mayhem_levels[mayhem_name]
 func increase_mayhem_level(mayhem_name:String): mayhem_levels[mayhem_name] += 1

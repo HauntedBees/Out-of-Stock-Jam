@@ -56,6 +56,7 @@ func _hit_animation(): return
 func _die(): return
 
 func _physics_process(delta:float):
+	if PlayerInfo.time_frozen: return
 	if forced_velocity_timer >= 0.0:
 		move_and_slide(forced_velocity * delta, Vector3.UP)
 		forced_velocity_timer -= delta

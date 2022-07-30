@@ -23,11 +23,15 @@ const weapon_info := {
 const mayhem_info := {
 	"Spindash": {
 		"cost": [4, 3, 1],
-		"cooldown": 1.0
+		"cooldown": [1.0, 1.0, 1.0]
 	},
 	"Magnet": {
 		"cost": [3, 3, 2],
-		"cooldown": 1.0
+		"cooldown": [1.0, 1.0, 1.0]
+	},
+	"Mayhem-Modulate": {
+		"cost": [8, 8, 8],
+		"cooldown": [3.0, 6.0, 10.0]
 	}
 }
 
@@ -39,7 +43,7 @@ var pushback := 2.0
 var uses_ammo := false
 
 onready var weapon_textures := [$Weapon/Pistol, $Weapon/Hammer]
-onready var mayhem_textures := [$Mayhem/Powers/Spindash, $Mayhem/Powers/Magnet]
+onready var mayhem_textures := [$Mayhem/Powers/Spindash, $Mayhem/Powers/Magnet, $"Mayhem/Powers/Mayhem-Modulate"]
 onready var mayhem_hand:TextureRect = $Mayhem/Hand
 onready var blast:TextureRect = $Blast
 onready var camera:Camera = get_viewport().get_camera()
@@ -144,10 +148,11 @@ func _try_mayhem():
 	if chaos_cost > PlayerInfo.chaos_energy: return
 	PlayerInfo.chaos_energy -= chaos_cost
 	get_tree().call_group("equip_monitor", "update_chaos")
-	mayhem_cooldown_remaining = 1.0
-	get_tree().call_group("player", "cause_mayhem")
+	var cooldown:float = current_info["cooldown"][current_level - 1]
+	mayhem_cooldown_remaining = cooldown
+	get_tree().call_group("player", "cause_mayhem", cooldown)
 	var passive_pos := mayhem_anim.current_animation_position
-	mayhem_anim.play(current_mayhem)
+	mayhem_anim.play(current_mayhem, -1, 1.0 / cooldown)
 	yield(mayhem_anim, "animation_finished")
 	mayhem_anim.play("RESET")
 	yield(mayhem_anim, "animation_finished")
