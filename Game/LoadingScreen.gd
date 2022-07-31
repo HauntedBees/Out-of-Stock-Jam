@@ -1,5 +1,7 @@
+class_name LoadingScreen
 extends Control
 
+onready var target:String
 onready var loading_label:Label = $Label
 onready var percent_label:Label = $PercentLabel
 onready var timer:Timer = $Timer
@@ -15,10 +17,11 @@ func _on_Timer_timeout():
 
 var loader:ResourceInteractiveLoader
 func _ready():
-	loader = ResourceLoader.load_interactive("res://Maps/%s.tscn" % PlayerInfo.map_to_load)
+	#loader = ResourceLoader.load_interactive("res://Maps/%s.tscn" % PlayerInfo.map_to_load)
+	loader = ResourceLoader.load_interactive(target)
 	percent_label.text = "0/0"
 
-func _process(delta:float):
+func _process(_delta:float):
 	if loader == null: return
 	var err := loader.poll()
 	if err == ERR_FILE_EOF:

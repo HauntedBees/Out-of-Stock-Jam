@@ -22,6 +22,7 @@ onready var cone_container:Spatial = $ConeContainer
 onready var ring_label:Label = $HUD/Scoreboard/HBoxContainer/VBoxContainer/RingCount
 onready var emerald:Emerald = $Emerald
 
+onready var fade:ColorRect = $ColorRect
 onready var scoreboard:TextureRect = $HUD/Scoreboard
 onready var info_popup:TextureRect = $HUD/Popup
 onready var info_message:Label = $HUD/Popup/Label
@@ -42,6 +43,7 @@ var rings := 0
 var stage:SpecialStageLevelInfo
 
 func _ready():
+	stage_num = PlayerInfo.mayhem_rubies
 	($ConeAnimation as AnimationPlayer).playback_speed = stage_speed
 	tween.interpolate_property($Camera, "rotation_degrees:x", -20, -15, 2.5)
 	tween.interpolate_property($Camera, "translation", 
@@ -153,6 +155,8 @@ func _on_object_entered(body:Node, me:SpecialStageItem):
 				_advance_to_next_part()
 			else:
 				_show_message("Too Bad...", false, true)
+				timer.start(2.0)
+				yield(timer, "timeout")
 				_exit_special_stage()
 		"hazard":
 			if is_hurt: return
@@ -160,6 +164,8 @@ func _on_object_entered(body:Node, me:SpecialStageItem):
 			player_anim.play("Fall")
 			_show_message("You Fell...!", false, true)
 			yield(player_anim, "animation_finished")
+			timer.start(2.0)
+			yield(timer, "timeout")
 			player.visible = false
 			_exit_special_stage()
 
@@ -177,10 +183,15 @@ func _advance_to_next_part():
 		timer.start(2.0)
 		yield(timer, "timeout")
 		_show_message("You got a Mayhem Ruby !", true)
-		print("TODO: this")
+		timer.start(2.0)
+		yield(timer, "timeout")
+		_exit_special_stage(true)
 	else:
 		stage_part += 1
 		_get_stage(true)
 
-func _exit_special_stage():
-	print("TODO: FAILURE")
+func _exit_special_stage(success := false):
+	tween.interpolate_property(fade, "color:a", 0.0, 1.0, 1.5)
+	tween.start()
+	yield(tween, "tween_completed")
+	SceneSwitcher.return_to_last_scene(success)

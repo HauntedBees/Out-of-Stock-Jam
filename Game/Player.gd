@@ -45,6 +45,8 @@ func _ready():
 	update_environment()
 
 func _process(delta:float):
+	if PlayerInfo.return_timeout > 0.0:
+		PlayerInfo.return_timeout -= delta
 	toggle_water()
 	handle_safe_oxygen(delta)
 

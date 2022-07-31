@@ -3,7 +3,7 @@ extends Node
 
 #-1 = right, 1 = left
 var stages := [
-#	[SpecialStageLevelInfo.new(0, ["C0:0,-20"])],
+	#[SpecialStageLevelInfo.new(0, ["C0:0,-20"])],
 	[
 		SpecialStageLevelInfo.new(20, ["R0:0,0", "R0:1,10", "R0:-1,20", "R1:1,30", "R1:-1,40", "R1:0,50", "C0:0,70"]),
 		SpecialStageLevelInfo.new(50, [

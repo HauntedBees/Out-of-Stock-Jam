@@ -13,6 +13,7 @@ var chaos_energy := 10
 var max_chaos_energy := 10
 var emerald_shards := 6
 var map_stickers := []
+var mayhem_rubies := 0
 
 var drag_to_move := true
 
@@ -34,6 +35,7 @@ var mayhem_levels := {
 }
 var time_frozen := false
 var invisible := false
+var return_timeout := 0.0
 
 func get_mayhem_level(mayhem_name:String) -> int: return mayhem_levels[mayhem_name]
 func increase_mayhem_level(mayhem_name:String): mayhem_levels[mayhem_name] += 1
