@@ -51,7 +51,8 @@ func done_message():
 		yield(anim, "animation_finished")
 		# TODO: play bang sound
 		grab_hand.visible = false
-		spartacus.get_active_material(0).albedo_texture = hurt_face
+		var m:SpatialMaterial = spartacus.get_active_material(0)
+		m.albedo_texture = hurt_face
 	elif message_idx == 2:
 		anim.play("WalkForward")
 	elif message_idx >= messages.size():

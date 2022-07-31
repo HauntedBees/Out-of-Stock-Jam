@@ -1,6 +1,10 @@
 class_name Weapon
 extends Control
 
+var projectiles := {
+	"Grenade": load("res://Weapons/Grenade.tscn")
+}
+
 const weapon_info := {
 	"Hammer": {
 		"animation": "Melee",
@@ -11,14 +15,27 @@ const weapon_info := {
 		"is_melee": true,
 		"uses_ammo": false
 	},
+	"Grenade Launcher": {
+		"blast_position": Vector2(-721, -159),
+		"blast_rotation": 50.1,
+		"animation": "Shoot",
+		"power": 5.0,
+		"cooldown": 0.5,
+		"pushback": 100.0,
+		"range": 999.0,
+		"projectile": "Grenade",
+		"is_melee": false,
+		"uses_ammo": true
+	},
 	"Pistol": {
 		"blast_position": Vector2(-652, -426),
+		"blast_rotation": 32.7,
 		"animation": "Shoot",
 		"power": 5.0,
 		"cooldown": 0.5,
 		"pushback": 100.0,
 		"range": 30.0,
-		"is_melee": true,
+		"is_melee": false,
 		"uses_ammo": true
 	}
 }
@@ -48,8 +65,11 @@ var attack_range := 50.0
 var pushback := 2.0
 var uses_ammo := false
 var is_melee := false
+var has_projectile := false
+var projectile:PackedScene
 
-onready var weapon_textures := [$Weapon/Pistol, $Weapon/Hammer]
+onready var weapon_container:Control = $Weapon
+onready var weapon_textures := weapon_container.get_children()
 onready var mayhem_textures := [
 	$Mayhem/Powers/Spindash, 
 	$Mayhem/Powers/Magnet, 
@@ -88,7 +108,14 @@ func set_weapon(weapon:String):
 	attack_range = w["range"]
 	uses_ammo = w["uses_ammo"]
 	is_melee = w["is_melee"]
+	if w.has("projectile"):
+		has_projectile = true
+		projectile = projectiles[w["projectile"]]
+	else:
+		has_projectile = false
 	power = w["power"] * 10.0
+	if w.has("blast_rotation"):
+		blast.rect_rotation = w["blast_rotation"]
 	if w.has("blast_position"):
 		blast.margin_left = w["blast_position"].x
 		blast.margin_bottom = w["blast_position"].y
@@ -126,6 +153,7 @@ func _switch_mayhem():
 	mayhem_anim.seek(passive_pos, true)
 
 func reload():
+	if PlayerInfo.current_weapon.reload_amount == PlayerInfo.current_weapon.current_ammo: return
 	cooldown_remaining = 99
 	weapon_anim.play("Reload", -1, PlayerInfo.current_weapon.reload_speed_mult)
 	yield(weapon_anim, "animation_finished")
@@ -152,6 +180,16 @@ func _try_weapon_attack():
 		PlayerInfo.reduce_ammo()
 	cooldown_remaining = cooldown
 	weapon_anim.play(attack_animation)
+	if has_projectile:
+		_projectile_attack()
+	else:
+		_standard_attack()
+
+func _projectile_attack():
+	var p:Projectile = projectile.instance()
+	get_tree().call_group("player", "fire_projectile", p)
+
+func _standard_attack():
 	var body = PlayerInfo.get_collision(attack_range)
 	if body is SecurityControl: return
 	var damage_power := power

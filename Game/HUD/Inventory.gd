@@ -19,7 +19,7 @@ onready var mayhem_textures := {
 }
 
 onready var search:Control = $Search
-onready var map:TextureRect = $MapPaper
+onready var map = $MapPaper
 
 var search_contents := []
 

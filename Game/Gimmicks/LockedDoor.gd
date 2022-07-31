@@ -1,3 +1,4 @@
+class_name LockedDoor
 extends StaticBody
 
 onready var t:Tween = $Tween

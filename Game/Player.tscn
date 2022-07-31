@@ -374,6 +374,7 @@ disabled = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.784994 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Spindash"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.791513, 0 )
 shape = SubResource( 9 )
 disabled = true
 

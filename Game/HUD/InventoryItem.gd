@@ -27,7 +27,7 @@ var drag_start_pos := Vector2.ZERO
 func set_item(i:Item): info = i
 func _ready():
 	num_columns = 4 if is_search else PlayerInfo.get_inventory_columns()
-	if info.stackable:
+	if info.max_stack_size > 1:
 		hint_tooltip = "%s (%s)" % [info.type, info.amount]
 	else:
 		hint_tooltip = info.type
@@ -36,7 +36,7 @@ func _ready():
 	shadow.rect_size = rect_size
 	item.texture = load("res://Textures/%s" % info.texture)
 	shadow.texture = item.texture
-	if info.stackable:
+	if info.max_stack_size > 1:
 		amount_label.visible = true
 		amount_label.text = "x%s" % info.amount
 	elif info.uses_ammo:
@@ -74,7 +74,7 @@ func _end_item_movement():
 	var offset := PlayerInfo.SEARCH_OFFSET if is_search else PlayerInfo.INV_OFFSET
 	var other_offset := PlayerInfo.INV_OFFSET if is_search else PlayerInfo.SEARCH_OFFSET
 	if _is_valid_move_location(offset, parent_container):
-		if info.stackable:
+		if info.max_stack_size > 1:
 			var potential_merge := _get_potential_stack(offset, parent_container)
 			if potential_merge != null:
 				_merge_items(parent_container, potential_merge)
@@ -82,7 +82,7 @@ func _end_item_movement():
 		info.position = _get_shifted_location(offset)
 		rect_position = offset + PlayerInfo.INV_DELTA * info.position
 	elif (is_search || search_drag) && _is_valid_move_location(other_offset, other_container):
-		if info.stackable:
+		if info.max_stack_size > 1:
 			var potential_merge := _get_potential_stack(other_offset, other_container)
 			if potential_merge != null:
 				_merge_items(parent_container, potential_merge)
@@ -135,9 +135,9 @@ func _move_between_containers(from:Array, to:Array, target:Item):
 
 func _merge_items(container:Array, target:Item):
 	var new_amount := target.amount + info.amount
-	if new_amount > 99:
-		var leftover := new_amount - 99
-		target.amount = 99
+	if new_amount > target.max_stack_size:
+		var leftover := new_amount - target.max_stack_size
+		target.amount = target.max_stack_size
 		info.amount = leftover
 	else:
 		target.amount += info.amount

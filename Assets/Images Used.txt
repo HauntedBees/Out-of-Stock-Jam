@@ -4,7 +4,7 @@ moving platform going down is jittery
 TODOS:
 put something in at least one desk in Doctors' Office
 zoom out minimap a bit? maybe
-should probably actually show how much damage is dealt
+should probably actually show how much damage is dealt (or maybe not?)
 add heavy weapons -> break doors with them!
 difficulty options
 
@@ -66,6 +66,9 @@ https://pixabay.com/photos/wooden-hammer-hammer-1922384/
 https://pixabay.com/photos/pistol-muzzleloader-weapon-old-2490781/
 https://pixabay.com/photos/fire-burst-black-background-blast-1128806/
 https://pixabay.com/photos/blasting-caps-danger-beware-tin-1267476/
+https://pixabay.com/vectors/explosion-detonation-boom-bomb-417894/
+https://pixabay.com/illustrations/rifle-grenade-launcher-weapon-5522325/
+https://pixabay.com/photos/hand-grenade-nade-militaria-6183963/
 
 Mayhem
 https://pixabay.com/photos/woman-face-social-media-thoughts-1446557/

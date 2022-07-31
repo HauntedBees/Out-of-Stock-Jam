@@ -40,7 +40,6 @@ func hide_highlight():
 func take_hit(_direction:Vector3, _force:float, damage:float):
 	health -= damage
 	if health <= 0:
-		print("BOOSH")
 		queue_free()
 
 func _on_timeout():

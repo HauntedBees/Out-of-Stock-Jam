@@ -69,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Entities/Lamp.gd"
 }, {
+"base": "StaticBody",
+"class": "LockedDoor",
+"language": "GDScript",
+"path": "res://Gimmicks/LockedDoor.gd"
+}, {
 "base": "Spatial",
 "class": "MapOrigin",
 "language": "GDScript",
@@ -83,6 +88,11 @@ _global_script_classes=[ {
 "class": "PlayerStatsHUD",
 "language": "GDScript",
 "path": "res://PlayerStatsHUD.gd"
+}, {
+"base": "RigidBody",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://Weapons/Projectile.gd"
 }, {
 "base": "StaticBody",
 "class": "SecurityControl",
@@ -122,9 +132,11 @@ _global_script_class_icons={
 "InventoryMayhem": "",
 "Item": "",
 "Lamp": "",
+"LockedDoor": "",
 "MapOrigin": "",
 "Player": "",
 "PlayerStatsHUD": "",
+"Projectile": "",
 "SecurityControl": "",
 "SpecialStageItem": "",
 "SpecialStageLevelInfo": "",
@@ -140,8 +152,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-PlayerInfo="*res://Entities/PlayerInfo.gd"
 ContentIndex="*res://Entities/ContentIndex.gd"
+PlayerInfo="*res://Entities/PlayerInfo.gd"
 
 [debug]
 

@@ -330,3 +330,10 @@ func update_environment():
 	camera.environment.ambient_light_energy = 0.2
 	if vision_level < 3: return
 	camera.environment.ambient_light_energy = 0.5
+
+func fire_projectile(p:Projectile):
+	p.launcher = self
+	get_parent().add_child(p)
+	var launch_direction := camera.project_ray_normal(get_viewport().size / 2)
+	p.global_transform.origin = head.global_transform.origin + launch_direction * 0.5
+	p.apply_impulse(Vector3.ZERO, launch_direction * p.launch_force)

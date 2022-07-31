@@ -12,6 +12,8 @@ onready var grid:TextureRect = $Grid
 onready var player:TextureRect = $Grid/Hacker
 onready var anim:AnimationPlayer = $AnimationPlayer
 onready var hack_button:Button = $HackButton
+onready var info_top:Control = $InfoTop
+onready var info_bottom:Control = $InfoBottom
 
 var grid_offset := Vector2.ZERO
 var player_pos := Vector2.ZERO
@@ -26,19 +28,19 @@ func _on_HackButton_pressed():
 	if hack_button.disabled: return
 	hack_button.visible = false
 	game_over = false
-	$InfoTop.visible = false
-	$InfoBottom.visible = false
+	info_top.visible = false
+	info_bottom.visible = false
 
 func show_granted():
 	game_over = true
 	hack_button.visible = false
 	anim.play("Success")
-	$InfoTop.visible = false
-	$InfoBottom.visible = false
+	info_top.visible = false
+	info_bottom.visible = false
 
 func set_access(allowed:bool):
-	$InfoTop.visible = true
-	$InfoBottom.visible = true
+	info_top.visible = true
+	info_bottom.visible = true
 	hack_button.visible = true
 	game_over = true
 	if allowed:

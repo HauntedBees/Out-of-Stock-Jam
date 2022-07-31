@@ -40,10 +40,12 @@ func increase_mayhem_level(mayhem_name:String): mayhem_levels[mayhem_name] += 1
 func get_inventory_columns() -> int: return 8 + get_mayhem_level("Strength") 
 
 var inventory := [
-	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(1, 1), {"amount": 3}),
-	Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(1, 2), {"amount": 8}),
-	Item.new("Hammer", "Weapons/Hammer.png", Vector2(1, 3), Vector2(5, 0), { "equippable": true, "uses_ammo": false }),
-	Item.new("Pistol", "Weapons/Pistol.png", Vector2(1, 3), Vector2(0, 0), { "equippable": true, "reload_amount": 6, "current_ammo": 4, "reload_speed_mult": 0.2 })
+	ContentIndex.get_item("Grenade Launcher", Vector2(2, 0), 1),
+	ContentIndex.get_item("Grenade Launcher Ammo", Vector2(6, 0), 7),
+	ContentIndex.get_item("Pistol Ammo", Vector2(1, 1), 3),
+	ContentIndex.get_item("Pistol Ammo", Vector2(1, 2), 8),
+	ContentIndex.get_item("Hammer", Vector2(5, 0)),
+	ContentIndex.get_item("Pistol", Vector2(0, 0), 4)
 ]
 var current_weapon:Item = UNARMED
 var current_mayhem := ""
