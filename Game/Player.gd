@@ -14,6 +14,7 @@ onready var magnet_area:Area = $Magnet
 onready var magnet_area_shape:CollisionShape = $Magnet/CollisionShape
 onready var spindash_area_shape:CollisionShape = $Spindash/CollisionShape
 
+onready var water_overlay:TextureRect = $Underwater
 onready var head:CollisionShape = $Head
 onready var player_stats:PlayerStatsHUD = $HUD/LeftHUD
 onready var inventory:Inventory = $HUD/Inventory
@@ -29,6 +30,11 @@ var hack_target:SecurityControl
 var in_terminal := false
 var in_inventory := false
 var is_crouched := false
+var in_water := false
+var water_y := 0.0
+
+var needs_safe_oxygen := false
+var safe_oxygen_level := 0.0
 
 var active_mayhem := 0.0
 var mayhem_targets := []
@@ -37,6 +43,25 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	weapon.set_weapon(PlayerInfo.current_weapon.type)
 	update_environment()
+
+func _process(delta:float):
+	toggle_water()
+	handle_safe_oxygen(delta)
+
+func handle_safe_oxygen(delta:float):
+	if !needs_safe_oxygen: return
+	var old_safe_oxygen := safe_oxygen_level
+	safe_oxygen_level -= delta
+	if old_safe_oxygen >= 10 && safe_oxygen_level < 10:
+		print("TEN SECONDS LEFT")
+		# TODO: handle death and dying and whatnot
+
+func toggle_water():
+	if in_water:
+		if head.global_transform.origin.y <= water_y:
+			water_overlay.visible = true
+			return
+	water_overlay.visible = false
 
 func _physics_process(delta:float):
 	if in_terminal || PlayerInfo.in_cutscene: return
@@ -87,9 +112,21 @@ func _handle_input():
 		_handle_crouch(false)
 
 func _handle_crouch(is_crouch:bool):
+	if in_water: return
 	is_crouched = is_crouch
 	head.disabled = is_crouched
 	camera.transform.origin.y = -0.35 if is_crouch else 0.55
+
+func get_in_water(water_depth:float):
+	if is_crouched:
+		_handle_crouch(false)
+	water_y = water_depth
+	in_water = true
+	needs_safe_oxygen = true
+	match PlayerInfo.get_mayhem_level("Swim"):
+		0, 1: safe_oxygen_level = 20.0
+		2: safe_oxygen_level = 30.0
+		3: safe_oxygen_level = 60.0
 
 func _handle_movement_input():
 	var movement := Vector2()
@@ -116,7 +153,24 @@ func _handle_movement(delta:float):
 		velocity.y = 0.0
 		speed_mult = 1.6 + 0.6 * (PlayerInfo.get_mayhem_level("Spindash") - 1)
 	else:
-		velocity.y += delta * GRAVITY
+		if in_water:
+			var swim_level := PlayerInfo.get_mayhem_level("Swim")
+			if swim_level == 0:
+				if !is_on_floor():
+					velocity.y += delta * GRAVITY * 3.0
+			else:
+				if swim_level < 3:
+					speed_mult *= 0.75
+				var my_gravity := GRAVITY
+				if Input.is_action_pressed("jump"):
+					my_gravity = -GRAVITY / 2.0
+				elif Input.is_action_pressed("crouch"):
+					my_gravity = GRAVITY / 2.0
+				else:
+					my_gravity = GRAVITY / 14.0
+				velocity.y = my_gravity
+		else:
+			velocity.y += delta * GRAVITY
 	var vel_xz := Vector3(velocity.x, 0, velocity.z)
 	var acceleration := speed_mult * (ACCELERATION if direction.dot(vel_xz) > 0 else DECELERATION)
 	vel_xz = vel_xz.linear_interpolate(direction * speed_mult * MAX_SPEED, acceleration * delta)
@@ -129,7 +183,7 @@ func _input(event:InputEvent):
 		return
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED: # aiming
 		if event is InputEventMouseMotion: return _handle_camera_movement(event)
-	if event.is_action_pressed("jump") && is_on_floor():
+	if event.is_action_pressed("jump") && is_on_floor() && !in_water:
 		velocity.y = JUMP_SPEED
 	elif event.is_action("toggle_inventory") && Input.is_action_just_pressed("toggle_inventory"):
 		_toggle_inventory(!in_inventory)

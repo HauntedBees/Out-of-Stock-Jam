@@ -7,9 +7,10 @@ zoom out minimap a bit
 allow viewing full map
 actually implement swimming
 should probably actually show how much damage is dealt
-add heavy weapons
-add hacking
+add heavy weapons -> break doors with them!
 difficulty options
+
+player pos: -20.597, 0.46, 30.272
 
 REMAINING POWERS?: hi-jump? repair?
 
@@ -43,7 +44,7 @@ https://pixabay.com/photos/obsidian-stone-volcanic-rock-glass-505332/
 https://pixabay.com/illustrations/technology-network-connection-3357605/
 https://pixabay.com/illustrations/compass-directions-arrow-scale-c-4596523/
 https://pixabay.com/illustrations/navigation-gps-direction-travel-3482965/
-
+https://pixabay.com/photos/ocean-sea-submerged-underwater-1845110/
 
 Opening Cutscene
 https://pixabay.com/photos/christmas-man-decorated-reindeer-1717771/
@@ -92,6 +93,7 @@ https://pixabay.com/photos/sheet-metal-bottom-stole-metal-338882/
 https://pixabay.com/photos/white-painted-concrete-wall-concrete-888895/
 https://pixabay.com/vectors/lamp-ceiling-interior-blue-metal-576012/
 https://pixabay.com/photos/ladder-clouds-heart-valentine-s-day-6955391/
+https://pixabay.com/photos/water-swimming-pool-wave-pool-1018808/
 
 Gimmicks
 https://pixabay.com/photos/macarons-desserts-food-pastry-6483919/
