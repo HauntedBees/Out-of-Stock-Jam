@@ -7,7 +7,6 @@ make all the special stages
 put something in at least one desk in Doctors' Office
 zoom out minimap a bit? maybe
 should probably actually show how much damage is dealt (or maybe not?)
-difficulty options
 
 player pos: -20.597, 0.46, 30.272
 
@@ -17,9 +16,12 @@ Cover Art
 https://www.gettyimages.com/detail/photo/electro-therapy-man-royalty-free-image/1270832624
 https://pixabay.com/photos/mustache-indian-man-portrait-pirate-2431996/
 
-Title Screen:
+Title Screen & Menus:
 https://pixabay.com/illustrations/security-internet-crime-cyber-4700815/
 https://pixabay.com/vectors/button-icon-www-pages-theme-859343/
+https://pixabay.com/illustrations/ice-planet-planet-ufo-futuristic-4316648/
+https://pixabay.com/illustrations/logo-concept-banner-header-1330779/
+https://pixabay.com/illustrations/binary-one-cyborg-cybernetics-1536646/
 
 Hacking
 https://pixabay.com/illustrations/square-background-color-mosaic-2724370/
