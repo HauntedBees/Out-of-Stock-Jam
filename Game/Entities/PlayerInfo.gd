@@ -12,6 +12,7 @@ var rings := 0
 var chaos_energy := 10
 var max_chaos_energy := 10
 var emerald_shards := 6
+var map_stickers := []
 
 var drag_to_move := true
 

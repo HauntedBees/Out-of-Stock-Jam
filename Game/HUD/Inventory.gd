@@ -19,6 +19,7 @@ onready var mayhem_textures := {
 }
 
 onready var search:Control = $Search
+onready var map:TextureRect = $MapPaper
 
 var search_contents := []
 
@@ -70,7 +71,6 @@ func _draw_items():
 			ii.set_item(i)
 			search_items.append(ii)
 			add_child(ii)
-			
 	var mayhem_pos := Vector2(0, 0)
 	for idx in MAYHEMS.size():
 		var mayhem_name:String = MAYHEMS[idx]
@@ -83,6 +83,8 @@ func _draw_items():
 			else:
 				mayhem_pos.x += 1
 			add_child(ii)
+	remove_child(map)
+	add_child(map)
 
 func refresh_items():
 	search.visible = is_search
@@ -111,3 +113,13 @@ func get_equipment(idx:int) -> Item:
 	return null
 
 func _on_CloseButton_pressed(): emit_signal("close_search")
+
+func _on_MapButton_pressed():
+	if map.visible:
+		map.visible = false
+	else:
+		map.load_existing_stickers()
+		map.visible = true
+
+func close_cleanup():
+	map.clean_up()

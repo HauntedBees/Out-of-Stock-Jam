@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=2]
+[gd_resource type="Theme" load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Computer Speak v0.3.ttf" type="DynamicFontData" id=1]
 
@@ -12,6 +12,25 @@ bg_color = Color( 0.0627451, 0.494118, 0.12549, 0.682353 )
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.0627451, 0.313726, 0.12549, 0.462745 )
 
+[sub_resource type="DynamicFont" id=5]
+size = 32
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.141176, 0.623529, 0.160784, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.219608, 1, 0, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+
 [sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 1 )
 
@@ -21,4 +40,7 @@ Button/fonts/font = SubResource( 1 )
 Button/styles/hover = SubResource( 4 )
 Button/styles/normal = SubResource( 2 )
 HBoxContainer/constants/separation = 50
+TooltipLabel/colors/font_color = Color( 1, 1, 1, 1 )
+TooltipLabel/fonts/font = SubResource( 5 )
+TooltipPanel/styles/panel = SubResource( 6 )
 VBoxContainer/constants/separation = 40

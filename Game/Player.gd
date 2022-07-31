@@ -243,7 +243,10 @@ func _toggle_inventory(new_position:bool, search := false):
 		_on_close_item_search()
 		return
 	inventory.is_search = search
-	if in_inventory: inventory.refresh_items()
+	if in_inventory:
+		inventory.refresh_items()
+	else:
+		inventory.close_cleanup()
 	inventory.visible = in_inventory
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE if in_inventory else Input.MOUSE_MODE_CAPTURED)
 
