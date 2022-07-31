@@ -19,12 +19,14 @@ func set_color():
 		5: rmat.albedo_color = Color(0.3, 0.65, 0.0)
 		6: rmat.albedo_color = Color(0.77, 0.77, 0.77)
 
+func rubies_changed(): set_color()
+
 func on_return(beat_stage:bool):
 	if !beat_stage: return
 	cleared = true
 	ruby.visible = false
 	PlayerInfo.mayhem_rubies += 1
-	get_tree().call_group("RubyWatcher", "set_color")
+	get_tree().call_group("RubyWatcher", "rubies_changed")
 
 func _on_body_entered(body:Node):
 	if cleared || !(body is Player): return

@@ -208,8 +208,9 @@ func _handle_use_item(event:InputEvent):
 	if body == null: return
 	if body is Entity:
 		var body_as_entity:Entity = body
-		var body_as_enemy:Enemy = body
-		if !body_as_enemy.is_dead: return
+		if body is Enemy:
+			var body_as_enemy:Enemy = body
+			if !body_as_enemy.is_dead: return
 		search_target = body_as_entity
 		inventory.search_contents = body_as_entity.contents
 		_toggle_inventory(true, true)

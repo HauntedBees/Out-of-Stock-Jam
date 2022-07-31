@@ -20,6 +20,7 @@ onready var mayhem_textures := {
 
 onready var search:Control = $Search
 onready var map = $MapPaper
+onready var ruby_container:Control = $RubyHolder
 
 var search_contents := []
 
@@ -46,6 +47,11 @@ func _ready():
 			search_bgs.append(xy)
 			add_child(xy)
 	_draw_items()
+	rubies_changed()
+
+func rubies_changed():
+	for i in 7:
+		ruby_container.get_child(i).visible = PlayerInfo.mayhem_rubies > i
 
 func _draw_items():
 	for i in PlayerInfo.inventory:
