@@ -64,6 +64,7 @@ func _vector3_to_vector2(v3:Vector3) -> Vector2: return Vector2(v3.x, v3.z).norm
 
 # front = 1/2, right = 1, back = -1/2, left = 0
 func _set_animation(forced := false):
+	if is_dead: return
 	var camera:Camera = get_viewport().get_camera()
 	
 	var forward := Vector2(0, 1)
@@ -87,6 +88,7 @@ func _set_animation(forced := false):
 		material.albedo_texture = side
 
 func _hit_animation():
+	if is_dead: return
 	material.uv1_scale.x = 1
 	material.albedo_texture = hurt
 	hit_anim = true

@@ -1,63 +1,6 @@
 class_name Weapon
 extends Control
 
-var projectiles := {
-	"Grenade": load("res://Weapons/Grenade.tscn")
-}
-
-const weapon_info := {
-	"Hammer": {
-		"animation": "Melee",
-		"power": 7.0,
-		"cooldown": 0.3,
-		"pushback": 300.0,
-		"range": 4.0,
-		"is_melee": true,
-		"uses_ammo": false
-	},
-	"Grenade Launcher": {
-		"blast_position": Vector2(-721, -159),
-		"blast_rotation": 50.1,
-		"animation": "Shoot",
-		"power": 5.0,
-		"cooldown": 0.5,
-		"pushback": 100.0,
-		"range": 999.0,
-		"projectile": "Grenade",
-		"is_melee": false,
-		"uses_ammo": true
-	},
-	"Pistol": {
-		"blast_position": Vector2(-652, -426),
-		"blast_rotation": 32.7,
-		"animation": "Shoot",
-		"power": 5.0,
-		"cooldown": 0.5,
-		"pushback": 100.0,
-		"range": 30.0,
-		"is_melee": false,
-		"uses_ammo": true
-	}
-}
-const mayhem_info := {
-	"Spindash": {
-		"cost": [4, 3, 1],
-		"cooldown": [1.0, 1.0, 1.0]
-	},
-	"Magnet": {
-		"cost": [3, 3, 2],
-		"cooldown": [1.0, 1.0, 1.0]
-	},
-	"Mayhem-Modulate": {
-		"cost": [8, 8, 8],
-		"cooldown": [3.0, 6.0, 10.0]
-	},
-	"Cloak": {
-		"cost": [8, 8, 5],
-		"cooldown": [5.0, 8.0, 15.0]
-	}
-}
-
 var attack_animation := "Shoot"
 var cooldown := 0.5
 var power := 10.0
@@ -67,6 +10,7 @@ var uses_ammo := false
 var is_melee := false
 var has_projectile := false
 var projectile:PackedScene
+var rapid_fire := false
 
 onready var weapon_container:Control = $Weapon
 onready var weapon_textures := weapon_container.get_children()
@@ -106,8 +50,9 @@ func set_weapon(weapon:String):
 	attack_animation = w["animation"]
 	pushback = w["pushback"]
 	attack_range = w["range"]
-	uses_ammo = w["uses_ammo"]
-	is_melee = w["is_melee"]
+	uses_ammo = w.has("uses_ammo")
+	is_melee = w.has("is_melee")
+	rapid_fire = w.has("rapid_fire")
 	if w.has("projectile"):
 		has_projectile = true
 		projectile = projectiles[w["projectile"]]
@@ -169,7 +114,10 @@ func try_attack(delta:float):
 
 func _try_weapon_attack():
 	if cooldown_remaining > 0.0 || current_weapon == "Unarmed": return
-	if !Input.is_action_just_pressed("action"): return
+	if rapid_fire:
+		if !Input.is_action_pressed("action"): return
+	else:
+		if !Input.is_action_just_pressed("action"): return
 	if uses_ammo:
 		var ammo := PlayerInfo.get_loaded_ammo()
 		if ammo <= 0:
@@ -179,7 +127,7 @@ func _try_weapon_attack():
 			return
 		PlayerInfo.reduce_ammo()
 	cooldown_remaining = cooldown
-	weapon_anim.play(attack_animation)
+	weapon_anim.play(attack_animation, 0, 1.0/cooldown)
 	if has_projectile:
 		_projectile_attack()
 	else:
@@ -194,15 +142,15 @@ func _standard_attack():
 	if body is SecurityControl: return
 	var damage_power := power
 	var modifier := rng.randf()
-	var damage_ranges := [0.2, 0.4, 0.95]
+	var damage_ranges := [0.2, 0.4, 0.99]
 	match PlayerInfo.get_mayhem_level("Vision"):
-		1, 2: damage_ranges = [0.05, 0.3, 0.96]
-		3: damage_ranges = [0.01, 0.2, 0.92]
-	if modifier <= damage_ranges[0]:
+		1, 2: damage_ranges = [0.05, 0.3, 0.98]
+		3: damage_ranges = [0.01, 0.2, 0.96]
+	if modifier <= damage_ranges[0]: # miss
 		damage_power = 0.0
-	elif modifier >= damage_ranges[2]:
-		damage_power *= 3.0
-	elif modifier < damage_ranges[1]:
+	elif modifier >= damage_ranges[2]: # critical hit
+		damage_power *= 1.1
+	elif modifier < damage_ranges[1]: # weaker shot
 		damage_power *= 0.7
 	if is_melee:
 		match PlayerInfo.get_mayhem_level("Strength"):
@@ -235,3 +183,86 @@ func _try_mayhem():
 	yield(mayhem_anim, "animation_finished")
 	mayhem_anim.play("Passive")
 	mayhem_anim.seek(passive_pos, true)
+
+
+const mayhem_info := {
+	"Spindash": {
+		"cost": [4, 3, 1],
+		"cooldown": [1.0, 1.0, 1.0]
+	},
+	"Magnet": {
+		"cost": [3, 3, 2],
+		"cooldown": [1.0, 1.0, 1.0]
+	},
+	"Mayhem-Modulate": {
+		"cost": [8, 8, 8],
+		"cooldown": [3.0, 6.0, 10.0]
+	},
+	"Cloak": {
+		"cost": [8, 8, 5],
+		"cooldown": [5.0, 8.0, 15.0]
+	}
+}
+var projectiles := {
+	"Grenade": load("res://Weapons/Grenade.tscn")
+}
+const weapon_info := {
+	"Hammer": {
+		"animation": "Melee",
+		"power": 5.0,
+		"cooldown": 0.3,
+		"pushback": 300.0,
+		"range": 4.0,
+		"is_melee": true
+	},
+	"Sword": {
+		"animation": "Melee",
+		"power": 10.0,
+		"cooldown": 0.2,
+		"pushback": 500.0,
+		"range": 5.0,
+		"is_melee": true
+	},
+	"Grenade Launcher": {
+		"blast_position": Vector2(-721, -159),
+		"blast_rotation": 50.1,
+		"animation": "Shoot",
+		"power": 5.0,
+		"cooldown": 0.5,
+		"pushback": 100.0,
+		"range": 999.0,
+		"projectile": "Grenade",
+		"uses_ammo": true
+	},
+	"Pistol": {
+		"blast_position": Vector2(-652, -426),
+		"blast_rotation": 32.7,
+		"animation": "Shoot",
+		"power": 12.0,
+		"cooldown": 0.5,
+		"pushback": 100.0,
+		"range": 30.0,
+		"uses_ammo": true
+	},
+	"Shotgun": {
+		"blast_position": Vector2(-669, -124),
+		"blast_rotation": 43.9,
+		"animation": "Shoot",
+		"power": 150.0,
+		"cooldown": 1.0,
+		"pushback": 1000.0,
+		"range": 5.0,
+		"uses_ammo": true
+	},
+	"Assault Rifle": {
+		"blast_position": Vector2(-669, -124),
+		"blast_rotation": 43.9,
+		"animation": "QuickShot",
+		"power": 1.5,
+		"cooldown": 0.1,
+		"pushback": 10.0,
+		"range": 60.0,
+		"uses_ammo": true,
+		"rapid_fire": true
+	}
+}

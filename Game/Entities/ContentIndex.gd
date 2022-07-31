@@ -12,7 +12,23 @@ var item_types := {
 		"reload_speed_mult": 0.2
 	}),
 	"Pistol Ammo": Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2.ZERO, {
-		"max_stack_size": 32
+		"max_stack_size": 30
+	}),
+	"Assault Rifle": Item.new("Assault Rifle", "Weapons/Assault Rifle.png", Vector2(1, 3), Vector2.ZERO, {
+		"equippable": true,
+		"reload_amount": 30,
+		"reload_speed_mult": 0.4
+	}),
+	"Assault Rifle Ammo": Item.new("Assault Rifle Ammo", "Weapons/Assault RifleAmmo.png", Vector2(1, 1), Vector2.ZERO, {
+		"max_stack_size": 120
+	}),
+	"Shotgun": Item.new("Shotgun", "Weapons/Shotgun.png", Vector2(1, 3), Vector2.ZERO, {
+		"equippable": true,
+		"reload_amount": 2,
+		"reload_speed_mult": 0.1
+	}),
+	"Shotgun Ammo": Item.new("Shotgun Ammo", "Weapons/ShotgunAmmo.png", Vector2(1, 1), Vector2.ZERO, {
+		"max_stack_size": 16
 	}),
 	"Grenade Launcher": Item.new("Grenade Launcher", "Weapons/Grenade Launcher.png", Vector2(2, 3), Vector2.ZERO, {
 		"equippable": true,
@@ -24,6 +40,10 @@ var item_types := {
 		"max_stack_size": 16
 	}),
 	"Hammer": Item.new("Hammer", "Weapons/Hammer.png", Vector2(1, 3), Vector2.ZERO, {
+		"equippable": true,
+		"uses_ammo": false
+	}),
+	"Sword": Item.new("Sword", "Weapons/Sword.png", Vector2(1, 3), Vector2.ZERO, {
 		"equippable": true,
 		"uses_ammo": false
 	})

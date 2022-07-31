@@ -2,10 +2,11 @@ KNOWN BUGS:
 moving platform going down is jittery
 
 TODOS:
+make many hacking levels
+make all the special stages
 put something in at least one desk in Doctors' Office
 zoom out minimap a bit? maybe
 should probably actually show how much damage is dealt (or maybe not?)
-add heavy weapons -> break doors with them!
 difficulty options
 
 player pos: -20.597, 0.46, 30.272
@@ -62,13 +63,18 @@ https://pixabay.com/photos/man-male-adult-watching-movie-5545037/
 https://pixabay.com/illustrations/fantasy-warrior-woman-heroin-3734118/
 
 Weapons
+https://pixabay.com/photos/sabre-sword-poland-story-king-1859774/
+https://pixabay.com/photos/fire-burst-black-background-blast-1128806/
+https://pixabay.com/vectors/explosion-detonation-boom-bomb-417894/
 https://pixabay.com/photos/wooden-hammer-hammer-1922384/
 https://pixabay.com/photos/pistol-muzzleloader-weapon-old-2490781/
-https://pixabay.com/photos/fire-burst-black-background-blast-1128806/
+https://pixabay.com/photos/ammo-box-storage-ammunition-army-1052570/
+https://pixabay.com/illustrations/gun-shotgun-weapons-machine-trunk-4725978/
 https://pixabay.com/photos/blasting-caps-danger-beware-tin-1267476/
-https://pixabay.com/vectors/explosion-detonation-boom-bomb-417894/
 https://pixabay.com/illustrations/rifle-grenade-launcher-weapon-5522325/
 https://pixabay.com/photos/hand-grenade-nade-militaria-6183963/
+https://pixabay.com/illustrations/g36k-heckler-koch-weapon-gun-3871447/
+https://pixabay.com/illustrations/ammo-box-box-storage-metal-box-gun-6788532/
 
 Mayhem
 https://pixabay.com/photos/woman-face-social-media-thoughts-1446557/
@@ -138,6 +144,7 @@ https://pixabay.com/illustrations/man-back-robot-cyborg-android-320271/
 https://pixabay.com/illustrations/man-face-back-posing-robot-cyborg-320272/
 
 Special Stage
+https://pixabay.com/vectors/lamp-lamppost-light-street-159683/
 https://pixabay.com/vectors/marathon-runner-sport-silhouette-3635758/
 https://pixabay.com/illustrations/ring-decoration-wedding-rings-3426950/
 https://pixabay.com/vectors/matrix-background-wallpaper-5361690/
@@ -162,11 +169,7 @@ https://www.pexels.com/photo/photo-of-woman-using-fishing-rod-2898225/
 https://pixabay.com/vectors/fishing-rod-fishing-drawing-sketch-6856757/
 
 MIGHT USE:
-https://pixabay.com/illustrations/ammo-box-box-storage-metal-box-gun-6788532/ <- machine gun?
-https://pixabay.com/photos/ammo-box-storage-ammunition-army-1052570/ <- "small arms"
 
-https://pixabay.com/photos/sabre-sword-poland-story-king-1859774/ <- fancy sword
-https://pixabay.com/illustrations/g36k-heckler-koch-weapon-gun-3871447/ <- machiney gun?
 https://pixabay.com/photos/accuracy-international-as50-872190/ <- sniper rifle
 https://pixabay.com/illustrations/arco-de-garra-talon-bow-arco-6039059/ <- shitty bow and arrow
 

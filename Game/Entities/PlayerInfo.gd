@@ -42,9 +42,12 @@ func get_inventory_columns() -> int: return 8 + get_mayhem_level("Strength")
 var inventory := [
 	ContentIndex.get_item("Grenade Launcher", Vector2(2, 0), 1),
 	ContentIndex.get_item("Grenade Launcher Ammo", Vector2(6, 0), 7),
+	ContentIndex.get_item("Assault Rifle", Vector2(4, 0), 30),
+	ContentIndex.get_item("Assault Rifle Ammo", Vector2(1, 0), 120),
 	ContentIndex.get_item("Pistol Ammo", Vector2(1, 1), 3),
 	ContentIndex.get_item("Pistol Ammo", Vector2(1, 2), 8),
 	ContentIndex.get_item("Hammer", Vector2(5, 0)),
+	ContentIndex.get_item("Sword", Vector2(7, 0)),
 	ContentIndex.get_item("Pistol", Vector2(0, 0), 4)
 ]
 var current_weapon:Item = UNARMED
