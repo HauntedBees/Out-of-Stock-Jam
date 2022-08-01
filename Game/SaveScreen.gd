@@ -66,12 +66,12 @@ func _load_save_info(save_key:String):
 		button.text = "< EMPTY >"
 		if is_load: button.disabled = true
 	if is_load:
-		button.connect("pressed", self, "_load", [save_key])
+		button.connect("pressed", self, "load_data", [save_key])
 	else:
-		button.connect("pressed", self, "_save", [save_key, button])
+		button.connect("pressed", self, "save_data", [save_key, button])
 	panel.add_child(button)
 
-func _load(key:String):
+func load_data(key:String):
 	var game := File.new()
 	game.open("user://save_%s.save" % key, File.READ)
 	# Metadata
@@ -104,7 +104,7 @@ func _load(key:String):
 	SceneSwitcher.switch_scene("res://Maps/%s.tscn" % location_line, false)
 	SceneSwitcher.memory = player_info
 
-func _save(key:String, button:Button):
+func save_data(key:String, button:Button):
 	button.set_meta("Key", key)
 	current_screen.save_png("user://save_%s.png" % key)
 	screenshot.texture = GASUtils.load_screen_as_texture(key)
