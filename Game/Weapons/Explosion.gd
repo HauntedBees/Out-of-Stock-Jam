@@ -26,3 +26,9 @@ func _on_body_entered(body:Spatial):
 	elif body is Lamp:
 		var le:Lamp = body
 		le.take_hit(direction, force, calc_damage)
+
+
+func _on_area_entered(area:Area):
+	if area is Trap:
+		get_tree().call_group("destroy_monitor", "on_destroy", area.name)
+		area.queue_free()

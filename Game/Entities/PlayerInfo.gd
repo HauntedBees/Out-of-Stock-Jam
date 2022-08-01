@@ -22,7 +22,7 @@ var mayhem_levels := {
 	"Mayhem-Modulate": 0,
 	"Cloak": 0,
 	"Swim": 0,
-	"Strength": 0,
+	"Strength": 1,
 	"Weaponry": 0,
 	"Hacking": 0,
 	"Vision": 0
@@ -96,18 +96,20 @@ func reload_weapon():
 	current_weapon.current_ammo = current_weapon.reload_amount - remaining
 	get_tree().call_group("equip_monitor", "update_ammo")
 
-func get_collision(distance:float, no_lamps := false) -> Entity:
+func get_collision(distance:float, no_lamps := false, include_areas := false) -> Entity:
 	var camera := get_viewport().get_camera()
 	var center := get_viewport().size / 2
 	var from := camera.project_ray_origin(center)
 	var to := from + camera.project_ray_normal(center) * distance
-	var res := get_viewport().world.direct_space_state.intersect_ray(from, to)
+	var res := get_viewport().world.direct_space_state.intersect_ray(from, to, [], 0x7FFFFFFF, true, include_areas)
 	if !res.has("collider"): return null
 	if res["collider"] is Entity:
 		return res["collider"]
 	elif res["collider"] is SecurityControl:
 		return res["collider"]
 	elif !no_lamps && res["collider"] is Lamp:
+		return res["collider"]
+	elif res["collider"] is Trap:
 		return res["collider"]
 	return null
 

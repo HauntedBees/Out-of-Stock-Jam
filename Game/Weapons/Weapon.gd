@@ -138,8 +138,12 @@ func _projectile_attack():
 	get_tree().call_group("player", "fire_projectile", p)
 
 func _standard_attack():
-	var body = PlayerInfo.get_collision(attack_range)
+	var body = PlayerInfo.get_collision(attack_range, false, true)
 	if body is SecurityControl: return
+	if body is Trap:
+		get_tree().call_group("destroy_monitor", "on_destroy", body.name)
+		body.queue_free()
+		return
 	var damage_power := power
 	var modifier := rng.randf()
 	var damage_ranges := [0.2, 0.4, 0.99]

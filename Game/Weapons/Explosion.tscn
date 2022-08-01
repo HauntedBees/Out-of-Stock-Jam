@@ -139,5 +139,6 @@ playback_speed = 2.0
 anims/Boom = SubResource( 4 )
 anims/RESET = SubResource( 5 )
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
