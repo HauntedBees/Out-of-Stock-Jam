@@ -46,3 +46,5 @@ func _on_BuyButton_pressed():
 	panel.visible = false
 
 func _on_CloseButton_pressed(): emit_signal("closed")
+
+func _on_WtfButton_pressed(): $AcceptDialog.popup_centered()
