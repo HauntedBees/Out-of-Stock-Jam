@@ -193,6 +193,7 @@ func _handle_movement(delta:float):
 	velocity = move_and_slide(Vector3(vel_xz.x, velocity.y, vel_xz.z), Vector3.UP)
 
 func _input(event:InputEvent):
+	if game_over.visible: return
 	var pause_pressed := GASInput.is_action_just_pressed("pause")
 	if PlayerInfo.paused:
 		if pause_pressed:

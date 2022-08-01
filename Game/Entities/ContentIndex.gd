@@ -50,6 +50,7 @@ var item_types := {
 }
 
 func get_item(type:String, position:Vector2, amount := 0) -> Item:
+	if type == "Unarmed": return PlayerInfo.UNARMED
 	var old:Item = item_types[type]
 	var item := Item.new(old.type, old.texture, old.size, old.position, old.saved_args)
 	item.position = position

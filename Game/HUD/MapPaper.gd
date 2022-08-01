@@ -97,5 +97,5 @@ func load_existing_stickers():
 		tr.texture = sticker_textures[s["texture"]]
 		tr.mouse_filter = MOUSE_FILTER_PASS
 		tr.connect("gui_input", self, "_on_remove_sticker", [tr])
-		tr.rect_position = s["position"]
+		tr.rect_position = s["position"] if s is Vector2 else GASUtils.str2vec2(s["position"])
 		posted_stickers.add_child(tr)
