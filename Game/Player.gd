@@ -7,9 +7,7 @@ const JUMP_SPEED := 12.0
 const ACCELERATION := 4.5
 const DECELERATION := 16.0
 
-var velocity := Vector3()
-var direction := Vector3()
-
+onready var pause_screen:PauseScreen = $PauseScreen
 onready var magnet_area:Area = $Magnet
 onready var magnet_area_shape:CollisionShape = $Magnet/CollisionShape
 onready var spindash_area_shape:CollisionShape = $Spindash/CollisionShape
@@ -23,18 +21,21 @@ onready var vision:Spatial = $Vision
 onready var camera:Camera = $Vision/Camera
 onready var crosshair:TextureRect = $HUD/Crosshair
 onready var hacking_terminal:HackingTerminal = $HackingTerminal
-var MOUSE_SENSITIVITY := -0.15
-var search_target:Entity
-var hack_target:SecurityControl
 
-var in_terminal := false
-var in_inventory := false
+# Saved
+var velocity := Vector3()
+var direction := Vector3()
 var is_crouched := false
 var in_water := false
 var water_y := 0.0
-
 var needs_safe_oxygen := false
 var safe_oxygen_level := 0.0
+
+# Unsaved
+var in_terminal := false
+var in_inventory := false
+var search_target:Entity
+var hack_target:SecurityControl
 
 var active_mayhem := 0.0
 var mayhem_targets := []
@@ -45,6 +46,7 @@ func _ready():
 	update_environment()
 
 func _process(delta:float):
+	if PlayerInfo.paused: return
 	if PlayerInfo.return_timeout > 0.0:
 		PlayerInfo.return_timeout -= delta
 	toggle_water()
@@ -66,7 +68,7 @@ func toggle_water():
 	water_overlay.visible = false
 
 func _physics_process(delta:float):
-	if in_terminal || PlayerInfo.in_cutscene: return
+	if PlayerInfo.paused || in_terminal || PlayerInfo.in_cutscene: return
 	if weapon != null: weapon.try_attack(delta)
 	if active_mayhem > 0:
 		active_mayhem -= delta
@@ -103,14 +105,13 @@ func _handle_cursor():
 			return
 	else: crosshair.modulate.a = 0.25
 
-var crouch_toggle := false # TODO: move to settings. also, create settings.
 func _handle_input():
-	if Input.is_action_just_pressed("reload"):
+	if GASInput.is_action_just_pressed("reload"):
 		weapon.reload()
 	_handle_movement_input()
-	if Input.is_action_just_pressed("crouch"):
-		_handle_crouch(!is_crouched if crouch_toggle else true)
-	elif !crouch_toggle && Input.is_action_just_released("crouch"):
+	if GASInput.is_action_just_pressed("crouch"):
+		_handle_crouch(!is_crouched if PlayerInfo.crouch_toggle else true)
+	elif !PlayerInfo.crouch_toggle && Input.is_action_just_released("crouch"):
 		_handle_crouch(false)
 
 func _handle_crouch(is_crouch:bool):
@@ -179,28 +180,36 @@ func _handle_movement(delta:float):
 	velocity = move_and_slide(Vector3(vel_xz.x, velocity.y, vel_xz.z), Vector3.UP)
 
 func _input(event:InputEvent):
+	var pause_pressed := GASInput.is_action_just_pressed("pause")
+	if PlayerInfo.paused:
+		if pause_pressed:
+			pause_screen.close()
+		return
+	elif pause_pressed:
+		pause_screen.open()
+		return
 	if in_terminal:
-		if (event.is_action("toggle_inventory") && Input.is_action_just_pressed("toggle_inventory")) || (event.is_action("use") && Input.is_action_just_pressed("use")):
+		if (event.is_action("toggle_inventory") && GASInput.is_action_just_pressed("toggle_inventory")) || (event.is_action("use") && GASInput.is_action_just_pressed("use")):
 			_close_terminal()
 		return
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED: # aiming
 		if event is InputEventMouseMotion: return _handle_camera_movement(event)
 	if event.is_action_pressed("jump") && is_on_floor() && !in_water:
 		velocity.y = JUMP_SPEED
-	elif event.is_action("toggle_inventory") && Input.is_action_just_pressed("toggle_inventory"):
+	elif event.is_action("toggle_inventory") && GASInput.is_action_just_pressed("toggle_inventory"):
 		_toggle_inventory(!in_inventory)
 	_handle_equip_switch()
 	_handle_use_item(event)
 
 func _handle_camera_movement(event:InputEventMouseMotion):
-	vision.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
-	rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY))
+	vision.rotate_x(deg2rad(event.relative.y * PlayerInfo.mouse_sensitivity))
+	rotate_y(deg2rad(event.relative.x * PlayerInfo.mouse_sensitivity))
 	var camera_rotation := vision.rotation_degrees
 	camera_rotation.x = clamp(camera_rotation.x, -85, 85)
 	vision.rotation_degrees = camera_rotation
 
 func _handle_use_item(event:InputEvent):
-	if !(event.is_action("use") && Input.is_action_just_pressed("use")): return
+	if !(event.is_action("use") && GASInput.is_action_just_pressed("use")): return
 	if in_inventory && search_target != null:
 		_on_close_item_search()
 		return
@@ -255,7 +264,7 @@ func _toggle_inventory(new_position:bool, search := false):
 
 func _handle_equip_switch():
 	for i in range(0, 10):
-		if !Input.is_action_just_pressed("equip%s" % i): continue
+		if !GASInput.is_action_just_pressed("equip%s" % i): continue
 		if Input.is_action_pressed("equip_modifier"):
 			var mayhem := ""
 			match i:

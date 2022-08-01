@@ -9,6 +9,7 @@ export(bool) var shoot_to_get := false
 export(float) var collider_y_scale := 1.0
 export(float) var y_scale := 1.0
 export(float) var x_scale := 1.0
+
 func _ready():
 	main_mesh = $InteractModel
 	main_mesh.mesh = main_mesh.mesh.duplicate()

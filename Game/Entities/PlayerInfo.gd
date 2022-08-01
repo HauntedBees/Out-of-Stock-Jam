@@ -8,20 +8,14 @@ const INV_HEIGHT := 3
 
 var UNARMED := Item.new("Unarmed", "", Vector2(0, 0), Vector2(0, 0), {"uses_ammo": false})
 
+# Saved Details
+var play_time := 0.0
 var rings := 0
 var chaos_energy := 10
 var max_chaos_energy := 10
 var emerald_shards := 6
 var map_stickers := []
 var mayhem_rubies := 0
-
-var drag_to_move := true
-
-var inv_is_dragging := false
-var in_cutscene := false
-
-var map_to_load := "Medical Bay"
-
 var mayhem_levels := {
 	"Spindash": 1,
 	"Magnet": 1,
@@ -33,14 +27,7 @@ var mayhem_levels := {
 	"Hacking": 1,
 	"Vision": 1
 }
-var time_frozen := false
-var invisible := false
-var return_timeout := 0.0
-
-func get_mayhem_level(mayhem_name:String) -> int: return mayhem_levels[mayhem_name]
-func increase_mayhem_level(mayhem_name:String): mayhem_levels[mayhem_name] += 1
-func get_inventory_columns() -> int: return 8 + get_mayhem_level("Strength") 
-
+var current_map := "Medical Bay"
 var inventory := [
 	ContentIndex.get_item("Grenade Launcher", Vector2(2, 0), 1),
 	ContentIndex.get_item("Grenade Launcher Ammo", Vector2(6, 0), 7),
@@ -54,6 +41,28 @@ var inventory := [
 ]
 var current_weapon:Item = UNARMED
 var current_mayhem := ""
+var inv_drag_to_move := true
+var crouch_toggle := false
+var mouse_sensitivity := -0.15
+var map_infos := {}
+
+# Unsaved
+var inv_is_dragging := false
+var in_cutscene := false
+var paused := false
+var time_frozen := false
+var invisible := false
+var return_timeout := 0.0
+
+func inventory_as_dicts() -> Array:
+	var res := []
+	for i in inventory:
+		res.append(i.as_dict())
+	return res
+
+func get_mayhem_level(mayhem_name:String) -> int: return mayhem_levels[mayhem_name]
+func increase_mayhem_level(mayhem_name:String): mayhem_levels[mayhem_name] += 1
+func get_inventory_columns() -> int: return 8 + get_mayhem_level("Strength") 
 
 func get_loaded_ammo() -> int: return current_weapon.current_ammo
 func get_ammo() -> int:
@@ -100,3 +109,5 @@ func get_collision(distance:float, no_lamps := false) -> Entity:
 	elif !no_lamps && res["collider"] is Lamp:
 		return res["collider"]
 	return null
+
+func _process(delta:float): play_time += delta

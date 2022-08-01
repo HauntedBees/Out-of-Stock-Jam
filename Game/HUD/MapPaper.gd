@@ -58,7 +58,7 @@ func _process(_delta:float):
 	cursor.rect_position = rect_size / 2.0 + Vector2(ppos.x * 9.15, ppos.z * 9.0) # magic numbers, good enough
 
 func _on_gui_input(event:InputEvent):
-	if !(event.is_action("action") && Input.is_action_just_pressed("action")): return
+	if !(event.is_action("action") && GASInput.is_action_just_pressed("action")): return
 	if current_sticker == null: return
 	current_sticker.set_global_position(get_viewport().get_mouse_position() + MOUSE_OFFSET)
 	remove_child(current_sticker)
@@ -69,7 +69,7 @@ func _on_gui_input(event:InputEvent):
 	save_stickers()
 
 func _on_remove_sticker(event:InputEvent, sticker:TextureRect):
-	if !(event.is_action("action") && Input.is_action_just_pressed("action")): return
+	if !(event.is_action("action") && GASInput.is_action_just_pressed("action")): return
 	sticker.queue_free()
 
 func _select_sticker(tr:TextureRect):

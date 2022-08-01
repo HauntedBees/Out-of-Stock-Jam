@@ -1,5 +1,7 @@
 extends Area
 
+const IS_SPECIAL_POST := true # can't just do class_name SpecialPost because ayyy cyclical references lmao
+
 onready var warning:TextureRect = $RingWarning
 onready var ruby:MeshInstance = $Ruby
 onready var rmat:SpatialMaterial = ruby.get_active_material(0)

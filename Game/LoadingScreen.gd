@@ -17,7 +17,6 @@ func _on_Timer_timeout():
 
 var loader:ResourceInteractiveLoader
 func _ready():
-	#loader = ResourceLoader.load_interactive("res://Maps/%s.tscn" % PlayerInfo.map_to_load)
 	loader = ResourceLoader.load_interactive(target)
 	percent_label.text = "0/0"
 

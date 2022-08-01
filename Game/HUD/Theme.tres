@@ -11,4 +11,6 @@ font_data = ExtResource( 1 )
 [resource]
 Label/colors/font_color = Color( 0.384314, 1, 0, 1 )
 Label/fonts/font = SubResource( 9 )
+RichTextLabel/colors/default_color = Color( 0.384314, 1, 0, 1 )
+RichTextLabel/fonts/normal_font = SubResource( 9 )
 VBoxContainer/constants/separation = 32

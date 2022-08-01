@@ -42,6 +42,15 @@ func hide_highlight():
 
 func button_press(idx:int):
 	match idx:
-		1: get_node(first_button_target).call(first_button_function)
-		2: get_node(second_button_target).call(second_button_function)
-		3: get_node(third_button_target).call(third_button_function)
+		1:
+			var n:Node = get_node(first_button_target)
+			if n == null: return
+			n.call(first_button_function)
+		2:
+			var n:Node = get_node(second_button_target)
+			if n == null: return
+			n.call(second_button_function)
+		3:
+			var n:Node = get_node(third_button_target)
+			if n == null: return
+			n.call(third_button_function)

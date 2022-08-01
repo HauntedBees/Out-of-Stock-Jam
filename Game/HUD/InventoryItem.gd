@@ -53,10 +53,10 @@ func set_equip_order():
 
 func _on_gui_input(event:InputEvent):
 	if !(event is InputEventMouseButton): return
-	if event.is_pressed() && PlayerInfo.drag_to_move:
+	if event.is_pressed() && PlayerInfo.inv_drag_to_move:
 		_start_item_movement()
 	elif !event.is_pressed():
-		if PlayerInfo.drag_to_move || dragging:
+		if PlayerInfo.inv_drag_to_move || dragging:
 			_end_item_movement()
 		else:
 			_start_item_movement()

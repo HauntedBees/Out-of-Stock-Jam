@@ -17,6 +17,7 @@ func _on_body_entered(body:Spatial):
 		be.take_hit(direction, force, calc_damage)
 	elif body is LockedDoor:
 		if calc_damage > 150 && distance < 2.0:
+			get_tree().call_group("destroy_monitor", "on_destroy", body.name)
 			body.queue_free()
 	elif body is Player:
 		var pe:Player = body

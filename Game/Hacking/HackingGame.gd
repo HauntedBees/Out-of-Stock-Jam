@@ -90,13 +90,13 @@ func render_map():
 func _process(_delta:float):
 	if game_over: return
 	var m := Vector2.ZERO
-	if Input.is_action_just_pressed("move_forward"):
+	if GASInput.is_action_just_pressed("move_forward"):
 		m.y = -1
-	elif Input.is_action_just_pressed("move_backward"):
+	elif GASInput.is_action_just_pressed("move_backward"):
 		m.y = 1
-	elif Input.is_action_just_pressed("strafe_left"):
+	elif GASInput.is_action_just_pressed("strafe_left"):
 		m.x -= 1
-	elif Input.is_action_just_pressed("strafe_right"):
+	elif GASInput.is_action_just_pressed("strafe_right"):
 		m.x += 1
 	if m.length() == 0: return
 	var new_pos := player_pos + m

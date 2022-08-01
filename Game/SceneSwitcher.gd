@@ -6,6 +6,7 @@ var target:String
 var keep_last_scene:bool
 var cached_scene:Node
 var cached_caller:Node
+var memory:Dictionary
 
 func return_to_last_scene(args):
 	var current_scene := root.get_child(root.get_child_count() - 1)
@@ -18,6 +19,7 @@ func return_to_last_scene(args):
 		cached_caller = null
 
 func switch_scene(target_route:String, retain_previous:bool, caller:Node = null):
+	memory = {}
 	target = target_route
 	keep_last_scene = retain_previous
 	cached_caller = caller

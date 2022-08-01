@@ -51,7 +51,8 @@ func _ready():
 
 func rubies_changed():
 	for i in 7:
-		ruby_container.get_child(i).visible = PlayerInfo.mayhem_rubies > i
+		var ruby:Control = ruby_container.get_child(i)
+		ruby.visible = PlayerInfo.mayhem_rubies > i
 
 func _draw_items():
 	for i in PlayerInfo.inventory:

@@ -40,6 +40,7 @@ func hide_highlight():
 func take_hit(_direction:Vector3, _force:float, damage:float):
 	health -= damage
 	if health <= 0:
+		get_tree().call_group("destroy_monitor", "on_destroy", name)
 		queue_free()
 
 func _on_timeout():

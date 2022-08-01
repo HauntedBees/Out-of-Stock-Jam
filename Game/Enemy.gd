@@ -24,6 +24,20 @@ onready var label:Label = $Viewport/Label
 var last_h_angle := 0.0
 var hit_anim := false
 
+func from_dict(d:Dictionary):
+	last_h_angle = d["last_h_angle"]
+	hit_anim = d["hit_anim"]
+	is_human = d["is_human"]
+	speed = d["speed"]
+	_entity_from_dict(d)
+func as_dict() -> Dictionary:
+	var d := _entity_as_dict()
+	d["last_h_angle"] = last_h_angle
+	d["hit_anim"] = hit_anim
+	d["is_human"] = is_human
+	d["speed"] = speed
+	return d
+
 func _ready():
 	main_mesh = $EnemyModel
 	name_mesh = $Name
@@ -33,11 +47,11 @@ func _ready():
 	label.text = type
 
 func _process(_delta:float):
-	if hit_anim || is_dead: return
+	if PlayerInfo.paused || hit_anim || is_dead: return
 	_set_animation()
 
 func _physics_process(delta:float):
-	if PlayerInfo.time_frozen: return
+	if PlayerInfo.paused || PlayerInfo.time_frozen: return
 	if hit_anim || is_dead: return
 	if path_node < path.size():
 		var dir:Vector3 = (path[path_node] - global_transform.origin)

@@ -58,3 +58,11 @@ func get_item(type:String, position:Vector2, amount := 0) -> Item:
 	else:
 		item.amount = amount
 	return item
+
+func get_item_from_dictionary(d:Dictionary) -> Item: return get_item(d["type"], GASUtils.str2vec2(d["position"]), d["amount"])
+
+func get_inventory_from_dictionaries(a:Array) -> Array:
+	var inv := []
+	for di in a:
+		inv.append(get_item_from_dictionary(di))
+	return inv

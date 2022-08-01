@@ -35,9 +35,9 @@ var mayhem_cooldown_remaining := 0.0
 
 func _ready(): rng.randomize()
 
-func update_weapon(): set_weapon(PlayerInfo.current_weapon.type)
-func set_weapon(weapon:String):
-	if current_weapon == weapon: return
+func update_weapon(force := false): set_weapon(PlayerInfo.current_weapon.type, force)
+func set_weapon(weapon:String, force := false):
+	if !force && current_weapon == weapon: return
 	if weapon == "Unarmed":
 		current_weapon = "Unarmed"
 		for wt in weapon_textures:

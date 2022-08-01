@@ -12,14 +12,40 @@ var name_mesh:MeshInstance
 var material:SpatialMaterial
 
 var is_dead := false
-
+var contents := []
 var forced_velocity := Vector3.ZERO
 var forced_velocity_timer := 0.0
 
 var highlight_timer := 0.0
 
-var contents := []
-	#Item.new("Pistol Ammo", "Weapons/PistolAmmo.png", Vector2(1, 1), Vector2(0, 0), {"amount": 95})
+
+func from_dict(d:Dictionary): _entity_from_dict(d)
+func _entity_from_dict(d:Dictionary):
+	health = d["health"]
+	global_transform.origin = GASUtils.str2vec3(d["position"])
+	rotation_degrees = GASUtils.str2vec3(d["rotation"])
+	force_multiplier = d["force_multiplier"]
+	is_dead = d["is_dead"]
+	forced_velocity = GASUtils.str2vec3(d["forced_velocity"])
+	forced_velocity_timer = d["forced_velocity_timer"]
+	contents = ContentIndex.get_inventory_from_dictionaries(d["contents"])
+	if is_dead: _die()
+
+func as_dict() -> Dictionary: return _entity_as_dict()
+func _entity_as_dict() -> Dictionary:
+	var inventory := []
+	for i in contents:
+		inventory.append(i.as_dict())
+	return {
+		"health": health,
+		"position": global_transform.origin,
+		"rotation": rotation_degrees,
+		"force_multiplier": force_multiplier,
+		"is_dead": is_dead,
+		"forced_velocity": forced_velocity,
+		"forced_velocity_timer": forced_velocity_timer,
+		"contents": inventory
+	}
 
 func _ready():
 	if content_name != "":
@@ -57,7 +83,7 @@ func _hit_animation(): return
 func _die(): return
 
 func _physics_process(delta:float):
-	if PlayerInfo.time_frozen: return
+	if PlayerInfo.paused || PlayerInfo.time_frozen: return
 	if forced_velocity_timer >= 0.0:
 		move_and_slide(forced_velocity * delta, Vector3.UP)
 		forced_velocity_timer -= delta

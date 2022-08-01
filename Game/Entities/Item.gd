@@ -34,6 +34,13 @@ func _init(item_type:String, texture_path:String, inv_size:Vector2, inv_pos := V
 	current_ammo = other["current_ammo"] if other.has("current_ammo") else reload_amount
 	reload_speed_mult = other["reload_speed_mult"] if other.has("reload_speed_mult") else 1.0
 
+func as_dict() -> Dictionary:
+	return {
+		"type": type,
+		"amount": current_ammo if equippable else amount,
+		"position": position
+	}
+
 func equip_index() -> int:
 	var can_equip_heavy:bool = PlayerInfo.get_mayhem_level("Strength") > 0
 	if is_heavy && !can_equip_heavy: return -1
