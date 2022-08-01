@@ -129,6 +129,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://HUD/MapOrigin.gd"
 }, {
+"base": "StaticBody",
+"class": "MayhemKiosk",
+"language": "GDScript",
+"path": "res://Entities/MayhemKiosk.gd"
+}, {
 "base": "Control",
 "class": "PauseScreen",
 "language": "GDScript",
@@ -209,6 +214,7 @@ _global_script_class_icons={
 "LockedDoor": "",
 "Map": "",
 "MapOrigin": "",
+"MayhemKiosk": "",
 "PauseScreen": "",
 "Player": "",
 "PlayerStatsHUD": "",

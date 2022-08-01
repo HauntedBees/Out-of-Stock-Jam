@@ -139,7 +139,7 @@ func _projectile_attack():
 
 func _standard_attack():
 	var body = PlayerInfo.get_collision(attack_range, false, true)
-	if body is SecurityControl: return
+	if body is SecurityControl || body is MayhemKiosk: return
 	if body is Trap:
 		get_tree().call_group("destroy_monitor", "on_destroy", body.name)
 		body.queue_free()

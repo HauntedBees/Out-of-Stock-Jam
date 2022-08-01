@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Textures/Weapons/Hammer.png" type="Texture" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://Textures/OpeningCutscene/HurtHand.png" type="Texture" id=21]
 [ext_resource path="res://Textures/OpeningCutscene/RoboHand.png" type="Texture" id=22]
 [ext_resource path="res://Textures/HUD/DeadEnd.png" type="Texture" id=23]
+[ext_resource path="res://HUD/MayhemScreen.tscn" type="PackedScene" id=24]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.560811
@@ -570,9 +571,13 @@ __meta__ = {
 [node name="PauseScreen" parent="." instance=ExtResource( 19 )]
 visible = false
 
+[node name="MayhemScreen" parent="." instance=ExtResource( 24 )]
+visible = false
+
 [connection signal="close_search" from="HUD/Inventory" to="." method="_on_close_item_search"]
 [connection signal="body_entered" from="Spindash" to="." method="_on_Spindash_entered"]
 [connection signal="body_exited" from="Spindash" to="." method="_on_Spindash_exited"]
 [connection signal="button_pressed" from="HackingTerminal" to="." method="_on_HackingTerminal_button_pressed"]
 [connection signal="exit" from="HackingTerminal" to="." method="_close_terminal"]
 [connection signal="hacked" from="HackingTerminal" to="." method="_on_HackingTerminal_hacked"]
+[connection signal="closed" from="MayhemScreen" to="." method="_on_MayhemScreen_closed"]

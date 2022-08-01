@@ -1,5 +1,7 @@
 extends Control
 
+signal closed()
+
 onready var shard_count:Label = $Shards/ShardAmount
 onready var info_label:Label = $InfoLabel
 
@@ -12,7 +14,8 @@ onready var panel_button:Button = $InfoPanel/HBoxContainer/BuyButton
 var current_mayhem := ""
 var current_mayhem_cost := 0
 
-func _ready(): shard_count.text = String(PlayerInfo.emerald_shards)
+func _ready(): set_shards()
+func set_shards(): shard_count.text = String(PlayerInfo.emerald_shards)
 
 func _on_select_mayhem(name:String, image:Texture, text:String, cost:int):
 	current_mayhem_cost = cost
@@ -41,3 +44,5 @@ func _on_BuyButton_pressed():
 		get_tree().call_group("player", "update_environment")
 	# TODO: play an AW YEAH noise
 	panel.visible = false
+
+func _on_CloseButton_pressed(): emit_signal("closed")

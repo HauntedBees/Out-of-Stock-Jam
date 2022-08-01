@@ -107,6 +107,8 @@ func get_collision(distance:float, no_lamps := false, include_areas := false) ->
 		return res["collider"]
 	elif res["collider"] is SecurityControl:
 		return res["collider"]
+	elif res["collider"] is MayhemKiosk:
+		return res["collider"]
 	elif !no_lamps && res["collider"] is Lamp:
 		return res["collider"]
 	elif res["collider"] is Trap:

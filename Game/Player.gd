@@ -18,6 +18,7 @@ onready var pause_screen:PauseScreen = $PauseScreen
 onready var magnet_area:Area = $Magnet
 onready var magnet_area_shape:CollisionShape = $Magnet/CollisionShape
 onready var spindash_area_shape:CollisionShape = $Spindash/CollisionShape
+onready var mayhem_screen:Control = $MayhemScreen
 
 onready var water_overlay:TextureRect = $Underwater
 onready var head:CollisionShape = $Head
@@ -195,7 +196,11 @@ func _handle_movement(delta:float):
 func _input(event:InputEvent):
 	if game_over.visible: return
 	var pause_pressed := GASInput.is_action_just_pressed("pause")
-	if PlayerInfo.paused:
+	if mayhem_screen.visible:
+		if pause_pressed || (event.is_action("toggle_inventory") && GASInput.is_action_just_pressed("toggle_inventory")) || (event.is_action("use") && GASInput.is_action_just_pressed("use")):
+			_on_MayhemScreen_closed()
+		return
+	elif PlayerInfo.paused:
 		if pause_pressed:
 			pause_screen.close()
 		return
@@ -250,6 +255,16 @@ func _handle_use_item(event:InputEvent):
 		hack_target = bs
 		hacking_terminal.configure(bs.cleared, bs.first_button_text, bs.second_button_text, bs.third_button_text, bs.level_requirement)
 		_open_terminal(hacking_terminal)
+	elif body is MayhemKiosk:
+		mayhem_screen.visible = true
+		mayhem_screen.set_shards()
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		PlayerInfo.paused = true
+
+func _on_MayhemScreen_closed():
+	mayhem_screen.visible = false
+	PlayerInfo.paused = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _on_HackingTerminal_hacked():
 	if hack_target == null: return
