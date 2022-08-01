@@ -495,10 +495,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1627.0
-margin_top = 1042.0
-margin_right = 1744.0
-margin_bottom = 1140.0
+margin_left = -293.0
+margin_top = -38.0
+margin_right = -176.0
+margin_bottom = 60.0
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -657,6 +657,7 @@ __meta__ = {
 }
 
 [node name="Hand" type="TextureRect" parent="Mayhem"]
+visible = false
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
