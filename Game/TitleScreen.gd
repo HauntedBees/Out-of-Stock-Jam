@@ -8,6 +8,7 @@ onready var load_game:TextureButton = $MainTitle/VBoxContainer/Button_LoadGame
 onready var options:TextureButton = $MainTitle/VBoxContainer/Button_Options
 onready var quit:TextureButton = $MainTitle/VBoxContainer/Button_Quit
 
+onready var options_screen:Control = $OptionsScreen
 onready var save_screen:SaveScreen = $SaveScreen
 
 func _ready():
@@ -46,3 +47,4 @@ func _get_date(key:String) -> String:
 
 func _on_LoadGame_pressed(): save_screen.setup(true)
 func _on_SaveScreen_back_save(): save_screen.visible = false
+func _on_Options_pressed(): options_screen.visible = true

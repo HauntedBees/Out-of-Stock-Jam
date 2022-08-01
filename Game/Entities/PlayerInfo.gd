@@ -43,7 +43,8 @@ var current_weapon:Item = UNARMED
 var current_mayhem := ""
 var inv_drag_to_move := true
 var crouch_toggle := false
-var mouse_sensitivity := -0.15
+var equip_toggle := false
+var mouse_sensitivity := 0.15
 var map_infos := {}
 
 # Unsaved

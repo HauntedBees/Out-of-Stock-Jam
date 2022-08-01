@@ -1,12 +1,65 @@
 extends Node
 
+# TODO: support multiple mappings for same input
+func get_actions_as_json() -> String: return to_json(get_actions_as_dictionary())
+func get_actions_as_dictionary() -> Dictionary:
+	var actions := {}
+	var action_list:PoolStringArray = InputMap.get_actions()
+	for action_name in action_list:
+		var action:InputEvent = InputMap.get_action_list(action_name)[0]
+		if action is InputEventKey:
+			actions[action_name] = "InputEventKey,%s" % action.scancode
+		elif action is InputEventMouseButton:
+			var b:InputEventMouseButton = action
+			actions[action_name] = "InputEventMouseButton,%s" % b.button_index
+		elif action is InputEventJoypadButton:
+			var b:InputEventJoypadButton = action
+			actions[action_name] = "InputEventJoypadButton,%s" % b.button_index
+		elif action is InputEventJoypadMotion:
+			var b:InputEventJoypadMotion = action
+			actions[action_name] = "InputEventJoypadMotion,%s,%s" % [b.axis, b.axis_value]
+	return actions
+
+# TODO: support multiple mappings for same input
+func restore_actions_from_json(json:String): restore_actions_from_dictionary(parse_json(json))
+func restore_actions_from_dictionary(actions:Dictionary):
+	for action_name in actions.keys():
+		var split_type:Array = String(actions[action_name]).split(",")
+		match split_type[0]:
+			"InputEventKey":
+				var event := InputEventKey.new()
+				event.pressed = true
+				event.scancode = int(split_type[1])
+				remap_action(action_name, event, true)
+			"InputEventMouseButton":
+				var event := InputEventMouseButton.new()
+				event.pressed = true
+				event.button_index = int(split_type[1])
+				remap_action(action_name, event, true)
+			"InputEventJoypadButton":
+				var event := InputEventJoypadButton.new()
+				event.pressed = true
+				event.button_index = int(split_type[1])
+				remap_action(action_name, event, true)
+			"InputEventJoypadMotion":
+				var event := InputEventJoypadMotion.new()
+				event.pressed = true
+				event.axis = int(split_type[1])
+				event.axis_value = float(split_type[2])
+				remap_action(action_name, event, true)
+
 # https://gameaccessibilityguidelines.com/allow-controls-to-be-remapped-reconfigured/
-func remap_action(action:String, event:InputEvent):
+func remap_action(action:String, event:InputEvent, limit_one_action := false):
 	var existing_mappings := InputMap.get_action_list(action)
 	var is_button:bool = event is InputEventJoypadButton
 	var is_motion:bool = event is InputEventJoypadMotion
 	for mapping in existing_mappings:
 		var is_mapping_button_or_joy:bool = mapping is InputEventJoypadMotion || mapping is InputEventJoypadButton
+		if limit_one_action:
+			InputMap.action_erase_event(action, mapping)
+			if is_motion && is_mapping_button_or_joy:
+				event.axis_value = 1 if event.axis_value > 0 else -1
+			InputMap.action_add_event(action, event)
 		if is_motion && is_mapping_button_or_joy:
 			InputMap.action_erase_event(action, mapping)
 			event.axis_value = 1 if event.axis_value > 0 else -1

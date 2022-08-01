@@ -124,12 +124,13 @@ __meta__ = {
 }
 
 [node name="ChaosLabel" type="Label" parent="HUD/LeftHUD/HealthChaos"]
-margin_left = 572.0
+margin_left = 578.667
 margin_top = 14.0
-margin_right = 676.0
+margin_right = 688.667
 margin_bottom = 89.0
+rect_scale = Vector2( 0.85, 1 )
 theme = ExtResource( 8 )
-text = "CHAOS"
+text = "MAYHEM"
 align = 1
 valign = 1
 __meta__ = {

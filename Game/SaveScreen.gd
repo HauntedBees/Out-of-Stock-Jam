@@ -1,6 +1,17 @@
 class_name SaveScreen
 extends Control
 
+###############################
+## SAVE FILE FORMAT          ##
+## line 1: location name     ##
+## line 2: save date         ##
+## line 3: mayhem ruby count ##
+## line 4: ring count        ##
+## line 5: play time         ##
+## line 6: player info       ##
+## lines 7+: map info        ##
+###############################
+
 signal back_save()
 var button_theme:Theme = preload("res://HUD/MenuButtonTheme.tres")
 
@@ -92,6 +103,8 @@ func load_data(key:String):
 	PlayerInfo.inv_drag_to_move = player_info["inv_drag_to_move"]
 	PlayerInfo.crouch_toggle = player_info["crouch_toggle"]
 	PlayerInfo.mouse_sensitivity = player_info["mouse_sensitivity"]
+	PlayerInfo.equip_toggle = player_info["equip_toggle"]
+	GASInput.restore_actions_from_dictionary(player_info["controls"])
 	# Map Data
 	var map_datas:Dictionary = {}
 	while game.get_position() < game.get_len():
@@ -153,7 +166,9 @@ func _save_game_data(game:File):
 		"current_weapon": PlayerInfo.current_weapon.as_dict(),
 		"current_mayhem": PlayerInfo.current_mayhem,
 		"inv_drag_to_move": PlayerInfo.inv_drag_to_move,
-		"crouch_toggle": PlayerInfo.crouch_toggle
+		"crouch_toggle": PlayerInfo.crouch_toggle,
+		"equip_toggle": PlayerInfo.equip_toggle,
+		"controls": GASInput.get_actions_as_dictionary()
 	}
 	game.store_line(to_json(player_info))
 	# Save Non-Current Map Data

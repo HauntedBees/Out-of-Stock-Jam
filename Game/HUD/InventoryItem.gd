@@ -62,6 +62,7 @@ func _on_gui_input(event:InputEvent):
 			_start_item_movement()
 
 func _start_item_movement():
+	if PlayerInfo.inv_is_dragging: return # fix for when inv_drag_to_move is true
 	dragging = true
 	movehighlight.visible = true
 	shadow.visible = true

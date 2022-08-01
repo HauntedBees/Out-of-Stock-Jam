@@ -99,10 +99,10 @@ __meta__ = {
 [node name="ChaosLabel" type="Label" parent="."]
 margin_left = 1107.0
 margin_top = 10.0
-margin_right = 1269.0
+margin_right = 1244.0
 margin_bottom = 68.0
 theme = ExtResource( 3 )
-text = "POWERS"
+text = "MAYHEM"
 __meta__ = {
 "_edit_use_anchors_": false
 }

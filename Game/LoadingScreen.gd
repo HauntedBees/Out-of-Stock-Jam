@@ -25,7 +25,8 @@ func _process(_delta:float):
 	var err := loader.poll()
 	if err == ERR_FILE_EOF:
 		percent_label.text = "%s/%s" % [loader.get_stage_count(), loader.get_stage_count()]
-		var scene = loader.get_resource().instance()
+		var scene_pack:PackedScene = loader.get_resource()
+		var scene = scene_pack.instance()
 		get_node("/root").add_child(scene)
 		queue_free()
 	elif err == OK:

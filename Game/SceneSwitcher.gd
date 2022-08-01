@@ -25,7 +25,7 @@ func switch_scene(target_route:String, retain_previous:bool, caller:Node = null)
 	cached_caller = caller
 	loader = ResourceLoader.load_interactive("res://LoadingScreen.tscn")
 
-func _process(delta:float):
+func _process(_delta:float):
 	if loader == null: return
 	var err := loader.poll()
 	if err == ERR_FILE_EOF:

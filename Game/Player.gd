@@ -36,6 +36,7 @@ var in_terminal := false
 var in_inventory := false
 var search_target:Entity
 var hack_target:SecurityControl
+var equip_toggled := false
 
 var active_mayhem := 0.0
 var mayhem_targets := []
@@ -194,6 +195,14 @@ func _input(event:InputEvent):
 		return
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED: # aiming
 		if event is InputEventMouseMotion: return _handle_camera_movement(event)
+	if event.is_action_pressed("equip_modifier") && GASInput.is_action_just_pressed("equip_modifier"):
+		if PlayerInfo.equip_toggle:
+			equip_toggled = !equip_toggled
+		else:
+			equip_toggled = true
+	elif event.is_action_released("equip_modifier") && Input.is_action_just_released("equip_modifier"):
+		if !PlayerInfo.equip_toggle:
+			equip_toggled = false
 	if event.is_action_pressed("jump") && is_on_floor() && !in_water:
 		velocity.y = JUMP_SPEED
 	elif event.is_action("toggle_inventory") && GASInput.is_action_just_pressed("toggle_inventory"):
@@ -202,8 +211,8 @@ func _input(event:InputEvent):
 	_handle_use_item(event)
 
 func _handle_camera_movement(event:InputEventMouseMotion):
-	vision.rotate_x(deg2rad(event.relative.y * PlayerInfo.mouse_sensitivity))
-	rotate_y(deg2rad(event.relative.x * PlayerInfo.mouse_sensitivity))
+	vision.rotate_x(deg2rad(event.relative.y * -PlayerInfo.mouse_sensitivity))
+	rotate_y(deg2rad(event.relative.x * -PlayerInfo.mouse_sensitivity))
 	var camera_rotation := vision.rotation_degrees
 	camera_rotation.x = clamp(camera_rotation.x, -85, 85)
 	vision.rotation_degrees = camera_rotation
@@ -250,6 +259,7 @@ func _close_terminal():
 	# TODO: the other one too
 
 func _toggle_inventory(new_position:bool, search := false):
+	PlayerInfo.inv_is_dragging = false
 	in_inventory = new_position
 	if !in_inventory && search_target != null:
 		_on_close_item_search()
@@ -265,7 +275,7 @@ func _toggle_inventory(new_position:bool, search := false):
 func _handle_equip_switch():
 	for i in range(0, 10):
 		if !GASInput.is_action_just_pressed("equip%s" % i): continue
-		if Input.is_action_pressed("equip_modifier"):
+		if equip_toggled:
 			var mayhem := ""
 			match i:
 				1: mayhem = "Spindash"
