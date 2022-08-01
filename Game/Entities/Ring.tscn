@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Entities/Ring.gd" type="Script" id=1]
 [ext_resource path="res://Textures/Special Stage/Ring.png" type="Texture" id=2]
@@ -77,6 +77,38 @@ rings = 64
 
 [sub_resource type="SpatialMaterial" id=8]
 
+[sub_resource type="Animation" id=9]
+resource_name = "Flicker"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("RingMesh:material/0:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("RingMesh:material/0:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="Ring" type="Area" groups=["Ring"]]
 script = ExtResource( 1 )
 
@@ -103,5 +135,10 @@ layers = 0
 cast_shadow = 2
 mesh = SubResource( 7 )
 material/0 = SubResource( 8 )
+
+[node name="FlickerPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 1.5
+anims/Flicker = SubResource( 9 )
+anims/RESET = SubResource( 10 )
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -5,18 +5,27 @@ onready var conans_hint:RichTextLabel = $ConansHint
 onready var save_screen:SaveScreen = $SaveScreen
 onready var options_screen:Control = $OptionsScreen
 
+onready var continue_button:Control = $VBoxContainer/Button_Continue
+onready var options_button:Control = $VBoxContainer/Button_Options
+onready var save_button:Control = $VBoxContainer/Button_SaveGame
+onready var game_over_label:Control = $GameOverLabel
+
 var hint_idx := 0
 var rng := RandomNumberGenerator.new()
 
 func _ready(): rng.randomize()
 
-func open():
+func open(game_over := false):
 	save_screen.current_screen = GASUtils.get_screen()
 	visible = true
 	PlayerInfo.paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	hint_idx = rng.randi_range(0, HINTS.size() - 1)
 	_draw_hint()
+	continue_button.visible = !game_over
+	options_button.visible = !game_over
+	save_button.visible = !game_over
+	game_over_label.visible = game_over
 func close():
 	if save_screen.visible:
 		save_screen.visible = false

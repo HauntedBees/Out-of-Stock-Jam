@@ -17,15 +17,15 @@ var emerald_shards := 6
 var map_stickers := []
 var mayhem_rubies := 0
 var mayhem_levels := {
-	"Spindash": 1,
-	"Magnet": 1,
-	"Mayhem-Modulate": 1,
-	"Cloak": 1,
-	"Swim": 1,
-	"Strength": 1,
-	"Weaponry": 1,
-	"Hacking": 1,
-	"Vision": 1
+	"Spindash": 0,
+	"Magnet": 0,
+	"Mayhem-Modulate": 0,
+	"Cloak": 0,
+	"Swim": 0,
+	"Strength": 0,
+	"Weaponry": 0,
+	"Hacking": 0,
+	"Vision": 0
 }
 var current_map := "Medical Bay"
 var inventory := [

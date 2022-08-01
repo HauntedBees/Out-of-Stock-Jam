@@ -1,12 +1,19 @@
 class_name Player
 extends KinematicBody
 
+var RING_SCENE := load("res://Entities/Ring.tscn")
+
 const GRAVITY = -9.8
 const MAX_SPEED := 20.0
 const JUMP_SPEED := 12.0
 const ACCELERATION := 4.5
 const DECELERATION := 16.0
 
+onready var full_hud:Control = $HUD
+onready var game_over:Control = $Dead
+onready var game_over_timer:Timer = $Dead/Timer
+onready var game_over_anim:AnimationPlayer = $Dead/AnimationPlayer
+onready var ouchie:TextureRect = $HUD/Ouchie
 onready var pause_screen:PauseScreen = $PauseScreen
 onready var magnet_area:Area = $Magnet
 onready var magnet_area_shape:CollisionShape = $Magnet/CollisionShape
@@ -37,6 +44,7 @@ var in_inventory := false
 var search_target:Entity
 var hack_target:SecurityControl
 var equip_toggled := false
+var invicible_time := 0.0
 
 var active_mayhem := 0.0
 var mayhem_targets := []
@@ -50,6 +58,10 @@ func _process(delta:float):
 	if PlayerInfo.paused: return
 	if PlayerInfo.return_timeout > 0.0:
 		PlayerInfo.return_timeout -= delta
+	if invicible_time > 0.0:
+		invicible_time -= delta
+		if invicible_time <= 0.0:
+			ouchie.visible = false
 	toggle_water()
 	handle_safe_oxygen(delta)
 
@@ -359,3 +371,33 @@ func fire_projectile(p:Projectile):
 	var launch_direction := camera.project_ray_normal(get_viewport().size / 2)
 	p.global_transform.origin = head.global_transform.origin + launch_direction * 0.5
 	p.apply_impulse(Vector3.ZERO, launch_direction * p.launch_force)
+
+func take_damage():
+	if invicible_time > 0.0: return
+	if PlayerInfo.rings == 0:
+		full_hud.visible = false
+		game_over.visible = true
+		game_over_anim.play("Die")
+		PlayerInfo.paused = true
+		game_over_timer.start(2.5)
+		yield(game_over_timer, "timeout")
+		pause_screen.open(true)
+	else:
+		invicible_time = 3.0
+		ouchie.visible = true
+		fuck_it_up(PlayerInfo.rings)
+
+func fuck_it_up(rings_to_lose:int):
+	if rings_to_lose == 0:
+		return
+	var amount := rings_to_lose if rings_to_lose < 4 else 4
+	PlayerInfo.rings -= amount
+	player_stats.update_rings()
+	for i in amount:
+		var ring:Spatial = RING_SCENE.instance()
+		ring.delay_timeout = 0.4
+		ring.launch_on_start = true
+		ring.global_transform.origin = global_transform.origin + Vector3(0, 0.5, 0)
+		get_parent().add_child(ring)
+	yield(get_tree(), "idle_frame")
+	fuck_it_up(rings_to_lose - amount)

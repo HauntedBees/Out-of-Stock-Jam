@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Textures/Weapons/Hammer.png" type="Texture" id=2]
@@ -19,6 +19,10 @@
 [ext_resource path="res://Hacking/HackingTerminal.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Textures/HUD/Underwater.png" type="Texture" id=18]
 [ext_resource path="res://HUD/PauseScreen.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Textures/HUD/Hurt.png" type="Texture" id=20]
+[ext_resource path="res://Textures/OpeningCutscene/HurtHand.png" type="Texture" id=21]
+[ext_resource path="res://Textures/OpeningCutscene/RoboHand.png" type="Texture" id=22]
+[ext_resource path="res://Textures/HUD/DeadEnd.png" type="Texture" id=23]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.560811
@@ -26,6 +30,104 @@ height = 0.0454813
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.518712, 0.483798, 0.5237 )
+
+[sub_resource type="Animation" id=10]
+resource_name = "Ouchie"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "Die"
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 90, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DeadEnd:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Vision:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DeadEnd:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="CapsuleMesh" id=2]
 radius = 0.5
@@ -324,6 +426,77 @@ rect_scale = Vector2( 0.75, 0.75 )
 
 [node name="Inventory" parent="HUD" instance=ExtResource( 5 )]
 visible = false
+
+[node name="Ouchie" type="TextureRect" parent="HUD"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -64.0
+margin_top = 64.0
+margin_right = 64.0
+margin_bottom = 192.0
+texture = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OuchieAnim" type="AnimationPlayer" parent="HUD/Ouchie"]
+autoplay = "Ouchie"
+anims/Ouchie = SubResource( 10 )
+anims/RESET = SubResource( 11 )
+
+[node name="Dead" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeadEnd" type="TextureRect" parent="Dead"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -480.0
+margin_top = -480.0
+margin_right = 480.0
+margin_bottom = 480.0
+texture = ExtResource( 23 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightHand" type="TextureRect" parent="Dead"]
+margin_left = 1212.0
+margin_top = 481.0
+margin_right = 1663.0
+margin_bottom = 1331.0
+rect_rotation = -26.798
+texture = ExtResource( 21 )
+expand = true
+
+[node name="RoboLeftHand" type="TextureRect" parent="Dead"]
+margin_left = 673.0
+margin_top = 459.0
+margin_right = 1124.0
+margin_bottom = 1309.0
+rect_rotation = 24.3357
+rect_scale = Vector2( -1, 1 )
+texture = ExtResource( 22 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Dead"]
+anims/Die = SubResource( 12 )
+anims/RESET = SubResource( 13 )
+
+[node name="Timer" type="Timer" parent="Dead"]
 
 [node name="DebugModel" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.968006, 0 )
