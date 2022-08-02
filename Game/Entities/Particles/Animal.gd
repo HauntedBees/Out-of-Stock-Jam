@@ -2,7 +2,12 @@ extends MeshInstance
 
 var potential_animals := [
 	preload("res://Textures/Entities/Animals/Squirrel.png"),
-	preload("res://Textures/Entities/Animals/Rabbit.png")
+	preload("res://Textures/Entities/Animals/Rabbit.png"),
+	preload("res://Textures/Entities/Animals/Bird.png"),
+	preload("res://Textures/Entities/Animals/Seal.png"),
+	preload("res://Textures/Entities/Animals/Pig.png"),
+	preload("res://Textures/Entities/Animals/Penguin.png"),
+	preload("res://Textures/Entities/Animals/Chick.png")
 ]
 
 func _ready():
