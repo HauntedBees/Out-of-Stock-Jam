@@ -1,0 +1,38 @@
+Game Sounds:
+PlayerDamage | https://freesound.org/people/tec_studio/sounds/367273/
+Ring+NoRing | https://freesound.org/people/eZZin/sounds/545857/
+Bonk | https://freesound.org/people/facklere/sounds/458572/
+Woosh | https://freesound.org/people/qubodup/sounds/60013/
+Sword | https://freesound.org/people/Merrick079/sounds/568169/
+Rifle | https://freesound.org/people/dwightsabeast/sounds/395572/
+Gun | https://freesound.org/people/Brokenphono/sounds/344143/
+Thwop | https://freesound.org/people/xFromarge1/sounds/520044/
+Boom | https://freesound.org/people/derplayer/sounds/587193/
+GameOver | https://freesound.org/people/SoundsExciting/sounds/213096/
+Trap | https://freesound.org/people/ThePriest909/sounds/278203/
+Jump | https://freesound.org/people/acebrian/sounds/380471/
+Reload | https://freesound.org/people/SpliceSound/sounds/153560/
+EnterWater | https://freesound.org/people/Sheyvan/sounds/519006/
+LeaveWater | https://freesound.org/people/Sheyvan/sounds/470084/
+Switch | https://freesound.org/people/ArrowheadProductions/sounds/566176/
+Poof | https://freesound.org/people/Worldmaxter/sounds/471204/
+Pop | https://freesound.org/people/shyguy014/sounds/458533/
+
+Menu Sounds:
+Beep | https://freesound.org/people/noirenex/sounds/245242/
+Hover | https://freesound.org/people/deadsillyrabbit/sounds/251389/
+Denied | 
+
+ADD SOUNDS TO: open/close door
+
+refactor beep and hover to a global?
+
+SOUNDS NEEDED:
+	anything for medibot
+	humans dying
+	interactables being destroyed
+	any menu items
+	ambient noises
+
+Ambience:
+Title | https://freesound.org/people/szegvari/sounds/560617/

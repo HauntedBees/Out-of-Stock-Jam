@@ -2,6 +2,8 @@ extends Control
 
 const SAVE_PATH := "user://save_%s.save"
 
+onready var beep_ping:AudioStreamPlayer = $BeepSound
+onready var hover_ping:AudioStreamPlayer = $HoverSound
 onready var new_game:TextureButton = $MainTitle/VBoxContainer/Button_NewGame
 onready var continue_game:TextureButton = $MainTitle/VBoxContainer/Button_Continue
 onready var load_game:TextureButton = $MainTitle/VBoxContainer/Button_LoadGame
@@ -23,7 +25,11 @@ func has_saves() -> bool:
 		if f.file_exists(SAVE_PATH % i): return true
 	return false
 
+func _on_button_mouse_entered(): hover_ping.play()
+
 func _on_Continue_pressed():
+	beep_ping.play()
+	yield(beep_ping, "finished")
 	var dates := []
 	dates.append({ "key": "Autosave", "date": _get_date("Autosave") })
 	for i in 14:
@@ -45,6 +51,13 @@ func _get_date(key:String) -> String:
 	f.close()
 	return date
 
-func _on_LoadGame_pressed(): save_screen.setup(true)
-func _on_SaveScreen_back_save(): save_screen.visible = false
-func _on_Options_pressed(): options_screen.visible = true
+func _on_LoadGame_pressed(): 
+	beep_ping.play()
+	save_screen.setup(true)
+func _on_SaveScreen_back_save():
+	beep_ping.play()
+	save_screen.visible = false
+func _on_Options_pressed(): 
+	beep_ping.play()
+	options_screen.visible = true
+

@@ -15,6 +15,8 @@ extends Control
 signal back_save()
 var button_theme:Theme = preload("res://HUD/MenuButtonTheme.tres")
 
+onready var beep_ping:AudioStreamPlayer = $BeepSound
+onready var hover_ping:AudioStreamPlayer = $HoverSound
 onready var panel:VBoxContainer = $SaveOptions
 onready var save_desc:RichTextLabel = $SaveDescription
 onready var screenshot:TextureRect = $Screenshot
@@ -23,6 +25,8 @@ onready var ruby_container:Control = $RubyHolder
 var is_load := false
 var current_screen:Image
 
+func _on_button_mouse_entered(): 
+	hover_ping.play()
 func _on_BackButton_pressed(): emit_signal("back_save")
 func setup(load_screen:bool):
 	is_load = load_screen
@@ -32,8 +36,10 @@ func setup(load_screen:bool):
 	for i in 14:
 		_load_save_info(String(i))
 	visible = true
-func _hover(button:Button):
+func _hover(button:Button, is_empty := false):
 	if button.disabled: return
+	hover_ping.play()
+	if is_empty: return
 	screenshot.texture = GASUtils.load_screen_as_texture(button.get_meta("Key"))
 	_set_desc(button.get_meta("Playtime"), button.get_meta("Location"), button.get_meta("Rubies"), button.get_meta("Rings"))
 func _set_desc(play_time:int, location:String, rubies:int, rings:int):
@@ -55,6 +61,7 @@ func _load_save_info(save_key:String):
 	var game := File.new()
 	var file_name := "user://save_%s.save" % save_key
 	var prefix:String = save_key if save_key == "(Autosave) " else ""
+	var is_empty := false
 	if game.file_exists(file_name):
 		game.open(file_name, File.READ)
 		var location_line := game.get_line()
@@ -69,20 +76,22 @@ func _load_save_info(save_key:String):
 		button.set_meta("Playtime", playtime_line)
 		button.set_meta("Key", save_key)
 		button.text = "%s%s [%s]" % [prefix, location_line, date_line]
-		button.connect("mouse_entered", self, "_hover", [button])
 		game.close()
 	elif save_key == "Autosave":
 		return
 	else:
 		button.text = "< EMPTY >"
+		is_empty = true
 		if is_load: button.disabled = true
 	if is_load:
 		button.connect("pressed", self, "load_data", [save_key])
 	else:
 		button.connect("pressed", self, "save_data", [save_key, button])
+	button.connect("mouse_entered", self, "_hover", [button, is_empty])
 	panel.add_child(button)
 
 func load_data(key:String):
+	beep_ping.play()
 	var game := File.new()
 	game.open("user://save_%s.save" % key, File.READ)
 	# Metadata
@@ -118,6 +127,7 @@ func load_data(key:String):
 	SceneSwitcher.memory = player_info
 
 func save_data(key:String, button:Button):
+	beep_ping.play()
 	button.set_meta("Key", key)
 	current_screen.save_png("user://save_%s.png" % key)
 	screenshot.texture = GASUtils.load_screen_as_texture(key)

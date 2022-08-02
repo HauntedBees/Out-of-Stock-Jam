@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Hover.ogg-7a0d66716cc7b2c687724d2f1602fdaf.oggstr"
+
+[deps]
+
+source_file="res://Assets/MenuSounds/Hover.ogg"
+dest_files=[ "res://.import/Hover.ogg-7a0d66716cc7b2c687724d2f1602fdaf.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

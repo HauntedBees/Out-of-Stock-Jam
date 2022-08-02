@@ -11,6 +11,7 @@ var is_melee := false
 var has_projectile := false
 var projectile:PackedScene
 var rapid_fire := false
+var sound := ""
 
 onready var weapon_container:Control = $Weapon
 onready var weapon_textures := weapon_container.get_children()
@@ -49,6 +50,7 @@ func set_weapon(weapon:String, force := false):
 	cooldown = w["cooldown"]
 	attack_animation = w["animation"]
 	pushback = w["pushback"]
+	sound = w["sound"]
 	attack_range = w["range"]
 	uses_ammo = w.has("uses_ammo")
 	is_melee = w.has("is_melee")
@@ -70,6 +72,7 @@ func set_weapon(weapon:String, force := false):
 	else: _switch_weapon()
 func _switch_weapon():
 	cooldown_remaining = 99
+	get_tree().call_group("PlayerSound", "play_sound", "Switch", "Weapon")
 	weapon_anim.play("MoveDown")
 	yield(weapon_anim, "animation_finished")
 	for wt in weapon_textures:
@@ -86,6 +89,7 @@ func set_mayhem(mayhem:String):
 func _switch_mayhem():
 	var passive_pos := mayhem_anim.current_animation_position
 	mayhem_cooldown_remaining = 99
+	get_tree().call_group("PlayerSound", "play_sound", "Switch", "Weapon")
 	mayhem_anim.play("SwitchOff", -1, 2.0)
 	yield(mayhem_anim, "animation_finished")
 	for mt in mayhem_textures:
@@ -99,7 +103,9 @@ func _switch_mayhem():
 
 func reload():
 	if PlayerInfo.current_weapon.reload_amount == PlayerInfo.current_weapon.current_ammo: return
+	blast.modulate.a = 0.0
 	cooldown_remaining = 99
+	get_tree().call_group("PlayerSound", "play_sound", "Reload", "Weapon")
 	weapon_anim.play("Reload", -1, PlayerInfo.current_weapon.reload_speed_mult)
 	yield(weapon_anim, "animation_finished")
 	PlayerInfo.reload_weapon()
@@ -135,11 +141,14 @@ func _try_weapon_attack():
 
 func _projectile_attack():
 	var p:Projectile = projectile.instance()
+	get_tree().call_group("PlayerSound", "play_sound", sound, "Weapon")
 	get_tree().call_group("player", "fire_projectile", p)
 
 func _standard_attack():
 	var body = PlayerInfo.get_collision(attack_range, false, true)
-	if body is SecurityControl || body is MayhemKiosk: return
+	if body is SecurityControl || body is MayhemKiosk:
+		get_tree().call_group("PlayerSound", "play_sound", sound, "Weapon")
+		return
 	if body is Trap:
 		get_tree().call_group("destroy_monitor", "on_destroy", body.name)
 		body.queue_free()
@@ -166,7 +175,13 @@ func _standard_attack():
 			1: damage_power *= 1.08
 			2: damage_power *= 1.25
 			3: damage_power *= 2.25
-	if body != null: body.take_hit(camera.project_ray_normal(get_viewport().size / 2), pushback, damage_power)
+	if body != null:
+		body.take_hit(camera.project_ray_normal(get_viewport().size / 2), pushback, damage_power)
+		get_tree().call_group("PlayerSound", "play_sound", sound, "Weapon")
+	elif is_melee:
+		get_tree().call_group("PlayerSound", "play_sound", "Woosh", "Weapon")
+	else:
+		get_tree().call_group("PlayerSound", "play_sound", sound, "Weapon")
 
 func _try_mayhem():
 	if mayhem_cooldown_remaining > 0.0 || current_mayhem == "": return
@@ -217,15 +232,17 @@ const weapon_info := {
 		"cooldown": 0.3,
 		"pushback": 300.0,
 		"range": 4.0,
-		"is_melee": true
+		"is_melee": true,
+		"sound": "Bonk"
 	},
 	"Sword": {
 		"animation": "Melee",
-		"power": 10.0,
+		"power": 30.0,
 		"cooldown": 0.2,
 		"pushback": 500.0,
-		"range": 5.0,
-		"is_melee": true
+		"range": 6.0,
+		"is_melee": true,
+		"sound": "Sword"
 	},
 	"Grenade Launcher": {
 		"blast_position": Vector2(-721, -159),
@@ -236,7 +253,8 @@ const weapon_info := {
 		"pushback": 100.0,
 		"range": 999.0,
 		"projectile": "Grenade",
-		"uses_ammo": true
+		"uses_ammo": true,
+		"sound": "Thwop"
 	},
 	"Pistol": {
 		"blast_position": Vector2(-652, -426),
@@ -246,7 +264,8 @@ const weapon_info := {
 		"cooldown": 0.5,
 		"pushback": 100.0,
 		"range": 30.0,
-		"uses_ammo": true
+		"uses_ammo": true,
+		"sound": "Gun"
 	},
 	"Shotgun": {
 		"blast_position": Vector2(-669, -124),
@@ -256,7 +275,8 @@ const weapon_info := {
 		"cooldown": 1.0,
 		"pushback": 1000.0,
 		"range": 5.0,
-		"uses_ammo": true
+		"uses_ammo": true,
+		"sound": "Gun"
 	},
 	"Assault Rifle": {
 		"blast_position": Vector2(-669, -124),
@@ -267,6 +287,7 @@ const weapon_info := {
 		"pushback": 10.0,
 		"range": 60.0,
 		"uses_ammo": true,
-		"rapid_fire": true
+		"rapid_fire": true,
+		"sound": "Rifle"
 	}
 }

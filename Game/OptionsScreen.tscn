@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Textures/HUD/OrbBG.jpg" type="Texture" id=1]
 [ext_resource path="res://HUD/BWTheme.tres" type="Theme" id=2]
 [ext_resource path="res://OptionsScreen.gd" type="Script" id=3]
 [ext_resource path="res://HUD/Button.tres" type="Theme" id=4]
+[ext_resource path="res://Assets/MenuSounds/Beep.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Assets/MenuSounds/Hover.ogg" type="AudioStream" id=6]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://Assets/Computer Speak v0.3.ttf"
@@ -53,7 +55,6 @@ __meta__ = {
 }
 
 [node name="Settings" type="Control" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -167,6 +168,7 @@ margin_bottom = 271.0
 rect_min_size = Vector2( 120, 51 )
 
 [node name="Controls" type="Control" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -281,9 +283,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BeepSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_changed"]
+[connection signal="mouse_entered" from="TabContainer/Settings/HBoxContainer/VBoxContainer2/BorderlessWindow" to="." method="_on_control_mouse_entered"]
+[connection signal="mouse_exited" from="TabContainer/Settings/HBoxContainer/VBoxContainer2/FullScreen" to="." method="_on_control_mouse_entered"]
+[connection signal="mouse_entered" from="TabContainer/Settings/HBoxContainer/VBoxContainer2/Gameplay" to="." method="_on_control_mouse_entered"]
+[connection signal="mouse_entered" from="TabContainer/Settings/HBoxContainer/VBoxContainer2/MusicVolume" to="." method="_on_control_mouse_entered"]
+[connection signal="mouse_entered" from="TabContainer/Settings/HBoxContainer/VBoxContainer2/SoundVolume" to="." method="_on_control_mouse_entered"]
+[connection signal="mouse_entered" from="TabContainer/Controls/HBoxContainer/Controls5/ToggleEquip" to="." method="_on_control_mouse_entered"]
 [connection signal="toggled" from="TabContainer/Controls/HBoxContainer/Controls5/ToggleEquip" to="." method="_on_ToggleEquip_toggled"]
+[connection signal="mouse_entered" from="TabContainer/Controls/HBoxContainer/Controls5/ToggleCrouch" to="." method="_on_control_mouse_entered"]
 [connection signal="toggled" from="TabContainer/Controls/HBoxContainer/Controls5/ToggleCrouch" to="." method="_on_ToggleCrouch_toggled"]
 [connection signal="toggled" from="TabContainer/Controls/HBoxContainer/Controls5/ToggleDrag" to="." method="_on_ToggleDrag_toggled"]
+[connection signal="mouse_entered" from="TabContainer/Controls/HBoxContainer/Controls5/MouseSensitivity" to="." method="_on_control_mouse_entered"]
 [connection signal="value_changed" from="TabContainer/Controls/HBoxContainer/Controls5/MouseSensitivity" to="." method="_on_MouseSensitivity_value_changed"]
 [connection signal="confirmed" from="TabContainer/Controls/ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]
+[connection signal="popup_hide" from="TabContainer/Controls/ConfirmationDialog" to="." method="_on_ConfirmationDialog_popup_hide"]
+[connection signal="mouse_entered" from="BackButton" to="." method="_on_control_mouse_entered"]
 [connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]

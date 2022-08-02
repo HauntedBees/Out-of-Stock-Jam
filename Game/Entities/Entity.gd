@@ -72,7 +72,7 @@ func take_hit(direction:Vector3, force:float, damage:float):
 		forced_velocity.y = 0.0
 		forced_velocity_timer = 0.2
 	health -= damage
-	print(health)
+	print("%s: %s" % [name, health])
 	if health <= 0:
 		is_dead = true
 		_die()

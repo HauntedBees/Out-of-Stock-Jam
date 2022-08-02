@@ -10,7 +10,7 @@ var UNARMED := Item.new("Unarmed", "", Vector2(0, 0), Vector2(0, 0), {"uses_ammo
 
 # Saved Details
 var play_time := 0.0
-var rings := 0
+var rings := 20 # 0
 var chaos_energy := 10
 var max_chaos_energy := 10
 var emerald_shards := 6
@@ -24,7 +24,7 @@ var mayhem_levels := {
 	"Swim": 0,
 	"Strength": 1,
 	"Weaponry": 0,
-	"Hacking": 0,
+	"Hacking": 1,
 	"Vision": 0
 }
 var current_map := "Medical Bay"
@@ -101,7 +101,7 @@ func get_collision(distance:float, no_lamps := false, include_areas := false) ->
 	var center := get_viewport().size / 2
 	var from := camera.project_ray_origin(center)
 	var to := from + camera.project_ray_normal(center) * distance
-	var res := get_viewport().world.direct_space_state.intersect_ray(from, to, [], 0x7FFFFFFF, true, include_areas)
+	var res := get_viewport().world.direct_space_state.intersect_ray(from, to, [], 0x7FFFFFFF - 4, true, include_areas)
 	if !res.has("collider"): return null
 	if res["collider"] is Entity:
 		return res["collider"]

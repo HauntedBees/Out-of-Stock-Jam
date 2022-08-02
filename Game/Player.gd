@@ -77,8 +77,12 @@ func handle_safe_oxygen(delta:float):
 func toggle_water():
 	if in_water:
 		if head.global_transform.origin.y <= water_y:
+			if !water_overlay.visible:
+				get_tree().call_group("PlayerSound", "play_sound", "EnterWater")
 			water_overlay.visible = true
 			return
+	if water_overlay.visible:
+		get_tree().call_group("PlayerSound", "play_sound", "LeaveWater")
 	water_overlay.visible = false
 
 func _physics_process(delta:float):
@@ -205,6 +209,8 @@ func _input(event:InputEvent):
 			pause_screen.close()
 		return
 	elif pause_pressed:
+		if in_terminal: return
+		_toggle_inventory(false)
 		pause_screen.open()
 		return
 	if in_terminal:
@@ -223,6 +229,7 @@ func _input(event:InputEvent):
 			equip_toggled = false
 	if event.is_action_pressed("jump") && is_on_floor() && !in_water:
 		velocity.y = JUMP_SPEED
+		get_tree().call_group("PlayerSound", "play_sound", "Jump")
 	elif event.is_action("toggle_inventory") && GASInput.is_action_just_pressed("toggle_inventory"):
 		_toggle_inventory(!in_inventory)
 	_handle_equip_switch()
@@ -251,6 +258,7 @@ func _handle_use_item(event:InputEvent):
 		inventory.search_contents = body_as_entity.contents
 		_toggle_inventory(true, true)
 	elif body is SecurityControl:
+		get_tree().call_group("PlayerSound", "play_sound", "Beep")
 		var bs:SecurityControl = body
 		hack_target = bs
 		hacking_terminal.configure(bs.cleared, bs.first_button_text, bs.second_button_text, bs.third_button_text, bs.level_requirement)
@@ -389,19 +397,34 @@ func fire_projectile(p:Projectile):
 	p.apply_impulse(Vector3.ZERO, launch_direction * p.launch_force)
 
 func take_damage():
-	if invicible_time > 0.0: return
+	if PlayerInfo.paused || invicible_time > 0.0: return
 	if PlayerInfo.rings == 0:
-		full_hud.visible = false
-		game_over.visible = true
-		game_over_anim.play("Die")
-		PlayerInfo.paused = true
-		game_over_timer.start(2.5)
-		yield(game_over_timer, "timeout")
-		pause_screen.open(true)
+		_game_over()
 	else:
 		invicible_time = 3.0
 		ouchie.visible = true
 		fuck_it_up(PlayerInfo.rings)
+		get_tree().call_group("PlayerSound", "play_sound", "Hurt")
+
+func lose_ring():
+	if PlayerInfo.paused || invicible_time > 0.0: return
+	if PlayerInfo.rings == 0:
+		_game_over()
+	else:
+		PlayerInfo.rings -= 1
+		player_stats.update_rings()
+		get_tree().call_group("PlayerSound", "play_sound", "Hurt")
+
+func _game_over():
+	if game_over.visible: return
+	get_tree().call_group("PlayerSound", "play_sound", "GameOver", "Ring")
+	full_hud.visible = false
+	game_over.visible = true
+	game_over_anim.play("Die")
+	PlayerInfo.paused = true
+	game_over_timer.start(3.5)
+	yield(game_over_timer, "timeout")
+	pause_screen.open(true)
 
 func fuck_it_up(rings_to_lose:int):
 	if rings_to_lose == 0:

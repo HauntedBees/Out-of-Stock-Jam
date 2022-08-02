@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://HUD/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Textures/Title/ButtonPressed.png" type="Texture" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://SaveScreen.tscn" type="PackedScene" id=9]
 [ext_resource path="res://OptionsScreen.tscn" type="PackedScene" id=10]
 [ext_resource path="res://HUD/ThemeBig.tres" type="Theme" id=11]
+[ext_resource path="res://Assets/MenuSounds/Beep.ogg" type="AudioStream" id=12]
+[ext_resource path="res://Assets/MenuSounds/Hover.ogg" type="AudioStream" id=13]
 
 [node name="PauseScreen" type="Control"]
 anchor_right = 1.0
@@ -243,11 +245,27 @@ margin_bottom = 143.0
 rect_scale = Vector2( 2, 2 )
 theme = ExtResource( 11 )
 text = "Game Over"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
+[node name="BeepSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+
+[connection signal="mouse_entered" from="VBoxContainer/Button_Continue" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Button_Continue" to="." method="close"]
+[connection signal="mouse_entered" from="VBoxContainer/Button_Options" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Button_Options" to="." method="_on_Options_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Button_SaveGame" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Button_SaveGame" to="." method="_on_SaveGame_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Button_LoadGame" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Button_LoadGame" to="." method="_on_LoadGame_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Button_Quit" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_entered" from="NextHint" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="NextHint" to="." method="_on_NextHint_pressed"]
+[connection signal="mouse_entered" from="PrevHint" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="PrevHint" to="." method="_on_PrevHint_pressed"]
 [connection signal="back_save" from="SaveScreen" to="." method="close"]

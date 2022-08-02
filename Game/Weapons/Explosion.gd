@@ -3,13 +3,25 @@ extends Area
 var force := 0.0
 var damage := 0.0
 
-func _on_animation_finished(_anim_name:String): queue_free()
+onready var collider:CollisionShape = $CollisionShape
+
+var anim_done := false
+var sound_done := false
+
+func _on_animation_finished(_anim_name:String):
+	anim_done = true
+	collider.disabled = true
+	if sound_done: queue_free()
+
+func _on_AudioStreamPlayer3D_finished():
+	sound_done = true
+	if anim_done: queue_free()
 
 func _on_body_entered(body:Spatial):
 	var distance_vec:Vector3 = body.global_transform.origin - global_transform.origin
 	var distance := max(1.0, distance_vec.length() - 1.5)
 	var direction := distance_vec.normalized()
-	var calc_damage := damage / distance
+	var calc_damage := max(1.0, damage / distance)
 	if body is Entity:
 		var be:Entity = body
 		if be is Interactable:
@@ -32,3 +44,4 @@ func _on_area_entered(area:Area):
 	if area is Trap:
 		get_tree().call_group("destroy_monitor", "on_destroy", area.name)
 		area.queue_free()
+

@@ -39,7 +39,7 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.153437, 0 )
 shape = SubResource( 3 )
 
-[node name="Player" parent="." groups=["player"] instance=ExtResource( 2 )]
+[node name="Player" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.232056, 0 )
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Thwop.ogg-059c3f09216ddd4287f71450dcd5f5de.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Thwop.ogg"
+dest_files=[ "res://.import/Thwop.ogg-059c3f09216ddd4287f71450dcd5f5de.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

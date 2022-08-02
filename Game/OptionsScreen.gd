@@ -3,6 +3,9 @@ extends Control
 var label_theme:Theme = load("res://HUD/BWTheme.tres")
 var button_theme:Theme = load("res://HUD/Button.tres")
 
+onready var beep_ping:AudioStreamPlayer = $BeepSound
+onready var hover_ping:AudioStreamPlayer = $HoverSound
+
 onready var col1:VBoxContainer = $TabContainer/Controls/HBoxContainer/Controls0
 onready var col2:VBoxContainer = $TabContainer/Controls/HBoxContainer/Controls1
 onready var col3:VBoxContainer = $TabContainer/Controls/HBoxContainer/Controls2
@@ -22,6 +25,7 @@ var current_edited_action := ""
 var current_edited_action_value:InputEvent
 
 func _change_control(button:Button, display_name:String, action:String):
+	beep_ping.play()
 	target_button = button
 	confirm.popup_centered()
 	confirm.window_title = "Edit '%s'" % display_name
@@ -83,6 +87,7 @@ func _add_control(label_column:VBoxContainer, button_column:VBoxContainer, displ
 	b.rect_min_size = Vector2(120, 60)
 	b.theme = button_theme
 	b.text = _get_action_value(action_name)
+	b.connect("mouse_entered", self, "_on_control_mouse_entered")
 	b.connect("pressed", self, "_change_control", [b, display_name, action_name])
 	if tooltip != "": b.hint_tooltip = tooltip
 	button_column.add_child(b)
@@ -120,17 +125,25 @@ func _unhandled_input(event:InputEvent):
 	confirm.dialog_text = "Current Input:\n%s" % _get_event_value(event)
 
 func _on_ConfirmationDialog_confirmed():
+	beep_ping.play()
 	GASInput.remap_action(current_edited_action, current_edited_action_value, true)
 	target_button.text = _get_event_value(current_edited_action_value)
 	current_edited_action = ""
 	current_edited_action_value = null
 	target_button = null
 
-func _on_ConfirmationDialog_popup_hide(): in_popup = false
+func _on_ConfirmationDialog_popup_hide():
+	beep_ping.play()
+	in_popup = false
 
-func _on_BackButton_pressed(): visible = false
+func _on_BackButton_pressed():
+	beep_ping.play()
+	visible = false
 
 func _on_ToggleEquip_toggled(button_pressed:bool): PlayerInfo.equip_toggle = button_pressed
 func _on_ToggleCrouch_toggled(button_pressed:bool): PlayerInfo.crouch_toggle = button_pressed
 func _on_ToggleDrag_toggled(button_pressed:bool): PlayerInfo.inv_drag_to_move = button_pressed
 func _on_MouseSensitivity_value_changed(value:float): PlayerInfo.mouse_sensitivity = value
+
+func _on_control_mouse_entered(): hover_ping.play()
+func _on_tab_changed(_tab:int): beep_ping.play()

@@ -3,6 +3,10 @@ extends Control
 
 signal successful_hack()
 
+onready var beep_ping:AudioStreamPlayer = $BeepSound
+onready var hover_ping:AudioStreamPlayer = $HoverSound
+onready var no_ping:AudioStreamPlayer = $NoSound
+
 onready var blue_texture:Texture = preload("res://Textures/Hacking/BlueSphere.png")
 onready var red_texture:Texture = preload("res://Textures/Hacking/RedSphere.png")
 const GRID_SIZE := Vector2(84.5, 84.5)
@@ -20,12 +24,15 @@ var player_pos := Vector2.ZERO
 var node_map := []
 var level := 0
 var blues_remaining := 0
-var game_over := false
+var game_over := true
 
 func _ready(): rng.randomize()
 
+func _on_button_mouse_entered(): hover_ping.play()
+
 func _on_HackButton_pressed():
 	if hack_button.disabled: return
+	beep_ping.play()
 	hack_button.visible = false
 	game_over = false
 	info_top.visible = false
@@ -99,6 +106,7 @@ func _process(_delta:float):
 	elif GASInput.is_action_just_pressed("strafe_right"):
 		m.x += 1
 	if m.length() == 0: return
+	hover_ping.play()
 	var new_pos := player_pos + m
 	if new_pos.x < 0 || new_pos.y < 0 || new_pos.x > 11 || new_pos.y > 11: return
 	player_pos = new_pos
@@ -112,9 +120,11 @@ func _process(_delta:float):
 		tile.texture = red_texture
 		blues_remaining -= 1
 	else:
+		no_ping.play()
 		anim.play("GameOver")
 		game_over = true
 	if blues_remaining == 0:
+		beep_ping.play()
 		anim.play("Success")
 		game_over = true
 		emit_signal("successful_hack")
@@ -132,4 +142,3 @@ const LEVELS := [
 	[], # level two
 	[] # level three
 ]
-

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Textures/Hacking/Grid.png" type="Texture" id=1]
 [ext_resource path="res://Hacking/HackingGame.gd" type="Script" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://Textures/Hacking/AccessDenied.png" type="Texture" id=5]
 [ext_resource path="res://Textures/Hacking/AccessGranted.png" type="Texture" id=6]
 [ext_resource path="res://HUD/Button.tres" type="Theme" id=7]
+[ext_resource path="res://Assets/MenuSounds/Beep.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Assets/MenuSounds/Hover.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Assets/MenuSounds/Denied.ogg" type="AudioStream" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "GameOver"
@@ -223,4 +226,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BeepSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
+[node name="NoSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+
+[connection signal="mouse_entered" from="HackButton" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="HackButton" to="." method="_on_HackButton_pressed"]

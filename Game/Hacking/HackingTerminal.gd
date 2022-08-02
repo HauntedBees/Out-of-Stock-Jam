@@ -5,6 +5,9 @@ signal button_pressed(idx)
 signal hacked()
 signal exit()
 
+onready var beep_ping:AudioStreamPlayer = $BeepSound
+onready var hover_ping:AudioStreamPlayer = $HoverSound
+
 onready var first_button:Button = $TextureRect/VBoxContainer/Button1
 onready var second_button:Button = $TextureRect/VBoxContainer/Button2
 onready var third_button:Button = $TextureRect/VBoxContainer/Button3
@@ -43,6 +46,12 @@ func _on_successful_hack():
 	emit_signal("hacked")
 	hacking_game.modulate.a = 0.25
 
-func _on_ExitButton_pressed(): emit_signal("exit")
+func _on_ExitButton_pressed():
+	beep_ping.play()
+	emit_signal("exit")
 
-func _on_Button_pressed(i:int): emit_signal("button_pressed", i)
+func _on_Button_pressed(i:int):
+	beep_ping.play()
+	emit_signal("button_pressed", i)
+
+func _on_button_mouse_entered(): hover_ping.play()

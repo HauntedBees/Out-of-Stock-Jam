@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Textures/Weapons/Hammer.png" type="Texture" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://Textures/OpeningCutscene/RoboHand.png" type="Texture" id=22]
 [ext_resource path="res://Textures/HUD/DeadEnd.png" type="Texture" id=23]
 [ext_resource path="res://HUD/MayhemScreen.tscn" type="PackedScene" id=24]
+[ext_resource path="res://PlayerSoundBank.gd" type="Script" id=25]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.560811
@@ -573,6 +574,19 @@ visible = false
 
 [node name="MayhemScreen" parent="." instance=ExtResource( 24 )]
 visible = false
+
+[node name="PlayerSoundBank" type="Spatial" parent="." groups=["PlayerSound"]]
+script = ExtResource( 25 )
+
+[node name="Player1" type="AudioStreamPlayer" parent="PlayerSoundBank"]
+
+[node name="Player2" type="AudioStreamPlayer" parent="PlayerSoundBank"]
+
+[node name="Player3" type="AudioStreamPlayer" parent="PlayerSoundBank"]
+
+[node name="RingStream" type="AudioStreamPlayer" parent="PlayerSoundBank"]
+
+[node name="WeaponStream" type="AudioStreamPlayer" parent="PlayerSoundBank"]
 
 [connection signal="close_search" from="HUD/Inventory" to="." method="_on_close_item_search"]
 [connection signal="body_entered" from="Spindash" to="." method="_on_Spindash_entered"]

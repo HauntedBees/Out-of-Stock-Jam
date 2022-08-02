@@ -15,12 +15,14 @@ export(int) var level_three_cost := 0
 export(String, MULTILINE) var level_three := ""
 
 func _onmouse_entered():
+	get_parent().hover_ping.play()
 	info_label.text = "%s (Level %s)" % [mayhem_name, PlayerInfo.get_mayhem_level(mayhem_name)]
 
 func _on_mouse_exited():
 	info_label.text = "Choose a mayhem power to upgrade"
 
 func _on_pressed():
+	get_parent().beep_ping.play()
 	var level := PlayerInfo.get_mayhem_level(mayhem_name)
 	var cost := 0
 	var text := main_text + "\n\n"
