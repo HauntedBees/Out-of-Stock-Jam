@@ -45,7 +45,7 @@ var in_inventory := false
 var search_target:Entity
 var hack_target:SecurityControl
 var equip_toggled := false
-var invicible_time := 0.0
+var invincible_time := 0.0
 
 var active_mayhem := 0.0
 var mayhem_targets := []
@@ -59,9 +59,9 @@ func _process(delta:float):
 	if PlayerInfo.paused: return
 	if PlayerInfo.return_timeout > 0.0:
 		PlayerInfo.return_timeout -= delta
-	if invicible_time > 0.0:
-		invicible_time -= delta
-		if invicible_time <= 0.0:
+	if invincible_time > 0.0:
+		invincible_time -= delta
+		if invincible_time <= 0.0:
 			ouchie.visible = false
 	toggle_water()
 	handle_safe_oxygen(delta)
@@ -397,17 +397,20 @@ func fire_projectile(p:Projectile):
 	p.apply_impulse(Vector3.ZERO, launch_direction * p.launch_force)
 
 func take_damage():
-	if PlayerInfo.paused || invicible_time > 0.0: return
+	if PlayerInfo.paused || invincible_time > 0.0: return
 	if PlayerInfo.rings == 0:
 		_game_over()
 	else:
-		invicible_time = 3.0
+		match PlayerInfo.difficulty:
+			0: invincible_time = 8.0
+			1: invincible_time = 3.0
+			2: invincible_time = 0.5
 		ouchie.visible = true
 		fuck_it_up(PlayerInfo.rings)
 		get_tree().call_group("PlayerSound", "play_sound", "Hurt")
 
 func lose_ring():
-	if PlayerInfo.paused || invicible_time > 0.0: return
+	if PlayerInfo.paused || invincible_time > 0.0: return
 	if PlayerInfo.rings == 0:
 		_game_over()
 	else:

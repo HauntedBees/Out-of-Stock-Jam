@@ -106,19 +106,28 @@ text = "Gameplay"
 align = 2
 valign = 3
 
-[node name="Label3" type="Label" parent="TabContainer/Settings/HBoxContainer/VBoxContainer"]
+[node name="Label6" type="Label" parent="TabContainer/Settings/HBoxContainer/VBoxContainer"]
 margin_top = 165.0
 margin_right = 290.0
 margin_bottom = 216.0
+theme = ExtResource( 2 )
+text = "Difficulty"
+align = 2
+valign = 3
+
+[node name="Label3" type="Label" parent="TabContainer/Settings/HBoxContainer/VBoxContainer"]
+margin_top = 220.0
+margin_right = 290.0
+margin_bottom = 271.0
 theme = ExtResource( 2 )
 text = "Music Volume"
 align = 2
 valign = 3
 
 [node name="Label4" type="Label" parent="TabContainer/Settings/HBoxContainer/VBoxContainer"]
-margin_top = 220.0
+margin_top = 275.0
 margin_right = 290.0
-margin_bottom = 271.0
+margin_bottom = 326.0
 theme = ExtResource( 2 )
 text = "Sound Volume"
 align = 2
@@ -155,19 +164,27 @@ rect_pivot_offset = Vector2( 60, 0 )
 theme = SubResource( 4 )
 disabled = true
 
-[node name="MusicVolume" type="HSlider" parent="TabContainer/Settings/HBoxContainer/VBoxContainer2"]
+[node name="Difficulty" type="ItemList" parent="TabContainer/Settings/HBoxContainer/VBoxContainer2"]
 margin_top = 165.0
 margin_right = 120.0
-margin_bottom = 216.0
+margin_bottom = 228.0
 rect_min_size = Vector2( 120, 51 )
+items = [ "Easy", null, false, "Normal", null, false, "Hard", null, false ]
+auto_height = true
+
+[node name="MusicVolume" type="HSlider" parent="TabContainer/Settings/HBoxContainer/VBoxContainer2"]
+margin_top = 232.0
+margin_right = 120.0
+margin_bottom = 264.0
+rect_min_size = Vector2( 120, 32 )
 max_value = 1.0
 step = 0.1
 
 [node name="SoundVolume" type="HSlider" parent="TabContainer/Settings/HBoxContainer/VBoxContainer2"]
-margin_top = 220.0
+margin_top = 268.0
 margin_right = 120.0
-margin_bottom = 271.0
-rect_min_size = Vector2( 120, 51 )
+margin_bottom = 328.0
+rect_min_size = Vector2( 120, 60 )
 max_value = 1.0
 step = 0.1
 
@@ -299,6 +316,8 @@ stream = ExtResource( 6 )
 [connection signal="mouse_exited" from="TabContainer/Settings/HBoxContainer/VBoxContainer2/FullScreen" to="." method="_on_control_mouse_entered"]
 [connection signal="pressed" from="TabContainer/Settings/HBoxContainer/VBoxContainer2/FullScreen" to="." method="_on_FullScreen_pressed"]
 [connection signal="mouse_entered" from="TabContainer/Settings/HBoxContainer/VBoxContainer2/Gameplay" to="." method="_on_control_mouse_entered"]
+[connection signal="item_selected" from="TabContainer/Settings/HBoxContainer/VBoxContainer2/Difficulty" to="." method="_on_Difficulty_item_selected"]
+[connection signal="mouse_entered" from="TabContainer/Settings/HBoxContainer/VBoxContainer2/Difficulty" to="." method="_on_control_mouse_entered"]
 [connection signal="mouse_entered" from="TabContainer/Settings/HBoxContainer/VBoxContainer2/MusicVolume" to="." method="_on_control_mouse_entered"]
 [connection signal="value_changed" from="TabContainer/Settings/HBoxContainer/VBoxContainer2/MusicVolume" to="." method="_on_MusicVolume_value_changed"]
 [connection signal="mouse_entered" from="TabContainer/Settings/HBoxContainer/VBoxContainer2/SoundVolume" to="." method="_on_control_mouse_entered"]

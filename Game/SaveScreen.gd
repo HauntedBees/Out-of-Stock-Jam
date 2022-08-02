@@ -102,6 +102,7 @@ func load_data(key:String):
 	PlayerInfo.play_time = float(game.get_line())
 	# Player Data
 	var player_info:Dictionary = parse_json(game.get_line())
+	PlayerInfo.difficulty = int(player_info["difficulty"]) if player_info.has("difficulty") else 1 # TODO: normal
 	PlayerInfo.chaos_energy = int(player_info["chaos_energy"])
 	PlayerInfo.max_chaos_energy = int(player_info["max_chaos_energy"])
 	PlayerInfo.emerald_shards = int(player_info["emerald_shards"])
@@ -167,6 +168,7 @@ func _save_game_data(game:File):
 		"is_crouched": player.is_crouched,
 		"position": pspat.global_transform.origin,
 		"rotation": Vector2(player.vision.rotation_degrees.x, player.rotation_degrees.y),
+		"difficulty": PlayerInfo.difficulty,
 		"mouse_sensitivity": PlayerInfo.mouse_sensitivity,
 		"chaos_energy": PlayerInfo.chaos_energy,
 		"max_chaos_energy": PlayerInfo.max_chaos_energy,

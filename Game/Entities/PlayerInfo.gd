@@ -9,6 +9,7 @@ const INV_HEIGHT := 3
 var UNARMED := Item.new("Unarmed", "", Vector2(0, 0), Vector2(0, 0), {"uses_ammo": false})
 
 # Saved Details
+var difficulty := 1
 var music_volume := 1.0
 var sound_volume := 1.0
 var borderless_window := false

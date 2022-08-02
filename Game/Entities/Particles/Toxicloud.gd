@@ -30,10 +30,13 @@ func _process(delta:float):
 	if has_player:
 		hurt_timer -= delta
 		if hurt_timer <= 0.0:
-			hurt_timer = 1.0
+			match PlayerInfo.difficulty:
+				0: hurt_timer = 5.0
+				1: hurt_timer = 1.0
+				2: hurt_timer = 0.25
 			player.lose_ring()
 	time_remaining -= delta
-	if time_remaining <= 0.0:
+	if time_remaining <= 0.0 && !tween.is_active():
 		_fade()
 func _on_animation_finished(_anim_name:String):
 	queue_free()
@@ -41,14 +44,12 @@ func _on_animation_finished(_anim_name:String):
 func _physics_process(delta:float):
 	if tween.is_active(): return
 	var dist := player.global_transform.origin - global_transform.origin
-	var move_dir := direction
 	if dist.length() <= 10.0:
-		move_dir = dist.normalized()
-	transform.origin += move_dir * speed * delta
+		direction = dist.normalized()
+	transform.origin += direction * speed * delta
 
 func _on_Toxicloud_body_entered(body:Node):
 	if body is StaticBody:
-		print("woosh")
 		direction = Vector3.ZERO
 		_fade()
 		return
@@ -59,6 +60,6 @@ func _on_Toxicloud_body_entered(body:Node):
 
 func _on_Toxicloud_body_exited(body:Node):
 	if body != player: return
-	if player.invicible_time <= 0.0:
+	if player.invincible_time <= 0.0:
 		player.ouchie.visible = false
 	has_player = false

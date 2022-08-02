@@ -10,6 +10,7 @@ onready var borderless:CheckButton = $TabContainer/Settings/HBoxContainer/VBoxCo
 onready var full_screen:CheckButton = $TabContainer/Settings/HBoxContainer/VBoxContainer2/FullScreen
 onready var music_volume:HSlider = $TabContainer/Settings/HBoxContainer/VBoxContainer2/MusicVolume
 onready var sound_volume:HSlider = $TabContainer/Settings/HBoxContainer/VBoxContainer2/SoundVolume
+onready var difficulty:ItemList = $TabContainer/Settings/HBoxContainer/VBoxContainer2/Difficulty
 
 onready var col1:VBoxContainer = $TabContainer/Controls/HBoxContainer/Controls0
 onready var col2:VBoxContainer = $TabContainer/Controls/HBoxContainer/Controls1
@@ -44,6 +45,7 @@ func _ready():
 	full_screen.pressed = PlayerInfo.full_screen
 	music_volume.value = PlayerInfo.music_volume
 	sound_volume.value = PlayerInfo.sound_volume
+	difficulty.select(PlayerInfo.difficulty)
 	
 	confirm.get_child(1).align = HALIGN_CENTER
 	confirm.get_child(0).focus_mode = 0
@@ -167,3 +169,6 @@ func _on_FullScreen_pressed():
 	PlayerInfo.set_full_screen(full_screen.pressed)
 func _on_SoundVolume_value_changed(value:float): PlayerInfo.set_sound_volume(value)
 func _on_MusicVolume_value_changed(value:float): PlayerInfo.set_music_volume(value)
+func _on_Difficulty_item_selected(index:int):
+	beep_ping.play()
+	PlayerInfo.difficulty = index
