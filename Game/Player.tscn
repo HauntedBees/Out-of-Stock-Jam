@@ -159,6 +159,7 @@ height = 5.0
 extents = Vector3( 0.478443, 1, 0.221113 )
 
 [node name="Player" type="KinematicBody" groups=["player"]]
+collision_layer = 257
 script = ExtResource( 1 )
 
 [node name="Buttock" type="CollisionShape" parent="."]

@@ -77,8 +77,10 @@ func take_hit(direction:Vector3, force:float, damage:float):
 		is_dead = true
 		_die()
 	else: 
+		_custom_hit()
 		_hit_animation()
 
+func _custom_hit(): return
 func _hit_animation(): return
 func _die(): return
 

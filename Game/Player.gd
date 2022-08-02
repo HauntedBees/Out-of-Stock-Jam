@@ -99,6 +99,7 @@ func _water_submerge():
 		3: safe_oxygen_level = 60.0
 	if PlayerInfo.difficulty == 0:
 		safe_oxygen_level *= 2.0
+	safe_oxygen_level = 12.0
 
 func _water_exit():
 	needs_safe_oxygen = false
@@ -454,7 +455,7 @@ func fuck_it_up(rings_to_lose:int):
 		var ring:Spatial = RING_SCENE.instance()
 		ring.delay_timeout = 0.4
 		ring.launch_on_start = true
-		ring.global_transform.origin = global_transform.origin + Vector3(0, 0.5, 0)
 		get_parent().add_child(ring)
+		ring.global_transform.origin = global_transform.origin + Vector3(0, 0.5, 0)
 	yield(get_tree(), "idle_frame")
 	fuck_it_up(rings_to_lose - amount)

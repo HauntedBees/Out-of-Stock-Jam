@@ -17,6 +17,7 @@ LeaveWater | https://freesound.org/people/Sheyvan/sounds/470084/
 Switch | https://freesound.org/people/ArrowheadProductions/sounds/566176/
 Poof | https://freesound.org/people/Worldmaxter/sounds/471204/
 Pop | https://freesound.org/people/shyguy014/sounds/458533/
+Metal | https://freesound.org/people/MisterTood/sounds/9026/
 
 Menu Sounds:
 Beep | https://freesound.org/people/noirenex/sounds/245242/

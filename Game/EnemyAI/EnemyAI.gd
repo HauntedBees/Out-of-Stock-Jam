@@ -2,6 +2,7 @@ class_name EnemyAI
 extends Node
 
 onready var e := get_parent()
+onready var extra_timer := Timer.new()
 onready var mind := Timer.new()
 onready var player:Spatial = e.get_parent().find_node("Player")
 onready var nav:Navigation = e.get_parent()
@@ -9,12 +10,17 @@ onready var nav:Navigation = e.get_parent()
 var path := []
 var path_node := 0
 
+func is_hit(): return
+
+func _custom_ready(): return
 func _ready():
 	add_child(mind)
+	add_child(extra_timer)
 	mind.autostart = true
 	mind.one_shot = false
 	mind.start()
 	mind.connect("timeout", self, "_on_mind_timeout")
+	_custom_ready()
 
 func _custom_mind_timeout(): return
 func _on_mind_timeout():
@@ -40,6 +46,16 @@ func _look_at_target(t:Vector3):
 	e.rotation.x = 0
 	e.rotation.z = 0
 	e._set_animation(true)
+
+func _distance_to_player() -> float: return (player.global_transform.origin - e.global_transform.origin).length()
+func _direction_to_player() -> Vector3: return (player.global_transform.origin - e.global_transform.origin).normalized()
+
+func _can_see_player(max_distance:float, from:Vector3) -> bool:
+	var direction:Vector3 = (player.global_transform.origin - e.global_transform.origin).normalized()
+	var to := from + max_distance * direction
+	var res := get_viewport().world.direct_space_state.intersect_ray(from, to)
+	if !res.has("collider"): return false
+	return res["collider"] == player
 
 func _set_target(t:Vector3, face_target := false):
 	if face_target: _look_at_target(t)

@@ -20,7 +20,9 @@ onready var dead:Texture = load("res://Textures/Entities/%s.png" % ("corpse" if 
 onready var timer:Timer = $Timer
 onready var label:Label = $Viewport/Label
 onready var die_sound:AudioStreamPlayer3D = $PopStream
+onready var misc_sound:AudioStreamPlayer3D = $MiscStream
 
+var my_ai:EnemyAI = null
 var last_h_angle := 0.0
 var hit_anim := false
 
@@ -41,7 +43,8 @@ func as_dict() -> Dictionary:
 
 func _ready():
 	if enemy_ai != null:
-		add_child(enemy_ai.new())
+		my_ai = enemy_ai.new()
+		add_child(my_ai)
 	main_mesh = $EnemyModel
 	name_mesh = $Name
 	material = main_mesh.get_active_material(0).duplicate()
@@ -53,6 +56,10 @@ func _process(_delta:float):
 	if PlayerInfo.paused || hit_anim || is_dead: return
 	_set_animation()
 
+func _custom_hit():
+	if my_ai == null: return
+	my_ai.is_hit()
+
 # avencherus you are my hero I spent 3 hours trying to remember trigonometry and you saved my life
 # https://godotengine.org/qa/27625/equivalent-of-gamemakerss-function-angle_difference?show=27631#a27631
 func _angle_to_angle(from:float, to:float) -> float: return fposmod(to - from + PI, PI * 2) - PI
@@ -60,7 +67,10 @@ func _vector3_to_vector2(v3:Vector3) -> Vector2: return Vector2(v3.x, v3.z).norm
 
 # front = 1/2, right = 1, back = -1/2, left = 0
 func _set_animation(forced := false):
-	if is_dead || all_facing: return
+	if is_dead: return
+	if all_facing:
+		material.albedo_texture = only_texture
+		return
 	var camera:Camera = get_viewport().get_camera()
 	
 	var forward := Vector2(0, 1)
@@ -114,6 +124,8 @@ func refresh_label():
 	if amount == 0: label.text = title
 	else: label.text = "%s (%s)" % [title, amount]
 
+func _on_PopStream_finished(): die_sound.queue_free()
 
-func _on_PopStream_finished():
-	die_sound.queue_free()
+func play_misc_sound(s:AudioStream):
+	misc_sound.stream = s
+	misc_sound.play()
