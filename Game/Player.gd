@@ -9,6 +9,8 @@ const JUMP_SPEED := 12.0
 const ACCELERATION := 4.5
 const DECELERATION := 16.0
 
+onready var drown:Control = $HUD/DrownCountdown
+onready var panic:AudioStreamPlayer = $PlayerSoundBank/PanicAtTheShitshow
 onready var full_hud:Control = $HUD
 onready var game_over:Control = $Dead
 onready var game_over_timer:Timer = $Dead/Timer
@@ -70,20 +72,38 @@ func handle_safe_oxygen(delta:float):
 	if !needs_safe_oxygen: return
 	var old_safe_oxygen := safe_oxygen_level
 	safe_oxygen_level -= delta
-	if old_safe_oxygen >= 10 && safe_oxygen_level < 10:
-		print("TEN SECONDS LEFT")
-		# TODO: handle death and dying and whatnot
+	if old_safe_oxygen >= 10.0 && safe_oxygen_level < 10.0:
+		panic.play()
+		drown.start_timer()
+	elif safe_oxygen_level <= 0.0:
+		_game_over()
 
 func toggle_water():
 	if in_water:
 		if head.global_transform.origin.y <= water_y:
 			if !water_overlay.visible:
+				_water_submerge()
 				get_tree().call_group("PlayerSound", "play_sound", "EnterWater")
 			water_overlay.visible = true
 			return
 	if water_overlay.visible:
+		_water_exit()
 		get_tree().call_group("PlayerSound", "play_sound", "LeaveWater")
 	water_overlay.visible = false
+
+func _water_submerge():
+	needs_safe_oxygen = true
+	match PlayerInfo.get_mayhem_level("Swim"):
+		0, 1: safe_oxygen_level = 20.0
+		2: safe_oxygen_level = 30.0
+		3: safe_oxygen_level = 60.0
+	if PlayerInfo.difficulty == 0:
+		safe_oxygen_level *= 2.0
+
+func _water_exit():
+	needs_safe_oxygen = false
+	drown.visible = false
+	panic.stop()
 
 func _physics_process(delta:float):
 	if PlayerInfo.paused || in_terminal || PlayerInfo.in_cutscene: return
@@ -143,11 +163,6 @@ func get_in_water(water_depth:float):
 		_handle_crouch(false)
 	water_y = water_depth
 	in_water = true
-	needs_safe_oxygen = true
-	match PlayerInfo.get_mayhem_level("Swim"):
-		0, 1: safe_oxygen_level = 20.0
-		2: safe_oxygen_level = 30.0
-		3: safe_oxygen_level = 60.0
 
 func _handle_movement_input():
 	var movement := Vector2()

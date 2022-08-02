@@ -11,4 +11,3 @@ func _on_body_exited(body:Node):
 	if !(body is Player): return
 	var player:Player = body
 	player.in_water = false
-	player.needs_safe_oxygen = false

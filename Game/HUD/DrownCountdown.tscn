@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://HUD/ThemeBig.tres" type="Theme" id=1]
+[ext_resource path="res://HUD/DrownCountdown.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Panic Shit"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Color( 0.827451, 0.384314, 1, 0.388235 ), Color( 0.827451, 0.384314, 1, 0 ), Color( 0.827451, 0.384314, 1, 0.388235 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.827451, 0.384314, 1, 0.388235 ) ]
+}
+
+[node name="DrownCountdown" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+modulate = Color( 0.827451, 0.384314, 1, 0.388235 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -30.0
+margin_top = -60.0
+margin_right = 30.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 120 )
+rect_scale = Vector2( 10, 5 )
+rect_pivot_offset = Vector2( 30, 60 )
+theme = ExtResource( 1 )
+text = "10"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Panic Shit"
+"anims/Panic Shit" = SubResource( 1 )
+anims/RESET = SubResource( 2 )

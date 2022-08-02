@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Textures/Weapons/Hammer.png" type="Texture" id=2]
@@ -25,6 +25,8 @@
 [ext_resource path="res://Textures/HUD/DeadEnd.png" type="Texture" id=23]
 [ext_resource path="res://HUD/MayhemScreen.tscn" type="PackedScene" id=24]
 [ext_resource path="res://PlayerSoundBank.gd" type="Script" id=25]
+[ext_resource path="res://Assets/Music/Panic.ogg" type="AudioStream" id=26]
+[ext_resource path="res://HUD/DrownCountdown.tscn" type="PackedScene" id=27]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.560811
@@ -448,6 +450,9 @@ autoplay = "Ouchie"
 anims/Ouchie = SubResource( 10 )
 anims/RESET = SubResource( 11 )
 
+[node name="DrownCountdown" parent="HUD" instance=ExtResource( 27 )]
+visible = false
+
 [node name="Dead" type="Control" parent="."]
 visible = false
 anchor_right = 1.0
@@ -587,6 +592,10 @@ script = ExtResource( 25 )
 [node name="RingStream" type="AudioStreamPlayer" parent="PlayerSoundBank"]
 
 [node name="WeaponStream" type="AudioStreamPlayer" parent="PlayerSoundBank"]
+
+[node name="PanicAtTheShitshow" type="AudioStreamPlayer" parent="PlayerSoundBank"]
+stream = ExtResource( 26 )
+bus = "Music"
 
 [connection signal="close_search" from="HUD/Inventory" to="." method="_on_close_item_search"]
 [connection signal="body_entered" from="Spindash" to="." method="_on_Spindash_entered"]
