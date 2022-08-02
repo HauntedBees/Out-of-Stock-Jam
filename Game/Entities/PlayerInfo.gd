@@ -9,6 +9,10 @@ const INV_HEIGHT := 3
 var UNARMED := Item.new("Unarmed", "", Vector2(0, 0), Vector2(0, 0), {"uses_ammo": false})
 
 # Saved Details
+var music_volume := 1.0
+var sound_volume := 1.0
+var borderless_window := false
+var full_screen := false
 var play_time := 0.0
 var rings := 20 # 0
 var chaos_energy := 10
@@ -54,6 +58,57 @@ var paused := false
 var time_frozen := false
 var invisible := false
 var return_timeout := 0.0
+
+func _ready(): _read_global_config()
+
+func _read_global_config():
+	var game := File.new()
+	if !game.file_exists("user://global.config"): return
+	game.open("user://global.config", File.READ)
+	set_borderless(game.get_line() == "True")
+	set_full_screen(game.get_line() == "True")
+	set_sound_volume(float(game.get_line()))
+	set_music_volume(float(game.get_line()))
+	game.close()
+
+func save_global_config():
+	var game := File.new()
+	game.open("user://global.config", File.WRITE)
+	game.store_line("%s\n%s\n%s\n%s" % [borderless_window, full_screen, sound_volume, music_volume])
+	game.close()
+
+func set_borderless(val:bool):
+	borderless_window = val
+	OS.set_borderless_window(val)
+
+func set_full_screen(val:bool):
+	full_screen = val
+	OS.set_window_fullscreen(val)
+
+func set_sound_volume(val:float):
+	sound_volume = val
+	var db_val := _approximate_decimal_to_decibel(val)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), db_val)
+	
+func set_music_volume(val:float):
+	music_volume = val
+	var db_val := _approximate_decimal_to_decibel(val)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), db_val)
+
+func _approximate_decimal_to_decibel(d:float) -> float:
+	match d:
+		1.0: return 0.0
+		0.9: return -1.0
+		0.8: return -2.0
+		0.7: return -3.0
+		0.6: return -4.4
+		0.5: return -6.0
+		0.4: return -8.0
+		0.3: return -10.5
+		0.2: return -14.0
+		0.1: return -20.0
+		0.0: return -80.0
+	return 0.0
 
 func inventory_as_dicts() -> Array:
 	var res := []

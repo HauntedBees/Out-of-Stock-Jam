@@ -6,6 +6,11 @@ var button_theme:Theme = load("res://HUD/Button.tres")
 onready var beep_ping:AudioStreamPlayer = $BeepSound
 onready var hover_ping:AudioStreamPlayer = $HoverSound
 
+onready var borderless:CheckButton = $TabContainer/Settings/HBoxContainer/VBoxContainer2/BorderlessWindow
+onready var full_screen:CheckButton = $TabContainer/Settings/HBoxContainer/VBoxContainer2/FullScreen
+onready var music_volume:HSlider = $TabContainer/Settings/HBoxContainer/VBoxContainer2/MusicVolume
+onready var sound_volume:HSlider = $TabContainer/Settings/HBoxContainer/VBoxContainer2/SoundVolume
+
 onready var col1:VBoxContainer = $TabContainer/Controls/HBoxContainer/Controls0
 onready var col2:VBoxContainer = $TabContainer/Controls/HBoxContainer/Controls1
 onready var col3:VBoxContainer = $TabContainer/Controls/HBoxContainer/Controls2
@@ -35,6 +40,11 @@ func _change_control(button:Button, display_name:String, action:String):
 	in_popup = true
 
 func _ready():
+	borderless.pressed = PlayerInfo.borderless_window
+	full_screen.pressed = PlayerInfo.full_screen
+	music_volume.value = PlayerInfo.music_volume
+	sound_volume.value = PlayerInfo.sound_volume
+	
 	confirm.get_child(1).align = HALIGN_CENTER
 	confirm.get_child(0).focus_mode = 0
 	var hbox:HBoxContainer = confirm.get_child(2)
@@ -138,6 +148,7 @@ func _on_ConfirmationDialog_popup_hide():
 
 func _on_BackButton_pressed():
 	beep_ping.play()
+	PlayerInfo.save_global_config()
 	visible = false
 
 func _on_ToggleEquip_toggled(button_pressed:bool): PlayerInfo.equip_toggle = button_pressed
@@ -147,3 +158,12 @@ func _on_MouseSensitivity_value_changed(value:float): PlayerInfo.mouse_sensitivi
 
 func _on_control_mouse_entered(): hover_ping.play()
 func _on_tab_changed(_tab:int): beep_ping.play()
+
+func _on_BorderlessWindow_pressed():
+	beep_ping.play()
+	PlayerInfo.set_borderless(borderless.pressed)
+func _on_FullScreen_pressed():
+	beep_ping.play()
+	PlayerInfo.set_full_screen(full_screen.pressed)
+func _on_SoundVolume_value_changed(value:float): PlayerInfo.set_sound_volume(value)
+func _on_MusicVolume_value_changed(value:float): PlayerInfo.set_music_volume(value)
