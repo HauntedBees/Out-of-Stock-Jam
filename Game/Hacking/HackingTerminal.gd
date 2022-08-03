@@ -34,8 +34,12 @@ func open(level_requirement:int, access_granted:bool):
 		access_status.text = "Access: Granted"
 		hacking_game.modulate.a = 0.25
 	else:
-		hacking_game.set_access(PlayerInfo.get_mayhem_level("Hacking") >= level_requirement)
-		access_status.text = "Access: Denied"
+		var can_access := PlayerInfo.get_mayhem_level("Hacking") >= level_requirement
+		hacking_game.set_access(can_access)
+		if can_access:
+			access_status.text = "Access: Denied"
+		else:
+			access_status.text = "Hacking Level %s Needed" % level_requirement
 		hacking_game.modulate.a = 1.0
 		
 func _on_successful_hack():

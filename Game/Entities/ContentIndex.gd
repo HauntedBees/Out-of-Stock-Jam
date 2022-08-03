@@ -121,6 +121,10 @@ var items := {
 		get_item("Pistol Ammo", Vector2(1, 0), 2),
 		get_item("Onion", Vector2(2, 1), 1),
 	],
+	"pistol": [
+		get_item("Pistol", Vector2(0, 0), 1),
+		get_item("Pistol Ammo", Vector2(2, 1), 2),
+	],
 	"rings_10": [10],
 	"mayhem_full": [1000],
 	"inv_rings10": [get_item("Rings", Vector2.ZERO, 10)],

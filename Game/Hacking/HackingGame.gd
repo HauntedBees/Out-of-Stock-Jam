@@ -140,6 +140,14 @@ const LEVELS := [
 			"xBBBB"
 		]
 	],
-	[], # level two
+	[
+		[
+			"xxxxx",
+			"xRRRB",
+			"xRBBB",
+			"xRBBB",
+			"xBBBB"
+		]
+	], # level two
 	[] # level three
 ]
