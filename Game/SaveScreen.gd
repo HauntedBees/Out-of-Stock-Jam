@@ -102,7 +102,7 @@ func load_data(key:String):
 	PlayerInfo.play_time = float(game.get_line())
 	# Player Data
 	var player_info:Dictionary = parse_json(game.get_line())
-	PlayerInfo.difficulty = int(player_info["difficulty"]) if player_info.has("difficulty") else 1 # TODO: normal
+	PlayerInfo.difficulty = int(player_info["difficulty"])
 	PlayerInfo.chaos_energy = int(player_info["chaos_energy"])
 	PlayerInfo.max_chaos_energy = int(player_info["max_chaos_energy"])
 	PlayerInfo.emerald_shards = int(player_info["emerald_shards"])
@@ -114,6 +114,8 @@ func load_data(key:String):
 	PlayerInfo.crouch_toggle = player_info["crouch_toggle"]
 	PlayerInfo.mouse_sensitivity = player_info["mouse_sensitivity"]
 	PlayerInfo.equip_toggle = player_info["equip_toggle"]
+	GASConfig.input_cooldown_enabled = player_info["input_cooldown_enabled"]
+	GASConfig.input_cooldown_length = player_info["input_cooldown_length"]
 	GASInput.restore_actions_from_dictionary(player_info["controls"])
 	# Map Data
 	var map_datas:Dictionary = {}
@@ -180,7 +182,9 @@ func _save_game_data(game:File):
 		"inv_drag_to_move": PlayerInfo.inv_drag_to_move,
 		"crouch_toggle": PlayerInfo.crouch_toggle,
 		"equip_toggle": PlayerInfo.equip_toggle,
-		"controls": GASInput.get_actions_as_dictionary()
+		"controls": GASInput.get_actions_as_dictionary(),
+		"input_cooldown_enabled": GASConfig.input_cooldown_enabled,
+		"input_cooldown_length": GASConfig.input_cooldown_length
 	}
 	game.store_line(to_json(player_info))
 	# Save Non-Current Map Data

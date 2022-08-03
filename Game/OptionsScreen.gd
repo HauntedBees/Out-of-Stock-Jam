@@ -24,6 +24,7 @@ onready var toggle_equip:CheckButton = $TabContainer/Controls/HBoxContainer/Cont
 onready var toggle_crouch:CheckButton = $TabContainer/Controls/HBoxContainer/Controls5/ToggleCrouch
 onready var toggle_drag:CheckButton = $TabContainer/Controls/HBoxContainer/Controls5/ToggleDrag
 onready var mouse_sens:SpinBox = $TabContainer/Controls/HBoxContainer/Controls5/MouseSensitivity
+onready var input_cooldown:HSlider = $TabContainer/Controls/HBoxContainer/Controls5/InputCooldown
 
 var in_popup := false
 var target_button:Button
@@ -81,10 +82,12 @@ func _ready():
 	_add_control(col5, null, "Press Toggle Crouch", "")
 	_add_control(col5, null, "Drag Move Items", "")
 	_add_control(col5, null, "Mouse Sensitivity", "")
+	_add_control(col5, null, "Input Cooldown", "")
 	toggle_equip.pressed = PlayerInfo.equip_toggle
 	toggle_crouch.pressed = PlayerInfo.crouch_toggle
 	toggle_drag.pressed = PlayerInfo.inv_drag_to_move
 	mouse_sens.value = PlayerInfo.mouse_sensitivity
+	input_cooldown.value = GASConfig.input_cooldown_length
 
 func _add_control(label_column:VBoxContainer, button_column:VBoxContainer, display_name:String, action_name:String, tooltip:String = ""):
 	var l := Label.new()
@@ -172,3 +175,6 @@ func _on_MusicVolume_value_changed(value:float): PlayerInfo.set_music_volume(val
 func _on_Difficulty_item_selected(index:int):
 	beep_ping.play()
 	PlayerInfo.difficulty = index
+func _on_InputCooldown_value_changed(value:float):
+	GASConfig.input_cooldown_length = value
+	GASConfig.input_cooldown_enabled = value > 0.0

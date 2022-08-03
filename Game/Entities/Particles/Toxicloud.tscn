@@ -15,6 +15,7 @@ albedo_color = Color( 1, 1, 1, 0.247059 )
 albedo_texture = ExtResource( 1 )
 
 [sub_resource type="SphereShape" id=3]
+radius = 0.630938
 
 [node name="Toxicloud" type="Area"]
 collision_layer = 4

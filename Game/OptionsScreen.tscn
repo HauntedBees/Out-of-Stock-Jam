@@ -55,6 +55,7 @@ __meta__ = {
 }
 
 [node name="Settings" type="Control" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -189,7 +190,6 @@ max_value = 1.0
 step = 0.1
 
 [node name="Controls" type="Control" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -274,6 +274,16 @@ step = 0.05
 value = 0.05
 align = 1
 
+[node name="InputCooldown" type="HSlider" parent="TabContainer/Controls/HBoxContainer/Controls5"]
+margin_top = 256.0
+margin_right = 158.0
+margin_bottom = 316.0
+rect_min_size = Vector2( 100, 60 )
+hint_tooltip = "Blocks accidental repeat inputs for up to half a second."
+theme = ExtResource( 4 )
+max_value = 0.5
+step = 0.05
+
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="TabContainer/Controls"]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -329,6 +339,8 @@ stream = ExtResource( 6 )
 [connection signal="toggled" from="TabContainer/Controls/HBoxContainer/Controls5/ToggleDrag" to="." method="_on_ToggleDrag_toggled"]
 [connection signal="mouse_entered" from="TabContainer/Controls/HBoxContainer/Controls5/MouseSensitivity" to="." method="_on_control_mouse_entered"]
 [connection signal="value_changed" from="TabContainer/Controls/HBoxContainer/Controls5/MouseSensitivity" to="." method="_on_MouseSensitivity_value_changed"]
+[connection signal="mouse_entered" from="TabContainer/Controls/HBoxContainer/Controls5/InputCooldown" to="." method="_on_control_mouse_entered"]
+[connection signal="value_changed" from="TabContainer/Controls/HBoxContainer/Controls5/InputCooldown" to="." method="_on_InputCooldown_value_changed"]
 [connection signal="confirmed" from="TabContainer/Controls/ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]
 [connection signal="popup_hide" from="TabContainer/Controls/ConfirmationDialog" to="." method="_on_ConfirmationDialog_popup_hide"]
 [connection signal="mouse_entered" from="BackButton" to="." method="_on_control_mouse_entered"]
