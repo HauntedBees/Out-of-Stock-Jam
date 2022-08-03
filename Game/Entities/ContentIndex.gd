@@ -133,6 +133,7 @@ var items := {
 	],
 	"rings_10": [10],
 	"mayhem_full": [1000],
+	"yog": [get_item("Yoggy", Vector2(2, 1), 1)],
 	"inv_rings10": [get_item("Rings", Vector2.ZERO, 10)],
 	"inv_rings20": [get_item("Rings", Vector2.ZERO, 20)],
 	"shard": [get_item("Mayhem Shards", Vector2(1, 1), 1)],

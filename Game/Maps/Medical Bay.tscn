@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Assets/Map_Medical.glb" type="PackedScene" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -47,6 +47,24 @@ albedo_texture = ExtResource( 27 )
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0.009552, 0.677676, -0.0428543, 0, 0, 0, 0, 0, 0, 22.1027, 0.610112, 0.0247116, 0, 0, 0, 0, 0, 0, 22.1027, 7.70426, 0.0247116, 0, 0, 0, 0, 0, 0, 4.3336, 7.83938, 0.0247116 ),
 "tilts": PoolRealArray( 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=9]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 16.6084, 0, 52.1552, 0, 0, 0, 0, 0, 0, 16.6084, 0, 31.3959, 0, 0, 0, 0, 0, 0, 29.2216, 0, 30.8703, 0, 0, 0, 0, 0, 0, 28.9589, 0, -3.29062 ),
+"tilts": PoolRealArray( 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=10]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 20.4183, 3.03984e-06, 35.8631, 0, 0, 0, 0, 0, 0, 19.8928, 3.03984e-06, 52.418, 0, 0, 0, 0, 0, 0, 28.433, 3.03984e-06, 52.418, 0, 0, 0, 0, 0, 0, 28.1702, 3.03984e-06, 43.3522, 0, 0, 0, 0, 0, 0, 41.5718, 3.03984e-06, 42.5639, 0, 0, 0, 0, 0, 0, 41.4404, 3.03984e-06, 38.0967, 0, 0, 0, 0, 0, 0, 28.9586, 3.03984e-06, 37.8339, 0, 0, 0, 0, 0, 0, 28.1702, 3.03984e-06, 31.9214, 0, 0, 0, 0, 0, 0, 44.5938, 3.03984e-06, 32.3156, 0, 0, 0, 0, 0, 0, 44.7251, 3.03984e-06, 45.323, 0, 0, 0, 0, 0, 0, 42.6229, 3.03984e-06, 45.5858, 0, 0, 0, 0, 0, 0, 42.2288, 3.03984e-06, 49.9216, 0, 0, 0, 0, 0, 0, 29.8783, 3.03984e-06, 49.6588 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=8]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0.0359201, 0, -0.111132, 0, 0, 0, 0, 0, 0, -0.177035, 0, -15.9408, 0, 0, 0, 0, 0, 0, -7.34652, 0, -16.1537, 0, 0, 0, 0, 0, 0, -7.27467, 0, -50.0666, 0, 0, 0, 0, 0, 0, -3.64939, 0, -69.5175, 0, 0, 0, 0, 0, 0, 20.1306, 0, -69.6594 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
 }
 
 [sub_resource type="CubeMesh" id=3]
@@ -592,10 +610,10 @@ flicker_chance = 0.0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9639, 0, -20.9422 )
 
 [node name="RingBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 23 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 55.1685, 0, 20.4376 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.6006, 0, -38.1499 )
 
 [node name="MayhemBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 56.0584, 0, 25.4203 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2395, 0, -40.6731 )
 display_name = ""
 
 [node name="ServerRoom" type="Spatial" parent="Navigation/NavigationMeshInstance"]
@@ -858,14 +876,167 @@ collider_y_scale = 1.5
 y_scale = 3.0
 x_scale = 2.0
 
+[node name="Waiting Room" type="Spatial" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.9418, 0, -27.7229 )
+
+[node name="WaitingChair" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.85856, -0.25, -4.83137 )
+type = "Chair"
+mesh_scale = Vector2( 1, 1.5 )
+
+[node name="WaitingChair2" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.85856, -0.25, -1.67805 )
+type = "Chair"
+mesh_scale = Vector2( 1, 1.5 )
+
+[node name="WaitingChair3" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.85856, -0.25, 1.47526 )
+type = "Chair"
+mesh_scale = Vector2( 1, 1.5 )
+
+[node name="WaitingChair4" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.94609, -0.25, -4.83137 )
+type = "Chair"
+mesh_scale = Vector2( 1, 1.5 )
+
+[node name="WaitingChair5" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.94609, -0.25, -1.67805 )
+type = "Chair"
+mesh_scale = Vector2( 1, 1.5 )
+
+[node name="WaitingChair6" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.94609, -0.25, 1.47526 )
+type = "Chair"
+mesh_scale = Vector2( 1, 1.5 )
+
+[node name="WaitingChair7" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0394, -0.25, -4.83137 )
+type = "Chair"
+mesh_scale = Vector2( 1, 1.5 )
+
+[node name="WaitingChair8" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0394, -0.25, -1.67805 )
+type = "Chair"
+mesh_scale = Vector2( 1, 1.5 )
+
+[node name="WaitingChair9" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0394, -0.25, 1.47526 )
+type = "Chair"
+mesh_scale = Vector2( 1, 1.5 )
+
+[node name="WaitingChair10" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0394, -0.25, 4.75996 )
+type = "Chair"
+mesh_scale = Vector2( 1, 1.5 )
+
+[node name="WaitingDesk" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8843, 1.40107, 5.54523 )
+type = "Desk"
+health = 500.0
+force_multiplier = 0.0
+content_name = "inv_rings20"
+collider_y_scale = 1.5
+y_scale = 3.0
+x_scale = 2.0
+
+[node name="WaitingSkel" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.322, 0.25, 5.322 )
+type = "Pile"
+health = 15.0
+content_name = "yog"
+display_name = "Corpse"
+collider_y_scale = 0.25
+y_scale = 0.25
+
+[node name="CeilingLamp7" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 5 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 5.90171, 14.5062, -0.289721 )
+flicker_chance = 0.0
+
+[node name="CeilingLamp8" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 5 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.67071, 14.5062, -0.289721 )
+flicker_chance = 0.0
+
+[node name="CeilingLamp9" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 5 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.899031, 14.5062, -0.289721 )
+flicker_chance = 0.0
+
+[node name="CeilingLamp10" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 5 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -4.13003, 14.5062, -0.289721 )
+flicker_chance = 0.0
+
+[node name="CeilingLamp15" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 5 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 27.0552, 14.5062, -11.4577 )
+flicker_chance = 0.0
+
+[node name="CeilingLamp16" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 5 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 23.8242, 14.5062, -11.4577 )
+flicker_chance = 0.0
+
+[node name="CeilingLamp17" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 5 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 20.2544, 14.5062, -11.4577 )
+flicker_chance = 0.0
+
+[node name="CeilingLamp18" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 5 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 17.0234, 14.5062, -11.4577 )
+flicker_chance = 0.0
+
+[node name="CeilingLamp11" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 5 )]
+transform = Transform( 7.54979e-08, 0, 1, 0, 1, 0, -1, 0, 7.54979e-08, 3.78373, 14.5062, 25.9221 )
+flicker_chance = 0.0
+
+[node name="CeilingLamp12" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 5 )]
+transform = Transform( 7.54979e-08, 0, 1, 0, 1, 0, -1, 0, 7.54979e-08, 3.78373, 14.5062, 22.6911 )
+flicker_chance = 0.0
+
+[node name="CeilingLamp13" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 5 )]
+transform = Transform( 7.54979e-08, 0, 1, 0, 1, 0, -1, 0, 7.54979e-08, 3.78373, 14.5062, 19.1214 )
+flicker_chance = 0.0
+
+[node name="CeilingLamp14" parent="Navigation/NavigationMeshInstance/Waiting Room" instance=ExtResource( 5 )]
+transform = Transform( 7.54979e-08, 0, 1, 0, 1, 0, -1, 0, 7.54979e-08, 3.78373, 14.5062, 15.8904 )
+flicker_chance = 0.0
+
 [node name="Player" parent="Navigation" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.9612, 0.459739, 20.4796 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.8517, 0.459739, -27.3456 )
+
+[node name="WaitingMole" parent="Navigation" instance=ExtResource( 4 )]
+transform = Transform( 0.2896, 0, 0.957148, 0, 1, 0, -0.957148, 0, 0.2896, -19.3991, 1.2, -31.4475 )
+type = "Moleborg"
+force_multiplier = 0.0
+content_name = "mole"
+enemy_ai = ExtResource( 21 )
+is_human = false
+speed = 0.0
+all_facing = true
 
 [node name="RingPath" type="Path" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8233, 0, -16.553 )
 curve = SubResource( 2 )
 script = ExtResource( 7 )
 distance = 3.0
+
+[node name="RingPath3" type="Path" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.823, 0.8, -16.553 )
+curve = SubResource( 9 )
+script = ExtResource( 7 )
+distance = 3.0
+
+[node name="RingPath4" type="Path" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.823, 0.8, -16.553 )
+script = ExtResource( 7 )
+distance = 3.0
+
+[node name="RingPath5" type="Path" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.823, 0.8, -16.553 )
+curve = SubResource( 10 )
+script = ExtResource( 7 )
+distance = 3.0
+
+[node name="RingPath2" type="Path" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.864, 0.8, 30.286 )
+curve = SubResource( 8 )
+script = ExtResource( 7 )
+distance = 4.0
 
 [node name="OpeningCutscene" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.7297, 1.09108, 30.2202 )
@@ -994,10 +1165,13 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 16.2671
 text = "Server Room"
 
 [node name="Trap" parent="." instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54.666, 0, 14.3 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.33853, 0, -29.0673 )
+
+[node name="Trap2" parent="." instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3078, 0, 0.956213 )
 
 [node name="MayhemKiosk" parent="." instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 63.4814, 0, 16.1356 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.764, 0, 25.3724 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 22 )
