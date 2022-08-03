@@ -109,25 +109,33 @@ var items := {
 	],
 	"common1": [
 		get_item("Strobbery", Vector2(1, 1), 1),
-		get_item("Pistol Ammo", Vector2(3, 0), 5)
+		get_item("Pistol Ammo", Vector2(3, 0), 2)
 	],
 	"common2": [
 		get_item("Broccoli", Vector2(0, 0), 1),
-		get_item("Pistol Ammo", Vector2(0, 1), 3)
+		get_item("Pistol Ammo", Vector2(0, 1), 1)
 	],
 	"common3": [get_item("Capsicum", Vector2(2, 2), 1)],
 	"common4": [get_item("Pistol Ammo", Vector2(0, 2), 3)],
+	"coffeemachine": [get_item("Tea", Vector2(2, 1), 1)],
 	"common5": [
 		get_item("Pistol Ammo", Vector2(1, 0), 2),
-		get_item("Onion", Vector2(2, 1), 1),
+		get_item("Onion", Vector2(2, 1), 1)
 	],
 	"pistol": [
 		get_item("Pistol", Vector2(0, 0), 1),
 		get_item("Pistol Ammo", Vector2(2, 1), 2),
 	],
+	"mole": [
+		get_item("Capsicum", Vector2(0, 1), 1),
+		get_item("Broccoli", Vector2(0, 0), 1),
+		get_item("Onion", Vector2(2, 1), 1),
+	],
 	"rings_10": [10],
 	"mayhem_full": [1000],
 	"inv_rings10": [get_item("Rings", Vector2.ZERO, 10)],
+	"inv_rings20": [get_item("Rings", Vector2.ZERO, 20)],
+	"shard": [get_item("Mayhem Shards", Vector2(1, 1), 1)],
 	"starter": [
 		get_item("Hammer", Vector2.ZERO, 1),
 		get_item("Mayhem Shards", Vector2(2, 2), 5),

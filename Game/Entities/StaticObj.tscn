@@ -10,6 +10,7 @@ size = Vector2( 2, 2 )
 
 [sub_resource type="SpatialMaterial" id=3]
 flags_transparent = true
+flags_unshaded = true
 params_billboard_mode = 1
 albedo_texture = ExtResource( 1 )
 

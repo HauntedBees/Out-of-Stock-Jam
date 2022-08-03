@@ -51,6 +51,12 @@ func _look_at_target(t:Vector3):
 func _distance_to_player() -> float: return (player.global_transform.origin - e.global_transform.origin).length()
 func _direction_to_player() -> Vector3: return (player.global_transform.origin - e.global_transform.origin).normalized()
 
+func _heard_noise(volume:float, position:Vector3, hearing_range:float) -> bool:
+	var dist:float = abs((position - e.global_transform.origin).length())
+	if dist > hearing_range: return false
+	var hear_chance := volume / (dist / 10.0)
+	return randf() < hear_chance
+
 func _can_see_player(max_distance:float, from:Vector3) -> bool:
 	if PlayerInfo.invisible: return false
 	var direction:Vector3 = (player.global_transform.origin - e.global_transform.origin).normalized()
@@ -58,6 +64,18 @@ func _can_see_player(max_distance:float, from:Vector3) -> bool:
 	var res := get_viewport().world.direct_space_state.intersect_ray(from, to)
 	if !res.has("collider"): return false
 	return res["collider"] == player
+
+func _does_detect_player(max_distance:float, from:Vector3) -> bool:
+	if !_can_see_player(max_distance, from): return false
+	var direction := _direction_to_player()
+	if direction.z > 0: return false # 0, 0, -1 is in front, 0, 0, 1 is behind
+	var chance := _get_light_level() * 0.05 + _get_player_light_level() * 0.15
+	var distance := _distance_to_player()
+	if distance < 5.0: chance += 0.4 / distance
+	if !player.is_crouched: chance += 0.3
+	if direction.z <= -0.1: chance += 0.5
+	print(chance)
+	return randf() <= chance
 
 func _set_target(t:Vector3, face_target := false):
 	if face_target: _look_at_target(t)

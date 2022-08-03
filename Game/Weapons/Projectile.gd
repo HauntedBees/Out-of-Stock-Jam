@@ -22,4 +22,5 @@ func _on_body_entered(body:Node):
 		blast.damage = damage
 		get_parent().add_child(blast)
 		blast.global_transform.origin = global_transform.origin
+		get_tree().call_group("SoundAwaiter", "noise_made", 2.0, global_transform.origin)
 	queue_free()

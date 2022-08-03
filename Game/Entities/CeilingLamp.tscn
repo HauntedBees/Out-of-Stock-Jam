@@ -27,7 +27,6 @@ material/0 = SubResource( 3 )
 
 [node name="SpotLight" type="SpotLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2.19954, 0 )
-light_indirect_energy = 7.606
 shadow_enabled = true
 spot_range = 120.0
 spot_attenuation = 2.0
