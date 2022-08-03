@@ -27,6 +27,7 @@ func _fade():
 	queue_free()
 
 func _process(delta:float):
+	if PlayerInfo.time_frozen: return
 	if has_player:
 		hurt_timer -= delta
 		if hurt_timer <= 0.0:
@@ -42,7 +43,7 @@ func _on_animation_finished(_anim_name:String):
 	queue_free()
 
 func _physics_process(delta:float):
-	if tween.is_active(): return
+	if PlayerInfo.time_frozen || tween.is_active(): return
 	var dist := player.global_transform.origin - global_transform.origin
 	if dist.length() <= 10.0:
 		direction = dist.normalized()

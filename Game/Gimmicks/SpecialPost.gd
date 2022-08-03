@@ -33,11 +33,11 @@ func on_return(beat_stage:bool):
 func _on_body_entered(body:Node):
 	if cleared || !(body is Player): return
 	if PlayerInfo.return_timeout > 0.0: return
-	if PlayerInfo.rings < 50:
+	if PlayerInfo.rings < 25:
 		warning.visible = true
 	else:
 		SceneSwitcher.switch_scene("res://Special/SpecialStage.tscn", true, self)
-		get_tree().call_group("player", "add_rings", -50)
+		get_tree().call_group("player", "add_rings", -25)
 
 func _on_body_exited(body:Node):
 	if cleared || !(body is Player): return

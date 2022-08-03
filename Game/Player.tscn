@@ -179,6 +179,12 @@ cull_mask = 1048573
 environment = ExtResource( 16 )
 current = true
 
+[node name="SpotLight" type="SpotLight" parent="Vision/Camera"]
+light_energy = 0.2
+light_indirect_energy = 0.1
+spot_range = 14.1727
+spot_angle = 42.4037
+
 [node name="HUD" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0

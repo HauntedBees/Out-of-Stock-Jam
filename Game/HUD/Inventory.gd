@@ -17,6 +17,12 @@ onready var mayhem_textures := {
 	"Mayhem-Modulate": preload("res://Textures/Entities/Mayhem/Mayhem-Modulate.png"),
 	"Cloak": preload("res://Textures/Entities/Mayhem/Cloak.png")
 }
+onready var sounds := {
+	"Beep": $BeepSound,
+	"No": $NoSound,
+	"Hover": $HoverSound,
+	"Eat": $EatSound
+}
 
 onready var search:Control = $Search
 onready var map = $MapPaper
@@ -63,6 +69,7 @@ func _draw_items():
 		ii.rect_position = PlayerInfo.INV_OFFSET + PlayerInfo.INV_DELTA * i["position"]
 		ii.connect("equip_position_changed", self, "_refresh_equip_positions")
 		ii.connect("remove_item", self, "_item_moved")
+		ii.connect("play_sound", self, "_play_sound")
 		ii.set_item(i)
 		items.append(ii)
 		add_child(ii)
@@ -75,6 +82,7 @@ func _draw_items():
 			ii.other_container = PlayerInfo.inventory
 			ii.rect_position = PlayerInfo.SEARCH_OFFSET + PlayerInfo.INV_DELTA * i["position"]
 			ii.connect("remove_item", self, "_item_moved")
+			ii.connect("play_sound", self, "_play_sound")
 			ii.set_item(i)
 			search_items.append(ii)
 			add_child(ii)
@@ -85,6 +93,7 @@ func _draw_items():
 			var ii:InventoryMayhem = mayhem.instance()
 			ii.set_info(mayhem_name, idx + 1, mayhem_textures[mayhem_name])
 			ii.rect_position = MAYHEM_OFFSET + PlayerInfo.INV_DELTA * mayhem_pos
+			ii.connect("play_sound", self, "_play_sound")
 			if mayhem_pos.x == 1:
 				mayhem_pos = Vector2(0, mayhem_pos.y + 1)
 			else:
@@ -101,6 +110,11 @@ func refresh_items():
 	items = []
 	search_items = []
 	_draw_items()
+
+func _play_sound(s:String):
+	if !sounds.has(s): return
+	var asp:AudioStreamPlayer = sounds[s]
+	asp.play()
 
 func _item_moved():
 	if is_search:

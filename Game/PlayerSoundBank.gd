@@ -17,7 +17,14 @@ var sounds := {
 	"EnterWater": preload("res://Assets/Sounds/EnterWater.ogg"),
 	"LeaveWater": preload("res://Assets/Sounds/LeaveWater.ogg"),
 	"Switch": preload("res://Assets/Sounds/Switch.ogg"),
-	"Beep": preload("res://Assets/MenuSounds/Beep.ogg")
+	"Beep": preload("res://Assets/MenuSounds/Beep.ogg"),
+	"Denied": preload("res://Assets/MenuSounds/Denied.ogg"),
+	"Spindash": preload("res://Assets/Sounds/Spindash.ogg"),
+	"Magnet": preload("res://Assets/Sounds/Magnet.ogg"),
+	"Cloak": preload("res://Assets/Sounds/Cloak.ogg"),
+	"Uncloak": preload("res://Assets/Sounds/Uncloak.ogg"),
+	"Mayhem-Modulate": preload("res://Assets/Sounds/Mayhem-Modulate.ogg"),
+	"Pop": preload("res://Assets/Sounds/Pop.ogg")
 }
 onready var dedicated_channels := {
 	"Ring": $RingStream,

@@ -14,6 +14,9 @@ var reload_amount:int
 var reload_speed_mult:float
 var current_ammo:int
 var is_heavy:bool
+var is_usable:bool
+var immediate:bool
+var mayhem_recovered:int
 var saved_args:Dictionary
 
 func _init(item_type:String, texture_path:String, inv_size:Vector2, inv_pos := Vector2.ZERO, other := {}):
@@ -27,12 +30,15 @@ func _init(item_type:String, texture_path:String, inv_size:Vector2, inv_pos := V
 	saved_args = other
 	amount = other["amount"] if other.has("amount") else 1
 	equippable = other.has("equippable")
+	immediate = other.has("immediate")
 	is_heavy = other.has("is_heavy")
 	max_stack_size = other["max_stack_size"] if other.has("max_stack_size") else 1
 	uses_ammo = other["uses_ammo"] if other.has("uses_ammo") else true
 	reload_amount = other["reload_amount"] if other.has("reload_amount") else 0
 	current_ammo = other["current_ammo"] if other.has("current_ammo") else reload_amount
 	reload_speed_mult = other["reload_speed_mult"] if other.has("reload_speed_mult") else 1.0
+	is_usable = other.has("usable")
+	mayhem_recovered = other["mayhem_recovered"] if other.has("mayhem_recovered") else 0
 
 func as_dict() -> Dictionary:
 	return {

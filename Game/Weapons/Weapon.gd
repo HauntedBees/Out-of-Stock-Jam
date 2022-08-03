@@ -149,8 +149,9 @@ func _standard_attack():
 	if body is SecurityControl || body is MayhemKiosk:
 		get_tree().call_group("PlayerSound", "play_sound", sound, "Weapon")
 		return
-	if body is Trap:
+	if body is Trap || body is Grate:
 		get_tree().call_group("destroy_monitor", "on_destroy", body.name)
+		get_tree().call_group("PlayerSound", "play_sound", sound, "Weapon")
 		body.queue_free()
 		return
 	var damage_power := power
@@ -194,6 +195,7 @@ func _try_mayhem():
 	get_tree().call_group("equip_monitor", "update_chaos")
 	var new_cooldown:float = current_info["cooldown"][current_level - 1]
 	mayhem_cooldown_remaining = new_cooldown
+	get_tree().call_group("PlayerSound", "play_sound", current_mayhem, "Weapon")
 	get_tree().call_group("player", "cause_mayhem", new_cooldown)
 	var passive_pos := mayhem_anim.current_animation_position
 	mayhem_anim.play(current_mayhem, -1, 1.0 / new_cooldown)

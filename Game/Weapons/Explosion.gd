@@ -34,11 +34,12 @@ func _on_body_entered(body:Spatial):
 	elif body is Player:
 		var pe:Player = body
 		pe.velocity += direction * force * 0.1
-		print("TODO: this whole thing")
 	elif body is Lamp:
 		var le:Lamp = body
 		le.take_hit(direction, force, calc_damage)
-
+	elif body is Grate:
+		get_tree().call_group("destroy_monitor", "on_destroy", body.name)
+		body.queue_free()
 
 func _on_area_entered(area:Area):
 	if area is Trap:

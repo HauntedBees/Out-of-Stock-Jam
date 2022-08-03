@@ -11,6 +11,7 @@ var path := []
 var path_node := 0
 
 func is_hit(): return
+func pre_death(): return
 
 func _custom_ready(): return
 func _ready():
@@ -51,6 +52,7 @@ func _distance_to_player() -> float: return (player.global_transform.origin - e.
 func _direction_to_player() -> Vector3: return (player.global_transform.origin - e.global_transform.origin).normalized()
 
 func _can_see_player(max_distance:float, from:Vector3) -> bool:
+	if PlayerInfo.invisible: return false
 	var direction:Vector3 = (player.global_transform.origin - e.global_transform.origin).normalized()
 	var to := from + max_distance * direction
 	var res := get_viewport().world.direct_space_state.intersect_ray(from, to)

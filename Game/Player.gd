@@ -56,6 +56,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	weapon.set_weapon(PlayerInfo.current_weapon.type)
 	update_environment()
+	rotation_degrees.y = -90 # TODO: I should not need this
 
 func _process(delta:float):
 	if PlayerInfo.paused: return
@@ -116,7 +117,9 @@ func _physics_process(delta:float):
 				"Magnet": magnet_area_shape.disabled = true
 				"Spindash": spindash_area_shape.disabled = true
 				"Mayhem-Modulate": PlayerInfo.time_frozen = false
-				"Cloak": PlayerInfo.invisible = false
+				"Cloak":
+					get_tree().call_group("PlayerSound", "play_sound", "Uncloak")
+					PlayerInfo.invisible = false
 		else:
 			match PlayerInfo.current_mayhem:
 				"Magnet": _mayhem_magnet()
@@ -270,6 +273,11 @@ func _handle_use_item(event:InputEvent):
 		if body is Enemy:
 			var body_as_enemy:Enemy = body
 			if !body_as_enemy.is_dead: return
+		elif body is Interactable:
+			var bi:Interactable = body
+			if bi.shoot_to_get:
+				bi._die()
+				return
 		search_target = body_as_entity
 		inventory.search_contents = body_as_entity.contents
 		_toggle_inventory(true, true)
@@ -328,6 +336,9 @@ func _handle_equip_switch():
 	for i in range(0, 10):
 		if !GASInput.is_action_just_pressed("equip%s" % i): continue
 		if equip_toggled:
+			if active_mayhem > 0:
+				get_tree().call_group("PlayerSound", "play_sound", "Denied")
+				return
 			var mayhem := ""
 			match i:
 				1: mayhem = "Spindash"
@@ -358,8 +369,15 @@ func _on_close_item_search():
 func add_rings(amount:int):
 	PlayerInfo.rings += amount
 	player_stats.update_rings()
+func add_chaos_energy(amount:int):
+	PlayerInfo.chaos_energy = int(min(PlayerInfo.chaos_energy + amount, PlayerInfo.max_chaos_energy))
+	player_stats.update_chaos()
+func add_emerald_shard(amount:int):
+	PlayerInfo.emerald_shards += amount
+	player_stats.update_shards()
 
 func cause_mayhem(time:float):
+	if active_mayhem > 0: return
 	active_mayhem = time
 	mayhem_targets = []
 	match PlayerInfo.current_mayhem:

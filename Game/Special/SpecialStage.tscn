@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Textures/Special Stage/test_walls.png" type="Texture" id=1]
 [ext_resource path="res://Textures/Special Stage/Player.png" type="Texture" id=2]
@@ -17,6 +17,11 @@
 [ext_resource path="res://Textures/Special Stage/ThumbsUp.png" type="Texture" id=15]
 [ext_resource path="res://Textures/Special Stage/ThumbsDown.png" type="Texture" id=16]
 [ext_resource path="res://Special/Emerald.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Assets/Music/Special.ogg" type="AudioStream" id=18]
+[ext_resource path="res://Assets/Sounds/Ring.ogg" type="AudioStream" id=19]
+[ext_resource path="res://Assets/Sounds/PlayerDamage.ogg" type="AudioStream" id=20]
+[ext_resource path="res://Assets/MenuSounds/Denied.ogg" type="AudioStream" id=21]
+[ext_resource path="res://Assets/Sounds/Success.ogg" type="AudioStream" id=22]
 
 [sub_resource type="QuadMesh" id=14]
 size = Vector2( 230, 130 )
@@ -514,5 +519,22 @@ color = Color( 1, 1, 1, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+autoplay = true
+bus = "Music"
+
+[node name="HurtPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
+
+[node name="RingPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+
+[node name="GoodSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 22 )
+
+[node name="LoseSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 21 )
 
 [connection signal="timeout" from="Skybox/Timer" to="Skybox" method="_on_timeout"]

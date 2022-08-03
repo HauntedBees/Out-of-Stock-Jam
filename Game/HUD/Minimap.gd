@@ -28,7 +28,9 @@ func _set_rotation(f:float):
 func _ready(): reset()
 
 func reset():
-	var origin:MapOrigin = get_tree().get_nodes_in_group("MapOrigin")[0]
+	var map_origin := get_tree().get_nodes_in_group("MapOrigin")
+	if map_origin == null || map_origin.size() == 0: return
+	var origin:MapOrigin = map_origin[0]
 	player = get_tree().get_nodes_in_group("player")[0]
 	origin_real_position = Vector2(origin.global_transform.origin.x, origin.global_transform.origin.z)
 	origin_mini_position = origin.offset

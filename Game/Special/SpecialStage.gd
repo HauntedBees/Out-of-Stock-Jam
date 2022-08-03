@@ -1,5 +1,10 @@
 extends Spatial
 
+onready var ring_sound:AudioStreamPlayer = $RingPlayer
+onready var hurt_sound:AudioStreamPlayer = $HurtPlayer
+onready var win_sound:AudioStreamPlayer = $GoodSound
+onready var lose_sound:AudioStreamPlayer = $LoseSound
+
 onready var ring_scene:PackedScene = preload("res://Special/Ring.tscn")
 onready var spike_scene:PackedScene = preload("res://Special/Spike.tscn")
 onready var hazard_scene:PackedScene = preload("res://Special/Hazard.tscn")
@@ -100,7 +105,9 @@ func _show_message(text:String, good := false, bad := false):
 	info_popup.visible = true
 	info_message.text = text
 	good_job.visible = good
+	if good: win_sound.play()
 	bad_job.visible = bad
+	if bad: lose_sound.play()
 
 func _physics_process(delta:float):
 	_handle_player_movement(delta)
@@ -134,12 +141,14 @@ func _on_object_entered(body:Node, me:SpecialStageItem):
 		"ring":
 			rings += 1
 			ring_label.text = String(rings)
+			ring_sound.play()
 			me.queue_free()
 		"spike":
 			if is_hurt: return
 			rings = int(max(rings - 10, 0))
 			ring_label.text = String(rings)
 			is_hurt = true
+			hurt_sound.play()
 			player_anim.play("Hurt")
 			yield(player_anim, "animation_finished")
 			is_hurt = false

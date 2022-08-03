@@ -15,6 +15,7 @@ func _custom_ready():
 	sewer.global_transform.origin = e.global_transform.origin + Vector3(0, 2.1, 0)
 	sewer.visible = false
 	hide()
+func pre_death(): reveal()
 
 func _custom_process(delta:float):
 	if hide_timer > 0.0:
@@ -25,15 +26,16 @@ func _custom_mind_timeout():
 	if is_hidden: origin.y += 2.0
 	var can_see_player := _can_see_player(20.0, origin)
 	if is_hidden:
-		if hide_timer <= 0.0 && (can_see_player || randf() < 0.2):
+		if hide_timer <= 0.0 && (can_see_player || randf() < 0.4):
 			reveal()
 	else:
 		if can_see_player:
 			shoot(_direction_to_player())
-		elif randf() < 0.2:
+		elif randf() < 0.1:
 			hide()
 
 func is_hit():
+	if PlayerInfo.time_frozen: return
 	extra_timer.start(0.2)
 	yield(extra_timer, "timeout")
 	hide()

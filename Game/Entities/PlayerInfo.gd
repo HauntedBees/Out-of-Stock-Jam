@@ -22,15 +22,15 @@ var emerald_shards := 6
 var map_stickers := []
 var mayhem_rubies := 0
 var mayhem_levels := {
-	"Spindash": 0,
-	"Magnet": 0,
-	"Mayhem-Modulate": 0,
-	"Cloak": 0,
+	"Spindash": 1,
+	"Magnet": 1,
+	"Mayhem-Modulate": 1,
+	"Cloak": 1,
 	"Swim": 0,
 	"Strength": 1,
 	"Weaponry": 0,
 	"Hacking": 1,
-	"Vision": 0
+	"Vision": 1
 }
 var current_map := "Medical Bay"
 var inventory := [
@@ -38,7 +38,8 @@ var inventory := [
 	ContentIndex.get_item("Grenade Launcher Ammo", Vector2(6, 0), 7),
 	ContentIndex.get_item("Assault Rifle", Vector2(4, 0), 30),
 	ContentIndex.get_item("Assault Rifle Ammo", Vector2(1, 0), 120),
-	ContentIndex.get_item("Pistol Ammo", Vector2(1, 1), 3),
+	ContentIndex.get_item("Strobbery", Vector2(1, 1), 3),
+	ContentIndex.get_item("Tea", Vector2(6, 1), 3),
 	ContentIndex.get_item("Pistol Ammo", Vector2(1, 2), 8),
 	ContentIndex.get_item("Hammer", Vector2(5, 0)),
 	ContentIndex.get_item("Sword", Vector2(7, 0)),
@@ -168,6 +169,8 @@ func get_collision(distance:float, no_lamps := false, include_areas := false) ->
 	elif !no_lamps && res["collider"] is Lamp:
 		return res["collider"]
 	elif res["collider"] is Trap:
+		return res["collider"]
+	elif res["collider"] is Grate:
 		return res["collider"]
 	return null
 

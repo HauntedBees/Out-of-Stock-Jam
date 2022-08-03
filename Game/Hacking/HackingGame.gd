@@ -3,6 +3,7 @@ extends Control
 
 signal successful_hack()
 
+onready var win_ping:AudioStreamPlayer = $WinSound
 onready var beep_ping:AudioStreamPlayer = $BeepSound
 onready var hover_ping:AudioStreamPlayer = $HoverSound
 onready var no_ping:AudioStreamPlayer = $NoSound
@@ -124,7 +125,7 @@ func _process(_delta:float):
 		anim.play("GameOver")
 		game_over = true
 	if blues_remaining == 0:
-		beep_ping.play()
+		win_ping.play()
 		anim.play("Success")
 		game_over = true
 		emit_signal("successful_hack")

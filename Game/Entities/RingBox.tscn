@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Interactable.tscn" type="PackedScene" id=1]
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="SpatialMaterial" id=2]
+resource_local_to_scene = true
+render_priority = 1
+flags_transparent = true
+flags_unshaded = true
+flags_no_depth_test = true
+flags_do_not_receive_shadows = true
+params_billboard_mode = 2
+albedo_texture = SubResource( 1 )
+uv1_scale = Vector3( 0.731, 2.883, 1 )
+uv1_offset = Vector3( 0.034, -1.106, 0 )
+
+[node name="RingBox" instance=ExtResource( 1 )]
+type = "RingBox"
+health = 5.0
+content_name = "rings_10"
+display_name = "Rings"
+shoot_to_get = true
+
+[node name="CollisionShape" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+
+[node name="DebugModel" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+
+[node name="InteractModel" parent="." index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+
+[node name="Name" parent="." index="4"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.1, 0, 0, 0 )
+material/0 = SubResource( 2 )

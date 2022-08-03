@@ -26,6 +26,7 @@ func show_highlight():
 	main_mesh.get_active_material(0).next_pass = highlight
 
 func _process(delta:float):
+	if PlayerInfo.time_frozen: return
 	if light_on && rng.randf() < flicker_chance:
 		flicker_timer.start()
 		light.visible = false
@@ -44,5 +45,8 @@ func take_hit(_direction:Vector3, _force:float, damage:float):
 		queue_free()
 
 func _on_timeout():
+	if PlayerInfo.time_frozen:
+		flicker_timer.start()
+		return
 	light_on = true
 	light.visible = true

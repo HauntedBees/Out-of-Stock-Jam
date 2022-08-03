@@ -104,6 +104,8 @@ func _hit_animation():
 	_set_animation(true)
 
 func _die():
+	if my_ai != null:
+		my_ai.pre_death()
 	material.uv1_scale.x = 1
 	material.albedo_texture = dead
 	main_mesh.mesh = dead_mesh

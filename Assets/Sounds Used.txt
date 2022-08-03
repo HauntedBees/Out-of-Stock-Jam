@@ -18,23 +18,36 @@ Switch | https://freesound.org/people/ArrowheadProductions/sounds/566176/
 Poof | https://freesound.org/people/Worldmaxter/sounds/471204/
 Pop | https://freesound.org/people/shyguy014/sounds/458533/
 Metal | https://freesound.org/people/MisterTood/sounds/9026/
+Eat | https://freesound.org/people/Rudmer_Rotteveel/sounds/364924/
+Spindash | https://freesound.org/people/BaDoink/sounds/539638/
+Magnet | https://freesound.org/people/strangehorizon/sounds/619723/
+Mayhem-Modulate | https://freesound.org/people/craigsmith/sounds/487074/
+Cloak, Uncloak | https://freesound.org/people/HorrorAudio/sounds/507451/
+Break | https://freesound.org/people/vrodge/sounds/119525/
 
 Menu Sounds:
 Beep | https://freesound.org/people/noirenex/sounds/245242/
 Hover | https://freesound.org/people/deadsillyrabbit/sounds/251389/
 Denied | 
+Success | https://freesound.org/people/Fupicat/sounds/607207/
 
-ADD SOUNDS TO: open/close door
+ADD SOUNDS TO:
+	using an interactable
+	entering special stage?
+	open/close door
+	enemies getting hurt?
+	humans dying
 
 refactor beep and hover to a global?
 
 SOUNDS NEEDED:
 	anything for medibot
-	humans dying
-	interactables being destroyed
-	any menu items
 	ambient noises
 
 Ambience:
 Title | https://freesound.org/people/szegvari/sounds/560617/
 Panic | https://freesound.org/people/younoise/sounds/554209/
+Server | https://freesound.org/people/szegvari/sounds/608323/
+Background | https://freesound.org/people/secondbody/sounds/614461/
+Special | https://freesound.org/people/jammerboy70/sounds/398640/
+Server | https://freesound.org/people/szegvari/sounds/608323/

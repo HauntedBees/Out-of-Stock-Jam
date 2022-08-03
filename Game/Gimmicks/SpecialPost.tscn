@@ -72,10 +72,13 @@ margin_top = -87.5
 margin_right = 386.0
 margin_bottom = 87.5
 theme = ExtResource( 4 )
-text = "You need at least 50 rings
+text = "You need at least 25 rings
 to enter the special stage."
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

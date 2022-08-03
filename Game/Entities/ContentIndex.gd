@@ -1,11 +1,57 @@
 extends Node
-var items := {
-	"rings_10": [10],
-	"hammer": [
-		Item.new("Hammer", "Weapons/Hammer.png", Vector2(1, 3), Vector2(0, 0), { "equippable": true, "uses_ammo": false })
-	]
-}
+
 var item_types := {
+	# Auto-Consumables
+	"Rings": Item.new("Rings", "Entities/RingBox.png", Vector2(1, 1), Vector2.ZERO, {
+		"max_stack_size": 99,
+		"immediate": true
+	}),
+	"Mayhem Shards": Item.new("Mayhem Shards", "HUD/EmeraldShard.png", Vector2(1, 1), Vector2.ZERO, {
+		"max_stack_size": 99,
+		"immediate": true
+	}),
+	# Mayhem Boosters
+	"Strobbery": Item.new("Strobbery", "Items/Strobbery.png", Vector2(1, 1), Vector2.ZERO, {
+		"max_stack_size": 99,
+		"usable": true,
+		"mayhem_recovered": 1
+	}),
+	"Onion": Item.new("Onion", "Items/Onion.png", Vector2(1, 1), Vector2.ZERO, {
+		"max_stack_size": 99,
+		"usable": true,
+		"mayhem_recovered": 2
+	}),
+	"Capsicum": Item.new("Capsicum", "Items/Capsicum.png", Vector2(1, 1), Vector2.ZERO, {
+		"max_stack_size": 99,
+		"usable": true,
+		"mayhem_recovered": 3
+	}),
+	"Broccoli": Item.new("Broccoli", "Items/Broccoli.png", Vector2(1, 1), Vector2.ZERO, {
+		"max_stack_size": 99,
+		"usable": true,
+		"mayhem_recovered": 4
+	}),
+	"Pasta": Item.new("Pasta", "Items/Pasta.png", Vector2(1, 1), Vector2.ZERO, {
+		"max_stack_size": 99,
+		"usable": true,
+		"mayhem_recovered": 5
+	}),
+	"Yoggy": Item.new("Yoggy", "Items/Yoggy.png", Vector2(1, 1), Vector2.ZERO, {
+		"max_stack_size": 99,
+		"usable": true,
+		"mayhem_recovered": 10
+	}),
+	"Tofu": Item.new("Tofu", "Items/Tofu.png", Vector2(1, 1), Vector2.ZERO, {
+		"max_stack_size": 99,
+		"usable": true,
+		"mayhem_recovered": 25
+	}),
+	"Tea": Item.new("Tea", "Items/Tea.png", Vector2(1, 1), Vector2.ZERO, {
+		"max_stack_size": 99,
+		"usable": true,
+		"mayhem_recovered": 50
+	}),
+	# Weapons
 	"Pistol": Item.new("Pistol", "Weapons/Pistol.png", Vector2(1, 3), Vector2.ZERO, {
 		"equippable": true,
 		"reload_amount": 6,
@@ -47,6 +93,43 @@ var item_types := {
 		"equippable": true,
 		"uses_ammo": false
 	})
+}
+
+var items := {
+	"sysadmin1": [get_item("Rings", Vector2(1, 2), 10)],
+	"sysadmin2": [
+		get_item("Pasta", Vector2(2, 2), 1),
+		get_item("Yoggy", Vector2(1, 2), 1)
+	],
+	"sysadmin3": [get_item("Mayhem Shards", Vector2(3, 2), 2)],
+	"sysadmin4": [
+		get_item("Shotgun", Vector2(0, 0), 2),
+		get_item("Shotgun Ammo", Vector2(1, 2), 4),
+		get_item("Shotgun Ammo", Vector2(2, 2), 3)
+	],
+	"common1": [
+		get_item("Strobbery", Vector2(1, 1), 1),
+		get_item("Pistol Ammo", Vector2(3, 0), 5)
+	],
+	"common2": [
+		get_item("Broccoli", Vector2(0, 0), 1),
+		get_item("Pistol Ammo", Vector2(0, 1), 3)
+	],
+	"common3": [get_item("Capsicum", Vector2(2, 2), 1)],
+	"common4": [get_item("Pistol Ammo", Vector2(0, 2), 3)],
+	"common5": [
+		get_item("Pistol Ammo", Vector2(1, 0), 2),
+		get_item("Onion", Vector2(2, 1), 1),
+	],
+	"rings_10": [10],
+	"mayhem_full": [1000],
+	"inv_rings10": [get_item("Rings", Vector2.ZERO, 10)],
+	"starter": [
+		get_item("Hammer", Vector2.ZERO, 1),
+		get_item("Mayhem Shards", Vector2(2, 2), 5),
+		get_item("Rings", Vector2(3, 1), 10)
+		#Item.new("Hammer", "Weapons/Hammer.png", Vector2(1, 3), Vector2(0, 0), { "equippable": true, "uses_ammo": false })
+	]
 }
 
 func get_item(type:String, position:Vector2, amount := 0) -> Item:
