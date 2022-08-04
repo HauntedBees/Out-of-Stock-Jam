@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Textures/Title/TitleBG.png" type="Texture" id=1]
 [ext_resource path="res://HUD/Theme.tres" type="Theme" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://Assets/Music/Title.ogg" type="AudioStream" id=11]
 [ext_resource path="res://Assets/MenuSounds/Beep.ogg" type="AudioStream" id=12]
 [ext_resource path="res://Assets/MenuSounds/Hover.ogg" type="AudioStream" id=13]
+[ext_resource path="res://HUD/Button.tres" type="Theme" id=14]
+[ext_resource path="res://Textures/HUD/EmeraldShard.png" type="Texture" id=15]
+[ext_resource path="res://Textures/HUD/Chaos.png" type="Texture" id=16]
 
 [node name="TitleScreen" type="Control"]
 anchor_right = 1.0
@@ -262,6 +265,278 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HBoxContainer" type="HBoxContainer" parent="OpeningInfo"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -620.0
+margin_top = -148.0
+margin_right = 620.0
+margin_bottom = -68.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HowToPlay" type="Button" parent="OpeningInfo/HBoxContainer"]
+margin_right = 400.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 400, 80 )
+theme = ExtResource( 14 )
+text = "How do I play?"
+
+[node name="ShowOpening" type="Button" parent="OpeningInfo/HBoxContainer"]
+margin_left = 420.0
+margin_right = 820.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 400, 80 )
+theme = ExtResource( 14 )
+text = "Let's Get Started!"
+
+[node name="StraightToGame" type="Button" parent="OpeningInfo/HBoxContainer"]
+margin_left = 840.0
+margin_right = 1240.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 400, 80 )
+theme = ExtResource( 14 )
+text = "Skip Opening Cutscene"
+
+[node name="HowToPlay" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="HowToPlay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.788235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HowToPlay" type="RichTextLabel" parent="HowToPlay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 342.0
+margin_top = 16.0
+margin_right = -10.0
+margin_bottom = -16.0
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "Your goal is to navigate the [color=#FF00FF]Space Colony M0B1[/color] to get the resources you need to take on [color=#FF00FF]Doctor Roboton[/color], who has taken over the fifth floor: [color=#FF00FF]the Command Center[/color]. To do so you must [color=#FF00FF]search[/color] the station for resources, [color=#FF00FF]sneak[/color] past enemies (or [color=#FF00FF]fight[/color] them, if you're brave), and unlock and use [color=#FF00FF]mayhem abilities[/color] to turn the tides in your favor.
+Collect all the [color=#FF00FF]rings[/color] you can, as they provide you with [color=#FF00FF]health[/color] and grant you access to [color=#FF00FF]special stages[/color]. If you are hurt by an enemy or trap, you will lose all your [color=#FF00FF]rings[/color]. No rings? [color=#FF0000]Game Over[/color]."
+text = "Your goal is to navigate the Space Colony M0B1 to get the resources you need to take on Doctor Roboton, who has taken over the fifth floor: the Command Center. To do so you must search the station for resources, sneak past enemies (or fight them, if you're brave), and unlock and use mayhem abilities to turn the tides in your favor.
+Collect all the rings you can, as they provide you with health and grant you access to special stages. If you are hurt by an enemy or trap, you will lose all your rings. No rings? Game Over."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BasicControls" type="RichTextLabel" parent="HowToPlay"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 342.0
+margin_top = 16.0
+margin_right = -10.0
+margin_bottom = -16.0
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "It is recommended to play this game with a keyboard and mouse. The default controls are [color=#FF00FF]WASD[/color] to move, and [color=#FF00FF]mouse movement[/color] to look around. Press [color=#FF00FF]F[/color] to look in containers and interact with objects. [color=#FF00FF]left click[/color] to use your currently equipped weapon. Press [color=#FF00FF]Tab[/color] to bring up your inventory, then click and drag items to sort them. You can use [color=#FF00FF]the number keys[/color] to change weapons, and [color=#FF00FF]R[/color] to reload. Press [color=#FF00FF]space bar[/color] to jump and hold [color=#FF00FF]Ctrl[/color] to crouch. You can pause with [color=#FF00FF]ESC[/color]. All of these controls can be changed in the [color=#FF00FF]Options Menu[/color] At any time."
+text = "It is recommended to play this game with a keyboard and mouse. The default controls are WASD to move, and mouse movement to look around. Press F to look in containers and interact with objects. left click to use your currently equipped weapon. Press Tab to bring up your inventory, then click and drag items to sort them. You can use the number keys to change weapons, and R to reload. Press space bar to jump and hold Ctrl to crouch. You can pause with ESC. All of these controls can be changed in the Options Menu At any time."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MayhemControls" type="RichTextLabel" parent="HowToPlay"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 342.0
+margin_top = 16.0
+margin_right = -10.0
+margin_bottom = -16.0
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "[color=#FF00FF]Mayhem Abilities[/color] are special powers you can unlock with    [color=#FF00FF]Mayhem shards[/color], which can be found in various locations around the station. Some abilities are always active - like the ability to use [color=#FF00FF]heavy weapons[/color] or [color=#FF00FF]swim[/color], while others like the [color=#FF00FF]spin dash[/color] can be equipped and used just like weapons. Use the [color=#FF00FF]right mouse button[/color] to use one of these abilities, and [color=#FF00FF]hold shift[/color] while pressing a [color=#FF00FF]number key[/color] to change your equipped ability. Each ability uses [color=#FF00FF]Mayhem Energy[/color] (shown with         ), which can be recovered by eating [color=#FF00FF]food[/color]."
+text = "Mayhem Abilities are special powers you can unlock with    Mayhem shards, which can be found in various locations around the station. Some abilities are always active - like the ability to use heavy weapons or swim, while others like the spin dash can be equipped and used just like weapons. Use the right mouse button to use one of these abilities, and hold shift while pressing a number key to change your equipped ability. Each ability uses Mayhem Energy (shown with         ), which can be recovered by eating food."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlay/MayhemControls"]
+margin_left = 159.0
+margin_top = 89.0
+margin_right = 231.0
+margin_bottom = 161.0
+rect_min_size = Vector2( 72, 72 )
+texture = ExtResource( 15 )
+expand = true
+
+[node name="TextureRect2" type="TextureRect" parent="HowToPlay/MayhemControls"]
+margin_left = 566.0
+margin_top = 786.0
+margin_right = 827.0
+margin_bottom = 858.0
+rect_min_size = Vector2( 72, 72 )
+texture = ExtResource( 16 )
+expand = true
+
+[node name="SpecialStages" type="RichTextLabel" parent="HowToPlay"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 342.0
+margin_top = 16.0
+margin_right = -10.0
+margin_bottom = -16.0
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "Hidden across the station are [color=#FF00FF]special posts[/color]. If you find one and have [color=#FF00FF]25 rings[/color], you'll be taken to a [color=#FF00FF]special stage[/color]. In these stages, you must avoid obstacles and collect the required number of [color=#FF00FF]rings[/color] through three segments. If you complete them all, you'll unlock a [color=#FF00FF]Mayhem Ruby[/color]. What do they do? Find all 7 before you face [color=#FF00FF]Doctor Roboton[/color] to find out!
+Even if you don't have 25 [color=#FF00FF]rings[/color], you should walk into any [color=#FF00FF]special post[/color] you find; if you get hurt with [color=#FF0000]zero rings[/color] and die, instead of getting a [color=#FF0000]game over[/color] you'll reappear at the last [color=#FF00FF]special post[/color] you visited."
+text = "Hidden across the station are special posts. If you find one and have 25 rings, you'll be taken to a special stage. In these stages, you must avoid obstacles and collect the required number of rings through three segments. If you complete them all, you'll unlock a Mayhem Ruby. What do they do? Find all 7 before you face Doctor Roboton to find out!
+Even if you don't have 25 rings, you should walk into any special post you find; if you get hurt with zero rings and die, instead of getting a game over you'll reappear at the last special post you visited."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hacking" type="RichTextLabel" parent="HowToPlay"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 342.0
+margin_top = 16.0
+margin_right = -10.0
+margin_bottom = -16.0
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "If you unlock the [color=#FF00FF]Hacking Mayhem Ability[/color], you can [color=#FF00FF]hack[/color] some [color=#FF00FF]security panels[/color] across the station. Press the [color=#FF00FF]use[/color] input ([color=#FF00FF]F[/color] by default) when facing one to bring up the [color=#FF00FF]control panel[/color]. If your [color=#FF00FF]hacking level[/color] is high enough, you'll be able to [color=#FF00FF]hack[/color] the terminal, allowing you to perform any of the actions listed on the panel.
+To successfully [color=#FF00FF]hack[/color], you must navigate your [color=#FF00FF]avatar[/color] with the movement inputs ([color=#FF00FF]wasd[/color] by default) and touch all the [color=#5555FF]blue spheres[/color], turning them [color=#FF0000]red[/color], without touching any of the [color=#FF0000]red spheres[/color]."
+text = "If you unlock the Hacking Mayhem Ability, you can hack some security panels across the station. Press the use input (F by default) when facing one to bring up the control panel. If your hacking level is high enough, you'll be able to hack the terminal, allowing you to perform any of the actions listed on the panel.
+To successfully hack, you must navigate your avatar with the movement inputs (wasd by default) and touch all the blue spheres, turning them red, without touching any of the red spheres."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Accessibility" type="RichTextLabel" parent="HowToPlay"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 342.0
+margin_top = 16.0
+margin_right = -10.0
+margin_bottom = -16.0
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "The [color=#FF00FF]options menu[/color], accessible from both the [color=#FF00FF]Title Screen[/color] and [color=#FF00FF]pause menu[/color] (opened with [color=#FF00FF]Esc[/color] by default), lets you change various settings designed to make the game more accessible.
+You can adjust the [color=#FF00FF]mouse sensitivity[/color] to make [color=#FF00FF]aiming[/color] easier, and enable an [color=#FF00FF]input cooldown[/color] if you want to avoid [color=#FF00FF]accidentally pressing the same input multiple times[/color]. Actions that require [color=#FF00FF]dragging the cursor[/color] can be changed to [color=#FF00FF]clicking to grab and clicking to release[/color], and [color=#FF00FF]inputs that need to be held down[/color] can be changed to be [color=#FF00FF]toggles[/color] as well."
+text = "The options menu, accessible from both the Title Screen and pause menu (opened with Esc by default), lets you change various settings designed to make the game more accessible.
+You can adjust the mouse sensitivity to make aiming easier, and enable an input cooldown if you want to avoid accidentally pressing the same input multiple times. Actions that require dragging the cursor can be changed to clicking to grab and clicking to release, and inputs that need to be held down can be changed to be toggles as well."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HowToPlay"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 117.0
+margin_top = -97.0
+margin_right = 937.0
+margin_bottom = -17.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShowOpening" type="Button" parent="HowToPlay/HBoxContainer"]
+margin_right = 400.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 400, 80 )
+theme = ExtResource( 14 )
+text = "Let's Get Started!"
+
+[node name="StraightToGame" type="Button" parent="HowToPlay/HBoxContainer"]
+margin_left = 420.0
+margin_right = 820.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 400, 80 )
+theme = ExtResource( 14 )
+text = "Skip Opening Cutscene"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlay"]
+margin_left = 2.0
+margin_top = 78.0
+margin_right = 328.0
+margin_bottom = 972.0
+
+[node name="HowPlayBtn" type="Button" parent="HowToPlay/VBoxContainer"]
+margin_right = 326.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
+theme = ExtResource( 14 )
+toggle_mode = true
+pressed = true
+text = "how to play"
+
+[node name="BasicCtrlsBtn" type="Button" parent="HowToPlay/VBoxContainer"]
+margin_top = 84.0
+margin_right = 326.0
+margin_bottom = 164.0
+rect_min_size = Vector2( 0, 80 )
+theme = ExtResource( 14 )
+toggle_mode = true
+text = "basic controls"
+
+[node name="MayhemBtn" type="Button" parent="HowToPlay/VBoxContainer"]
+margin_top = 168.0
+margin_right = 326.0
+margin_bottom = 248.0
+rect_min_size = Vector2( 0, 80 )
+theme = ExtResource( 14 )
+toggle_mode = true
+text = "mayhem abilities"
+
+[node name="StagesBtn" type="Button" parent="HowToPlay/VBoxContainer"]
+margin_top = 252.0
+margin_right = 326.0
+margin_bottom = 332.0
+rect_min_size = Vector2( 0, 80 )
+theme = ExtResource( 14 )
+toggle_mode = true
+text = "special stages"
+
+[node name="HackingBtn" type="Button" parent="HowToPlay/VBoxContainer"]
+margin_top = 336.0
+margin_right = 326.0
+margin_bottom = 416.0
+rect_min_size = Vector2( 0, 80 )
+theme = ExtResource( 14 )
+toggle_mode = true
+text = "hacking"
+
+[node name="OptionsBtn" type="Button" parent="HowToPlay/VBoxContainer"]
+margin_top = 420.0
+margin_right = 326.0
+margin_bottom = 500.0
+rect_min_size = Vector2( 0, 80 )
+theme = ExtResource( 14 )
+toggle_mode = true
+text = "Accessibility"
+
 [node name="SaveScreen" parent="." instance=ExtResource( 9 )]
 visible = false
 
@@ -280,6 +555,7 @@ stream = ExtResource( 12 )
 stream = ExtResource( 13 )
 
 [connection signal="mouse_entered" from="MainTitle/VBoxContainer/Button_NewGame" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="MainTitle/VBoxContainer/Button_NewGame" to="." method="_on_NewGame_pressed"]
 [connection signal="mouse_entered" from="MainTitle/VBoxContainer/Button_Continue" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="MainTitle/VBoxContainer/Button_Continue" to="." method="_on_Continue_pressed"]
 [connection signal="mouse_entered" from="MainTitle/VBoxContainer/Button_LoadGame" to="." method="_on_button_mouse_entered"]
@@ -288,4 +564,24 @@ stream = ExtResource( 13 )
 [connection signal="pressed" from="MainTitle/VBoxContainer/Button_Options" to="." method="_on_Options_pressed"]
 [connection signal="mouse_entered" from="MainTitle/VBoxContainer/Button_Quit" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="MainTitle/VBoxContainer/Button_Quit" to="." method="_on_Button_Quit_pressed"]
+[connection signal="mouse_entered" from="OpeningInfo/HBoxContainer/HowToPlay" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="OpeningInfo/HBoxContainer/HowToPlay" to="." method="_on_HowToPlay_pressed"]
+[connection signal="mouse_entered" from="OpeningInfo/HBoxContainer/ShowOpening" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_entered" from="OpeningInfo/HBoxContainer/StraightToGame" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="OpeningInfo/HBoxContainer/StraightToGame" to="." method="_on_StraightToGame_pressed"]
+[connection signal="mouse_entered" from="HowToPlay/HBoxContainer/ShowOpening" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_entered" from="HowToPlay/HBoxContainer/StraightToGame" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="HowToPlay/HBoxContainer/StraightToGame" to="." method="_on_StraightToGame_pressed"]
+[connection signal="mouse_entered" from="HowToPlay/VBoxContainer/HowPlayBtn" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="HowToPlay/VBoxContainer/HowPlayBtn" to="." method="_on_HowPlayBtn_pressed"]
+[connection signal="mouse_entered" from="HowToPlay/VBoxContainer/BasicCtrlsBtn" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="HowToPlay/VBoxContainer/BasicCtrlsBtn" to="." method="_on_BasicCtrlsBtn_pressed"]
+[connection signal="mouse_entered" from="HowToPlay/VBoxContainer/MayhemBtn" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="HowToPlay/VBoxContainer/MayhemBtn" to="." method="_on_MayhemBtn_pressed"]
+[connection signal="mouse_entered" from="HowToPlay/VBoxContainer/StagesBtn" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="HowToPlay/VBoxContainer/StagesBtn" to="." method="_on_StagesBtn_pressed"]
+[connection signal="mouse_entered" from="HowToPlay/VBoxContainer/HackingBtn" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="HowToPlay/VBoxContainer/HackingBtn" to="." method="_on_HackingBtn_pressed"]
+[connection signal="mouse_entered" from="HowToPlay/VBoxContainer/OptionsBtn" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="HowToPlay/VBoxContainer/OptionsBtn" to="." method="_on_OptionsBtn_pressed"]
 [connection signal="back_save" from="SaveScreen" to="." method="_on_SaveScreen_back_save"]

@@ -13,6 +13,23 @@ onready var quit:TextureButton = $MainTitle/VBoxContainer/Button_Quit
 onready var options_screen:Control = $OptionsScreen
 onready var save_screen:SaveScreen = $SaveScreen
 
+onready var how_buttons := [
+	$HowToPlay/VBoxContainer/HowPlayBtn,
+	$HowToPlay/VBoxContainer/BasicCtrlsBtn,
+	$HowToPlay/VBoxContainer/MayhemBtn,
+	$HowToPlay/VBoxContainer/StagesBtn,
+	$HowToPlay/VBoxContainer/HackingBtn,
+	$HowToPlay/VBoxContainer/OptionsBtn
+]
+onready var how_to_play := [
+	$HowToPlay/HowToPlay,
+	$HowToPlay/BasicControls,
+	$HowToPlay/MayhemControls,
+	$HowToPlay/SpecialStages,
+	$HowToPlay/Hacking,
+	$HowToPlay/Accessibility
+]
+
 func _ready():
 	var has_saves := has_saves()
 	continue_game.visible = has_saves
@@ -62,3 +79,32 @@ func _on_Options_pressed():
 	options_screen.visible = true
 
 func _on_Button_Quit_pressed(): get_tree().quit()
+
+func _on_NewGame_pressed():
+	beep_ping.play()
+	$OpeningInfo.visible = true
+
+func _on_HowToPlay_pressed():
+	beep_ping.play()
+	$HowToPlay.visible = true
+	_set_how_play(0)
+
+func _on_StraightToGame_pressed():
+	PlayerInfo.current_map = "Medical Bay"
+	get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "Map", "save_to_dictionary")
+	SceneSwitcher.switch_scene("res://Maps/Medical Bay.tscn", false)
+
+func _on_HowPlayBtn_pressed(): _set_how_play(0)
+func _on_BasicCtrlsBtn_pressed(): _set_how_play(1)
+func _on_MayhemBtn_pressed(): _set_how_play(2)
+func _on_StagesBtn_pressed(): _set_how_play(3)
+func _on_HackingBtn_pressed():_set_how_play(4)
+func _on_OptionsBtn_pressed(): _set_how_play(5)
+func _set_how_play(idx:int):
+	beep_ping.play()
+	for i in how_buttons.size():
+		var b:Button = how_buttons[i]
+		b.pressed = i == idx
+	for i in how_to_play.size():
+		var s:Control = how_to_play[i]
+		s.visible = i == idx
