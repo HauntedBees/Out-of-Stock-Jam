@@ -100,7 +100,13 @@ func _create_object(type:PackedScene, side:int, position:Vector2):
 	obj.rotation_degrees.y = 60 * side
 	cone_container.add_child(obj)
 
-func _show_amount_message(): _show_message("Collect %s Rings" % stage.ring_requirement)
+func _ring_requirement() -> int:
+	if PlayerInfo.difficulty == 0:
+		return int(floor(stage.ring_requirement / 2.0))
+	else:
+		return stage.ring_requirement
+
+func _show_amount_message(): _show_message("Collect %s Rings" % _ring_requirement())
 func _show_message(text:String, good := false, bad := false):
 	info_popup.visible = true
 	info_message.text = text
@@ -159,7 +165,7 @@ func _on_object_entered(body:Node, me:SpecialStageItem):
 			tween.interpolate_property(scoreboard, "rect_scale", Vector2(1, 1), Vector2(1.35, 1.35), 1.0)
 			tween.start()
 			yield(tween, "tween_completed")
-			if rings >= stage.ring_requirement:
+			if rings >= _ring_requirement():
 				_show_message("Good Job!", true)
 				_advance_to_next_part()
 			else:

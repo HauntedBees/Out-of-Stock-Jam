@@ -65,7 +65,7 @@ func render_map():
 	anim.play("RESET")
 	node_map = []
 	blues_remaining = 0
-	var level_options:Array = LEVELS[level]
+	var level_options:Array = LEVELS[0] if PlayerInfo.difficulty == 0 else LEVELS[level]
 	var current_map:PoolStringArray = level_options[rng.randi_range(0, level_options.size() - 1)]
 	var size := current_map.size()
 	var offset := floor((12.0 - size) / 2.0)
@@ -138,16 +138,73 @@ const LEVELS := [
 			"xRBBB",
 			"xRBBB",
 			"xBBBB"
+		],
+		[
+			"xxxxxxx",
+			"xRRxBBx",
+			"xRRxBBx",
+			"xxxxxxx",
+			"xBBxRRx",
+			"xBBxRRx",
+			"xxxxxxx"
+		],
+		[
+			"RRxRR",
+			"RBBBR",
+			"xBRBx",
+			"RBBBR",
+			"RRxRR"
 		]
 	],
-	[
+	[ # level two
 		[
-			"xxxxx",
-			"xRRRB",
-			"xRBBB",
-			"xRBBB",
-			"xBBBB"
+			"xxxxxxx",
+			"xRRxRRx",
+			"xRBxBRx",
+			"xxxxxxx",
+			"xRRxRRx",
+			"xRBxBRx",
+			"xxxxxxx"
+		],
+		[
+			"xxxxxxx",
+			"xxRRRxx",
+			"xRBBBRx",
+			"xRBRBRx",
+			"xRBBBRx",
+			"xxBRRxx",
+			"xxxxxxx"
+		],
+		[
+			"xBBBBBx",
+			"xRRRRRx",
+			"xRBBBRx",
+			"xRBRBRx",
+			"xRBRBRx",
+			"xRBRBRx",
+			"xxxRxxx"
 		]
-	], # level two
-	[] # level three
+	],
+	[ # level three
+		[
+			"RRRRRRRR",
+			"RBBBBBBR",
+			"RBBBBBBR",
+			"RBBRRBBR",
+			"RBRRRBBR",
+			"RBBBBBBR",
+			"BBBBBBBR",
+			"RRRRRRRR"
+		],
+		[
+			"RBRBRRRR",
+			"RBRBRBBB",
+			"RBRBRBBB",
+			"RBRBRRRR",
+			"RBRBRRBB",
+			"RBRBBRBB",
+			"RBBBBRRB",
+			"BRRRRBBR"
+		]
+	]
 ]
