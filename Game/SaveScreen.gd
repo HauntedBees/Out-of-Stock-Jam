@@ -128,6 +128,7 @@ func load_data(key:String):
 	PlayerInfo.map_infos = map_datas
 	game.close()
 	SceneSwitcher.switch_scene("res://Maps/%s.tscn" % location_line, false)
+	player_info["source"] = "SAVE"
 	SceneSwitcher.memory = player_info
 
 func save_data(key:String, button:Button):

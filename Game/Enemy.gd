@@ -103,9 +103,18 @@ func _hit_animation():
 	hit_anim = false
 	_set_animation(true)
 
-func _die():
+func _die(immediate := false):
 	if my_ai != null:
 		my_ai.pre_death()
+	if immediate:
+		material.uv1_scale.x = 1
+		material.albedo_texture = dead
+		main_mesh.mesh = dead_mesh
+		translate(Vector3(0, -0.5, 0))
+		refresh_label()
+		collision_layer = 2
+		collision_mask = 2
+		return
 	material.uv1_scale.x = 1
 	material.albedo_texture = dead
 	main_mesh.mesh = dead_mesh

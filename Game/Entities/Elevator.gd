@@ -5,6 +5,7 @@ export(String, "REGULAR", "SERVICE", "EXECUTIVE") var type := "REGULAR"
 onready var highlight:ShaderMaterial = preload("res://HUD/Hover.tres")
 onready var main_mesh:MeshInstance = $MeshInstance
 onready var name_mesh:MeshInstance = $Name
+onready var hud:ElevatorHUD = $HUD
 var material:SpatialMaterial
 var highlight_timer := 0.0
 
@@ -26,3 +27,5 @@ func _process(delta:float):
 func hide_highlight():
 	main_mesh.get_active_material(0).next_pass = null
 	name_mesh.visible = false
+
+func use(): hud.display_hud(PlayerInfo.current_map, PlayerInfo.current_story_state, type)

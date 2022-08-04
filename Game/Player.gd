@@ -56,7 +56,6 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	weapon.set_weapon(PlayerInfo.current_weapon.type)
 	update_environment()
-	rotation_degrees.y = -90 # TODO: I should not need this
 
 func _process(delta:float):
 	if PlayerInfo.paused: return
@@ -210,7 +209,6 @@ func _handle_movement(delta:float):
 				velocity.y = my_gravity
 		else:
 			velocity.y += delta * GRAVITY
-	print(velocity.y)
 	var vel_xz := Vector3(velocity.x, 0, velocity.z)
 	var acceleration := speed_mult * (ACCELERATION if direction.dot(vel_xz) > 0 else DECELERATION)
 	vel_xz = vel_xz.linear_interpolate(direction * speed_mult * MAX_SPEED, acceleration * delta)
@@ -295,7 +293,8 @@ func _handle_use_item(event:InputEvent):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		PlayerInfo.paused = true
 	elif body is Elevator:
-		print("FUUU")
+		var e:Elevator = body
+		e.use()
 
 func _on_MayhemScreen_closed():
 	mayhem_screen.visible = false

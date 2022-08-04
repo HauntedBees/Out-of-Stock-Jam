@@ -4,10 +4,14 @@ extends Spatial
 var destroyed_object_names := [] # Lamps and LockedDoors
 func _ready():
 	add_to_group("destroy_monitor")
+	add_to_group("Map")
 	get_tree().call_group("equip_monitor", "update_weapon", true)
 	get_tree().call_group("equip_monitor", "update_mayhem")
-	if SceneSwitcher.memory.keys().size() > 0:
-		_load_player()
+	match SceneSwitcher.get_memory_type():
+		"SAVE":
+			_load_player()
+		"MAP":
+			_place_player()
 	_load_from_map_info()
 	#_identify_duplicates(self, true)
 func on_destroy(body:String): destroyed_object_names.append(body)
@@ -18,6 +22,13 @@ func _load_from_map_info():
 	destroyed_object_names = map_info["_destroyed"]
 	for n in get_children():
 		_load_node(map_info, n)
+
+func _place_player():
+	var player = get_tree().get_nodes_in_group("player")[0]
+	var d := SceneSwitcher.memory
+	var destination:Spatial = find_node(d["destination"])
+	player.global_transform.origin = destination.global_transform.origin
+	player.rotation_degrees.y = destination.rotation_degrees.y
 
 func _load_player():
 	var player = get_tree().get_nodes_in_group("player")[0] # fucking cyclic references
@@ -48,6 +59,11 @@ func get_as_dictionary() -> Dictionary:
 	for n in get_children():
 		_check_node(info, n)
 	return info
+
+func save_to_dictionary():
+	var d := get_as_dictionary()
+	PlayerInfo.map_infos[name] = d
+	print("saved %s" % name)
 
 func _check_node(info_ref:Dictionary, n:Node):
 	if n is Entity:

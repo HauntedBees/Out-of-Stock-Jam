@@ -180,5 +180,9 @@ func get_item_from_dictionary(d:Dictionary) -> Item: return get_item(d["type"], 
 func get_inventory_from_dictionaries(a:Array) -> Array:
 	var inv := []
 	for di in a:
-		inv.append(get_item_from_dictionary(di))
+		if di is Dictionary:
+			inv.append(get_item_from_dictionary(di))
+		else:
+			print("not a dict: %s" % di)
+			inv.append(di)
 	return inv

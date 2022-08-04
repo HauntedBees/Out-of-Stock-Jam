@@ -29,13 +29,16 @@ func _entity_from_dict(d:Dictionary):
 	forced_velocity = GASUtils.str2vec3(d["forced_velocity"])
 	forced_velocity_timer = d["forced_velocity_timer"]
 	contents = ContentIndex.get_inventory_from_dictionaries(d["contents"])
-	if is_dead: _die()
+	if is_dead: _die(true)
 
 func as_dict() -> Dictionary: return _entity_as_dict()
 func _entity_as_dict() -> Dictionary:
 	var inventory := []
 	for i in contents:
-		inventory.append(i.as_dict())
+		if i is Item:
+			inventory.append(i.as_dict())
+		else:
+			inventory.append(i)
 	return {
 		"health": health,
 		"position": global_transform.origin,
@@ -82,7 +85,7 @@ func take_hit(direction:Vector3, force:float, damage:float):
 
 func _custom_hit(): return
 func _hit_animation(): return
-func _die(): return
+func _die(immediate := false): return
 
 func _physics_process(delta:float):
 	if PlayerInfo.paused || PlayerInfo.time_frozen: return

@@ -8,6 +8,14 @@ var cached_scene:Node
 var cached_caller:Node
 var memory:Dictionary
 
+func get_memory_type() -> String:
+	if memory == null || memory.keys().size() == 0:
+		return "None"
+	if memory.has("source"):
+		return memory["source"]
+	else:
+		return "None"
+
 func return_to_last_scene(args):
 	var current_scene := root.get_child(root.get_child_count() - 1)
 	current_scene.queue_free()

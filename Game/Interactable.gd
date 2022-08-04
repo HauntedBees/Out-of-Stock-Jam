@@ -29,7 +29,14 @@ func refresh_label():
 	else:
 		label.text = "%s (%s)" % [display_name, contents.size()]
 
-func _die():
+func _die(immediate := false):
+	if immediate:
+		if shoot_to_get:
+			queue_free()
+		else:
+			transform.origin.y -= 0.5
+			main_mesh.material_override = MeshCache.get_material_with_texture(main_mesh.material_override, scrap_tex)
+			($CollisionShape as CollisionShape).disabled = true
 	if shoot_to_get:
 		get_tree().call_group("PlayerSound", "play_sound", "Pop")
 		if content_name.find("rings_") == 0:

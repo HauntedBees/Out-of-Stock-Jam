@@ -1137,9 +1137,6 @@ force_multiplier = 0.0
 content_name = "some_food"
 y_scale = 2.0
 
-[node name="Elevator" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 32 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -41.9576 )
-
 [node name="Medibot2" parent="Navigation" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.1987, 1.2, -32.7843 )
 type = "Medibot"
@@ -1408,3 +1405,9 @@ autoplay = true
 
 [node name="TestCamera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.887, 2.805, -22.424 )
+
+[node name="Elevator" parent="." instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.124424, 0, -41.8954 )
+
+[node name="Elevator_REGULAR" type="Spatial" parent="."]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -38.5858 )

@@ -41,5 +41,19 @@ func load_screen_as_texture_rect(name: String, width := 0.0, height := 0.0, keep
 	texture_rect.texture = texture
 	return texture_rect
 
-func str2vec2(s:String) -> Vector2: return str2var("Vector2" + s)
-func str2vec3(s:String) -> Vector3: return str2var("Vector3" + s)
+func str2vec2(s) -> Vector2:
+	if s is String:
+		return str2var("Vector2" + s)
+	elif s is Vector2:
+		return s
+	else:
+		print("THIIIS SHOULDN'T HAPPEN")
+		return Vector2.ZERO
+func str2vec3(s) -> Vector3:
+	if s is String:
+		return str2var("Vector3" + s)
+	elif s is Vector3:
+		return s
+	else:
+		print("THIIIS SHOULDN'T HAPPEN")
+		return Vector3.ZERO
