@@ -26,6 +26,7 @@ onready var sounds := {
 
 onready var search:Control = $Search
 onready var map = $MapPaper
+onready var map_image:TextureRect = $MapPaper/Map
 onready var ruby_container:Control = $RubyHolder
 
 var search_contents := []
@@ -36,6 +37,7 @@ var search_bgs := []
 var is_search := false
 
 func _ready():
+	map_image.texture = load("res://Textures/HUD/Map_%s.png" % PlayerInfo.current_map)
 	for x in PlayerInfo.INV_WIDTH:
 		var is_locked:bool = x >= PlayerInfo.get_inventory_columns()
 		var ref_tile := lock if is_locked else tile

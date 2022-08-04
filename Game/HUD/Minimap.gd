@@ -28,6 +28,7 @@ func _set_rotation(f:float):
 func _ready(): reset()
 
 func reset():
+	map.texture = load("res://Textures/HUD/Map_%s.png" % PlayerInfo.current_map)
 	var map_origin := get_tree().get_nodes_in_group("MapOrigin")
 	if map_origin == null || map_origin.size() == 0: return
 	var origin:MapOrigin = map_origin[0]

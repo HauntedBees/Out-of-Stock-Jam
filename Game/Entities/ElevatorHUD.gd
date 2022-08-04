@@ -43,6 +43,12 @@ func display_hud(current_floor:String, current_story:int, elevator_type:String):
 		"SERVICE":
 			shaft_floor1.visible = current_floor != "Engineering"
 			shaft_floor2.visible = current_floor != "Arboreals"
+			if current_story == 0:
+				match current_floor:
+					"Engineering":
+						label.text = "The elevator is stuck on the first floor. Find the power supply in the center of the room to turn it back on."
+					"Arboreals":
+						label.text = "The elevator is stuck on the first floor. You can take this service elevator to the first floor to turn it back on."
 		"EXECUTIVE":
 			regular_floor4.visible = current_floor != "Crew Quarters"
 			special_floor5.visible = current_floor != "Command Center"
