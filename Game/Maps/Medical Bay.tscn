@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Assets/Map_Medical.glb" type="PackedScene" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Gimmicks/Ladder.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Maps/RingPath.gd" type="Script" id=7]
 [ext_resource path="res://Entities/StaticObj.tscn" type="PackedScene" id=8]
-[ext_resource path="res://OpeningCutscene.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Ceiling.material" type="Material" id=10]
 [ext_resource path="res://HUD/MapOrigin.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Hacking/SecurityControl.tscn" type="PackedScene" id=12]
@@ -437,12 +436,12 @@ x_scale = 2.0
 [node name="Cryogenics" type="Spatial" parent="Navigation/NavigationMeshInstance"]
 
 [node name="Chamber" parent="Navigation/NavigationMeshInstance/Cryogenics" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.6716, 1.08101, 20.0427 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.6716, 0.5, 20.0427 )
 type = "Cryochamber"
 health = 10000.0
 force_multiplier = 0.0
 collider_y_scale = 2.0
-y_scale = 2.0
+y_scale = 3.0
 x_scale = 2.0
 
 [node name="Computer" parent="Navigation/NavigationMeshInstance/Cryogenics" instance=ExtResource( 3 )]
@@ -470,12 +469,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.1254, 7.40775, 19.8591 )
 flicker_chance = 0.0
 
 [node name="Chamber2" parent="Navigation/NavigationMeshInstance/Cryogenics" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.6716, 1.08101, 30.2269 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.6716, 0.5, 30.2269 )
 type = "Cryochamber"
 health = 10000.0
 force_multiplier = 0.0
 collider_y_scale = 2.0
-y_scale = 2.0
+y_scale = 3.0
 x_scale = 2.0
 
 [node name="Computer2" parent="Navigation/NavigationMeshInstance/Cryogenics" instance=ExtResource( 3 )]
@@ -503,39 +502,39 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.1254, 7.40775, 30.0432 )
 flicker_chance = 0.0
 
 [node name="Chamber3" parent="Navigation/NavigationMeshInstance/Cryogenics" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.6716, 1.08101, 39.8412 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.6716, 0.5, 39.8412 )
 type = "Cryochamber"
 health = 10000.0
 force_multiplier = 0.0
 collider_y_scale = 2.0
-y_scale = 2.0
+y_scale = 3.0
 x_scale = 2.0
 
 [node name="Chamber4" parent="Navigation/NavigationMeshInstance/Cryogenics" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.28532, 1.08101, 20.0427 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.28532, 0.5, 20.0427 )
 type = "Cryochamber"
 health = 10000.0
 force_multiplier = 0.0
 collider_y_scale = 2.0
-y_scale = 2.0
+y_scale = 3.0
 x_scale = 2.0
 
 [node name="Chamber5" parent="Navigation/NavigationMeshInstance/Cryogenics" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.28532, 1.08101, 30.2269 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.28532, 0.5, 30.2269 )
 type = "Cryochamber"
 health = 10000.0
 force_multiplier = 0.0
 collider_y_scale = 2.0
-y_scale = 2.0
+y_scale = 3.0
 x_scale = 2.0
 
 [node name="Chamber6" parent="Navigation/NavigationMeshInstance/Cryogenics" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.28532, 1.08101, 39.8412 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.28532, 0.5, 39.8412 )
 type = "Cryochamber"
 health = 10000.0
 force_multiplier = 0.0
 collider_y_scale = 2.0
-y_scale = 2.0
+y_scale = 3.0
 x_scale = 2.0
 
 [node name="Computer3" parent="Navigation/NavigationMeshInstance/Cryogenics" instance=ExtResource( 3 )]
@@ -1182,7 +1181,7 @@ speed = 0.0
 all_facing = true
 
 [node name="Player" parent="Navigation" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.91, 0.459739, 30.6613 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.91, 0.459739, 25.1536 )
 
 [node name="RingPath" type="Path" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8233, 0, -16.553 )
@@ -1219,9 +1218,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.4003, 0.8, 30.286 )
 curve = SubResource( 12 )
 script = ExtResource( 7 )
 distance = 4.0
-
-[node name="OpeningCutscene" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.7297, 1.09108, 30.2202 )
 
 [node name="Ceiling" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.4255, 0 )
@@ -1411,3 +1407,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.124424, 0, -41.8954 )
 
 [node name="Elevator_REGULAR" type="Spatial" parent="."]
 transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -38.5858 )
+
+[node name="SpawnPoint" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20.91, 0.46, 30.661 )

@@ -1,8 +1,8 @@
 extends Node
 
  # https://gameaccessibilityguidelines.com/include-a-cool-down-period-post-acceptance-delay-of-0-5-seconds-between-inputs/
-var input_cooldown_enabled := true
-var input_cooldown_length := 0.5
+var input_cooldown_enabled := false#true
+var input_cooldown_length := 0.0#0.5
 
 # https://gameaccessibilityguidelines.com/use-an-easily-readable-default-font-size/
 var vision_minimum_font_size := 28

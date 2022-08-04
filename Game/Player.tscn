@@ -20,8 +20,8 @@
 [ext_resource path="res://Textures/HUD/Underwater.png" type="Texture" id=18]
 [ext_resource path="res://HUD/PauseScreen.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Textures/HUD/Hurt.png" type="Texture" id=20]
-[ext_resource path="res://Textures/OpeningCutscene/HurtHand.png" type="Texture" id=21]
-[ext_resource path="res://Textures/OpeningCutscene/RoboHand.png" type="Texture" id=22]
+[ext_resource path="res://Textures/HUD/RoboHand.png" type="Texture" id=21]
+[ext_resource path="res://Textures/HUD/HurtHand.png" type="Texture" id=22]
 [ext_resource path="res://Textures/HUD/DeadEnd.png" type="Texture" id=23]
 [ext_resource path="res://HUD/MayhemScreen.tscn" type="PackedScene" id=24]
 [ext_resource path="res://PlayerSoundBank.gd" type="Script" id=25]
@@ -490,7 +490,7 @@ margin_top = 481.0
 margin_right = 1663.0
 margin_bottom = 1331.0
 rect_rotation = -26.798
-texture = ExtResource( 21 )
+texture = ExtResource( 22 )
 expand = true
 
 [node name="RoboLeftHand" type="TextureRect" parent="Dead"]
@@ -500,7 +500,7 @@ margin_right = 1124.0
 margin_bottom = 1309.0
 rect_rotation = 24.3357
 rect_scale = Vector2( -1, 1 )
-texture = ExtResource( 22 )
+texture = ExtResource( 21 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false

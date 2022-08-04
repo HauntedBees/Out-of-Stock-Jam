@@ -29,6 +29,18 @@ onready var how_to_play := [
 	$HowToPlay/Hacking,
 	$HowToPlay/Accessibility
 ]
+onready var cutscene := [
+	$OpeningCutscene/TextureRect,
+	$OpeningCutscene/TextureRect2,
+	$OpeningCutscene/TextureRect3,
+	$OpeningCutscene/TextureRect4,
+	$OpeningCutscene/TextureRect5,
+	$OpeningCutscene/TextureRect6,
+	$OpeningCutscene/TextureRect7,
+	$OpeningCutscene/TextureRect8,
+	$OpeningCutscene/TextureRect9
+]
+onready var cutscene_text:RichTextLabel = $OpeningCutscene/Textbox/CutsceneText
 
 func _ready():
 	var has_saves := has_saves()
@@ -91,8 +103,11 @@ func _on_HowToPlay_pressed():
 
 func _on_StraightToGame_pressed():
 	PlayerInfo.current_map = "Medical Bay"
-	get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "Map", "save_to_dictionary")
 	SceneSwitcher.switch_scene("res://Maps/Medical Bay.tscn", false)
+	SceneSwitcher.memory = {
+		"source": "MAP",
+		"destination": "SpawnPoint"
+	}
 
 func _on_HowPlayBtn_pressed(): _set_how_play(0)
 func _on_BasicCtrlsBtn_pressed(): _set_how_play(1)
@@ -108,3 +123,57 @@ func _set_how_play(idx:int):
 	for i in how_to_play.size():
 		var s:Control = how_to_play[i]
 		s.visible = i == idx
+
+var cutscene_dialog:PoolStringArray = [
+	"[color=#CCAAAA]???[/color]: Hmm, what's this?",
+	"[color=#CCAAAA]???[/color]: Oh, my, it looks like your cryogenic chamber got stuck for a while.",
+	"[color=#CCAAAA]???[/color]: Ah, yes... you were supposed to be awoken from stasis 2 months ago!",
+	"[color=#CCAAAA]???[/color]: Unfortunately for you, a lot has happened in those 2 months.",
+	"[color=#CCAAAA]???[/color]: This colony is now controlled by [color=#FF00FF]Doctor Roboton[/color], and I am one of his [color=#FF00FF]Roboticizers[/color].",
+	"[color=#CCAAAA]???[/color]: Which means it's now time to [color=#FF0000]roboticize you[/color].",
+	"[color=#CCAAAA]???[/color]: Just doing my job; [color=#FF0000]nothing personnel, kid[/color].",
+	"You can feel yourself slowly succumbing to the [color=#FF00FF]mayhem[/color] of roboticization.",
+	"[color=#CCAAAA]???[/color]: URK.",
+	"Behind the [color=#FF00FF]now dead Roboticizer[/color] you see a woman holding a gun.",
+	"[color=#AACCAA]???[/color]: That was close. I'm glad I caught you in time; you're our only hope now.",
+	"[color=#AACCAA]???[/color]: I'm Princess Oaknut, and I used to lead this space station. Until [color=#FF00FF]Roboton[/color] happened.",
+	"[color=#AACCAA]Oaknut[/color]: He and his minions invaded the station and began killing and roboticizing everyone.",
+	"[color=#AACCAA]Oaknut[/color]: You're the only one who can stop him, he's not stopping with just this station.",
+	"[color=#AACCAA]Oaknut[/color]: Once he overrides the controls in the captain's chamber... our species is doomed.",
+	"[color=#AACCAA]Oaknut[/color]: Please, stop him. I'm glad I was able to catch you before it was too late for you.",
+	"[color=#AACCAA]Oaknut[/color]: But now, it's too late for me... There are other enemies around the station that did a number on me. Please be careful.",
+	"[color=#AACCAA]Oaknut[/color]: Take the [color=#FF00FF]items[/color] in that [color=#FF00FF]desk[/color]; you'll need them.",
+	"[color=#AACCAA]Oaknut[/color]: Good... luck..."
+]
+var cutscene_idx := 0
+var cutscene_advances := [1, 5, 6, 7, 8, 9, 17, 18]
+var cutscene_advance_idx := 0
+
+func _on_ShowOpening_pressed():
+	beep_ping.play()
+	_start_cutscene()
+func _start_cutscene():
+	$TitleMusic.stop()
+	$BackgroundMusic.play()
+	$OpeningCutscene.visible = true
+	for c in cutscene:
+		c.visible = false
+	cutscene[0].visible = true
+	cutscene_text.bbcode_text = cutscene_dialog[0]
+
+func _is_action(event:InputEvent, action:String) -> bool:
+	return event.is_action(action) && GASInput.is_action_just_pressed(action)
+
+func _on_OpeningCutscene_gui_input(event:InputEvent):
+	if !(_is_action(event, "action") || _is_action(event, "use")):
+		return
+	cutscene_idx += 1
+	if cutscene_idx >= cutscene_dialog.size():
+		_on_StraightToGame_pressed()
+		return
+	if cutscene_idx == 8:
+		$Bang.play()
+	cutscene_text.bbcode_text = cutscene_dialog[cutscene_idx]
+	if cutscene_idx == cutscene_advances[cutscene_advance_idx]:
+		cutscene_advance_idx += 1
+		cutscene[cutscene_advance_idx].visible = true
