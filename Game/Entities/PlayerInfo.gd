@@ -52,9 +52,11 @@ var inv_drag_to_move := true
 var crouch_toggle := false
 var equip_toggle := false
 var mouse_sensitivity := 0.15
+var last_save_point := ""
 var map_infos := {}
 
 # Unsaved
+var last_used_save_point := ""
 var in_elevator := false
 var inv_is_dragging := false
 var in_cutscene := false

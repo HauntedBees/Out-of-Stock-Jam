@@ -380,7 +380,12 @@ skeleton = NodePath("../..")
 material/0 = SubResource( 16 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0, 38.0158 )
+transform = Transform( 1, 0, 0, 0, 0.998695, -0.0510633, 0, 0.0510633, 0.998695, 0, -1.21041, 38.0158 )
+light_energy = 2.0
+
+[node name="DirectionalLight2" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.75123, 0.660041, 0, -0.660041, 0.75123, 0, 4.16483, 38.0158 )
+light_energy = 2.0
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -450,10 +455,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 640.0
-margin_top = 355.0
-margin_right = 1280.0
-margin_bottom = 487.0
+margin_left = -320.0
+margin_top = -185.0
+margin_right = 320.0
+margin_bottom = -53.0
 texture = ExtResource( 14 )
 expand = true
 __meta__ = {

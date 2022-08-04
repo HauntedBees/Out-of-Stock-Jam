@@ -464,7 +464,20 @@ func _game_over():
 	PlayerInfo.paused = true
 	game_over_timer.start(3.5)
 	yield(game_over_timer, "timeout")
-	pause_screen.open(true)
+	if PlayerInfo.last_save_point == "":
+		pause_screen.open(true)
+	else:
+		var point_info:PoolStringArray = PlayerInfo.last_save_point.split("/")
+		PlayerInfo.last_save_point = ""
+		PlayerInfo.paused = false
+		PlayerInfo.current_map = point_info[0]
+		PlayerInfo.return_timeout = 2.0
+		get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "Map", "save_to_dictionary")
+		SceneSwitcher.switch_scene("res://Maps/%s.tscn" % point_info[0], false)
+		SceneSwitcher.memory = {
+			"source": "MAP",
+			"destination": point_info[1]
+		}
 
 func fuck_it_up(rings_to_lose:int):
 	if rings_to_lose == 0:

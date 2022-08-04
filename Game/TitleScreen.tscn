@@ -287,4 +287,5 @@ stream = ExtResource( 13 )
 [connection signal="mouse_entered" from="MainTitle/VBoxContainer/Button_Options" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="MainTitle/VBoxContainer/Button_Options" to="." method="_on_Options_pressed"]
 [connection signal="mouse_entered" from="MainTitle/VBoxContainer/Button_Quit" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="MainTitle/VBoxContainer/Button_Quit" to="." method="_on_Button_Quit_pressed"]
 [connection signal="back_save" from="SaveScreen" to="." method="_on_SaveScreen_back_save"]

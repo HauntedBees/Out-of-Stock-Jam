@@ -61,3 +61,4 @@ func _on_Options_pressed():
 	beep_ping.play()
 	options_screen.visible = true
 
+func _on_Button_Quit_pressed(): get_tree().quit()

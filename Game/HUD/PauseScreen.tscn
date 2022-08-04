@@ -264,6 +264,7 @@ stream = ExtResource( 13 )
 [connection signal="mouse_entered" from="VBoxContainer/Button_LoadGame" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Button_LoadGame" to="." method="_on_LoadGame_pressed"]
 [connection signal="mouse_entered" from="VBoxContainer/Button_Quit" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Button_Quit" to="." method="_on_Button_Quit_pressed"]
 [connection signal="mouse_entered" from="NextHint" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="NextHint" to="." method="_on_NextHint_pressed"]
 [connection signal="mouse_entered" from="PrevHint" to="." method="_on_button_mouse_entered"]

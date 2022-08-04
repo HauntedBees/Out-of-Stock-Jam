@@ -114,6 +114,7 @@ func load_data(key:String):
 	PlayerInfo.current_story_state = player_info["current_story_state"]
 	PlayerInfo.crouch_toggle = player_info["crouch_toggle"]
 	PlayerInfo.mouse_sensitivity = player_info["mouse_sensitivity"]
+	PlayerInfo.last_save_point = player_info["last_save_point"]
 	PlayerInfo.equip_toggle = player_info["equip_toggle"]
 	GASConfig.input_cooldown_enabled = player_info["input_cooldown_enabled"]
 	GASConfig.input_cooldown_length = player_info["input_cooldown_length"]
@@ -173,6 +174,7 @@ func _save_game_data(game:File):
 		"position": pspat.global_transform.origin,
 		"rotation": Vector2(player.vision.rotation_degrees.x, player.rotation_degrees.y),
 		"difficulty": PlayerInfo.difficulty,
+		"last_save_point": PlayerInfo.last_save_point,
 		"mouse_sensitivity": PlayerInfo.mouse_sensitivity,
 		"chaos_energy": PlayerInfo.chaos_energy,
 		"max_chaos_energy": PlayerInfo.max_chaos_energy,

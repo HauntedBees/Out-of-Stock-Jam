@@ -261,7 +261,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Sonic Shock"
-run/main_scene="res://Maps/Arboreals.tscn"
+run/main_scene="res://Maps/Medical Bay.tscn"
 boot_splash/image="res://SplashScreen.png"
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"

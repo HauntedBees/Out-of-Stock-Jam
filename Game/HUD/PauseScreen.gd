@@ -71,7 +71,8 @@ const HINTS := [
 	"Eating [color=#FF00FF]Food[/color] will recover lost [color=#FF00FF]Mayhem Energy[/color], allowing you to use more of your [color=#FF00FF]Mayhem Abilities[/color].",
 	"As long as you have at least one [color=#FF00FF]Ring[/color], you're safe from enemy attacks. But if an enemy hits you when you have no [color=#FF00FF]Rings[/color], you'll die.",
 	"If you have at least [color=#FF00FF]50 Rings[/color], you can enter [color=#FF00FF]Cyberspace[/color] at a [color=#FF00FF]Lamp Post[/color], where you can earn a [color=#FF00FF]Mayhem Ruby[/color].",
-	"If you die, you'll reappear at the last [color=#FF00FF]Lamp Post[/color] you touched. Haven't touched a [color=#FF00FF]Lamp Post[/color] yet? You should do that soon."
+	"If you die, you'll reappear once at the last [color=#FF00FF]Lamp Post[/color] you touched with all of your items! Haven't touched a [color=#FF00FF]Lamp Post[/color] yet? You should do that soon."
 ]
 
 func _on_button_mouse_entered(): hover_ping.play()
+func _on_Button_Quit_pressed(): get_tree().quit()

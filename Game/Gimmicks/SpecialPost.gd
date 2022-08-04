@@ -32,6 +32,10 @@ func on_return(beat_stage:bool):
 
 func _on_body_entered(body:Node):
 	if cleared || !(body is Player): return
+	var key := "%s/%s" % [PlayerInfo.current_map, name]
+	if PlayerInfo.last_used_save_point != key:
+		PlayerInfo.last_save_point = key
+		PlayerInfo.last_used_save_point = key
 	if PlayerInfo.return_timeout > 0.0: return
 	if PlayerInfo.rings < 25:
 		warning.visible = true
