@@ -49,6 +49,10 @@ var stage:SpecialStageLevelInfo
 
 func _ready():
 	stage_num = PlayerInfo.mayhem_rubies
+	stage_speed = 0.1 + stage_num * 0.011
+	match PlayerInfo.difficulty:
+		0: stage_speed = 0.8
+		2: stage_speed += 0.02
 	($ConeAnimation as AnimationPlayer).playback_speed = stage_speed
 	tween.interpolate_property($Camera, "rotation_degrees:x", -20, -15, 2.5)
 	tween.interpolate_property($Camera, "translation", 
