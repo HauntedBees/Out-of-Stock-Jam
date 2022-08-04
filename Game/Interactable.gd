@@ -14,15 +14,10 @@ export(float) var x_scale := 1.0
 
 func _ready():
 	main_mesh = $InteractModel
-	main_mesh.mesh = main_mesh.mesh.duplicate()
-	(main_mesh.mesh as QuadMesh).size.x *= x_scale
-	(main_mesh.mesh as QuadMesh).size.y *= y_scale
+	main_mesh.mesh = MeshCache.get_mesh_with_dimensions(main_mesh.mesh, Vector2(x_scale, y_scale))
 	var col_shape:CollisionShape = $CollisionShape
-	col_shape.shape = col_shape.shape.duplicate()
-	(col_shape.shape as BoxShape).extents.y *= collider_y_scale
-	material = main_mesh.get_active_material(0).duplicate()
-	main_mesh.material_override = material
-	material.albedo_texture = tex
+	col_shape.shape = MeshCache.get_collider_with_dimensions(col_shape.shape, Vector2(1.0, collider_y_scale))
+	main_mesh.material_override = MeshCache.get_material_with_texture(main_mesh.get_active_material(0), tex)
 	if display_name == "":
 		display_name = type
 	name_mesh = $Name
@@ -44,7 +39,8 @@ func _die():
 		queue_free()
 	else:
 		die_sound.play()
-		material.albedo_texture = scrap_tex
+		transform.origin.y -= 0.5
+		main_mesh.material_override = MeshCache.get_material_with_texture(main_mesh.material_override, scrap_tex)
 		($CollisionShape as CollisionShape).disabled = true
 
 func _on_BreakStream_finished(): die_sound.queue_free()

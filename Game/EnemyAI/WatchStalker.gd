@@ -9,9 +9,11 @@ func noise_made(volume:float, position:Vector3):
 	if player_sight > 0: return
 	if !_heard_noise(volume, position, 40.0): return
 	moving_to_sound = true
-	print(position)
 	_set_target(position, true)
 
+func is_hit():
+	if PlayerInfo.time_frozen: return
+	_set_target(player.global_transform.origin, true)
 
 func _custom_mind_timeout():
 	if player_sight > 0:

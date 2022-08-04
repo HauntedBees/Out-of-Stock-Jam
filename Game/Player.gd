@@ -100,7 +100,6 @@ func _water_submerge():
 		3: safe_oxygen_level = 60.0
 	if PlayerInfo.difficulty == 0:
 		safe_oxygen_level *= 2.0
-	safe_oxygen_level = 12.0
 
 func _water_exit():
 	needs_safe_oxygen = false
@@ -211,6 +210,7 @@ func _handle_movement(delta:float):
 				velocity.y = my_gravity
 		else:
 			velocity.y += delta * GRAVITY
+	print(velocity.y)
 	var vel_xz := Vector3(velocity.x, 0, velocity.z)
 	var acceleration := speed_mult * (ACCELERATION if direction.dot(vel_xz) > 0 else DECELERATION)
 	vel_xz = vel_xz.linear_interpolate(direction * speed_mult * MAX_SPEED, acceleration * delta)
@@ -219,6 +219,8 @@ func _handle_movement(delta:float):
 func _input(event:InputEvent):
 	if game_over.visible: return
 	var pause_pressed := GASInput.is_action_just_pressed("pause")
+	if PlayerInfo.in_elevator:
+		return
 	if mayhem_screen.visible:
 		if pause_pressed || (event.is_action("toggle_inventory") && GASInput.is_action_just_pressed("toggle_inventory")) || (event.is_action("use") && GASInput.is_action_just_pressed("use")):
 			_on_MayhemScreen_closed()
@@ -292,6 +294,8 @@ func _handle_use_item(event:InputEvent):
 		mayhem_screen.set_shards()
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		PlayerInfo.paused = true
+	elif body is Elevator:
+		print("FUUU")
 
 func _on_MayhemScreen_closed():
 	mayhem_screen.visible = false

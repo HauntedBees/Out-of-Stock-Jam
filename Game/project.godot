@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Spatial",
+"class": "Elevator",
+"language": "GDScript",
+"path": "res://Entities/Elevator.gd"
+}, {
+"base": "Spatial",
 "class": "Emerald",
 "language": "GDScript",
 "path": "res://Special/Emerald.gd"
@@ -205,6 +210,7 @@ _global_script_classes=[ {
 "path": "res://Weapons/Weapon.gd"
 } ]
 _global_script_class_icons={
+"Elevator": "",
 "Emerald": "",
 "Enemy": "",
 "EnemyAI": "",
@@ -249,7 +255,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Sonic Shock"
-run/main_scene="res://Maps/Medical Bay.tscn"
+run/main_scene="res://Maps/Arboreals.tscn"
 config/icon="res://icon.png"
 
 [autoload]

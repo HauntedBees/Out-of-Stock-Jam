@@ -13,10 +13,13 @@ var light:Light
 var highlight_timer := 0.0
 var rng := RandomNumberGenerator.new()
 var light_on := true
+var in_view := false
 
 func _ready():
+	in_view = false
 	rng.randomize()
 	light = $SpotLight
+	light.visible = false
 	main_mesh.mesh = main_mesh.mesh.duplicate()
 	material = main_mesh.get_active_material(0).duplicate()
 	main_mesh.material_override = material
@@ -26,7 +29,7 @@ func show_highlight():
 	main_mesh.get_active_material(0).next_pass = highlight
 
 func _process(delta:float):
-	if PlayerInfo.time_frozen: return
+	if PlayerInfo.time_frozen || !in_view: return
 	if light_on && rng.randf() < flicker_chance:
 		flicker_timer.start()
 		light.visible = false
@@ -50,3 +53,10 @@ func _on_timeout():
 		return
 	light_on = true
 	light.visible = true
+
+func _on_VisibilityNotifier_camera_entered(_camera:Camera):
+	in_view = true
+	light.visible = light_on
+func _on_VisibilityNotifier_camera_exited(_camera:Camera):
+	in_view = false
+	light.visible = false

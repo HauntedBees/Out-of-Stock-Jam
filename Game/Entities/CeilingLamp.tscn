@@ -26,15 +26,22 @@ mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
 
 [node name="SpotLight" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2.19954, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.372888, 0 )
+light_energy = 2.0
 shadow_enabled = true
-spot_range = 120.0
+spot_range = 9.69029
 spot_attenuation = 2.0
-spot_angle = 56.1388
+spot_angle = 18.6938
 spot_angle_attenuation = 0.450625
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
 
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.50848, 0 )
+aabb = AABB( -2.96919, -5.16881, -2.92246, 5.93839, 10.3376, 5.84492 )
+
 [connection signal="timeout" from="Timer" to="." method="_on_timeout"]
+[connection signal="camera_entered" from="VisibilityNotifier" to="." method="_on_VisibilityNotifier_camera_entered"]
+[connection signal="camera_exited" from="VisibilityNotifier" to="." method="_on_VisibilityNotifier_camera_exited"]

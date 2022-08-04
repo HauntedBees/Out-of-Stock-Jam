@@ -111,6 +111,7 @@ func load_data(key:String):
 	PlayerInfo.current_weapon = ContentIndex.get_item_from_dictionary(player_info["current_weapon"])
 	PlayerInfo.current_mayhem = player_info["current_mayhem"]
 	PlayerInfo.inv_drag_to_move = player_info["inv_drag_to_move"]
+	PlayerInfo.current_story_state = player_info["current_story_state"]
 	PlayerInfo.crouch_toggle = player_info["crouch_toggle"]
 	PlayerInfo.mouse_sensitivity = player_info["mouse_sensitivity"]
 	PlayerInfo.equip_toggle = player_info["equip_toggle"]
@@ -180,6 +181,7 @@ func _save_game_data(game:File):
 		"current_weapon": PlayerInfo.current_weapon.as_dict(),
 		"current_mayhem": PlayerInfo.current_mayhem,
 		"inv_drag_to_move": PlayerInfo.inv_drag_to_move,
+		"current_story_state": PlayerInfo.current_story_state,
 		"crouch_toggle": PlayerInfo.crouch_toggle,
 		"equip_toggle": PlayerInfo.equip_toggle,
 		"controls": GASInput.get_actions_as_dictionary(),

@@ -1,6 +1,7 @@
-class_name MayhemKiosk
-extends StaticBody
+class_name Elevator
+extends Spatial
 
+export(String, "REGULAR", "SERVICE", "EXECUTIVE") var type := "REGULAR"
 onready var highlight:ShaderMaterial = preload("res://HUD/Hover.tres")
 onready var main_mesh:MeshInstance = $MeshInstance
 onready var name_mesh:MeshInstance = $Name

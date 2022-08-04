@@ -115,6 +115,14 @@ var items := {
 		get_item("Broccoli", Vector2(0, 0), 1),
 		get_item("Pistol Ammo", Vector2(0, 1), 1)
 	],
+	"uncommon1": [
+		get_item("Strobbery", Vector2(0, 0), 2),
+		get_item("Pistol Ammo", Vector2(0, 1), 5)
+	],
+	"uncommon2": [
+		get_item("Rings", Vector2.ZERO, 10),
+		get_item("Onion", Vector2(0, 1), 2)
+	],
 	"common3": [get_item("Capsicum", Vector2(2, 2), 1)],
 	"common4": [get_item("Pistol Ammo", Vector2(0, 2), 3)],
 	"coffeemachine": [get_item("Tea", Vector2(2, 1), 1)],
@@ -126,17 +134,28 @@ var items := {
 		get_item("Pistol", Vector2(0, 0), 1),
 		get_item("Pistol Ammo", Vector2(2, 1), 2),
 	],
+	"machinegun": [
+		get_item("Assault Rifle", Vector2(0, 0), 15),
+		get_item("Assault Rifle Ammo", Vector2(1, 1), 14),
+	],
 	"mole": [
 		get_item("Capsicum", Vector2(0, 1), 1),
 		get_item("Broccoli", Vector2(0, 0), 1),
 		get_item("Onion", Vector2(2, 1), 1),
 	],
 	"rings_10": [10],
+	"rings_30": [30],
 	"mayhem_full": [1000],
 	"yog": [get_item("Yoggy", Vector2(2, 1), 1)],
+	"some_food": [
+		get_item("Strobbery", Vector2(1, 0), 2),
+		get_item("Pasta", Vector2(2, 1), 1)
+	],
+	"tofu": [get_item("Tofu", Vector2(2, 1), 1)],
 	"inv_rings10": [get_item("Rings", Vector2.ZERO, 10)],
 	"inv_rings20": [get_item("Rings", Vector2.ZERO, 20)],
 	"shard": [get_item("Mayhem Shards", Vector2(1, 1), 1)],
+	"shard2": [get_item("Mayhem Shards", Vector2(1, 1), 2)],
 	"starter": [
 		get_item("Hammer", Vector2.ZERO, 1),
 		get_item("Mayhem Shards", Vector2(2, 2), 5),

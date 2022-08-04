@@ -1,0 +1,200 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Textures/Entities/Elevator.png" type="Texture" id=1]
+[ext_resource path="res://HUD/Theme.tres" type="Theme" id=2]
+[ext_resource path="res://Entities/Elevator.gd" type="Script" id=3]
+[ext_resource path="res://HUD/ThemeBig.tres" type="Theme" id=4]
+[ext_resource path="res://Textures/HUD/Inventory.jpg" type="Texture" id=5]
+[ext_resource path="res://HUD/Button.tres" type="Theme" id=6]
+[ext_resource path="res://Entities/ElevatorHUD.gd" type="Script" id=7]
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 2.01523, 2.03193, 1.03262 )
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 4, 4, 0.5 )
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_unshaded = true
+albedo_texture = ExtResource( 1 )
+uv1_scale = Vector3( 3, 2, 1 )
+
+[sub_resource type="QuadMesh" id=19]
+
+[sub_resource type="ViewportTexture" id=21]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="SpatialMaterial" id=20]
+resource_local_to_scene = true
+render_priority = 1
+flags_transparent = true
+flags_unshaded = true
+flags_no_depth_test = true
+flags_do_not_receive_shadows = true
+params_billboard_mode = 2
+albedo_texture = SubResource( 21 )
+uv1_scale = Vector3( 0.731, 2.883, 1 )
+uv1_offset = Vector3( 0.034, -1.106, 0 )
+
+[node name="Elevator" type="StaticBody"]
+script = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0.643 )
+shape = SubResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.00198, 0 )
+mesh = SubResource( 1 )
+skeleton = NodePath("")
+material/0 = SubResource( 2 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 350, 55 )
+transparent_bg = true
+render_target_v_flip = true
+
+[node name="Label" type="Label" parent="Viewport"]
+margin_top = 2.0
+margin_right = 350.0
+margin_bottom = 60.0
+theme = ExtResource( 2 )
+text = "Elevator"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.1, 0.185949, -0.0740929, 0 )
+visible = false
+mesh = SubResource( 19 )
+skeleton = NodePath("")
+material/0 = SubResource( 20 )
+
+[node name="HUD" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Box" type="TextureRect" parent="HUD"]
+modulate = Color( 1, 1, 1, 0.572549 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -473.0
+margin_top = -325.5
+margin_right = 473.0
+margin_bottom = 325.5
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HUD/Box/VBoxContainer"]
+margin_right = 946.0
+margin_bottom = 175.0
+theme = ExtResource( 4 )
+text = "You need at least 25 rings
+to enter the special stage."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoFloor2_Climb" type="Button" parent="HUD/Box/VBoxContainer"]
+margin_top = 179.0
+margin_right = 946.0
+margin_bottom = 237.0
+theme = ExtResource( 6 )
+text = "Climb down to Aboreals"
+
+[node name="GoFloor1_Shaft" type="Button" parent="HUD/Box/VBoxContainer"]
+margin_top = 241.0
+margin_right = 946.0
+margin_bottom = 299.0
+theme = ExtResource( 6 )
+text = "Climb down to Engineering"
+
+[node name="GoFloor3_Climb" type="Button" parent="HUD/Box/VBoxContainer"]
+margin_top = 303.0
+margin_right = 946.0
+margin_bottom = 361.0
+theme = ExtResource( 6 )
+text = "Jump back to Medical Bay"
+
+[node name="GoFloor2_Shaft" type="Button" parent="HUD/Box/VBoxContainer"]
+margin_top = 365.0
+margin_right = 946.0
+margin_bottom = 423.0
+theme = ExtResource( 6 )
+text = "Climb back to Aboreals"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoFloor1_Normal" type="Button" parent="HUD/Box/VBoxContainer"]
+margin_top = 427.0
+margin_right = 946.0
+margin_bottom = 485.0
+theme = ExtResource( 6 )
+text = "Go to Engineering"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoFloor2_Normal" type="Button" parent="HUD/Box/VBoxContainer"]
+margin_top = 489.0
+margin_right = 946.0
+margin_bottom = 547.0
+theme = ExtResource( 6 )
+text = "Go to Arboreals"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoFloor3_Normal" type="Button" parent="HUD/Box/VBoxContainer"]
+margin_top = 551.0
+margin_right = 946.0
+margin_bottom = 609.0
+theme = ExtResource( 6 )
+text = "Go to Medical Bay"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoFloor4_Normal" type="Button" parent="HUD/Box/VBoxContainer"]
+margin_top = 613.0
+margin_right = 946.0
+margin_bottom = 671.0
+theme = ExtResource( 6 )
+text = "Go to Crew Quarters"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoFloor5_Normal" type="Button" parent="HUD/Box/VBoxContainer"]
+margin_top = 675.0
+margin_right = 946.0
+margin_bottom = 733.0
+theme = ExtResource( 6 )
+text = "Go to Command Center"
+__meta__ = {
+"_edit_use_anchors_": false
+}

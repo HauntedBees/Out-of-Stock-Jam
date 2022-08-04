@@ -13,6 +13,7 @@ var projectile:PackedScene
 var rapid_fire := false
 var sound := ""
 
+onready var player:Spatial = get_tree().get_nodes_in_group("player")[0]
 onready var weapon_container:Control = $Weapon
 onready var weapon_textures := weapon_container.get_children()
 onready var mayhem_textures := [
@@ -146,7 +147,7 @@ func _projectile_attack():
 
 func _standard_attack():
 	var body = PlayerInfo.get_collision(attack_range, false, true)
-	if body is SecurityControl || body is MayhemKiosk:
+	if body is SecurityControl || body is MayhemKiosk || body is Elevator:
 		get_tree().call_group("PlayerSound", "play_sound", sound, "Weapon")
 		return
 	if body is Trap || body is Grate:
@@ -182,6 +183,7 @@ func _standard_attack():
 	elif is_melee:
 		get_tree().call_group("PlayerSound", "play_sound", "Woosh", "Weapon")
 	else:
+		get_tree().call_group("SoundAwaiter", "noise_made", 0.5, player.global_transform.origin)
 		get_tree().call_group("PlayerSound", "play_sound", sound, "Weapon")
 
 func _try_mayhem():

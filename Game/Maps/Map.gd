@@ -9,6 +9,7 @@ func _ready():
 	if SceneSwitcher.memory.keys().size() > 0:
 		_load_player()
 	_load_from_map_info()
+	#_identify_duplicates(self, true)
 func on_destroy(body:String): destroyed_object_names.append(body)
 
 func _load_from_map_info():
@@ -92,3 +93,27 @@ func _load_node(info:Dictionary, n:Node):
 		for c in n.get_children():
 			_load_node(info, c)
 	# TODO: moving platforms if they're actually used
+
+# names need to be unique for saving to work
+var node_names := {}
+func _identify_duplicates(n:Node, first := false):
+	if !(n is Spatial): return
+	if n is Entity || "IS_SPECIAL_POST" in n || n is SecurityControl || n is LockedDoor:
+		if node_names.has(n.name):
+			var a:Array = node_names[n.name]
+			a.append("%s/%s" % [n.get_parent().name, n.name])
+			node_names[n.name] = a
+		else:
+			node_names[n.name] = ["%s/%s" % [n.get_parent().name, n.name]]
+		return
+	for c in n.get_children():
+		_identify_duplicates(c)
+	if first:
+		for k in node_names.keys():
+			var a:Array = node_names[k]
+			if a.size() == 1:
+				node_names.erase(k)
+		var f := File.new()
+		f.open("user://duplicate_names.txt", File.WRITE)
+		f.store_line(to_json(node_names))
+		f.close()

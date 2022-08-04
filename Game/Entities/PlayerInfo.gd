@@ -26,13 +26,14 @@ var mayhem_levels := {
 	"Magnet": 1,
 	"Mayhem-Modulate": 1,
 	"Cloak": 1,
-	"Swim": 0,
+	"Swim": 1,
 	"Strength": 1,
 	"Weaponry": 0,
 	"Hacking": 1,
 	"Vision": 1
 }
 var current_map := "Medical Bay"
+var current_story_state := 0
 var inventory := [
 	ContentIndex.get_item("Grenade Launcher", Vector2(2, 0), 1),
 	ContentIndex.get_item("Grenade Launcher Ammo", Vector2(6, 0), 7),
@@ -54,6 +55,7 @@ var mouse_sensitivity := 0.15
 var map_infos := {}
 
 # Unsaved
+var in_elevator := false
 var inv_is_dragging := false
 var in_cutscene := false
 var paused := false
@@ -165,6 +167,8 @@ func get_collision(distance:float, no_lamps := false, include_areas := false) ->
 	elif res["collider"] is SecurityControl:
 		return res["collider"]
 	elif res["collider"] is MayhemKiosk:
+		return res["collider"]
+	elif res["collider"] is Elevator:
 		return res["collider"]
 	elif !no_lamps && res["collider"] is Lamp:
 		return res["collider"]

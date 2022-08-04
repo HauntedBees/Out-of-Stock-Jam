@@ -68,12 +68,14 @@ func _can_see_player(max_distance:float, from:Vector3) -> bool:
 func _does_detect_player(max_distance:float, from:Vector3) -> bool:
 	if !_can_see_player(max_distance, from): return false
 	var direction := _direction_to_player()
-	if direction.z > 0: return false # 0, 0, -1 is in front, 0, 0, 1 is behind
+	var facing_dir:Vector3 = e.get_global_transform().basis.z
+	var facing_angle := facing_dir.angle_to(direction) / PI
+	if facing_angle <= 0.25: return false
 	var chance := _get_light_level() * 0.05 + _get_player_light_level() * 0.15
 	var distance := _distance_to_player()
 	if distance < 5.0: chance += 0.4 / distance
 	if !player.is_crouched: chance += 0.3
-	if direction.z <= -0.1: chance += 0.5
+	if facing_angle >= 0.7: chance += 0.5
 	print(chance)
 	return randf() <= chance
 
