@@ -41,6 +41,7 @@ onready var cutscene := [
 	$OpeningCutscene/TextureRect9
 ]
 onready var cutscene_text:RichTextLabel = $OpeningCutscene/Textbox/CutsceneText
+onready var credits:Control = $Credits
 
 func _ready():
 	var has_saves := has_saves()
@@ -177,3 +178,13 @@ func _on_OpeningCutscene_gui_input(event:InputEvent):
 	if cutscene_idx == cutscene_advances[cutscene_advance_idx]:
 		cutscene_advance_idx += 1
 		cutscene[cutscene_advance_idx].visible = true
+
+func _on_Credits_pressed():
+	beep_ping.play()
+	credits.visible = true
+func _on_Credits_BackButton_pressed():
+	beep_ping.play()
+	credits.visible = false
+func _on_Credits_meta_clicked(meta:String):
+	beep_ping.play()
+	OS.shell_open(meta)

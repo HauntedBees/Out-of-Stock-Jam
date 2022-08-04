@@ -208,10 +208,39 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button_Quit" type="TextureButton" parent="MainTitle/VBoxContainer"]
+[node name="Button_Credits" type="TextureButton" parent="MainTitle/VBoxContainer"]
 margin_top = 640.0
 margin_right = 439.0
 margin_bottom = 768.0
+rect_min_size = Vector2( 0, 128 )
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+expand = true
+
+[node name="Label" type="Label" parent="MainTitle/VBoxContainer/Button_Credits"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = -29.0
+margin_right = 125.0
+margin_bottom = 29.0
+rect_min_size = Vector2( 250, 0 )
+rect_scale = Vector2( 1.5, 1.5 )
+rect_pivot_offset = Vector2( 125, 29 )
+theme = ExtResource( 2 )
+text = "Credits"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_Quit" type="TextureButton" parent="MainTitle/VBoxContainer"]
+margin_top = 800.0
+margin_right = 439.0
+margin_bottom = 928.0
 rect_min_size = Vector2( 0, 128 )
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 5 )
@@ -636,6 +665,141 @@ bbcode_text = "[color=#FF00FF]Hey Guys[/color]"
 text = "Hey Guys"
 scroll_active = false
 
+[node name="Credits" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Credits"]
+modulate = Color( 0.227451, 0.227451, 0.227451, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Credits"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -703.5
+margin_top = 102.0
+margin_right = 703.5
+margin_bottom = 509.0
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "[center][color=#22FF22]Sonic Shock[/color] was created for the [color=#CCCCFF][url=https://itch.io/jam/out-of-stock]Out of Stock[/url][/color] Game Jam by [color=#CCCCFF][url=https://www.hauntedbees.com/]Haunted Bees Productions[/url][/color].
+[/center]"
+text = "Sonic Shock was created for the Out of Stock Game Jam by Haunted Bees Productions.
+"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="Button" parent="Credits"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -252.0
+margin_top = -71.0
+theme = ExtResource( 14 )
+text = "GO BACK"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Credits"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -854.5
+margin_top = -206.0
+margin_right = 854.5
+margin_bottom = 440.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Credits/HBoxContainer"]
+margin_right = 530.0
+margin_bottom = 646.0
+rect_min_size = Vector2( 530, 600 )
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "[color=#CCCCCC]Programming[/color]
+ Sean Finch
+[color=#CCCCCC]Game Design[/color]
+ Sean Finch
+[color=#CCCCCC]Writing[/color]
+ Sean Finch"
+text = "Programming
+ Sean Finch
+Game Design
+ Sean Finch
+Writing
+ Sean Finch"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Credits/HBoxContainer"]
+margin_left = 534.0
+margin_right = 1164.0
+margin_bottom = 646.0
+rect_min_size = Vector2( 630, 600 )
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "[color=#CCCCCC]Informant[/color]
+ Skyler Johnson
+[color=#CCCCCC]Biobreak Technician[/color]
+ CC
+[color=#CCCCCC]Accessibility[/color]
+ Kelly Marine"
+text = "Informant
+ Skyler Johnson
+Biobreak Technician
+ CC
+Accessibility
+ Kelly Marine"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Credits/HBoxContainer"]
+margin_left = 1168.0
+margin_right = 1778.0
+margin_bottom = 646.0
+rect_min_size = Vector2( 610, 600 )
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "[color=#CCCCCC]Graphics[/color]
+ [color=#CCCCFF][url=https://github.com/HauntedBees/Out-of-Stock-Jam/blob/main/Assets/ImageCredits.md]Lots of Stock Photos[/url][/color]
+[color=#CCCCCC]Audio[/color]
+ [color=#CCCCFF][url=https://github.com/HauntedBees/Out-of-Stock-Jam/blob/main/Assets/AudioCredits.md]Lots of Free Audio[/url][/color]
+[color=#CCCCCC]Made With[/color]
+ [color=#CCCCFF][url=https://godotengine.org/]Godot Engine[/url][/color]
+ [color=#CCCCFF][url=https://github.com/HauntedBees/Godot-Accessibility-Suite]GAS Accessibility[/url][/color]"
+text = "Graphics
+ Lots of Stock Photos
+Audio
+ Lots of Free Audio
+Made With
+ Godot Engine
+ GAS Accessibility"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="SaveScreen" parent="." instance=ExtResource( 9 )]
 visible = false
 
@@ -667,6 +831,8 @@ stream = ExtResource( 28 )
 [connection signal="pressed" from="MainTitle/VBoxContainer/Button_LoadGame" to="." method="_on_LoadGame_pressed"]
 [connection signal="mouse_entered" from="MainTitle/VBoxContainer/Button_Options" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="MainTitle/VBoxContainer/Button_Options" to="." method="_on_Options_pressed"]
+[connection signal="mouse_entered" from="MainTitle/VBoxContainer/Button_Credits" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="MainTitle/VBoxContainer/Button_Credits" to="." method="_on_Credits_pressed"]
 [connection signal="mouse_entered" from="MainTitle/VBoxContainer/Button_Quit" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="MainTitle/VBoxContainer/Button_Quit" to="." method="_on_Button_Quit_pressed"]
 [connection signal="mouse_entered" from="OpeningInfo/HBoxContainer/HowToPlay" to="." method="_on_button_mouse_entered"]
@@ -692,4 +858,7 @@ stream = ExtResource( 28 )
 [connection signal="mouse_entered" from="HowToPlay/VBoxContainer/OptionsBtn" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="HowToPlay/VBoxContainer/OptionsBtn" to="." method="_on_OptionsBtn_pressed"]
 [connection signal="gui_input" from="OpeningCutscene" to="." method="_on_OpeningCutscene_gui_input"]
+[connection signal="meta_clicked" from="Credits/RichTextLabel" to="." method="_on_Credits_meta_clicked"]
+[connection signal="pressed" from="Credits/BackButton" to="." method="_on_Credits_BackButton_pressed"]
+[connection signal="meta_clicked" from="Credits/HBoxContainer/RichTextLabel4" to="." method="_on_Credits_meta_clicked"]
 [connection signal="back_save" from="SaveScreen" to="." method="_on_SaveScreen_back_save"]
