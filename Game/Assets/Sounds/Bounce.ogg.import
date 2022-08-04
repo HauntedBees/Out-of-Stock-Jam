@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Bounce.ogg-062d5faad348f6fee1945aa7d3dde8db.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Bounce.ogg"
+dest_files=[ "res://.import/Bounce.ogg-062d5faad348f6fee1945aa7d3dde8db.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

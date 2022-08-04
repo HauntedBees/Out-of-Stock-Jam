@@ -39,3 +39,9 @@ type = "SERVICE"
 
 [node name="Elevator" parent="Navigation" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.7724, 0, -31.2227 )
+
+[node name="Elevator_REGULAR" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -27.3756, 0, -28.4751 )
+
+[node name="Elevator_SERVICE" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12.4479, 0, 39.9774 )

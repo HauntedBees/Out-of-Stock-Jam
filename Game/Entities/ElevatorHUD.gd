@@ -34,7 +34,10 @@ func display_hud(current_floor:String, current_story:int, elevator_type:String):
 			if current_story == 0:
 				broken_floor2.visible = current_floor != "Arboreals"
 				broken_floor3.visible = current_floor != "Medical Bay"
-				label.text = "The elevator is stuck on the first floor. You can climb down the shaft to reach the second floor, then you can find the service elevator to the first floor there."
+				if current_floor == "Medical Bay":
+					label.text = "The elevator is stuck on the first floor. You can climb down the shaft to reach the second floor, then you can find the service elevator to the first floor there."
+				else:
+					label.text = "The elevator is stuck on the first floor. There's service elevator in the southeast that will bring you there."
 			else:
 				regular_floor1.visible = current_floor != "Engineering"
 				regular_floor2.visible = current_floor != "Arboreals"

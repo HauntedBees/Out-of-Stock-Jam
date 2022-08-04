@@ -1182,7 +1182,7 @@ speed = 0.0
 all_facing = true
 
 [node name="Player" parent="Navigation" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.6472, 0.459739, -39.2479 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.91, 0.459739, 30.6613 )
 
 [node name="RingPath" type="Path" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8233, 0, -16.553 )

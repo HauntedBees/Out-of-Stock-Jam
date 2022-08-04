@@ -24,7 +24,8 @@ var sounds := {
 	"Cloak": preload("res://Assets/Sounds/Cloak.ogg"),
 	"Uncloak": preload("res://Assets/Sounds/Uncloak.ogg"),
 	"Mayhem-Modulate": preload("res://Assets/Sounds/Mayhem-Modulate.ogg"),
-	"Pop": preload("res://Assets/Sounds/Pop.ogg")
+	"Pop": preload("res://Assets/Sounds/Pop.ogg"),
+	"Bounce": preload("res://Assets/Sounds/Bounce.ogg")
 }
 onready var dedicated_channels := {
 	"Ring": $RingStream,

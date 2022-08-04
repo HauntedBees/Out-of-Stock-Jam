@@ -24,6 +24,7 @@ Magnet | https://freesound.org/people/strangehorizon/sounds/619723/
 Mayhem-Modulate | https://freesound.org/people/craigsmith/sounds/487074/
 Cloak, Uncloak | https://freesound.org/people/HorrorAudio/sounds/507451/
 Break | https://freesound.org/people/vrodge/sounds/119525/
+Bounce | https://freesound.org/people/Astounded/sounds/478730/
 
 Menu Sounds:
 Beep | https://freesound.org/people/noirenex/sounds/245242/

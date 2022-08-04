@@ -32,7 +32,7 @@ var mayhem_levels := {
 	"Hacking": 1,
 	"Vision": 1
 }
-var current_map := "Engineering"#"Medical Bay" #"Arboreals"#
+var current_map := "Medical Bay" #"Arboreals"#"Engineering"#
 var current_story_state := 0
 var inventory := [
 	ContentIndex.get_item("Grenade Launcher", Vector2(2, 0), 1),
