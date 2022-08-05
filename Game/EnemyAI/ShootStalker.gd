@@ -40,8 +40,9 @@ func _between(amount:float, a:float, b:float) -> bool:
 
 func _custom_physics_process(delta:float):
 	shoot_timer -= delta
+	var can_see := _can_see_player(30.0, e.global_transform.origin)
 	var d := _distance_to_player()
-	if _between(d, 10.0, 15.0) && player_sight > 0:
+	if _between(d, 10.0, 15.0) && player_sight > 0 && can_see:
 		if shoot_timer <= 0.0:
 			match PlayerInfo.difficulty:
 				0: shoot_timer = 2.0
@@ -49,7 +50,7 @@ func _custom_physics_process(delta:float):
 				2: shoot_timer = 0.15
 			var dir := _direction_to_player() + Vector3(-0.5 + 1.0 * randf(), 0, 0) if randf() < 0.4 else Vector3.ZERO
 			shoot(dir)
-	elif d <= 10 && player_sight > 0:
+	elif d <= 10 && player_sight > 0 && can_see:
 		var dir := -_direction_to_player().normalized()
 		dir.y = 0.0
 		e.move_and_slide(dir * e.speed * delta, Vector3.UP)
