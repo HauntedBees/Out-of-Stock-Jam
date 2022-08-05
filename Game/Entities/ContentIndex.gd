@@ -187,6 +187,15 @@ func get_item(type:String, position:Vector2, amount := 0) -> Item:
 
 func get_item_from_dictionary(d:Dictionary) -> Item: return get_item(d["type"], GASUtils.str2vec2(d["position"]), d["amount"])
 
+func get_inventory_from_name(s:String) -> Array:
+	if !items.has(s): return []
+	var item_list:Array = items[s]
+	var copy_list := []
+	for i in item_list:
+		var it:Item = i
+		copy_list.append(get_item_from_dictionary(it.as_dict()))
+	return copy_list
+
 func get_inventory_from_dictionaries(a:Array) -> Array:
 	var inv := []
 	for di in a:

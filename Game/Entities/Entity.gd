@@ -52,7 +52,7 @@ func _entity_as_dict() -> Dictionary:
 
 func _ready():
 	if content_name != "":
-		contents = ContentIndex.items[content_name]
+		contents = ContentIndex.get_inventory_from_name(content_name)
 
 func show_highlight():
 	highlight_timer = 0.1
