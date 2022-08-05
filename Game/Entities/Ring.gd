@@ -43,7 +43,7 @@ func _physics_process(delta:float):
 
 func _on_body_entered(body:Node):
 	if delay_timeout > 0.0: return
-	if !(body is Player):
+	if !(body is Player || body is NewPlayer):
 		if forced_velocity.length() > 0.05:
 			forced_velocity *= -0.9
 		return

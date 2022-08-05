@@ -164,12 +164,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Entities/MayhemKiosk.gd"
 }, {
+"base": "KinematicBody",
+"class": "NewPlayer",
+"language": "GDScript",
+"path": "res://Maps/SpecialBoss/NewPlayer.gd"
+}, {
 "base": "Control",
 "class": "PauseScreen",
 "language": "GDScript",
 "path": "res://HUD/PauseScreen.gd"
 }, {
-"base": "KinematicBody",
+"base": "Reference",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Player.gd"
@@ -251,6 +256,7 @@ _global_script_class_icons={
 "Map": "",
 "MapOrigin": "",
 "MayhemKiosk": "",
+"NewPlayer": "",
 "PauseScreen": "",
 "Player": "",
 "PlayerStatsHUD": "",

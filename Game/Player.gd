@@ -170,7 +170,7 @@ func get_in_water(water_depth:float):
 
 func _handle_movement_input():
 	var movement := Vector2()
-	if Input.is_action_pressed("move_forward") || active_mayhem > 0 && PlayerInfo.current_mayhem == "Spindash":
+	if Input.is_action_pressed("move_forward") || (active_mayhem > 0 && PlayerInfo.current_mayhem == "Spindash"):
 		movement.y += 1
 	elif Input.is_action_pressed("move_backward"):
 		movement.y -= 1

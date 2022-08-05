@@ -199,6 +199,11 @@
  - <https://pixabay.com/photos/skull-human-head-skeleton-bone-765477/>
  - <https://pixabay.com/vectors/ink-red-splatter-abstract-paint-303244/>
 
+# Double Boss
+ - <https://pixabay.com/illustrations/angel-god-heaven-angelic-spiritual-1579310/>
+ - <https://pixabay.com/illustrations/technology-robot-futuristic-machine-3940306/>
+ - <https://pixabay.com/illustrations/planets-spheres-orbs-balls-sci-fi-7323010/>
+
 # Special Stage
  - <https://pixabay.com/vectors/lamp-lamppost-light-street-159683/>
  - <https://pixabay.com/vectors/marathon-runner-sport-silhouette-3635758/>

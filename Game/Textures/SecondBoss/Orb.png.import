@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Ring.png-529dd8ffca5fb4376043fd98d8ccfe5d.s3tc.stex"
-path.etc="res://.import/Ring.png-529dd8ffca5fb4376043fd98d8ccfe5d.etc.stex"
+path.s3tc="res://.import/Orb.png-a4d26effb929abbfd198cb8e239ddbb3.s3tc.stex"
+path.etc="res://.import/Orb.png-a4d26effb929abbfd198cb8e239ddbb3.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/Special Stage/Ring.png"
-dest_files=[ "res://.import/Ring.png-529dd8ffca5fb4376043fd98d8ccfe5d.s3tc.stex", "res://.import/Ring.png-529dd8ffca5fb4376043fd98d8ccfe5d.etc.stex" ]
+source_file="res://Textures/SecondBoss/Orb.png"
+dest_files=[ "res://.import/Orb.png-a4d26effb929abbfd198cb8e239ddbb3.s3tc.stex", "res://.import/Orb.png-a4d26effb929abbfd198cb8e239ddbb3.etc.stex" ]
 
 [params]
 
@@ -22,7 +22,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=true
-flags/filter=false
+flags/filter=true
 flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=1

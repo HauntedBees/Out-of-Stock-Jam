@@ -16,11 +16,13 @@ func _ready():
 
 func _on_body_entered(body:Node):
 	if body == launcher: return
-	var blast = boom.instance()
 	if explode_on_impact:
+		var blast = boom.instance()
 		blast.force = blast_force
 		blast.damage = damage
 		get_parent().add_child(blast)
 		blast.global_transform.origin = global_transform.origin
 		get_tree().call_group("SoundAwaiter", "noise_made", 2.0, global_transform.origin)
+	elif body.is_in_group("EggsmanFinal"):
+		body.take_hit(Vector3.ZERO, blast_force, damage)
 	queue_free()
