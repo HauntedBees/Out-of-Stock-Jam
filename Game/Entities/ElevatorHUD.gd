@@ -73,6 +73,14 @@ func _on_GoBack_pressed():
 func _on_Arboreals_pressed(): _go_to_map("Arboreals")
 func _on_MedBay_pressed(): _go_to_map("Medical Bay")
 func _on_Engineering_pressed(): _go_to_map("Engineering")
+func _on_CrewQtrs_pressed(): _go_to_map("Crew Quarters")
+func _on_CmdCtr_pressed():
+	visible = false
+	PlayerInfo.paused = false
+	PlayerInfo.in_elevator = false
+	PlayerInfo.current_map = "CommandCenter"
+	get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "Map", "save_to_dictionary")
+	SceneSwitcher.switch_scene("res://HUD/PreBossCutscene.tscn", false)
 
 func _go_to_map(map:String):
 	visible = false

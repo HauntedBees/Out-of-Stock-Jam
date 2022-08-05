@@ -217,4 +217,6 @@ __meta__ = {
 [connection signal="pressed" from="HUD/Box/VBoxContainer/GoFloor1_Normal" to="HUD" method="_on_Engineering_pressed"]
 [connection signal="pressed" from="HUD/Box/VBoxContainer/GoFloor2_Normal" to="HUD" method="_on_Arboreals_pressed"]
 [connection signal="pressed" from="HUD/Box/VBoxContainer/GoFloor3_Normal" to="HUD" method="_on_MedBay_pressed"]
+[connection signal="pressed" from="HUD/Box/VBoxContainer/GoFloor4_Normal" to="HUD" method="_on_CrewQtrs_pressed"]
+[connection signal="pressed" from="HUD/Box/VBoxContainer/GoFloor5_Normal" to="HUD" method="_on_CmdCtr_pressed"]
 [connection signal="pressed" from="HUD/Box/VBoxContainer/GoBack" to="HUD" method="_on_GoBack_pressed"]
