@@ -1221,6 +1221,7 @@ distance = 4.0
 
 [node name="Ceiling" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.4255, 0 )
+visible = false
 mesh = SubResource( 3 )
 material/0 = ExtResource( 10 )
 
@@ -1397,9 +1398,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.704, 5.68163, 1.4624 )
 stream = ExtResource( 25 )
 unit_size = 10.0
 autoplay = true
-
-[node name="TestCamera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.887, 2.805, -22.424 )
 
 [node name="Elevator" parent="." instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.124424, 0, -41.8954 )

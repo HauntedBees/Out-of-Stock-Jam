@@ -26,6 +26,7 @@ onready var sounds := {
 
 onready var search:Control = $Search
 onready var map = $MapPaper
+onready var hint:TextureRect = $MapPaper/Overlay
 onready var map_image:TextureRect = $MapPaper/Map
 onready var ruby_container:Control = $RubyHolder
 
@@ -39,9 +40,13 @@ var is_search := false
 func _ready():
 	if PlayerInfo.current_map == "CommandCenter":
 		map_image.visible = false
+		$MapButton.visible = false
+		$HintButton.visible = false
 	else:
+		hint.visible = PlayerInfo.difficulty == 0
 		map_image.visible = true
 		map_image.texture = load("res://Textures/HUD/Map_%s.png" % PlayerInfo.current_map)
+		hint.texture = load("res://Textures/HUD/Overlay_%s.png" % PlayerInfo.current_map)
 	for x in PlayerInfo.INV_WIDTH:
 		var is_locked:bool = x >= PlayerInfo.get_inventory_columns()
 		var ref_tile := lock if is_locked else tile
@@ -150,3 +155,8 @@ func _on_MapButton_pressed():
 
 func close_cleanup():
 	map.clean_up()
+
+func _on_HintButton_pressed():
+	if !map.visible:
+		map.visible = true
+	hint.visible = !hint.visible

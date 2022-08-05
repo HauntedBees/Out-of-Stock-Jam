@@ -19,7 +19,7 @@ var rings := 20
 var chaos_energy := 10
 var max_chaos_energy := 10
 var emerald_shards := 6
-var map_stickers := []
+var map_stickers := {}
 var mayhem_rubies := 0
 var mayhem_levels := {
 	"Spindash": 0,

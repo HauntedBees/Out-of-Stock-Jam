@@ -51,6 +51,7 @@
  - <https://pixabay.com/vectors/labels-sticker-button-bullet-1356419/>
  - <https://pixabay.com/vectors/stars-badges-sticker-glossy-glow-150610/>
  - <https://pixabay.com/illustrations/why-reminder-post-note-sticker-1432955/>
+ - <https://pixabay.com/vectors/magnifying-glass-lense-loupe-hint-306196/>
 
 # Opening Cutscene
  - <https://pixabay.com/photos/christmas-man-decorated-reindeer-1717771/>
@@ -157,6 +158,10 @@
 ## Toximuster
  - <https://www.pexels.com/photo/white-robot-toy-on-white-flat-surface-9028879/>
  - <https://pixabay.com/photos/woman-smoking-unhealthy-addiction-7012651/>
+
+## Stalker
+ - <https://pixabay.com/photos/lacasadicarta-robbery-gun-gangster-5337100/>
+ - <https://pixabay.com/photos/woman-costume-dracula-red-cloak-6279195/>
 
 ## Mole
  - <https://pixabay.com/vectors/storm-drain-sewer-hole-street-41051/>

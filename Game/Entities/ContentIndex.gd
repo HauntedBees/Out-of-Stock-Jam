@@ -165,6 +165,7 @@ var items := {
 	"inv_rings20": [get_item("Rings", Vector2.ZERO, 20)],
 	"shard": [get_item("Mayhem Shards", Vector2(1, 1), 1)],
 	"shard2": [get_item("Mayhem Shards", Vector2(1, 1), 2)],
+	"shard10": [get_item("Mayhem Shards", Vector2(1, 1), 10)],
 	"starter": [
 		get_item("Hammer", Vector2.ZERO, 1),
 		get_item("Mayhem Shards", Vector2(2, 2), 5),

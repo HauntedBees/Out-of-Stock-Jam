@@ -85,12 +85,13 @@ func save_stickers():
 			"texture": sticker_textures.find(s.texture),
 			"position": s.rect_position
 		})
-	PlayerInfo.map_stickers = stickers
+	PlayerInfo.map_stickers[PlayerInfo.current_map] = stickers
 
 func load_existing_stickers():
 	for s in posted_stickers.get_children():
 		posted_stickers.remove_child(s)
-	for s in PlayerInfo.map_stickers:
+	if !PlayerInfo.map_stickers.has(PlayerInfo.current_map): return
+	for s in PlayerInfo.map_stickers[PlayerInfo.current_map]:
 		var tr := TextureRect.new()
 		tr.rect_size = SIZEV * 0.75
 		tr.expand = true
