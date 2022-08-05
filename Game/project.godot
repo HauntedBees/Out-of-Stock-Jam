@@ -184,6 +184,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://PlayerStatsHUD.gd"
 }, {
+"base": "StaticBody",
+"class": "PowerSwitch",
+"language": "GDScript",
+"path": "res://Maps/Custom/PowerSwitch.gd"
+}, {
 "base": "RigidBody",
 "class": "Projectile",
 "language": "GDScript",
@@ -260,6 +265,7 @@ _global_script_class_icons={
 "PauseScreen": "",
 "Player": "",
 "PlayerStatsHUD": "",
+"PowerSwitch": "",
 "Projectile": "",
 "SaveScreen": "",
 "SecurityControl": "",

@@ -139,7 +139,7 @@ func _handle_move_too_far_from_target():
 
 func _handle_cursor():
 	var body = PlayerInfo.get_collision(100.0)
-	if body != null:
+	if body != null && !(body is PowerSwitch):
 		body.show_highlight()
 		var dist:float = (body.transform.origin - transform.origin).length()
 		if dist <= weapon.attack_range:
@@ -303,6 +303,9 @@ func _handle_use_item(event:InputEvent):
 	elif body is Elevator:
 		var e:Elevator = body
 		e.use()
+	elif body is PowerSwitch:
+		var ps:PowerSwitch = body
+		ps.switch()
 
 func _on_MayhemScreen_closed():
 	mayhem_screen.visible = false

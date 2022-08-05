@@ -147,7 +147,7 @@ func _projectile_attack():
 
 func _standard_attack():
 	var body = PlayerInfo.get_collision(attack_range, false, true)
-	if body is SecurityControl || body is MayhemKiosk || body is Elevator:
+	if body is SecurityControl || body is MayhemKiosk || body is Elevator || body is PowerSwitch:
 		get_tree().call_group("PlayerSound", "play_sound", sound, "Weapon")
 		return
 	if body is Trap || body is Grate:

@@ -32,7 +32,7 @@ var mayhem_levels := {
 	"Hacking": 0,
 	"Vision": 0
 }
-var current_map := "Arboreals"#"Medical Bay" #"Arboreals"#"Engineering"#
+var current_map := "Engineering"#"Medical Bay" #"Arboreals"#"Engineering"#
 var current_story_state := 0
 var inventory := [
 	ContentIndex.get_item("Grenade Launcher", Vector2(2, 0), 1),
@@ -174,6 +174,8 @@ func get_collision(distance:float, no_lamps := false, include_areas := false) ->
 			return null
 		return res["collider"]
 	elif res["collider"] is MayhemKiosk:
+		return res["collider"]
+	elif res["collider"] is PowerSwitch:
 		return res["collider"]
 	elif res["collider"] is Elevator:
 		return res["collider"]

@@ -34,11 +34,18 @@ func display_hud(current_floor:String, current_story:int, elevator_type:String):
 			if current_story == 0:
 				broken_floor2.visible = current_floor != "Arboreals"
 				broken_floor3.visible = current_floor != "Medical Bay"
-				if current_floor == "Medical Bay":
-					label.text = "The elevator is stuck on the first floor. You can climb down the shaft to reach the second floor, then you can find the service elevator to the first floor there."
-				else:
-					label.text = "The elevator is stuck on the first floor. There's service elevator in the southeast that will bring you there."
+				match current_floor:
+					"Medical Bay":
+						label.text = "The elevator is stuck on the first floor. You can climb down the shaft to reach the second floor, then you can find the service elevator to the first floor there."
+					"Arboreals":
+						label.text = "The elevator is stuck on the first floor. There's service elevator in the southeast that will bring you there."
+					"Engineering":
+						label.text = "The elevator is stuck on this floor. Find the power supply in the center of the room to turn it back on."
 			else:
+				if current_floor == "Crew Quarters":
+					label.text = "Find the Executive Elevator! Don't forget to find all four Mayhem Rubies if you haven't already!"
+				else:
+					label.text = "Head to the Crew Quarters and find the Executive Elevator up to the Command Center to face Dr. Roboton."
 				regular_floor1.visible = current_floor != "Engineering"
 				regular_floor2.visible = current_floor != "Arboreals"
 				regular_floor3.visible = current_floor != "Medical Bay"
@@ -49,7 +56,7 @@ func display_hud(current_floor:String, current_story:int, elevator_type:String):
 			if current_story == 0:
 				match current_floor:
 					"Engineering":
-						label.text = "The elevator is stuck on the first floor. Find the power supply in the center of the room to turn it back on."
+						label.text = "The main elevator is stuck on this floor. Find the power supply in the center of the room to turn it back on."
 					"Arboreals":
 						label.text = "The elevator is stuck on the first floor. You can take this service elevator to the first floor to turn it back on."
 		"EXECUTIVE":
