@@ -53,7 +53,7 @@ func _process(delta:float):
 	if advance_timer > 0.0:
 		advance_timer -= delta
 		if advance_timer <= 0:
-			print("OK MOVE ON")
+			SceneSwitcher.switch_scene("res://HUD/PostBossCutscene.tscn", false)
 	if flicker_state > 0.0:
 		flicker_state -= delta
 		if flicker_state <= 0:

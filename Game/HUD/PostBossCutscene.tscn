@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Music/Boss.ogg" type="AudioStream" id=1]
+[ext_resource path="res://Textures/HUD/OrbBG.jpg" type="Texture" id=2]
+[ext_resource path="res://HUD/ThemeBig.tres" type="Theme" id=3]
+[ext_resource path="res://Textures/PreBossCutscene/BG2.png" type="Texture" id=4]
+[ext_resource path="res://HUD/PostBossCutscene.gd" type="Script" id=5]
+[ext_resource path="res://Textures/Title/SaveBG.png" type="Texture" id=6]
+
+[node name="PostBossCutscene" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -660, -90 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="Textbox" type="TextureRect" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 85.0
+margin_top = -301.0
+margin_right = -170.0
+margin_bottom = -19.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="CutsceneText" type="RichTextLabel" parent="Textbox"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 21.0
+margin_top = 13.0
+margin_right = -15.0
+margin_bottom = -11.0
+mouse_filter = 1
+theme = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[color=#FF00FF]Hey Guys[/color]"
+text = "Hey Guys"
+scroll_active = false
+
+[node name="DoomMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+autoplay = true
+
+[node name="LoseRect" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+
+[node name="Label" type="Label" parent="LoseRect"]
+margin_left = 848.0
+margin_top = 352.0
+margin_right = 1893.0
+margin_bottom = 438.0
+theme = ExtResource( 3 )
+text = "Better luck next time, space cowboy!"
+
+[node name="Label2" type="Label" parent="LoseRect"]
+margin_left = 1100.0
+margin_top = 448.0
+margin_right = 1897.0
+margin_bottom = 890.0
+theme = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Try loading an old save file and getting all the mayhem rubies from the special stages before trying to stop roboton!"
+autowrap = true
+
+[node name="Tween" type="Tween" parent="."]

@@ -195,6 +195,9 @@
  - <https://pixabay.com/photos/ball-blue-spikes-round-2061626/>
  - <https://unsplash.com/photos/VKnWrMnxahg>
  - <https://pixabay.com/photos/tunnel-corridor-space-outer-space-3233082/>
+ - <https://pixabay.com/photos/disc-shards-happiness-vandalism-4468127/>
+ - <https://pixabay.com/photos/skull-human-head-skeleton-bone-765477/>
+ - <https://pixabay.com/vectors/ink-red-splatter-abstract-paint-303244/>
 
 # Special Stage
  - <https://pixabay.com/vectors/lamp-lamppost-light-street-159683/>
