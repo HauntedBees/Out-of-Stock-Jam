@@ -15,12 +15,12 @@ var sound_volume := 1.0
 var borderless_window := false
 var full_screen := false
 var play_time := 0.0
-var rings := 20 # 0
+var rings := 20
 var chaos_energy := 10
 var max_chaos_energy := 10
 var emerald_shards := 6
 var map_stickers := []
-var mayhem_rubies := 4
+var mayhem_rubies := 0
 var mayhem_levels := {
 	"Spindash": 0,
 	"Magnet": 0,
@@ -32,7 +32,7 @@ var mayhem_levels := {
 	"Hacking": 0,
 	"Vision": 0
 }
-var current_map := "Medical Bay" #"Arboreals"#"Engineering"#
+var current_map := "Arboreals"#"Medical Bay" #"Arboreals"#"Engineering"#
 var current_story_state := 0
 var inventory := [
 	ContentIndex.get_item("Grenade Launcher", Vector2(2, 0), 1),

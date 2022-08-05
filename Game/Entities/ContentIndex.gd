@@ -144,6 +144,9 @@ var items := {
 		get_item("Assault Rifle", Vector2(0, 0), 15),
 		get_item("Assault Rifle Ammo", Vector2(1, 1), 14),
 	],
+	"sord": [
+		get_item("Sword", Vector2(1, 0), 1)
+	],
 	"mole": [
 		get_item("Capsicum", Vector2(0, 1), 1),
 		get_item("Broccoli", Vector2(0, 0), 1),

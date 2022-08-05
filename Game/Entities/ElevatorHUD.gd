@@ -64,6 +64,7 @@ func _on_GoBack_pressed():
 
 func _on_Arboreals_pressed(): _go_to_map("Arboreals")
 func _on_MedBay_pressed(): _go_to_map("Medical Bay")
+func _on_Engineering_pressed(): _go_to_map("Engineering")
 
 func _go_to_map(map:String):
 	visible = false

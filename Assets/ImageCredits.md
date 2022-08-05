@@ -168,6 +168,7 @@
  - <https://pixabay.com/photos/workers-construction-worker-handyman-2036185/>
  - <https://pixabay.com/photos/construction-worker-workers-appraise-1618343/>
  - <https://www.pexels.com/photo/a-person-walking-while-carrying-a-pylon-9322227/>
+ - <https://pixabay.com/vectors/hockey-puck-sports-hockey-ice-1477440/>
 
 ## Animals
  - <https://pixabay.com/photos/rodent-cute-downy-squirrel-little-3098452/>

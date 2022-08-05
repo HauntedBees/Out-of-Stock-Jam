@@ -344,7 +344,6 @@ theme = ExtResource( 14 )
 text = "Skip Opening Cutscene"
 
 [node name="HowToPlay" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -445,9 +444,9 @@ margin_right = -10.0
 margin_bottom = -16.0
 theme = ExtResource( 8 )
 bbcode_enabled = true
-bbcode_text = "Hidden across the station are [color=#FF00FF]special posts[/color]. If you find one and have [color=#FF00FF]25 rings[/color], you'll be taken to a [color=#FF00FF]special stage[/color]. In these stages, you must avoid obstacles and collect the required number of [color=#FF00FF]rings[/color] through three segments. If you complete them all, you'll unlock a [color=#FF00FF]Mayhem Ruby[/color]. What do they do? Find all 7 before you face [color=#FF00FF]Doctor Roboton[/color] to find out!
+bbcode_text = "Hidden across the station are [color=#FF00FF]special posts[/color]. If you find one and have [color=#FF00FF]25 rings[/color], you'll be taken to a [color=#FF00FF]special stage[/color]. In these stages, you must avoid obstacles and collect the required number of [color=#FF00FF]rings[/color] through three segments. If you complete them all, you'll unlock a [color=#FF00FF]Mayhem Ruby[/color]. What do they do? Find all 4 before you face [color=#FF00FF]Doctor Roboton[/color] to find out!
 Even if you don't have 25 [color=#FF00FF]rings[/color], you should walk into any [color=#FF00FF]special post[/color] you find; if you get hurt with [color=#FF0000]zero rings[/color] and die, instead of getting a [color=#FF0000]game over[/color] you'll reappear at the last [color=#FF00FF]special post[/color] you visited."
-text = "Hidden across the station are special posts. If you find one and have 25 rings, you'll be taken to a special stage. In these stages, you must avoid obstacles and collect the required number of rings through three segments. If you complete them all, you'll unlock a Mayhem Ruby. What do they do? Find all 7 before you face Doctor Roboton to find out!
+text = "Hidden across the station are special posts. If you find one and have 25 rings, you'll be taken to a special stage. In these stages, you must avoid obstacles and collect the required number of rings through three segments. If you complete them all, you'll unlock a Mayhem Ruby. What do they do? Find all 4 before you face Doctor Roboton to find out!
 Even if you don't have 25 rings, you should walk into any special post you find; if you get hurt with zero rings and die, instead of getting a game over you'll reappear at the last special post you visited."
 __meta__ = {
 "_edit_use_anchors_": false

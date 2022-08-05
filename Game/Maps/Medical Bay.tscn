@@ -1249,7 +1249,7 @@ third_button_text = ""
 transform = Transform( -0.0103671, 0, 0.999946, 0, 1, 0, -0.999946, 0, -0.0103671, 7.42107, 0, -21.4073 )
 
 [node name="ServerControl" parent="DoorsAndControls" instance=ExtResource( 12 )]
-transform = Transform( -0.00385721, 0, -0.999993, 0, 1, 0, 0.999993, 0, -0.00385721, 16.568, 1.787, 7.246 )
+transform = Transform( -0.00385721, 0, -0.999993, 0, 1, 0, 0.999993, 0, -0.00385721, 16.2152, 1.787, 7.246 )
 first_button_target = NodePath("../ServerDoors")
 first_button_function = "open"
 second_button_target = NodePath("../ServerDoors")
