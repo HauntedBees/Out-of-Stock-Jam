@@ -62,6 +62,7 @@ func display_hud(current_floor:String, current_story:int, elevator_type:String):
 		"EXECUTIVE":
 			regular_floor4.visible = current_floor != "Crew Quarters"
 			special_floor5.visible = current_floor != "Command Center"
+			label.text = "It's time to face Dr. Roboton!"
 
 func _on_GoBack_pressed():
 	visible = false
