@@ -29,10 +29,10 @@ var mayhem_levels := {
 	"Swim": 0,
 	"Strength": 0,
 	"Weaponry": 0,
-	"Hacking": 0,
+	"Hacking": 3,
 	"Vision": 0
 }
-var current_map := "Engineering"#"Crew Quarters"#"Engineering"#"Medical Bay" #"Arboreals"#"Engineering"#
+var current_map := "Crew Quarters"#"Engineering"#"Medical Bay" #"Arboreals"#"Engineering"#
 var current_story_state := 0
 var inventory := [
 	ContentIndex.get_item("Grenade Launcher", Vector2(2, 0), 1),

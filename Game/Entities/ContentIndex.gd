@@ -196,8 +196,11 @@ func get_inventory_from_name(s:String) -> Array:
 	var item_list:Array = items[s]
 	var copy_list := []
 	for i in item_list:
-		var it:Item = i
-		copy_list.append(get_item_from_dictionary(it.as_dict()))
+		if i is int:
+			copy_list.append(i)
+		else:
+			var it:Item = i
+			copy_list.append(get_item_from_dictionary(it.as_dict()))
 	return copy_list
 
 func get_inventory_from_dictionaries(a:Array) -> Array:
