@@ -43,7 +43,7 @@ func _input(event:InputEvent):
 		if ready_to_title:
 			SceneSwitcher.switch_scene("res://TitleScreen.tscn", false)
 		if PlayerInfo.mayhem_rubies >= 4:
-			pass # GOOD END
+			SceneSwitcher.switch_scene("res://Maps/CityEscape.tscn", false)
 		else:
 			tween.interpolate_property(lose, "modulate:a", 0.0, 1.0, 2.0)
 			tween.start()

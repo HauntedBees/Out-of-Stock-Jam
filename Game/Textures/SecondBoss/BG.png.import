@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/CompleteArea.png-7f8ebca798e4d54f5afb403be58d2952.s3tc.stex"
-path.etc="res://.import/CompleteArea.png-7f8ebca798e4d54f5afb403be58d2952.etc.stex"
+path.s3tc="res://.import/BG.png-eb36af5634dd8078c95fb4d210da9587.s3tc.stex"
+path.etc="res://.import/BG.png-eb36af5634dd8078c95fb4d210da9587.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/Special Stage/CompleteArea.png"
-dest_files=[ "res://.import/CompleteArea.png-7f8ebca798e4d54f5afb403be58d2952.s3tc.stex", "res://.import/CompleteArea.png-7f8ebca798e4d54f5afb403be58d2952.etc.stex" ]
+source_file="res://Textures/SecondBoss/BG.png"
+dest_files=[ "res://.import/BG.png-eb36af5634dd8078c95fb4d210da9587.s3tc.stex", "res://.import/BG.png-eb36af5634dd8078c95fb4d210da9587.etc.stex" ]
 
 [params]
 

@@ -3,9 +3,9 @@ extends KinematicBody
 
 var BEAM_SCENE := load("res://Maps/SpecialBoss/Beam.tscn")
 
-const GRAVITY = -40.0
+#const GRAVITY = -40.0
 const MAX_SPEED := 30.0
-const JUMP_SPEED := 24.0
+const JUMP_SPEED := 100.0
 const ACCELERATION := 4.5
 const DECELERATION := 16.0
 
@@ -19,14 +19,12 @@ onready var crosshair:TextureRect = $"../HUD/Crosshair"
 var velocity := Vector3()
 var direction := Vector3()
 var shoot_delay := 0.0
+var game_over := false
 
-func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-func _process(delta:float):
-	if PlayerInfo.paused: return
+func _ready(): Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta:float):
+	if game_over: return
 	if PlayerInfo.paused: return
 	shoot_delay -= delta
 	_handle_input()
@@ -38,13 +36,19 @@ func _physics_process(delta:float):
 		fire_projectile(beam)
 
 func _handle_cursor():
+	if game_over: return
 	var body = PlayerInfo.get_collision(100.0)
 	if body != null:
 		crosshair.modulate.a = 1
 	else: crosshair.modulate.a = 0.25
 
 func _handle_input():
-	var movement := Vector2(0, 1)
+	if game_over: return
+	var movement := Vector2(0, 0)
+	if Input.is_action_pressed("move_forward"):
+		movement.y += 1
+	elif Input.is_action_pressed("move_backward"):
+		movement.y -= 1
 	if Input.is_action_pressed("strafe_left"):
 		movement.x -= 1
 	elif Input.is_action_pressed("strafe_right"):
@@ -57,20 +61,22 @@ func _handle_input():
 	direction += camera_basis.x * movement.x
 
 func _handle_movement(delta:float):
+	if game_over: return
 	direction.y = 0
 	direction = direction.normalized()
-	if Input.is_action_pressed("move_forward"):
-		direction.z -= 0.5
-	elif Input.is_action_pressed("move_backward"):
-		direction.z += 0.5
 	var speed_mult := 1.25
-	velocity.y += delta * GRAVITY
+	if Input.is_action_pressed("jump"):
+		velocity.y += JUMP_SPEED * delta
+	elif Input.is_action_pressed("crouch"):
+		velocity.y -= JUMP_SPEED * delta
+	velocity.y *= 0.9 #delta * GRAVITY
 	var vel_xz := Vector3(velocity.x, 0, velocity.z)
 	var acceleration := speed_mult * (ACCELERATION if direction.dot(vel_xz) > 0 else DECELERATION)
 	vel_xz = vel_xz.linear_interpolate(direction * speed_mult * MAX_SPEED, acceleration * delta)
 	velocity = move_and_slide(Vector3(vel_xz.x, velocity.y, vel_xz.z), Vector3.UP)
 
 func _input(event:InputEvent):
+	if game_over: return
 	var pause_pressed := GASInput.is_action_just_pressed("pause")
 	if PlayerInfo.paused:
 		if pause_pressed:
@@ -81,9 +87,7 @@ func _input(event:InputEvent):
 		return
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED: # aiming
 		if event is InputEventMouseMotion: return _handle_camera_movement(event)
-	if event.is_action_pressed("jump") && GASInput.is_action_just_pressed("jump"):
-		velocity.y = JUMP_SPEED
-		get_tree().call_group("PlayerSound", "play_sound", "Jump")
+		#get_tree().call_group("PlayerSound", "play_sound", "Jump")
 
 func _handle_camera_movement(event:InputEventMouseMotion):
 	vision.rotate_x(deg2rad(event.relative.y * -PlayerInfo.mouse_sensitivity))
@@ -93,10 +97,13 @@ func _handle_camera_movement(event:InputEventMouseMotion):
 	vision.rotation_degrees = camera_rotation
 
 func add_rings(amount:int):
+	if game_over: return
 	PlayerInfo.rings += amount
 	ring_count.text = String(PlayerInfo.rings)
 
 func fire_projectile(p:Projectile):
+	if game_over: return
+	if game_over: return
 	p.launcher = self
 	get_parent().add_child(p)
 	var launch_source := camera.project_ray_normal(get_viewport().size * 0.6)
@@ -105,37 +112,19 @@ func fire_projectile(p:Projectile):
 	p.apply_impulse(Vector3.ZERO, launch_direction * p.launch_force)
 
 func lose_ring(amount := 0):
+	if game_over: return
 	if PlayerInfo.paused: return
 	PlayerInfo.rings = max(PlayerInfo.rings - amount, 0)
 	ring_count.text = String(PlayerInfo.rings)
 	get_tree().call_group("PlayerSound", "play_sound", "Hurt")
 	if PlayerInfo.rings == 0:
-		print("FUCK")
-		#_game_over()
-
-#func _game_over():
-#	if game_over.visible: return
-#	get_tree().call_group("PlayerSound", "play_sound", "GameOver", "Ring")
-#	full_hud.visible = false
-#	game_over.visible = true
-#	game_over_anim.play("Die")
-#	PlayerInfo.paused = true
-#	game_over_timer.start(3.5)
-#	yield(game_over_timer, "timeout")
-#	if PlayerInfo.last_save_point == "":
-#		pause_screen.open(true)
-#	else:
-#		var point_info:PoolStringArray = PlayerInfo.last_save_point.split("/")
-#		PlayerInfo.last_save_point = ""
-#		PlayerInfo.paused = false
-#		PlayerInfo.current_map = point_info[0]
-#		PlayerInfo.return_timeout = 2.0
-#		get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "Map", "save_to_dictionary")
-#		SceneSwitcher.switch_scene("res://Maps/%s.tscn" % point_info[0], false)
-#		SceneSwitcher.memory = {
-#			"source": "MAP",
-#			"destination": point_info[1]
-#		}
+		game_over = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		$"../LoseEnd".visible = true
 
 func _on_Timer_timeout():
+	if game_over: return
 	lose_ring(1)
+
+func _on_TryAgain_pressed(): SceneSwitcher.switch_scene("res://Maps/CityEscape.tscn", false)
+func _on_MainMenu_pressed(): SceneSwitcher.switch_scene("res://TitleScreen.tscn", false)

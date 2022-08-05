@@ -203,6 +203,8 @@
  - <https://pixabay.com/illustrations/angel-god-heaven-angelic-spiritual-1579310/>
  - <https://pixabay.com/illustrations/technology-robot-futuristic-machine-3940306/>
  - <https://pixabay.com/illustrations/planets-spheres-orbs-balls-sci-fi-7323010/>
+ - <https://pixabay.com/illustrations/corridor-science-room-future-4357417/>
+ - <https://pixabay.com/photos/milky-way-stars-night-sky-night-2695569/>
 
 # Special Stage
  - <https://pixabay.com/vectors/lamp-lamppost-light-street-159683/>
