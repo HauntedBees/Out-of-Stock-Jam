@@ -144,6 +144,10 @@ var items := {
 		get_item("Assault Rifle", Vector2(0, 0), 15),
 		get_item("Assault Rifle Ammo", Vector2(1, 1), 14),
 	],
+	"nades": [
+		get_item("Grenade Launcher", Vector2(0, 0), 1),
+		get_item("Grenade Launcher Ammo", Vector2(2, 1), 1),
+	],
 	"sord": [
 		get_item("Sword", Vector2(1, 0), 1)
 	],

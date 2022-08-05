@@ -1,8 +1,9 @@
 extends EnemyAI
 
 var music:AudioStream = load("res://Assets/Music/Stalker.ogg")
-onready var audio_player := AudioStreamPlayer3D.new()
+var audio_player:AudioStreamPlayer3D
 func _custom_ready():
+	audio_player = AudioStreamPlayer3D.new()
 	audio_player.stream = music
 	audio_player.autoplay = true
 	audio_player.unit_size = 5
