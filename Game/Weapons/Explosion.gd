@@ -7,6 +7,7 @@ onready var collider:CollisionShape = $CollisionShape
 
 var anim_done := false
 var sound_done := false
+var hurt_player := false
 
 func _on_animation_finished(_anim_name:String):
 	anim_done = true
@@ -33,13 +34,18 @@ func _on_body_entered(body:Spatial):
 			body.queue_free()
 	elif body is Player:
 		var pe:Player = body
-		pe.velocity += direction * force * 0.1
+		pe.velocity += direction * min(force, 10.0) * 0.1
+		if hurt_player:
+			pe.take_damage()
 	elif body is Lamp:
 		var le:Lamp = body
 		le.take_hit(direction, force, calc_damage)
 	elif body is Grate:
 		get_tree().call_group("destroy_monitor", "on_destroy", body.name)
 		body.queue_free()
+	elif body is Eggsman:
+		var be:Eggsman = body
+		be.take_hit(direction, force, calc_damage)
 
 func _on_area_entered(area:Area):
 	if area is Trap:

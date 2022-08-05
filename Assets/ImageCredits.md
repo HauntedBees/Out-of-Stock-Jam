@@ -184,6 +184,16 @@
  - <https://pixabay.com/illustrations/man-side-robot-cyborg-android-320268/>
  - <https://pixabay.com/illustrations/man-back-robot-cyborg-android-320271/>
  - <https://pixabay.com/illustrations/man-face-back-posing-robot-cyborg-320272/>
+ 
+## Roboton
+ - <https://unsplash.com/photos/yd4ubMUNTG0>
+ - <https://pixabay.com/photos/mustache-indian-man-portrait-pirate-2431996/>
+ - <https://unsplash.com/photos/UUNzBJLXsAY>
+ - <https://pixabay.com/photos/adult-bald-beard-corporate-1868750/>
+ - <https://pixabay.com/illustrations/ufo-space-spaceship-alien-future-5135991/>
+ - <https://pixabay.com/vectors/marble-ball-sphere-glass-circle-575745/>
+ - <https://pixabay.com/photos/ball-blue-spikes-round-2061626/>
+ - <https://unsplash.com/photos/VKnWrMnxahg>
 
 # Special Stage
  - <https://pixabay.com/vectors/lamp-lamppost-light-street-159683/>

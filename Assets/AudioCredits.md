@@ -26,6 +26,7 @@
  - [Cloak, Uncloak](https://freesound.org/people/HorrorAudio/sounds/507451/)
  - [Break](https://freesound.org/people/vrodge/sounds/119525/)
  - [Bounce](https://freesound.org/people/Astounded/sounds/478730/)
+ - [Oof][https://freesound.org/people/tonsil5/sounds/416839/]
 
 # Menu Sounds
 

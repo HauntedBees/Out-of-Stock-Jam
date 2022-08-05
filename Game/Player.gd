@@ -48,6 +48,8 @@ var search_target:Entity
 var hack_target:SecurityControl
 var equip_toggled := false
 var invincible_time := 0.0
+var bonus_force := Vector3.ZERO
+var bonus_force_timer := 0.0
 
 var active_mayhem := 0.0
 var mayhem_targets := []
@@ -212,7 +214,13 @@ func _handle_movement(delta:float):
 	var vel_xz := Vector3(velocity.x, 0, velocity.z)
 	var acceleration := speed_mult * (ACCELERATION if direction.dot(vel_xz) > 0 else DECELERATION)
 	vel_xz = vel_xz.linear_interpolate(direction * speed_mult * MAX_SPEED, acceleration * delta)
-	velocity = move_and_slide(Vector3(vel_xz.x, velocity.y, vel_xz.z), Vector3.UP)
+	
+	velocity = move_and_slide(Vector3(vel_xz.x, velocity.y, vel_xz.z) + bonus_force * delta, Vector3.UP)
+	if bonus_force_timer > 0:
+		bonus_force_timer -= delta
+		bonus_force *= 0.99
+		if bonus_force_timer <= 0.0:
+			bonus_force = Vector3.ZERO
 
 func _input(event:InputEvent):
 	if game_over.visible: return

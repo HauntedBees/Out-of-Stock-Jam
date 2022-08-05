@@ -13,12 +13,12 @@ onready var player = get_tree().get_nodes_in_group("player")[0]
 var launcher:Node
 var saved_velocity := Vector3.ZERO
 
-func _ready(): mesh.material_override = material
+func _ready():
+	if material != null:
+		mesh.material_override = material
 
 func _physics_process(_delta:float):
 	if PlayerInfo.time_frozen && gravity_scale > 0.0:
-		print("FREEZIN")
-		print(linear_velocity)
 		sleeping = true
 		saved_velocity = linear_velocity
 		gravity_scale = 0.0
@@ -31,6 +31,7 @@ func _on_body_entered(body:Node):
 	if body == launcher: return
 	if explode_on_impact:
 		var blast = boom.instance()
+		blast.hurt_player = true
 		blast.force = blast_force
 		blast.damage = damage
 		get_parent().add_child(blast)

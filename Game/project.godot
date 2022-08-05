@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "RigidBody",
+"class": "Eggsman",
+"language": "GDScript",
+"path": "res://Boss/Roboton1.gd"
+}, {
 "base": "Spatial",
 "class": "Elevator",
 "language": "GDScript",
@@ -215,6 +220,7 @@ _global_script_classes=[ {
 "path": "res://Weapons/Weapon.gd"
 } ]
 _global_script_class_icons={
+"Eggsman": "",
 "Elevator": "",
 "ElevatorHUD": "",
 "Emerald": "",

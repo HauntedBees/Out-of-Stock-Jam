@@ -29,7 +29,7 @@ albedo_texture = ExtResource( 1 )
 [sub_resource type="QuadMesh" id=12]
 size = Vector2( 1.5, 1 )
 
-[sub_resource type="ViewportTexture" id=16]
+[sub_resource type="ViewportTexture" id=18]
 viewport_path = NodePath("Viewport")
 
 [sub_resource type="SpatialMaterial" id=14]
@@ -40,7 +40,7 @@ flags_unshaded = true
 flags_no_depth_test = true
 flags_do_not_receive_shadows = true
 params_billboard_mode = 2
-albedo_texture = SubResource( 16 )
+albedo_texture = SubResource( 18 )
 uv1_scale = Vector3( 0.933, 2.883, 1 )
 uv1_offset = Vector3( -0.05, -1.106, 0 )
 
