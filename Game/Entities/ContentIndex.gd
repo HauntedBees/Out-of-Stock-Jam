@@ -134,6 +134,12 @@ var items := {
 		get_item("Pistol", Vector2(0, 0), 1),
 		get_item("Pistol Ammo", Vector2(2, 1), 2),
 	],
+	"mega_ammo": [
+		get_item("Pistol Ammo", Vector2(0, 0), 10),
+		get_item("Shotgun Ammo", Vector2(1, 1), 10),
+		get_item("Assault Rifle Ammo", Vector2(0, 1), 80),
+		get_item("Grenade Launcher Ammo", Vector2(1, 0), 5)
+	],
 	"machinegun": [
 		get_item("Assault Rifle", Vector2(0, 0), 15),
 		get_item("Assault Rifle Ammo", Vector2(1, 1), 14),

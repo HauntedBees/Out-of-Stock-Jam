@@ -37,7 +37,11 @@ var search_bgs := []
 var is_search := false
 
 func _ready():
-	map_image.texture = load("res://Textures/HUD/Map_%s.png" % PlayerInfo.current_map)
+	if PlayerInfo.current_map == "CommandCenter":
+		map_image.visible = false
+	else:
+		map_image.visible = true
+		map_image.texture = load("res://Textures/HUD/Map_%s.png" % PlayerInfo.current_map)
 	for x in PlayerInfo.INV_WIDTH:
 		var is_locked:bool = x >= PlayerInfo.get_inventory_columns()
 		var ref_tile := lock if is_locked else tile
