@@ -29,23 +29,23 @@ var mayhem_levels := {
 	"Swim": 0,
 	"Strength": 0,
 	"Weaponry": 0,
-	"Hacking": 3,
+	"Hacking": 0,
 	"Vision": 0
 }
-var current_map := "Crew Quarters"#"Engineering"#"Medical Bay" #"Arboreals"#"Engineering"#
+var current_map := "Medical Bay"#"Crew Quarters"#"Engineering"#"Medical Bay" #"Arboreals"#"Engineering"#
 var current_story_state := 0
-var inventory := [
-	ContentIndex.get_item("Grenade Launcher", Vector2(2, 0), 1),
-	ContentIndex.get_item("Grenade Launcher Ammo", Vector2(6, 0), 7),
-	ContentIndex.get_item("Assault Rifle", Vector2(4, 0), 30),
-	ContentIndex.get_item("Assault Rifle Ammo", Vector2(1, 0), 120),
-	ContentIndex.get_item("Strobbery", Vector2(1, 1), 3),
-	ContentIndex.get_item("Tea", Vector2(6, 1), 3),
-	ContentIndex.get_item("Pistol Ammo", Vector2(1, 2), 8),
-	ContentIndex.get_item("Hammer", Vector2(5, 0)),
-	ContentIndex.get_item("Sword", Vector2(7, 0)),
-	ContentIndex.get_item("Pistol", Vector2(0, 0), 4)
-]
+var inventory := []
+#	ContentIndex.get_item("Grenade Launcher", Vector2(2, 0), 1),
+#	ContentIndex.get_item("Grenade Launcher Ammo", Vector2(6, 0), 7),
+#	ContentIndex.get_item("Assault Rifle", Vector2(4, 0), 30),
+#	ContentIndex.get_item("Assault Rifle Ammo", Vector2(1, 0), 120),
+#	ContentIndex.get_item("Strobbery", Vector2(1, 1), 3),
+#	ContentIndex.get_item("Tea", Vector2(6, 1), 3),
+#	ContentIndex.get_item("Pistol Ammo", Vector2(1, 2), 8),
+#	ContentIndex.get_item("Hammer", Vector2(5, 0)),
+#	ContentIndex.get_item("Sword", Vector2(7, 0)),
+#	ContentIndex.get_item("Pistol", Vector2(0, 0), 4)
+#]
 var current_weapon:Item = UNARMED
 var current_mayhem := ""
 var inv_drag_to_move := true
