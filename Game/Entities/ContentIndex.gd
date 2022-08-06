@@ -174,7 +174,20 @@ var items := {
 		get_item("Hammer", Vector2.ZERO, 1),
 		get_item("Mayhem Shards", Vector2(2, 2), 5),
 		get_item("Rings", Vector2(3, 1), 10)
-		#Item.new("Hammer", "Weapons/Hammer.png", Vector2(1, 3), Vector2(0, 0), { "equippable": true, "uses_ammo": false })
+	],
+	"mondoprize1": [
+		get_item("Grenade Launcher", Vector2(0, 0), 1),
+		get_item("Grenade Launcher Ammo", Vector2(2, 1), 1),
+		get_item("Mayhem Shards", Vector2(2, 0), 2)
+	],
+	"mondoprize2": [
+		get_item("Assault Rifle", Vector2(2, 0), 15),
+		get_item("Shotgun", Vector2(1, 0), 2),
+		get_item("Pistol", Vector2(0, 0), 5)
+	],
+	"mondoprize3": [
+		get_item("Mayhem Shards", Vector2(2, 0), 2),
+		get_item("Sword", Vector2(0, 0), 1)
 	]
 }
 

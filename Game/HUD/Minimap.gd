@@ -45,6 +45,7 @@ func reset():
 
 func _process(_delta:float):
 	if Engine.editor_hint || PlayerInfo.current_map == "CommandCenter": return
+	if player == null: return
 	var player_origin := Vector2(player.global_transform.origin.x, player.global_transform.origin.z)
 	var player_offset := player_origin - origin_real_position
 	_set_offset(origin_mini_position + Vector2(player_offset.x / 21.0, player_offset.y / 20.5)) # magic numbers

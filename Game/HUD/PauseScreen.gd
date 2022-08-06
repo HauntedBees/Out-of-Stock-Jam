@@ -70,7 +70,7 @@ const HINTS := [
 	"Some holes are too big to jump over, but you're unaffected by gravity when using the [color=#FF00FF]Spin Dash Mayhem Ability[/color], which may be just what you need to get over that hurdle.",
 	"Eating [color=#FF00FF]Food[/color] will recover lost [color=#FF00FF]Mayhem Energy[/color], allowing you to use more of your [color=#FF00FF]Mayhem Abilities[/color].",
 	"As long as you have at least one [color=#FF00FF]Ring[/color], you're safe from enemy attacks. But if an enemy hits you when you have no [color=#FF00FF]Rings[/color], you'll die.",
-	"If you have at least [color=#FF00FF]50 Rings[/color], you can enter [color=#FF00FF]Cyberspace[/color] at a [color=#FF00FF]Lamp Post[/color], where you can earn a [color=#FF00FF]Mayhem Ruby[/color].",
+	"If you have at least [color=#FF00FF]25 Rings[/color], you can enter [color=#FF00FF]Cyberspace[/color] at a [color=#FF00FF]Lamp Post[/color], where you can earn a [color=#FF00FF]Mayhem Ruby[/color].",
 	"If you die, you'll reappear once at the last [color=#FF00FF]Lamp Post[/color] you touched with all of your items! Haven't touched a [color=#FF00FF]Lamp Post[/color] yet? You should do that soon."
 ]
 
