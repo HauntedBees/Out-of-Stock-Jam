@@ -1,4 +1,4 @@
-# Out-of-Stock-Jam
+# Sonic Shock
 My submission to the [2022 Out of Stock Game Jam](https://itch.io/jam/out-of-stock) on [itch.io](https://hauntedbees.itch.io/sonic-shock).
 
 # License
