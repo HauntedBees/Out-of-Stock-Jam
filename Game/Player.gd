@@ -57,6 +57,7 @@ var mayhem_targets := []
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	weapon.set_weapon(PlayerInfo.current_weapon.type)
+	weapon.set_mayhem(PlayerInfo.current_mayhem)
 	update_environment()
 
 func _process(delta:float):
@@ -272,7 +273,10 @@ func _handle_camera_movement(event:InputEventMouseMotion):
 func _handle_use_item(event:InputEvent):
 	if !(event.is_action("use") && GASInput.is_action_just_pressed("use")): return
 	if in_inventory && search_target != null:
-		_on_close_item_search()
+		if PlayerInfo.just_used_in_inventory: # is it a hack? yes. does it work? also yes.
+			PlayerInfo.just_used_in_inventory = false
+		else:
+			_on_close_item_search()
 		return
 	var body:Spatial = PlayerInfo.get_collision(2.8, true)
 	if body == null: return
@@ -334,6 +338,7 @@ func _close_terminal():
 
 func _toggle_inventory(new_position:bool, search := false):
 	PlayerInfo.inv_is_dragging = false
+	PlayerInfo.just_used_in_inventory = false
 	in_inventory = new_position
 	if !in_inventory && search_target != null:
 		_on_close_item_search()

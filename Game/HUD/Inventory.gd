@@ -115,6 +115,8 @@ func _draw_items():
 
 func refresh_items():
 	search.visible = is_search
+	if is_search:
+		map.visible = false
 	for ii in search_bgs: ii.visible = is_search
 	for ii in items: remove_child(ii)
 	for ii in search_items: remove_child(ii)

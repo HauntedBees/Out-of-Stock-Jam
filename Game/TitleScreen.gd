@@ -47,6 +47,7 @@ func _ready():
 	var has_saves := has_saves()
 	continue_game.visible = has_saves
 	load_game.visible = has_saves
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func has_saves() -> bool:
 	var f := File.new()

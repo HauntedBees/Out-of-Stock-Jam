@@ -673,16 +673,26 @@ margin_bottom = 519.0
 theme = ExtResource( 20 )
 bbcode_enabled = true
 bbcode_text = "The damage caused by [color=#FF00FF]Doctor roboton[/color] cannot be overstated, and cannot be undone. but now that you have defeated him once and for all, the people of your home planet have hope for a better future.
-
 As you ride off in an escape pod, you look back at [color=#FF00FF]M0B1[/color], sad for the opportunities you never got to experience there... for the countless opportunities and lives cut short by [color=#FF00FF]doctor roboton[/color]. This is not a happy ending, but it is the happiest one possible.
 
 [center][color=#AAFFAA]Congratulation! You wonned![/color][/center]"
 text = "The damage caused by Doctor roboton cannot be overstated, and cannot be undone. but now that you have defeated him once and for all, the people of your home planet have hope for a better future.
-
 As you ride off in an escape pod, you look back at M0B1, sad for the opportunities you never got to experience there... for the countless opportunities and lives cut short by doctor roboton. This is not a happy ending, but it is the happiest one possible.
 
 Congratulation! You wonned!"
 scroll_active = false
+
+[node name="PlaytimeLabel" type="Label" parent="WinEnd"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -646.0
+margin_top = -80.0
+margin_bottom = 6.0
+theme = ExtResource( 20 )
+text = "Your Playtime: XX:XX:XX"
+align = 2
 
 [node name="LoseEnd" type="Control" parent="."]
 visible = false

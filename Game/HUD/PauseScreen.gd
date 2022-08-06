@@ -28,7 +28,7 @@ func open(game_over := false):
 	_draw_hint()
 	continue_button.visible = !game_over
 	options_button.visible = !game_over
-	save_button.visible = !game_over
+	save_button.visible = PlayerInfo.current_map != "CommandCenter" && !game_over
 	game_over_label.visible = game_over
 func close():
 	beep_ping.play()
@@ -63,7 +63,7 @@ func _on_PrevHint_pressed():
 func _draw_hint(): conans_hint.bbcode_text = HINTS[hint_idx]
 const HINTS := [
 	"Hold down the [color=#FF00FF]Toggle Equip[/color] button (the [color=#FF00FF]Shift Key[/color]) while pressing a [color=#FF00FF]Number Key[/color] to equip Mayhem Abilities.",
-	"With the [color=#FF00FF]Strength Mayhem Ability[/color], you can use [color=#FF00FF]Heavy Weapons[/color] like the [color=#FF00FF]Grenade Launcher[/color].",
+	"With the [color=#FF00FF]Weaponry Mayhem Ability[/color], you can use [color=#FF00FF]Heavy Weapons[/color] like the [color=#FF00FF]Grenade Launcher[/color].",
 	"You'll normally sink in water, and drown after a short time, but you can increase your lung capacity with the [color=#FF00FF]Swim Mayhem Ability[/color], which will also let you swim.",
 	"You can save [color=#FF00FF]Inventory[/color] space by combining some items, like [color=#FF00FF]Ammo[/color] and [color=#FF00FF]Food[/color], into stacks. Each item has a different maximum stack size, so try to optimize what you can.",
 	"People die when they are killed.",

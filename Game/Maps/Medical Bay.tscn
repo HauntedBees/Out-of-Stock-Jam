@@ -1171,7 +1171,7 @@ speed = 0.0
 all_facing = true
 
 [node name="WaitingMole" parent="Navigation" instance=ExtResource( 4 )]
-transform = Transform( 0.2896, 0, 0.957148, 0, 1, 0, -0.957148, 0, 0.2896, -19.3991, 1.2, -31.4475 )
+transform = Transform( 0.2896, 0, 0.957148, 0, 1, 0, -0.957148, 0, 0.2896, -19.399, 0.1, -31.448 )
 type = "Moleborg"
 force_multiplier = 0.0
 content_name = "mole"

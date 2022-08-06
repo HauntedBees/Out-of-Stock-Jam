@@ -64,6 +64,7 @@ var paused := false
 var time_frozen := false
 var invisible := false
 var return_timeout := 0.0
+var just_used_in_inventory := false
 
 func _ready(): _read_global_config()
 

@@ -48,7 +48,7 @@ func as_dict() -> Dictionary:
 	}
 
 func equip_index() -> int:
-	var can_equip_heavy:bool = PlayerInfo.get_mayhem_level("Strength") > 0
+	var can_equip_heavy:bool = PlayerInfo.get_mayhem_level("Weaponry") > 0
 	if is_heavy && !can_equip_heavy: return -1
 	var item_positions := []
 	for i in PlayerInfo.inventory:

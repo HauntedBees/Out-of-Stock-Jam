@@ -93,4 +93,13 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Try loading an old save file and getting all the mayhem rubies from the special stages before trying to stop roboton!"
 autowrap = true
 
+[node name="PlayTime" type="Label" parent="LoseRect"]
+margin_left = 803.0
+margin_top = 895.0
+margin_right = 1600.0
+margin_bottom = 987.0
+theme = ExtResource( 3 )
+text = "Your Playtime: XX:XX:XX"
+autowrap = true
+
 [node name="Tween" type="Tween" parent="."]

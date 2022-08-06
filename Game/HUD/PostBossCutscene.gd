@@ -4,6 +4,7 @@ onready var cutscene_text:RichTextLabel = $Textbox/CutsceneText
 onready var lose:Control = $LoseRect
 onready var robo:Control = $Angel
 onready var tween:Tween = $Tween
+onready var playtime:Label = $LoseRect/PlayTime
 
 var bad_cutscene_dialog:PoolStringArray = [
 	"[color=#CCAAAA]Roboton[/color]: You... who do you think you are!?",
@@ -46,6 +47,11 @@ func _input(event:InputEvent):
 			SceneSwitcher.switch_scene("res://Maps/CityEscape.tscn", false)
 		else:
 			tween.interpolate_property(lose, "modulate:a", 0.0, 1.0, 2.0)
+			var play_time := int(PlayerInfo.play_time)
+			var hours := floor(play_time / 3600.0)
+			var minutes := int(floor(play_time / 60.0)) % 60
+			var seconds := play_time % 60
+			playtime.text = "Your Playtime: %02d:%02d:%02d" % [hours, minutes, seconds]
 			tween.start()
 			ready_to_title = true
 		return

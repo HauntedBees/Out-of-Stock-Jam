@@ -290,14 +290,13 @@ stream = ExtResource( 5 )
 autoplay = true
 
 [node name="Elevator_REGULAR" type="Spatial" parent="."]
-transform = Transform( 1, 0, -2.13163e-14, 0, 1, 0, 2.13163e-14, 0, 1, 20.626, 0.46, -42.508 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 20.626, 0.46, -42.508 )
 
 [node name="Elevator_EXECUTIVE" type="Spatial" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -17.767, 1, 38.157 )
 
 [node name="Ceiling" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.1569, 0 )
-visible = false
 mesh = SubResource( 2 )
 material/0 = ExtResource( 9 )
 

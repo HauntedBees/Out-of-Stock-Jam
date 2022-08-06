@@ -62,6 +62,11 @@ func _process(delta:float):
 		advance_timer -= delta
 		if advance_timer <= 0:
 			$"../WinEnd".visible = true
+			var play_time := int(PlayerInfo.play_time)
+			var hours := floor(play_time / 3600.0)
+			var minutes := int(floor(play_time / 60.0)) % 60
+			var seconds := play_time % 60
+			$"../WinEnd/PlaytimeLabel".text = "Your Playtime: %02d:%02d:%02d" % [hours, minutes, seconds]
 			player.game_over = true
 	if flicker_state > 0.0:
 		flicker_state -= delta

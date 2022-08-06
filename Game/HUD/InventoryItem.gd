@@ -86,6 +86,7 @@ func _handle_maybe_use(event:InputEvent):
 	if info.immediate:
 		_immediate_use()
 	elif info.is_usable:
+		PlayerInfo.just_used_in_inventory = true
 		if PlayerInfo.chaos_energy >= PlayerInfo.max_chaos_energy:
 			emit_signal("play_sound", "No")
 			return
