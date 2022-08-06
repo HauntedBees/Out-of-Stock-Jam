@@ -45,6 +45,7 @@ func _on_BuyButton_pressed():
 		return
 	beep_ping.play()
 	PlayerInfo.emerald_shards -= current_mayhem_cost
+	get_tree().call_group("equip_monitor", "update_shards")
 	shard_count.text = String(PlayerInfo.emerald_shards)
 	PlayerInfo.increase_mayhem_level(current_mayhem)
 	if current_mayhem == "Vision":

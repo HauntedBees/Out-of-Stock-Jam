@@ -102,6 +102,7 @@ func load_data(key:String):
 	PlayerInfo.play_time = float(game.get_line())
 	# Player Data
 	var player_info:Dictionary = parse_json(game.get_line())
+	PlayerInfo.current_map = location_line
 	PlayerInfo.difficulty = int(player_info["difficulty"])
 	PlayerInfo.chaos_energy = int(player_info["chaos_energy"])
 	PlayerInfo.max_chaos_energy = int(player_info["max_chaos_energy"])
@@ -115,6 +116,7 @@ func load_data(key:String):
 	PlayerInfo.crouch_toggle = player_info["crouch_toggle"]
 	PlayerInfo.mouse_sensitivity = player_info["mouse_sensitivity"]
 	PlayerInfo.last_save_point = player_info["last_save_point"]
+	PlayerInfo.mayhem_levels = player_info["mayhem_levels"]
 	PlayerInfo.equip_toggle = player_info["equip_toggle"]
 	GASConfig.input_cooldown_enabled = player_info["input_cooldown_enabled"]
 	GASConfig.input_cooldown_length = player_info["input_cooldown_length"]
@@ -189,7 +191,8 @@ func _save_game_data(game:File):
 		"equip_toggle": PlayerInfo.equip_toggle,
 		"controls": GASInput.get_actions_as_dictionary(),
 		"input_cooldown_enabled": GASConfig.input_cooldown_enabled,
-		"input_cooldown_length": GASConfig.input_cooldown_length
+		"input_cooldown_length": GASConfig.input_cooldown_length,
+		"mayhem_levels": PlayerInfo.mayhem_levels
 	}
 	game.store_line(to_json(player_info))
 	# Save Non-Current Map Data
